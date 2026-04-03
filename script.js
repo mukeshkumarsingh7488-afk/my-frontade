@@ -747,7 +747,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- डेटाबेस से असली अलर्ट्स मंगाने के लिए ---
 async function fetchNotifications() {
-  // 1. JWT Token nikalo jo login ke waqt save kiya tha
+  // 1. JWT Token nikalo
   const token = localStorage.getItem("token");
 
   try {
@@ -757,16 +757,21 @@ async function fetchNotifications() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token, // YE ZAROORI HAI: Isi se 401 error jayega
+          // 🚨 YE BADLAV ZAROORI HAI: 'x-auth-token' hata kar 'Authorization' dalo
+          "Authorization": "Bearer " + token
         },
-      },
+      }
     );
 
-    // 2. Error handling: Agar 401 aaya toh matlab token galat hai
+    // 2. Error handling
     if (response.status === 401) {
       console.error("401 Unauthorized: Token missing or invalid.");
+      // Agar logout ho raha hai, toh yahan redirect mat karna, bas return karo
       return;
     }
+
+    // ... baaki ka logic (res.json() etc.) iske niche rehne do
+
 
     const notifs = await response.json();
 
@@ -818,12 +823,14 @@ window.toggleNotifications = toggleNotifications;
 /* ============================================
    Socket.io Connection Setup (admin Alart)
   ===========================================*/
-const socket = io(window.API_BASE_URL + '/socket.io', {
+const socket = io(window.API_BASE_URL, {
+  path: "/socket.io/", // Agar backend pe custom path hai toh yahan define hota hai
   transports: ["websocket"],
   closeOnBeforeunload: true,
   reconnectionAttempts: 5,
   timeout: 10000,
 });
+
 
 socket.on("connect", () => {
   console.log("✅ Live connection ban gaya! ID:", socket.id);
@@ -1342,45 +1349,46 @@ async function sendBulkMail() {
 /* ========================================================================
      🚀 PRO LEVEL SYNC: Price, Title & Specific Thumbnail (Auto-Refresh)
 ======================================================================== */
-/* ========================================================================
-     🚀 FINAL PRO SYNC: Har Card ka Alag Data + Smooth Loading (Anti-Flash)
-======================================================================== */
 async function syncLatestPrices() {
   try {
-    const res = await fetch(window.API_BASE_URL + '/api/courses');
+    const res = await fetch(window.API_BASE_URL + "/api/courses");
     const courses = await res.json();
-    const BASE_URL = window.API_BASE_URL + '/';
+
+    // 💡 BASE_URL (UPLOADS)
+    const UPLOADS_URL = window.API_BASE_URL + '/uploads/';
 
     courses.forEach((course) => {
-      // 🎯 STEP 1: Pehle us SPECIFIC CARD ko dhoondo jiski ID match ho rahi hai
+      // 🎯 STEP 1: Specific Card dhoondo
       const card = document.querySelector(`.poster-card[data-id="${course._id}"]`);
 
       if (card) {
         console.log(`Updating Course: ${course.title}`);
 
-        // ✅ STEP 2: THUMBNAIL UPDATE (Sirf isi card ke liye)
+        // ✅ STEP 2: THUMBNAIL UPDATE
         const imgTag = card.querySelector(".course-img");
         if (imgTag && course.thumbnail) {
-          const fullPath = course.thumbnail.startsWith("http") ? course.thumbnail : `${BASE_URL}${course.thumbnail}`;
-          // 🔥 CACHE BUSTING: Timestamp joda taaki image turant refresh ho
+          const fullPath = course.thumbnail.startsWith("http")
+            ? course.thumbnail
+            : UPLOADS_URL + course.thumbnail;
+
           imgTag.src = `${fullPath}?t=${new Date().getTime()}`;
           console.log(`🖼️ Thumbnail Updated for: ${course.title}`);
         }
 
-        // ✅ STEP 3: PRICE UPDATE (Specific Card)
+        // ✅ STEP 3: PRICE UPDATE
         const priceTag = card.querySelector("p.price");
         if (priceTag) {
           const formattedPrice = Number(course.price).toLocaleString("en-IN");
           priceTag.innerText = `Price: ₹${formattedPrice}`;
         }
 
-        // ✅ STEP 4: TITLE UPDATE (Specific Card)
+        // ✅ STEP 4: TITLE UPDATE
         const titleTag = card.querySelector(".course-title");
         if (titleTag && course.title) {
           titleTag.innerText = course.title;
         }
 
-        // ✅ STEP 5: ENROLL BUTTON (Paytm/Checkout Logic Fix)
+        // ✅ STEP 5: ENROLL BUTTON (PayBtn)
         const payBtn = card.querySelector(".payBtn");
         if (payBtn) {
           payBtn.setAttribute("data-id", course._id);
@@ -1391,7 +1399,7 @@ async function syncLatestPrices() {
       }
     });
 
-    // 🔥 MAGIC STEP: Jab saara naya data cards mein bhar jaye, tab grid ko smooth dikhao
+    // 🔥 MAGIC STEP: Smooth display
     const grid = document.querySelector(".poster-grid");
     if (grid) {
       grid.style.opacity = "1";
@@ -1400,7 +1408,6 @@ async function syncLatestPrices() {
 
   } catch (err) {
     console.error("❌ Sync Error:", err);
-    // Error ki halat mein bhi grid dikha do taaki site blank na lage
     const grid = document.querySelector(".poster-grid");
     if (grid) grid.style.opacity = "1";
   }

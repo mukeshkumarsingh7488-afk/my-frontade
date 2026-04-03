@@ -405,7 +405,7 @@
         try {
             const token = localStorage.getItem('token');
             // Note: Backend check ke hisab se headers set kiye hain
-            const res = await fetch(window.window.API_BASE_URL + '/api/auth/all-users', {
+            const res = await fetch(window.API_BASE_URL + '/api/auth/all-users', {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             const data = await res.json();
@@ -470,7 +470,7 @@
     // 🔄 1. VIP TOGGLE: Normal <-> VIP switch
     async function toggleVIP(id) {
         try {
-            const res = await fetch(window.window.API_BASE_URL + '/api/auth/update-vip/${id}', {
+            const res = await fetch(window.API_BASE_URL + '/api/auth/update-vip/${id}', {
                 method: "PUT",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });
@@ -482,7 +482,7 @@
     // 🚫 2. BLOCK TOGGLE: User ko rokna ya allow karna
     async function toggleBlock(id) {
         try {
-            const res = await fetch(window.window.API_BASE_URL + '/api/auth/block-user/${id}', {
+            const res = await fetch(window.API_BASE_URL + '/api/auth/block-user/${id}', {
                 method: "PUT",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });
@@ -495,7 +495,7 @@
     async function deleteUser(id) {
         if (!confirm("Bhai, pakka udaana hai? (Soche samjhe bina mat dabao!)")) return;
         try {
-            const res = await fetch(window.window.API_BASE_URL + '/api/auth/delete-user/${id}', {
+            const res = await fetch(window.API_BASE_URL + '/api/auth/delete-user/${id}', {
                 method: "DELETE",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });

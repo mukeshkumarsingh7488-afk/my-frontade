@@ -206,7 +206,7 @@
             try {
                 courseDiv.innerHTML = "<p style='color:#94a3b8;'>Loading your courses...</p>";
 
-                const res = await fetch(window.window.API_BASE_URL + '/api/courses/my-courses', {
+                const res = await fetch(window.API_BASE_URL + '/api/courses/my-courses', {
                     method: 'GET',
                     headers: { 'x-auth-token': token }
                 });

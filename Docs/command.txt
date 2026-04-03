@@ -2,3 +2,6 @@ Professional Tareeka (GitHub + Auto-Deploy)
 git add .
 git commit -m "Bhai maine naya feature add kiya"
 git push origin main
+
+
+push github cmd     vercel --prod --force

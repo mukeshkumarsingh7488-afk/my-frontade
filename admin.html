@@ -342,7 +342,7 @@
             formData.append('thumbnail', document.getElementById('thumbnail').files[0]);
 
             try {
-                const res = await fetch(window.window.API_BASE_URL + '/api/courses/add', {
+                const res = await fetch(window.API_BASE_URL + '/api/courses/add', {
                     method: 'POST',
                     headers: { 'x-auth-token': token },
                     body: formData

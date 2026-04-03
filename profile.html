@@ -213,7 +213,7 @@
             }
 
             try {
-                const res = await fetch(window.API_BASE_URL + '/me', {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/me', {
                     headers: { 'x-auth-token': token }
                 });
 
