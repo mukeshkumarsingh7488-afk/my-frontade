@@ -1,0 +1,52 @@
+✅ 9 EMA + 15 EMA + FVG Trading Strategy (Sell Side)
+1️⃣ Chart Setup
+Indicator 1:
+
+9 EMA (Exponential Moving Average)
+
+15 EMA (Exponential Moving Average)
+
+Indicator 2:
+
+FVG (Fair Value Gap Indicator)
+
+Timeframe: 5-Minute Candle Chart
+
+2️⃣ Sell Entry के लिए Conditions
+✅ Step 1: Price and EMA Check
+Current Price 9 EMA और 15 EMA के नीचे होना चाहिए।
+
+दोनों EMA का slope नीचे की तरफ झुका होना चाहिए (EMA downward angle में हो)।
+
+✅ Step 2: FVG Confirmation
+Chart पर Bearish FVG बनना चाहिए।
+
+FVG के बाद जो candle close हो, वो भी EMA के नीचे होनी चाहिए।
+
+✅ Step 3: Entry Rule
+Bearish FVG के नीचे वाली candle close होते ही,
+
+Next candle पर sell entry लेना है।
+
+3️⃣ Stop Loss और Target Rules
+Stop Loss:
+
+FVG zone के ऊपर
+
+या 15 EMA के ऊपर buffer के साथ (जैसे 5-10 points का gap)
+
+Target:
+
+Risk:Reward कम से कम 1:1.5 या 1:2 रखना है।
+
+अगला Support level देख कर partial profit लेना।
+
+4️⃣ Trade Journal में Notes रखने के लिए Format
+Date	Time	Stock/Option Name	Entry Price	Stop Loss	Target	Reason (EMA + FVG)	Result (Win/Loss)
+
+✅ Important Notes for Sell Side
+Expiry वाले दिन option premium जल्दी decay करता है, उस समय ध्यान रखना।
+
+Volume confirmation देखना चाहिए: Selling candle में ज़्यादा volume हो।
+
+Option chain भी check कर सकते हैं कि resistance level के पास selling तो नहीं है।

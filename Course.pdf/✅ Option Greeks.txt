@@ -1,0 +1,65 @@
+✅ Option Greeks — आसान शब्दों में समझाइए
+Option Greeks से पता चलता है कि option premium (price) किन-किन चीज़ों से कितना effect होता है:
+
+Greek	मतलब (किससे effect hota hai)
+Delta	Underlying price से
+Gamma	Delta का speed
+Theta	Time decay (समय बीतने से)
+Vega	Volatility से
+Rho	Interest Rate से (कम use होता है)
+
+1️⃣ Delta — Price Movement का असर
+अगर Nifty ऊपर जाता है, option premium कितना बढ़ेगा?
+
+Delta का range:
+
+Call Option: +0.01 से +1 तक
+
+Put Option: −0.01 से −1 तक
+
+Example:
+
+Nifty Call Option Delta = 0.50
+
+Nifty 100 points ऊपर गया → Option premium में करीब 50 points का बढ़ाव आएगा।
+
+👉 ATM option में delta 0.5 के आसपास होता है।
+
+2️⃣ Gamma — Delta का Speed
+Delta हर वक्त एक जैसा नहीं रहता, वो भी बदलता है।
+
+Gamma बताता है कि Delta कितना तेज बदल रहा है।
+
+Example:
+अगर Gamma 0.05 है और Nifty 100 points move करता है → Delta 0.05 × 100 = 5 points change होगा।
+
+👉 Gamma ज़्यादा होता है जब option ATM के आसपास होता है।
+
+3️⃣ Theta — Time Decay
+Option में रोज़ रोज़ premium घटता है, अगर price stable भी रहे तो।
+
+इसको बोलते हैं Theta।
+
+Example:
+Theta = −10 → हर दिन option premium में 10 रुपये कम हो सकते हैं।
+
+👉 Theta expiry के पास ज़्यादा fast काम करता है।
+👉 Option buyers को नुकसान और sellers को फायदा।
+
+4️⃣ Vega — Volatility का असर
+Market में डर या अनिश्चितता बढ़े तो option premium भी बढ़ता है।
+
+Vega ये बताता है कि IV (Implied Volatility) में 1% बदलाव से premium कितना बदलेगा।
+
+Example:
+Vega = 8, IV 1% बढ़ा → Premium में 8 रुपये का इज़ाफा।
+
+👉 Event (जैसे Budget, RBI policy) के पहले Vega high होता है।
+
+✅ Short Summary (1 Line Reminder के लिए)
+Greek	Buyers के लिए Kya Dhyan Dein	Sellers के लिए Kya Dhyan Dein
+Delta	Movement का फायदा	Movement का नुकसान
+Gamma	Sharp move में ज्यादा फायदा	Sharp move में ज्यादा Risk
+Theta	नुकसान (time decay)	फायदा (time decay से)
+Vega	Event में फायदा	Event में नुकसान
+

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- 1. Meta Tags (Inhe sabse upar rakho) -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional Courses Web for Trading and Learning">
+
+  <!-- 2. Page Title -->
+  <title>Courses Web</title>
+
+  <!-- SweetAlert2 Library -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- 3. Google Fonts (Preconnect fast loading ke liye) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- 5. Main Stylesheet (Aapki apni CSS - Sabse niche taaki ye override kar sake) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- Scroll Progress Bar hamesha BODY ke andar hona chahiye -->
+
+<body>
+  <div id="scroll-progress"></div>
+  <!-- Example: Header ke paas ya sidebar me -->
+
+
+  <!-- =========================================
+         1. HEADER & NAVIGATION SECTION
+    ========================================= -->
+  <header>
+    <!-- Logo & Branding -->
+    <div class="logo-title">
+      <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+        <img src="images/BR30™  LOGO.jpeg" alt="logo" class="logo"
+          style="width: 45px; height: 45px; border-radius: 8px;">
+        <h1 class="logo-text" style="margin-left: 10px; color: #ffffff !important;">
+          <span class="purple">BR30</span> ᴛʀᴀᴅᴇʀ
+        </h1>
+      </a>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-container">
+
+        <!-- Center: Welcome Message (Ise Nav ke andar le aaye alignment ke liye) -->
+        <div class="welcome trader">
+          <h1 style="margin:0; font-size: 1.2rem;">💫 Welcome 💫</h1>
+        </div>
+
+        <!-- Right Side: AI Pro (Temprory comment)
+        <div class="right-group">
+          <button id="ai-pro-btn" class="ai-pro-glow-btn">
+            <i class="fas fa-robot"></i> AI Pro
+          </button> -->
+
+        <!-- Menu Bell -->
+        <div class="nav-right">
+          <div class="notification-wrapper">
+            <!-- onclick="toggleNotifications()" hata diya gaya hai -->
+            <div class="bell-icon">
+              <i class="fa-solid fa-bell"></i>
+              <span class="notification-badge" id="notif-count">3</span>
+            </div>
+          </div>
+
+          <!-- Left Side: Menu Icon -->
+          <div class="menu-icon" id="mobile-menu">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- Mobile Slide-in Links (Jo click pe khulega) -->
+        <div class="nav-links" id="navMenu">
+          <a href="index.html">Home</a>
+          <a href="register.html">Register</a>
+          <a href="profile.html">My Profile</a>
+          <a href="mycourse.html">My Course</a>
+          <a href="verify.html">Certificate</a>
+          <a href="disclaimer.html" target="_blank">Disclaimer</a>
+          <a href="aboutus.html" target="_blank">About Us</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- नोटिफिकेशन पैनल (Dropdown) -->
+    <div class="notif-dropdown" id="notif-dropdown">
+      <div class="notif-header">
+        <h3>Live Market Alerts ⚡</h3>
+        <span id="clear-all-notifs" style="cursor:pointer;">Clear All</span>
+
+      </div>
+      <div class="notif-list" id="notif-list">
+        <!-- यहाँ अलर्ट्स अपने आप लोड होंगे -->
+        <div class="notif-item unread">
+          <p>🚀 <b>NIFTY Alert:</b> Strong breakout above 23550. Watch for targets!</p>
+          <small>2 mins ago</small>
+        </div>
+
+        <div class="notif-item">
+          <p>⚠️ <b>BANKNIFTY:</b> Approaching resistance at 50500. Trailing SL recommended.</p>
+          <small>15 mins ago</small>
+        </div>
+        <div class="notif-item">
+          <p>📅 <b>Daily Discipline:</b> Did you follow your 1:2 Risk-Reward today?</p>
+          <small>1 hour ago</small>
+        </div>
+      </div>
+      <div class="notif-footer">
+        <a href="view-alart.html">View All Alerts</a>
+      </div>
+    </div>
+    </div>
+    </nav>
+  </header>
+
+
+  <!-- =========================================
+          2.  Seasion Clock 
+    ========================================= -->
+  <div class="market-clock-bar">
+    <!-- 🇮🇳 INDIA -->
+    <div class="clock-item">
+      <span class="country-flag">🇮🇳</span>
+      <span class="market-name">NSE/BSE</span>
+      <span id="india-time" class="digital-time">00:00:00</span>
+      <span id="india-status" class="status-pill">Checking...</span>
+    </div>
+
+    <!-- 🇯🇵 TOKYO (New) -->
+    <div class="clock-item">
+      <span class="country-flag">🇯🇵</span>
+      <span class="market-name">TOKYO</span>
+      <span id="tokyo-time" class="digital-time">00:00:00</span>
+      <span id="tokyo-status" class="status-pill">Checking...</span>
+    </div>
+
+    <!-- 🇬🇧 LONDON -->
+    <div class="clock-item">
+      <span class="country-flag">🇬🇧</span>
+      <span class="market-name">LONDON</span>
+      <span id="london-time" class="digital-time">00:00:00</span>
+      <span id="london-status" class="status-pill">Checking...</span>
+    </div>
+
+    <!-- 🇺🇸 NEW YORK -->
+    <div class="clock-item">
+      <span class="country-flag">🇺🇸</span>
+      <span class="market-name">NYSE</span>
+      <span id="ny-time" class="digital-time">00:00:00</span>
+      <span id="ny-status" class="status-pill">Checking...</span>
+    </div>
+  </div>
+
+
+
+  <!-- =========================================
+         3. HERO SECTION (Video Background)
+    ========================================= -->
+  <div class="hero-container">
+    <div class="hero-video">
+      <video autoplay muted loop>
+        <source src="videos/intro2.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Hero Text Overlay (Typing Animation) -->
+    <div class="video-text">
+      Hey, My Name is <span class="purple">Mukesh</span>
+      <div>and I am a passionate</div>
+      <span id="element"></span>
+    </div>
+  </div>
+
+
+  <!-- =========================================
+         4. You tube Live temprory comment
+    ========================================= 
+  <section class="live-status-section">
+    <div class="live-container">
+      <div class="live-title">
+        <span class="pulse-icon">🔴</span>
+        <h2>YouTube <span>Live Schedule</span></h2>
+      </div>
+
+      <div class="schedule-grid">
+       
+        <div class="slot-card">
+          <div class="slot-header">☀️ Morning Session</div>
+          <div class="slot-days">Monday to Friday</div>
+          <div class="slot-time">09:30 AM - 11:30 AM</div>
+        </div>
+
+    
+        <div class="slot-card">
+          <div class="slot-header">🌙 Evening Session</div>
+          <div class="slot-days">Monday to Friday</div>
+          <div class="slot-time">07:30 PM - 11:30 PM</div>
+        </div>
+      </div>
+
+      <a href="https://www.youtube.com" target="_blank" class="yt-btn">
+        <i class="fa-brands fa-youtube"></i> Subscribe for Live
+      </a>
+    </div>
+  </section> -->
+
+
+  <!-- =========================================
+         5. VIP Trader
+    ========================================= -->
+  <div class="leaderboard-wrapper">
+    <div class="bubbles">
+      <span style="--i:11;"></span>
+      <span style="--i:12;"></span>
+      <span style="--i:24;"></span>
+      <span style="--i:10;"></span>
+      <span style="--i:14;"></span>
+      <span style="--i:23;"></span>
+      <span style="--i:18;"></span>
+      <span style="--i:16;"></span>
+      <span style="--i:19;"></span>
+      <span style="--i:20;"></span>
+      <span style="--i:22;"></span>
+      <span style="--i:25;"></span>
+      <span style="--i:13;"></span>
+      <span style="--i:21;"></span>
+      <span style="--i:15;"></span>
+      <span style="--i:17;"></span>
+    </div>
+
+    <div class="animated-leaderboard-box">
+      <!-- Header Section -->
+      <div class="leaderboard-header">
+        <!-- Title with Highlighted Span -->
+        <h2 class="leaderboard-title">
+          Top <span class="highlight-green">👑VIP Traders</span>
+        </h2>
+        <p class="leaderboard-subtitle">In Last One Month</p>
+      </div>
+
+      <!-- 2-Column Grid Area (Data will load here) -->
+      <div id="topTradersList" class="traders-list-container">
+        <!-- JS will fill 6 names here -->
+      </div>
+
+      <!-- Footer Section with Premium Button -->
+      <div class="leaderboard-footer">
+        <!-- Anchor tag use kiya hai jo seedha section id par le jayega -->
+        <a href="index.html#coursesection" class="vip-btn">
+          <span>BROWSE COURSES</span>
+          <span class="btn-icon">🚀</span>
+        </a>
+
+        <p class="footer-note">Join VIP to see your name here!</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================
+         5. Course Section 
+    ========================================= -->
+  <section class="course-section" id="coursesection">
+    <div class="section-header-box">
+      <h2>🎓 Our <span>Premium Courses</span> 🎓</h2>
+      <p>Master the Markets with Professional Strategies</p>
+    </div>
+
+    <div class="poster-grid">
+      <!-- Card 1: Option Buying -->
+      <div class="poster-card" data-id="69b08c39e9657168f7652962">
+        <div class="card-tag">Best Seller</div>
+        <img src="images/BR30TRADER.png" class="course-img" alt="Course Thumbnail">
+        <h3 class="course-title">Advance Option Buying</h3>
+        <p class="price" data-id="69b08c39e9657168f7652962">Price: ₹--</p>
+        <div class="coupon-display-box"
+          style="display:none; margin: 15px 0; border: 1px dashed rgba(160, 32, 240, 0.5); padding: 12px; border-radius: 12px; background: rgba(160, 32, 240, 0.05); position: relative; overflow: hidden;">
+          <!-- 🔥 Ye naya section hai jo percentage dikhayega -->
+          <p
+            style="color: #4ade80; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+            🎁 Exclusive <span class="discount-val">30</span>% OFF Offer
+          </p>
+          <h4 style="color: white; margin: 5px 0; font-size: 14px;">Code:
+            <span class="active-code"
+              style="color: #a020f0; font-weight: 800; background: #fff; padding: 1px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(160,32,240,0.3);">
+              OFFER30
+            </span>
+          </h4>
+          <!-- ✨ Stylish Button -->
+          <button type="button" class="apply-coupon-btn"
+            style="background: linear-gradient(135deg, #a020f0 0%, #6d28d9 100%); color: white; border: none; font-size: 12px; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(160, 32, 240, 0.3); margin-top: 5px; text-transform: uppercase;">
+            Apply Discount
+          </button>
+        </div>
+        <button type="button" class="payBtn" data-course="Advance Option Buying" data-id="">Enroll Now</button>
+      </div>
+
+      <!-- Card 2: Option Selling -->
+      <div class="poster-card" data-id="69b08a56e9657168f765295b">
+        <img src="images/BR30TRADER.png" class="course-img" alt="Course Thumbnail">
+        <h3 class="course-title">Advance Option Selling</h3>
+        <p class="price" data-id="69b08a56e9657168f765295b">Price: ₹--</p>
+        <div class="coupon-display-box"
+          style="display:none; margin: 15px 0; border: 1px dashed rgba(160, 32, 240, 0.5); padding: 12px; border-radius: 12px; background: rgba(160, 32, 240, 0.05); position: relative; overflow: hidden;">
+          <!-- 🔥 Ye naya section hai jo percentage dikhayega -->
+          <p
+            style="color: #4ade80; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+            🎁 Exclusive <span class="discount-val">30</span>% OFF Offer
+          </p>
+          <h4 style="color: white; margin: 5px 0; font-size: 14px;">Code:
+            <span class="active-code"
+              style="color: #a020f0; font-weight: 800; background: #fff; padding: 1px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(160,32,240,0.3);">
+              OFFER30
+            </span>
+          </h4>
+          <!-- ✨ Stylish Button -->
+          <button type="button" class="apply-coupon-btn"
+            style="background: linear-gradient(135deg, #a020f0 0%, #6d28d9 100%); color: white; border: none; font-size: 12px; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(160, 32, 240, 0.3); margin-top: 5px; text-transform: uppercase;">
+            Apply Discount
+          </button>
+        </div>
+        <button type="button" class="payBtn" data-course="Advance Option Selling" data-id="">Enroll Now</button>
+      </div>
+
+      <!-- Card 3: BTST -->
+      <div class="poster-card" data-id="69b08c8fe9657168f765296a">
+        <img src="images/BR30TRADER.png" class="course-img" alt="Course Thumbnail">
+        <h3 class="course-title">Advance BTST Mastery</h3>
+        <p class="price" data-id="69b08c8fe9657168f765296a">Price: ₹--</p>
+        <div class="coupon-display-box"
+          style="display:none; margin: 15px 0; border: 1px dashed rgba(160, 32, 240, 0.5); padding: 12px; border-radius: 12px; background: rgba(160, 32, 240, 0.05); position: relative; overflow: hidden;">
+          <!-- 🔥 Ye naya section hai jo percentage dikhayega -->
+          <p
+            style="color: #4ade80; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+            🎁 Exclusive <span class="discount-val">30</span>% OFF Offer
+          </p>
+          <h4 style="color: white; margin: 5px 0; font-size: 14px;">Code:
+            <span class="active-code"
+              style="color: #a020f0; font-weight: 800; background: #fff; padding: 1px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(160,32,240,0.3);">
+              OFFER30
+            </span>
+          </h4>
+          <!-- ✨ Stylish Button -->
+          <button type="button" class="apply-coupon-btn"
+            style="background: linear-gradient(135deg, #a020f0 0%, #6d28d9 100%); color: white; border: none; font-size: 12px; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(160, 32, 240, 0.3); margin-top: 5px; text-transform: uppercase;">
+            Apply Discount
+          </button>
+        </div>
+        <button type="button" class="payBtn" data-course="Advance BTST Mastery" data-id="">Enroll Now</button>
+      </div>
+
+      <!-- Card 4: Crypto & Forex -->
+      <div class="poster-card" data-id="69b08cfae9657168f7652973">
+        <img src="images/BR30TRADER.png" class="course-img" alt="Course Thumbnail">
+        <h3 class="course-title">Crypto & Forex Pro</h3>
+        <p class="price" data-id="69b08cfae9657168f7652973">Price: ₹--</p>
+        <div class="coupon-display-box"
+          style="display:none; margin: 15px 0; border: 1px dashed rgba(160, 32, 240, 0.5); padding: 12px; border-radius: 12px; background: rgba(160, 32, 240, 0.05); position: relative; overflow: hidden;">
+          <!-- 🔥 Ye naya section hai jo percentage dikhayega -->
+          <p
+            style="color: #4ade80; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+            🎁 Exclusive <span class="discount-val">30</span>% OFF Offer
+          </p>
+          <h4 style="color: white; margin: 5px 0; font-size: 14px;">Code:
+            <span class="active-code"
+              style="color: #a020f0; font-weight: 800; background: #fff; padding: 1px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(160,32,240,0.3);">
+              OFFER30
+            </span>
+          </h4>
+          <!-- ✨ Stylish Button -->
+          <button type="button" class="apply-coupon-btn"
+            style="background: linear-gradient(135deg, #a020f0 0%, #6d28d9 100%); color: white; border: none; font-size: 12px; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(160, 32, 240, 0.3); margin-top: 5px; text-transform: uppercase;">
+            Apply Discount
+          </button>
+        </div>
+        <button type="button" class="payBtn" data-course="Crypto & Forex Pro" data-id="">Enroll Now</button>
+      </div>
+
+      <!-- Card 5: One Side Momentum -->
+      <div class="poster-card" data-id="69b08d75e9657168f765297d">
+        <div class="card-tag gold">VIP</div>
+        <img src="images/BR30TRADER.png" class="course-img" alt="Course Thumbnail">
+        <h3 class="course-title">One Side Momentum</h3>
+        <p class="price" data-id="69b08d75e9657168f765297d">Price: ₹--</p>
+        <div class="coupon-display-box"
+          style="display:none; margin: 15px 0; border: 1px dashed rgba(160, 32, 240, 0.5); padding: 12px; border-radius: 12px; background: rgba(160, 32, 240, 0.05); position: relative; overflow: hidden;">
+          <!-- 🔥 Ye naya section hai jo percentage dikhayega -->
+          <p
+            style="color: #4ade80; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+            🎁 Exclusive <span class="discount-val">30</span>% OFF Offer
+          </p>
+          <h4 style="color: white; margin: 5px 0; font-size: 14px;">Code:
+            <span class="active-code"
+              style="color: #a020f0; font-weight: 800; background: #fff; padding: 1px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(160,32,240,0.3);">
+              OFFER30
+            </span>
+          </h4>
+          <!-- ✨ Stylish Button -->
+          <button type="button" class="apply-coupon-btn"
+            style="background: linear-gradient(135deg, #a020f0 0%, #6d28d9 100%); color: white; border: none; font-size: 12px; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(160, 32, 240, 0.3); margin-top: 5px; text-transform: uppercase;">
+            Apply Discount
+          </button>
+        </div>
+        <button type="button" class="payBtn" data-course="One Side Momentum" data-id="">Enroll Now</button>
+      </div>
+
+      <!-- Card 6: New Course (Added to make 6) -->
+      <div class="poster-card" data-id="69c67168f5be64158b6e2056">
+        <img src="images/BR30TRADER.png" class="course-img" alt="Course Thumbnail">
+        <h3 class="course-title">Scalping Strategy Pro</h3>
+        <p class="price" data-id="69c67168f5be64158b6e2056">Price: ₹--</p>
+
+        <div class="coupon-display-box"
+          style="display:none; margin: 15px 0; border: 1px dashed rgba(160, 32, 240, 0.5); padding: 12px; border-radius: 12px; background: rgba(160, 32, 240, 0.05); position: relative; overflow: hidden;">
+          <!-- 🔥 Ye naya section hai jo percentage dikhayega -->
+          <p
+            style="color: #4ade80; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+            🎁 Exclusive <span class="discount-val">30</span>% OFF Offer
+          </p>
+          <h4 style="color: white; margin: 5px 0; font-size: 14px;">Code:
+            <span class="active-code"
+              style="color: #a020f0; font-weight: 800; background: #fff; padding: 1px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(160,32,240,0.3);">
+              OFFER30
+            </span>
+          </h4>
+          <!-- ✨ Stylish Button -->
+          <button type="button" class="apply-coupon-btn"
+            style="background: linear-gradient(135deg, #a020f0 0%, #6d28d9 100%); color: white; border: none; font-size: 12px; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(160, 32, 240, 0.3); margin-top: 5px; text-transform: uppercase;">
+            Apply Discount
+          </button>
+        </div>
+        <button type="button" class="payBtn" data-course="Scalping Strategy Pro" data-id="">Enroll Now</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================
+         6. Trading master
+    ========================================= -->
+  <section class="trading-network">
+    <h2 class="section-title">Trading <span>Mastery</span></h2>
+    <p class="section-subtitle">Top Strategies & Tools for Success</p>
+
+    <!-- 1. Indicators Section -->
+    <h3 class="category-name">🚀 Top 12 Indicators</h3>
+    <div class="grid-container">
+      <div class="grid-box"><span>●</span> RSI</div>
+      <div class="grid-box"><span>●</span> MACD</div>
+      <div class="grid-box"><span>●</span> Bollinger Bands</div>
+      <div class="grid-box"><span>●</span> Moving Average (EMA/SMA)</div>
+      <div class="grid-box"><span>●</span> VWAP</div>
+      <div class="grid-box"><span>●</span> Supertrend</div>
+      <div class="grid-box"><span>●</span> Fibonacci Retracement</div>
+      <div class="grid-box"><span>●</span> Stochastic Oscillator</div>
+      <div class="grid-box"><span>●</span> ADX</div>
+      <div class="grid-box"><span>●</span> Parabolic SAR</div>
+      <div class="grid-box"><span>●</span> Volume Oscillator</div>
+      <div class="grid-box"><span>●</span> Money Flow Index (MFI)</div>
+    </div>
+
+    <!-- 2. Candlestick Section -->
+    <h3 class="category-name">🕯️ Top 12 Candlesticks</h3>
+    <div class="grid-container">
+      <div class="grid-box"><span>●</span> Hammer</div>
+      <div class="grid-box"><span>●</span> Doji</div>
+      <div class="grid-box"><span>●</span> Engulfing (Bull/Bear)</div>
+      <div class="grid-box"><span>●</span> Morning Star</div>
+      <div class="grid-box"><span>●</span> Shooting Star</div>
+      <div class="grid-box"><span>●</span> Hanging Man</div>
+      <div class="grid-box"><span>●</span> Inverted Hammer</div>
+      <div class="grid-box"><span>●</span> Piercing Pattern</div>
+      <div class="grid-box"><span>●</span> Dark Cloud Cover</div>
+      <div class="grid-box"><span>●</span> Tweezer Bottom</div>
+      <div class="grid-box"><span>●</span> Marubozu (Bull/Bear)</div>
+      <div class="grid-box"><span>●</span> Tweezer Top</div>
+    </div>
+
+    <!-- 3. Price Action Section -->
+    <h3 class="category-name">📈 Price Action Logic</h3>
+    <div class="grid-container">
+      <div class="grid-box"><span>●</span> Support & Resistance</div>
+      <div class="grid-box"><span>●</span> Trendline Breakout</div>
+      <div class="grid-box"><span>●</span> Double Top/Bottom</div>
+      <div class="grid-box"><span>●</span> Head & Shoulders</div>
+      <div class="grid-box"><span>●</span> Supply & Demand Zones</div>
+      <div class="grid-box"><span>●</span>Cup and Handle</div>
+      <div class="grid-box"><span>●</span> Descending Trangle</div>
+      <div class="grid-box"><span>●</span> Triangle</div>
+    </div>
+  </section>
+
+
+  <!-- =========================================
+         7. master chart petern 
+    ========================================= -->
+  <section class="pattern-section">
+    <h2 class="section-title">Master <span>Chart Patterns</span></h2>
+    <p class="section-subtitle">The language of the market and price action logic</p>
+
+    <div class="pattern-grid">
+      <!-- Pattern 1 -->
+      <div class="pattern-card">
+        <div class="pattern-header">
+          <span class="trend-up">Bullish</span>
+          <h3>📉Double Bottom</h3>
+        </div>
+        <p class="logic-text"><b>Logic:</b> जब मार्केट दो बार एक ही सपोर्ट से बाउंस करे, तो यह 'W' पैटर्न बनाता है। यह
+          मंदी के खत्म होने का संकेत है।</p>
+        <div class="view-btn">View Strategy</div>
+      </div>
+
+      <!-- Pattern 2 -->
+      <div class="pattern-card">
+        <div class="pattern-header">
+          <span class="trend-down">Bearish</span>
+          <h3>👤Head & Shoulders</h3>
+        </div>
+        <p class="logic-text"><b>Logic:</b> यह ट्रेंड रिवर्सल का सबसे बड़ा सिग्नल है। जब बायर्स नया हाई बनाने में फेल हो
+          जाते हैं, तब यह बनता है।</p>
+        <div class="view-btn">View Strategy</div>
+      </div>
+
+      <!-- Pattern 3 -->
+      <div class="pattern-card">
+        <div class="pattern-header">
+          <span class="trend-up">Neutral</span>
+          <h3>📐Symmetrical Triangle</h3>
+        </div>
+        <p class="logic-text"><b>Logic:</b> यहाँ मार्केट कंसोलिडेट होता है। जिस तरफ भी ब्रेकआउट होगा, उस तरफ एक बड़ा मूव
+          आने की संभावना होती है।</p>
+        <div class="view-btn">View Strategy</div>
+      </div>
+
+      <!-- Pattern 4: Support & Resistance Breakout -->
+      <div class="pattern-card">
+        <div class="pattern-header">
+          <span class="trend-up" style="color: #3b82f6; background: rgba(59, 130, 246, 0.1);">High Volume</span>
+          <h3>🚀Breakout Logic</h3>
+        </div>
+        <p class="logic-text"><b>Logic:</b> जब मार्केट किसी बड़े रेजिस्टेंस को भारी वॉल्यूम के साथ पार करता है, तो यह
+          दर्शाता है कि अब बायर्स पूरी तरह कंट्रोल में हैं।</p>
+        <div class="view-btn">Check Volume</div>
+      </div>
+
+      <!-- Pattern 5: False Breakout (Trap) -->
+      <div class="pattern-card">
+        <div class="pattern-header">
+          <span class="trend-down">Stoploss Hunt</span>
+          <h3>🎯Fakeout Trap</h3>
+        </div>
+        <p class="logic-text"><b>Logic:</b> अक्सर मार्केट रेजिस्टेंस के ऊपर जाकर वापस नीचे आ जाता है। यह रिटेलर्स को
+          फँसाने (Trap) के लिए 'Liquidity Hunt' होता है।</p>
+        <div class="view-btn">Avoid Traps</div>
+      </div>
+
+      <!-- Pattern 6: Trendline Rejection -->
+      <div class="pattern-card">
+        <div class="pattern-header">
+          <span class="trend-up" style="color: #a020f0; background: rgba(160, 32, 240, 0.1);">Multi-Touch</span>
+          <h3>📈Trendline Logic</h3>
+        </div>
+        <p class="logic-text"><b>Logic:</b> ट्रेंडलाइन पर तीसरी बार टच होना सबसे 'High Accuracy' ट्रेड माना जाता है
+          क्योंकि यहाँ बड़े प्लेयर्स अपनी पोजीशन बढ़ाते हैं।</p>
+        <div class="view-btn">View Trend</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================
+             8. Trading Piller
+    ========================================= -->
+  <section class="trading-pillars">
+    <div class="pillar-container">
+      <!-- Pillar 1: Psychology -->
+      <div class="pillar-box">
+        <h2 class="purple-text">90%</h2>
+        <p class="white-text">Psychology Focus</p>
+        <div class="pillar-footer">मार्केट में पैसा सेटअप से नहीं, माइंडसेट से बनता है।</div>
+      </div>
+
+      <!-- Pillar 2: Risk Reward -->
+      <div class="pillar-box">
+        <h2 class="purple-text">1:2+</h2>
+        <p class="white-text">Risk Reward</p>
+        <div class="pillar-footer">कम खोना और ज़्यादा कमाना ही असली ट्रेडर की पहचान है।</div>
+      </div>
+
+      <!-- Pillar 3: Overtrading -->
+      <div class="pillar-box">
+        <h2 class="purple-text">Zero</h2>
+        <p class="white-text">Overtrading</p>
+        <div class="pillar-footer">जहाँ सेटअप नहीं, वहाँ ट्रेड नहीं। अनुशासन ही पैसा है।</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================
+         9. Free Course Section 
+    ========================================= -->
+  <section class="pdf-hub-section">
+    <div class="pdf-container">
+      <div class="pdf-header">
+        <h2>📚 Free <span>Course PDF</span> Hub</h2>
+        <p>Master the markets with our curated study material.</p>
+      </div>
+
+      <div class="pdf-list">
+        <a href="Course.pdf/✅ 9 EMA + 15 EMA + FVG Trading (Option Buying).txt" target="_blank" class="pdf-item">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>9 EMA + 15 EMA + FVG (Option Buying)</span>
+          <i class="fa-solid fa-download download-icon"></i>
+        </a>
+
+        <a href="Course.pdf/✅ 9 EMA + 15 EMA + FVG Trading (Option Selling).txt" target="_blank" class="pdf-item">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>9 EMA + 15 EMA + FVG (Option Selling)</span>
+          <i class="fa-solid fa-download download-icon"></i>
+        </a>
+
+        <a href="Course.pdf/✅ Option Greeks.txt" target="_blank" class="pdf-item">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>Option Greeks Mastery</span>
+          <i class="fa-solid fa-download download-icon"></i>
+        </a>
+
+        <a href="Course.pdf/✅ Option Selling with Hedging.txt" target="_blank" class="pdf-item">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>Option Selling with Hedging</span>
+          <i class="fa-solid fa-download download-icon"></i>
+        </a>
+
+        <a href="Course.pdf/✅ RSI Divergence क्या होता है.txt" target="_blank" class="pdf-item">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>RSI Divergence Full Guide</span>
+          <i class="fa-solid fa-download download-icon"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================
+         10. Service and tools 
+    ========================================= -->
+  <section class="services-section">
+    <h2 class="section-title">Our <span>Services & Tools</span></h2>
+    <p class="section-subtitle">High-performance digital solutions for your business</p>
+
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="icon-box">🌐</div>
+        <h3>Custom Web Development</h3>
+        <p>हम आपके बिजनेस के लिए हाई-स्पीड और रिस्पॉन्सिव वेबसाइट्स बनाते हैं (React, Node, MongoDB).</p>
+        <span class="tag">Standard</span>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card featured">
+        <div class="icon-box">📊</div>
+        <h3>Trading Dashboards</h3>
+        <p>लाइव मार्केट डेटा और कस्टमाइजेबल चार्ट्स के साथ पर्सनल ट्रेडिंग जर्नल्स और डैशबोर्ड्स।</p>
+        <span class="tag">Premium</span>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="icon-box">📱</div>
+        <h3>App Development</h3>
+        <p>एंड्रॉइड और iOS के लिए यूजर-फ्रेंडली मोबाइल एप्लिकेशन जो आपके काम को आसान बनाएं।</p>
+        <span class="tag">Scalable</span>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <div class="icon-box">⚡</div>
+        <h3>API Integration</h3>
+        <p>थर्ड-पार्टी टूल्स और पेमेंट गेटवे को आपकी वेबसाइट के साथ आसानी से जोड़ना।</p>
+        <span class="tag">Fast</span>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card">
+        <div class="icon-box">🛠️</div>
+        <h3>SEO & Performance</h3>
+        <p>आपकी वेबसाइट को Google पर रैंक कराने और लोडिंग स्पीड को 100% तक बढ़ाने की सर्विस।</p>
+        <span class="tag">SEO Friendly</span>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card">
+        <div class="icon-box">🔐</div>
+        <h3>Security Solutions</h3>
+        <p>डेटा प्रोटेक्शन और सिक्योर सर्वर सेटअप ताकि आपका बिजनेस हमेशा सुरक्षित रहे।</p>
+        <span class="tag">Secure</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+         11. pro Isometric & Responsive
+    =============================================================== -->
+  <div id="br30-trading-universe">
+    <!-- Floating Background Particles (New) -->
+    <div class="particles">
+      <div class="dot d1"></div>
+      <div class="dot d2"></div>
+      <div class="dot d3"></div>
+    </div>
+
+    <div class="universe-scene">
+      <!-- Center Core: BR30 Logo -->
+      <div class="core-logo">
+        <div class="logo-inner">BR30</div>
+        <div class="pulse-wave">TRADER</div>
+        <div class="pulse-wave wave-2">TRADER</div>
+      </div>
+
+      <!-- Floating Trading Elements -->
+      <div class="float-node n1">📈 <span>BULLISH</span></div>
+      <div class="float-node n2">📉 <span>BEARISH</span></div>
+      <div class="float-node n3">⚡ <span>EXECUTION</span></div>
+
+
+      <!-- Floating 3D Candles (Extra Pro Look) -->
+      <div class="candle c1"></div>
+      <div class="candle c2"></div>
+
+      <!-- Naya Clean Tech Floor (Bina Lines wala) -->
+      <div class="tech-floor">
+        <div class="floor-glow"></div>
+      </div>
+
+      <!-- Hero Text -->
+      <div class="hero-content">
+        <h1>Master The Market</h1>
+        <p>Advanced Algorithmic Ecosystem for Professionals</p>
+        <a href="https://t.me/YourTelegramChannel" target="_blank">
+          <button class="pro-btn">Join Our Free Community✅</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===============================================================
+         11. Scoped Container for Trading Section  
+    =============================================================== -->
+  <div id="br30-trading-section">
+    <div class="trading-container">
+
+      <!-- LEFT SIDE: 90% Mindset -->
+      <div class="trading-col">
+        <div class="ring-card purple-glow">
+          <div class="ring-inner">
+            <h2 class="percent">90%</h2>
+            <p class="label">MINDSET</p>
+          </div>
+        </div>
+        <div class="text-content">
+          <h3 class="title-green">🟦 Mindset – 90%</h3>
+          <p><span class="highlight-green">Discipline & Patience:</span> Market me loss aur drawdowns aayenge. Agar
+            mindset strong hai, to aap panik nahi karenge aur apni strategy ko follow karenge.</p>
+          <p><span class="highlight-green">Emotions Control:</span> Greed aur fear ko control करना सबसे important है।
+            Agar yeh na ho to perfect strategy bhi fail ho sakti है।</p>
+          <p><span class="highlight-green">Consistency:</span> Regular profitable trader बनने के लिए daily routine और
+            review mindset का part है।</p>
+          <p><span class="highlight-green">Risk Management Mentality:</span> Loss accept करना और risk को manage करना
+            mindset से आता है। na ki strategy se.</p>
+        </div>
+      </div>
+
+      <!-- CENTER: Live Trading Chart -->
+      <div class="trading-col-center">
+        <div class="candles-box">
+          <div class="cndl green"></div>
+          <div class="cndl red"></div>
+          <div class="cndl green"></div>
+        </div>
+        <p class="live-text">LIVE TRADING</p>
+      </div>
+
+      <!-- RIGHT SIDE: 10% Strategy -->
+      <div class="trading-col">
+        <div class="ring-card yellow-glow">
+          <div class="ring-inner">
+            <h2 class="percent">10%</h2>
+            <p class="label">STRATEGY</p>
+          </div>
+        </div>
+        <div class="text-content">
+          <h3 class="title-yellow">🟦 Strategy – 10%</h3>
+          <p><span class="highlight-green">Entry & Exit Rules:</span> kab और kaha buy/sell करना है ये strategy decide
+            करती है।</p>
+          <p><span class="highlight-green">Technical Analysis:</span> Support/resistance, indicators, patterns – ये
+            tools strategy का हिस्सा है।</p>
+          <p><span class="highlight-green">Position Sizing:</span> Kitna trade लेना है, stop loss kaha set करना है, ये
+            भी strategy के through होता है।</p>
+          <p><span class="highlight-green">💡 Real Life Example1:</span> Agar aapke paas perfect strategy hai lekin
+            mindset weak hai → overtrade karoge, fear me exit karoge, ya overconfidence me bada loss loge.</p>
+          <p><span class="highlight-green">💡 Real Life Example2:</span> Agar mindset strong hai lekin strategy simple
+            hai → disciplined trading se long term me profitable reh sakte ho.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ===============================================================
+         11. Dicipline card & sentiment cadr & Calculatore card
+    =============================================================== -->
+  <div class="trading-tools-wrapper">
+
+    <!-- 1. Discipline Card -->
+    <div class="tool-card">
+      <h2 class="section-title">Daily <span>Discipline</span></h2>
+      <p class="section-subtitle">Trading is 10% Strategy & 90% Psychology.</p>
+
+      <div class="checklist-container">
+        <!-- Existing Points -->
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Followed my Trading Plan? 📋</p>
+        </label>
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Stop-Loss placed in system? 🛡️</p>
+        </label>
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Proper Position Sizing? ⚖️</p>
+        </label>
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>No Overtrading today? 🚫</p>
+        </label>
+
+        <!-- New Pro Points -->
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Waited for my Setup? 🎯</p>
+        </label>
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Risk-Reward is 1:2 or more? 📊</p>
+        </label>
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Controlled my Emotions? 🧠</p>
+        </label>
+        <label class="check-item"><input type="checkbox"><span class="custom-check"></span>
+          <p>Exit based on Logic, not Fear? 🚪</p>
+        </label>
+      </div>
+      <div class="discipline-footer">
+        <button type="button" class="submit-discipline-btn" onclick="submitDailyCheck()">
+          Submit Daily Report 📝
+        </button>
+        <p id="success-msg" style="display: none; color: #22c55e; font-size: 0.8rem; margin-top: 10px;">
+          ✅ Report Saved! Great Job, Trader!
+        </p>
+      </div>
+    </div>
+
+
+    <!-- 2. Sentiment Card -->
+    <div class="tool-card">
+      <h2 class="section-title">Market <span>Sentiment</span></h2>
+      <p class="section-subtitle">Real-time fear and greed level.</p>
+      <div class="gauge-container">
+        <div class="gauge-base">
+          <div class="gauge-needle"></div>
+          <div class="label-fear">FEAR</div>
+          <div class="label-neutral">NEUTRAL</div>
+          <div class="label-greed">GREED</div>
+        </div>
+        <div class="sentiment-value">Mood: <span id="mood-text">Moderate Greed 📈</span></div>
+        <div class="market-status-box">
+          <div class="status-row">
+            <span class="status-pill bullish">Very Bullish 📈</span>
+            <span class="status-pill neutral">Neutral ↔️</span>
+            <span class="status-pill bearish">Very Bearish 📉</span>
+          </div>
+          <div class="status-info-text">
+            Current Bias: <span class="active-status">Waiting for Breakout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Calculator Card -->
+    <div class="tool-card">
+      <h2 class="section-title">Risk <span>Calculator</span></h2>
+      <p class="section-subtitle">Manage your capital like a pro.</p>
+      <div class="calc-box">
+        <div class="input-group"><label>Capital (₹)</label><input type="number" id="capital" placeholder="100000"></div>
+        <div class="input-group"><label>Risk (%)</label><input type="number" id="risk-percent" placeholder="2%"></div>
+        <div class="input-group"><label>Entry (₹)</label><input type="number" id="entry-price" placeholder="450"></div>
+        <div class="input-group"><label>SL (₹)</label><input type="number" id="sl-price" placeholder="440"></div>
+        <button class="calc-btn" onclick="calculateRisk()">Calculate</button>
+        <div class="result-display">
+          <p>Qty: <span id="qty-result">0</span></p>
+          <p>Risk: <span id="risk-amt">₹0</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================
+         12. Trading jarnel
+    ========================================= -->
+  <form id="journalForm" onsubmit="event.preventDefault(); saveTrade();">
+    <section class="journal-section">
+      <!-- Title Centered -->
+      <h2 class="section-title" style="text-align: center; width: 100%;"><span class="highlight">Trading Journal</span>
+        📓</h2>
+      <p class="section-subtitle" style="text-align: center;">Analyze your trades like a professional.</p>
+
+      <!-- Analytics Dashboard (Auto Calculating) -->
+      <div class="analytics-row">
+        <div class="stat-card">
+          <small>Total Gross P&L</small>
+          <h3 id="total-gross">₹0</h3>
+        </div>
+        <div class="stat-card">
+          <small>Total Brokerage (Est.)</small>
+          <h3 id="total-tax" style="color: #ef4444;">₹0</h3>
+        </div>
+        <div class="stat-card">
+          <small>Net P&L (After Tax)</small>
+          <h3 id="total-net">₹0</h3>
+        </div>
+      </div>
+
+      <div class="journal-container">
+        <!-- Input Form (Left) -->
+        <div class="journal-form">
+          <label class="input-label">Trade Name</label>
+          <input type="text" id="trade-name" placeholder="BTC / ETH/etc.">
+
+          <label class="input-label">Action</label>
+          <select id="trade-type">
+            <option value="Buy">BUY 🟢</option>
+            <option value="Sell">SELL 🔴</option>
+          </select>
+
+          <label class="input-label">Result Status</label>
+          <div class="pnl-toggle">
+            <button type="button" id="btn-prof" class="pnl-btn active-prof" onclick="setStatus('Profit')">Profit
+              💰</button>
+            <button type="button" id="btn-loss" class="pnl-btn" onclick="setStatus('Loss')">Loss 📉</button>
+          </div>
+          <input type="hidden" id="trade-status" value="Profit">
+
+          <label class="input-label">Amount (₹)</label>
+          <input type="number" id="trade-pnl" placeholder="Enter P&L  Amount">
+
+          <label class="input-label">Trade Lesson</label>
+          <textarea id="trade-note" placeholder="What did you learn Today?"></textarea>
+
+          <!-- onclick="saveTrade()" ko hata do aur id="saveTradeBtn" daal do -->
+          <button id="saveTradeBtn" class="save-btn">Save Trade 💾</button>
+
+        </div>
+
+        <!-- History (Right) -->
+        <div class="journal-history">
+          <div class="history-top-bar">
+            <h3>Recent History 🕒</h3>
+
+            <!-- Date Search Box -->
+            <div class="date-filter-group">
+              <input type="date" id="search-date" onchange="filterTradesByDate()" title="Filter by Date">
+              <button onclick="resetHistory()" title="Clear Filter">
+                <i class="fa-solid fa-rotate-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Scrollable Trade List -->
+          <div id="trade-list" class="styled-scroll">
+            <!-- ट्रेड्स यहाँ दिखेंगे -->
+          </div>
+        </div>
+    </section>
+  </form>
+
+
+  <!-- =========================================
+         13. FOOTER REVIEW & FEEDBACK SECTION
+    ========================================= -->
+  <!-- Highlight Stat -->
+  <h5>650+ Happy Users in Last 6 Months.</h5>
+
+  <div class="footer-review-section">
+    <div class="review-flex-container">
+
+      <!-- A. Share Your Experience: Review Form -->
+      <div class="review-form-box">
+        <h3>Share Your Experience</h3>
+        <form id="reviewForm">
+          <input type="text" id="userName" placeholder="Your Name" required>
+          <select id="userRating">
+            <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
+            <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
+            <option value="3">⭐⭐⭐ (3 Stars)</option>
+          </select>
+          <textarea id="userComment" placeholder="Write your feedback here..." required></textarea>
+          <button type="submit" id="submitBtn">Post Review</button>
+        </form>
+      </div>
+
+      <!-- B. Community Highlights: Display Section (SCROLL ADDED) -->
+      <div class="review-list-box">
+        <h3>Community Highlights (Top 10)</h3>
+
+        <!-- HTML के इस हिस्से को ऐसे बदलें -->
+        <div id="reviewDisplay" style="max-height: 320px; overflow-y: auto; padding-right: 5px;">
+          <!-- Reviews यहाँ आएँगे -->
+        </div>
+
+      </div>
+
+    </div> <!-- review-flex-container ends -->
+  </div> <!-- footer-review-section ends -->
+
+
+
+  <!-- =======================================
+        17. Daily P&L Update Section  
+     ===================================== -->
+  <section class="trading-updates">
+    <div class="pl-card">
+      <h2>💹 Daily P&L</h2>
+      <p>Transparency is key. Check my verified daily reports.</p>
+      <div class="pl-box">
+        <a href="https://drive.google.com/drive/folders/1KyYhGtuJX9J8jssCV5r9amUmwWYsqR6R?usp=sharing" target="_blank"
+          rel="noopener noreferrer">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>View P&L Drive</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Coming Courses Section -->
+    <div class="courses-card">
+      <h2>🔥 Coming Courses</h2>
+      <div class="course-tags">
+        <span>Scalping</span>
+        <span>Price Action</span>
+        <span>Candle Stick</span>
+        <span>Chart Reading</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================
+        18.  Course Highlite 
+     ========================= -->
+  <section class="highlights-section">
+    <div class="highlights-card">
+      <h3>🎓 Course Highlights</h3>
+      <div class="highlights-grid">
+        <div class="h-item"><i class="fas fa-chart-line"></i> Basic to Advanced</div>
+        <div class="h-item"><i class="fas fa-video"></i> Live Market Analysis</div>
+        <div class="h-item"><i class="fas fa-shield-alt"></i> Risk Management</div>
+        <div class="h-item"><i class="fas fa-infinity"></i> Lifetime Access</div>
+        <div class="h-item"><i class="fas fa-users"></i> Support Community</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+        19. Footer Section & Media
+     =========================== -->
+  <footer class="footer-section">
+    <h3>🌐 Connect & Contact 🌐</h3>
+
+    <div class="social-grid">
+      <!-- 1. YouTube -->
+      <a href="https://www.youtube.com/@br30_trader" target="_blank" class="s-link yt">
+        <i class="fa-brands fa-youtube"></i> <span>YouTube</span>
+      </a>
+
+      <!-- 2. Instagram -->
+      <a href="https://www.instagram.com/mukeshraj_7488" target="_blank" class="s-link ig">
+        <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
+      </a>
+
+      <!-- 3. Facebook -->
+      <a href="https://www.facebook.com/share/1AhDBpYv4E/" target="_blank" class="s-link fb">
+        <i class="fa-brands fa-facebook"></i> <span>Facebook</span>
+      </a>
+
+      <!-- 4. Telegram -->
+      <a href="https://t.me/+F8mDhdfiGaI1NDY1" target="_blank" class="s-link tg">
+        <i class="fa-brands fa-telegram"></i> <span>Telegram</span>
+      </a>
+
+      <!-- 5. Whatsapp -->
+      <a href="https://chat.whatsapp.com/ERgQUcY4M3lGU4GNeqhoRb?mode=gi_t" target="_blank" class="s-link wa">
+        <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
+      </a>
+
+      <!-- 6. Gmail -->
+      <a href="mailto:mukeshkumarsingh7488@gmail.com" target="_blank" class="s-link gm">
+        <i class="fa-solid fa-envelope"></i> <span>Gmail</span>
+      </a>
+    </div>
+
+    <p class="copyright">© 2023 BR30ᴛʀᴀᴅᴇʀ | Built for Success 🚀</p>
+  </footer>
+
+
+  <!-- ============================
+        20. Footer Policy Link
+     ========================= -->
+  <div class="footer-policy-links">
+    <div class="policy-wrapper">
+      <a href="aboutus.html">About Us</a>
+      <span class="divider">|</span>
+      <a href="contact.html">Contact Us</a>
+      <span class="divider">|</span>
+      <a href="privacy.html">Privacy Policy</a>
+      <span class="divider">|</span>
+      <a href="terms.html">Terms & Conditions</a>
+      <span class="divider">|</span>
+      <a href="refund.html">Refund Policy</a>
+    </div>
+  </div>
+
+
+  <!-- ==============================================================
+        21. Main footer
+     ============================================================ -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <!-- Brand Info -->
+      <div class="footer-about">
+        <h2 class="footer-logo">BR30<span>ᴛʀᴀᴅᴇʀ</span></h2>
+        <p>Empowering traders with logic, psychology, and high-performance web solutions.</p>
+        <div class="social-icons">
+          <a href="#">🌐</a>
+          <a href="#">📸</a>
+          <a href="#">🎥</a>
+          <a href="#">💬</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="strategies.html">Strategies</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About Me</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-contact">
+        <h3>Get In Touch</h3>
+        <p>📧 mukeshkumarsingh7488@gmail.com</p>
+        <p>📍 Based in India</p>
+        <p class="dev-tag">Built with ❤️ by Mukesh</p>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>&copy; 2023 BR30Trader. All Rights Reserved. | <span>Trading involves risk.</span></p>
+    </div>
+  </footer> <!-- Main Footer End -->
+
+  <!-- AI Pro Chat Modal (Temprory Coment)
+  <div id="ai-chat-modal" class="ai-modal">
+    <div class="ai-chat-container">
+      <div class="ai-chat-header">
+        <span><i class="fas fa-robot"></i> BR30 AI Pro Mentor</span>
+        <button id="close-chat">&times;</button>
+      </div>
+      <div id="ai-messages" class="ai-messages">
+        <p class="ai-msg">Bhai, main BR30 Mentor hoon. Trading ka kya sawal hai?</p>
+      </div>
+      <div class="ai-chat-input">
+        <input type="text" id="ai-user-input" placeholder="Puchho bhai (Nifty, Options, Strategy)...">
+        <button id="close-chat" onclick="closeAiChat()">&times;</button>
+      </div>
+    </div>
+  </div>
+  <button id="send-ai-btn" onclick="sendAiMessage()">
+    <i class="fas fa-paper-plane"></i>
+  </button> -->
+
+
+  <!-- ============================================
+          ADD JAVASCRIPT OR OTHER SCRIPTS BELOW
+    =========================================== -->
+
+
+  <!-- AI PRO CHAT LOGIC (Direct HTML Script) 
+  <script>
+    window.addEventListener('load', function () {
+      const btn = document.getElementById('ai-pro-btn');
+      const modal = document.getElementById('ai-chat-modal');
+      const sendBtn = document.getElementById('send-ai-btn');
+      const aiInput = document.getElementById('ai-user-input');
+      const msgDiv = document.getElementById('ai-messages');
+
+      // 1. Modal Kholne Ka Function
+      if (btn && modal) {
+        btn.addEventListener('mousedown', function (e) {
+          modal.style.display = "block";
+          modal.style.zIndex = "2147483647";
+        });
+      }
+
+      // 2. Message Bhejne Ka Logic
+      window.sendAiMessage = async function () {
+        const message = aiInput.value.trim();
+        if (!message) return;
+
+        // User Message Dikhao
+        msgDiv.innerHTML += `<div style="text-align:right; margin-bottom:10px;"><span style="background:#a020f0; padding:8px 12px; border-radius:10px; color:white; font-size:13px; display:inline-block;">${message}</span></div>`;
+        aiInput.value = "";
+        msgDiv.scrollTop = msgDiv.scrollHeight;
+
+        try {
+          const res = await fetch(window.API_BASE_URL + '/api/ai/guide', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+          });
+          const data = await res.json();
+
+          // AI Response Dikhao
+          msgDiv.innerHTML += `<div class="ai-msg" style="background:#1e293b; padding:10px; border-radius:8px; margin-bottom:10px; border-left:3px solid #a020f0; color:#ddd;"><b>AI Mentor:</b> ${data.reply}</div>`;
+          msgDiv.scrollTop = msgDiv.scrollHeight;
+        } catch (err) {
+          console.error("AI Error:", err);
+        }
+      };
+
+      // Enter Key Support
+      aiInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') window.sendAiMessage();
+      });
+    });
+
+    // Modal Band Karne Ka Function
+    function closeAiChat() {
+      document.getElementById('ai-chat-modal').style.display = "none";
+    }
+  </script> -->
+
+  <!-- =======================================
+           16. Other External Scripts belo
+     ===================================== -->
+
+  <!-- Typing Animation: Library for animated typing effects -->
+  <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
+
+  <!-- Real-time Communication: Socket.io for web sockets/chat -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+  <!-- Payment Gateway: Razorpay integration for checkouts -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- 🔥 Firebase scripts (frontend ke liye, NOT service worker) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js"></script>
+
+  <!-- Axios Library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- jQuery v3.7.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+  <!-- Axios (API call ke liye) -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- SweetAlert2 (Beautiful Alert) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <!-- Page Load Handler: Adds 'loaded' class to <html> for CSS transitions/animations -->
+  <script>
+    document.documentElement.className += " loaded";
+  </script>
+  
+ <script src="config.js"></script>
+  <!-- Main Script Module: Firebase, Payment aur baki saari logic ke liye -->
+  <script type="module" src="script.js"></script>
+  <!-- ==========================================
+          Other External Scripts end. avobe
+     ======================================== -->
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+✅ RSI Divergence क्या होता है?
+RSI Divergence मतलब —
+Price और RSI (Relative Strength Index) दोनों का चाल (movement) अलग-अलग दिशा में होना।
+
+ये market में trend reversal या weakness दिखाने का signal होता है।
+
+✅ RSI Divergence के Types
+1️⃣ Bullish Divergence (Buy Signal)
+Price: Lower Low बना रहा है।
+
+RSI: Higher Low बना रहा है।
+
+👉 मतलब price नीचे जा रहा है लेकिन RSI ऊपर उठ रहा है → गिरावट में कमजोरी = reversal आ सकता है।
+
+2️⃣ Bearish Divergence (Sell Signal)
+Price: Higher High बना रहा है।
+
+RSI: Lower High बना रहा है।
+
+👉 मतलब price ऊपर जा रहा है लेकिन RSI नीचे आ रहा है → तेजी में कमजोरी = गिरावट आ सकती है।
+
+✅ RSI Divergence पहचानने के लिए Step by Step
+1️⃣ Chart पर RSI indicator लगाएं (Default: 14 period)।
+2️⃣ Price का High/Low देखें और RSI का High/Low देखें।
+3️⃣ अगर दोनों opposite direction में move कर रहे हैं तो divergence है।
+4️⃣ Support या Resistance के पास divergence मिले तो signal strong होता है।
+
+✅ Notebook में लिखने के लिए Table Format
+Type	Price Movement	RSI Movement	Signal
+Bullish Divergence	Lower Low	Higher Low	Buy/Reversal
+Bearish Divergence	Higher High	Lower High	Sell/Reversal
+
+✅ Important Notes
+सिर्फ RSI divergence देखकर trade नहीं लेना चाहिए।
+
+Candle confirmation, volume confirmation साथ में देखना चाहिए।
+
+Higher Timeframe (15 min, 1 hour) में signal ज़्यादा reliable होता है।

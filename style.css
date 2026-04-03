@@ -1,0 +1,4199 @@
+/* #region Styles My Code */
+/* --- Desktop & Mobile Perfect Header --- */
+body {
+  /* Premium Dark Mesh Gradient: कोनों में हल्का सा गहरा हरा ग्लो */
+  background-color: #050505;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(0, 255, 136, 0.05) 0px, transparent 90%),
+    radial-gradient(at 100% 100%, rgba(0, 255, 136, 0.05) 0px, transparent 90%);
+  /* थोड़ा ज्यादा स्पेस ताकि बैकग्राउंड अच्छा दिखे */
+}
+
+/* सबसे ऊपर डालें */
+html {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* जैसे ही सब लोड होगा, पेज चमकेगा */
+html.loaded {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* इससे विड्थ खराब नहीं होगी */
+}
+
+body,
+html {
+  width: 100%;
+  overflow-x: hidden;
+  /* साइड स्क्रॉल रोकने के लिए */
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #000000;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Purani border-bottom hata kar ye niche wala code use karein */
+  border-bottom: none;
+}
+
+/* scroll-progress */
+#scroll-progress {
+  position: fixed;
+  /* Screen par lock karne ke liye */
+  top: 0;
+  left: 0;
+  width: 0%;
+  /* JS se control hoga */
+  height: 2px;
+  background: #00ff88 !important;
+  /* Brand Purple */
+  z-index: 99999 !important;
+  /* Sabse upar (Header se bhi upar) */
+  box-shadow: 0 0 15px #00ff88;
+  transition: width 0.15s ease-out;
+  /* Smooth movement */
+}
+
+/* --- THE MULTI-COLOR LINE (Full Width) --- */
+header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  /* Patli aur clean line */
+  /* Aapka Purple + Neon Blue + Pink ka combo */
+  background: linear-gradient(90deg, #329869, #00d2ff, #592059, #2e5f48);
+  background-size: 300% 100%;
+  animation: borderMove 4s linear infinite;
+  /* Line move karegi */
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  /* Glowing Effect */
+}
+
+/* Animation Logic */
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Mobile Fix for Header Height */
+@media (max-width: 768px) {
+  body {
+    padding-top: 100px;
+  }
+
+  /* Mobile par gap adjust karne ke liye */
+}
+
+/* ⚠️ IMPORTANT: Body mein gap dena zaroori hai varna content header ke niche chhup jayega */
+body {
+  padding-top: 80px;
+}
+
+h1 h2,
+h3,
+h4 {
+  color: #a9b1c5;
+}
+
+p {
+  color: #a9b1c5;
+}
+
+/* --- Global Header Style --- */
+.header {
+  background: #000000;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nav-container {
+  display: flex !important;
+  justify-content: flex-end !important;
+  /* इससे दोनों आइटम दाईं ओर चले जाएंगे */
+  align-items: center !important;
+  gap: 15px !important;
+  /* बेल और मेनू बटन के बीच की दूरी यहाँ से कम-ज्यादा करें */
+}
+
+/* Left Group */
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-title h1 {
+  color: #ffffff;
+  font-size: 20px;
+  margin: 0;
+}
+
+.logo-title h1 span {
+  color: #00ff88;
+}
+
+.nav-right-side {
+  text-align: right;
+  /* इससे अंदर के सभी बटन दाईं ओर खिसक जाएंगे */
+}
+
+/* Desktop Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: #00ff88;
+}
+
+/* Right Group (AI + Bell) */
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Welcome Center */
+.welcome.trader h1 {
+  color: #ffcc00;
+  font-size: 1.1rem;
+  margin: 0;
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+
+  /* 1. लोगो और आइकन्स को थोड़ा छोटा करें ताकि बीच में जगह बने */
+  .logo {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .logo-text {
+    display: none !important;
+    /* मोबाइल पर नाम छुपा दें, सिर्फ लोगो रहने दें */
+  }
+
+  /* 2. वेलकम को मोबाइल के हिसाब से सेट करें */
+  .welcome.trader {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: block !important;
+    /* सुनिश्चित करें कि ये छुपा न हो */
+    z-index: 9999 !important;
+    width: auto !important;
+  }
+
+  .welcome.trader h1 {
+    font-size: 0.9rem !important;
+    /* मोबाइल के लिए छोटा साइज */
+    white-space: nowrap !important;
+    letter-spacing: 0px !important;
+  }
+
+  /* 3. नेवबार के दाएं हिस्से को थोड़ा खिसकाएं */
+  .nav-right {
+    gap: 8px !important;
+    /* बेल और मेनू के बीच की दूरी कम करें */
+  }
+}
+
+
+/* 1. पूरे हेडर को एक लाइन में सेट करना */
+header {
+  display: flex;
+  justify-content: space-between;
+  /* लोगो बाएं और नेवबार दाएं */
+  align-items: center;
+  padding: 15px 5%;
+  /* "Welcome" को सेंटर करने के लिए यह जरूरी है */
+  background-color: #000;
+  /* आपका बैकग्राउंड कलर */
+  min-height: 60px;
+}
+
+/* 2. Welcome Message को बिल्कुल सेंटर में लाना */
+.welcome.trader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* यह स्क्रीन के बिल्कुल बीच में लाएगा */
+  text-align: center;
+  z-index: 10;
+}
+
+.welcome.trader h1 {
+  color: #FFD700;
+  /* गोल्ड या सफ़ेद जो आपको पसंद हो */
+  white-space: nowrap;
+  /* ताकि नाम एक ही लाइन में रहे */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 3. नेवबार (दाईं ओर के आइकन्स) को सेट करना */
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* बेल और मेनू के बीच की दूरी */
+}
+
+/* मोबाइल के लिए छोटा सुधार */
+@media (max-width: 768px) {
+  .logo-text {
+    display: none;
+    /* मोबाइल में सिर्फ लोगो दिखेगा ताकि 'Welcome' को जगह मिले */
+  }
+
+  .welcome.trader h1 {
+    font-size: 1rem !important;
+    /* मोबाइल में थोड़ा छोटा */
+  }
+}
+
+
+
+/* पूरे हेडर को मैनेज करने के लिए */
+header {
+  display: flex;
+  justify-content: space-between;
+  /* लोगो बाएं और बाकी सब दाएं */
+  align-items: center;
+  padding: 10px 15px;
+  background: #000;
+  /* ब्लैक बैकग्राउंड */
+}
+
+/* दाईं ओर के दोनों आइकन्स के लिए */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* बेल और मेनू के बीच की दूरी */
+}
+
+/* मेनू बटन (Hamburger) की स्टाइलिंग */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+  /* सफेद धारियां */
+  border-radius: 2px;
+}
+
+/* बेल आइकन को थोड़ा सा एडजस्ट करने के लिए */
+.bell-container {
+  position: relative;
+  cursor: pointer;
+}
+
+/* जब मेनू खुला हो (Active Class) */
+.menu-icon.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-icon.active span:nth-child(2) {
+  opacity: 0;
+  /* बीच वाली लाइन गायब हो जाएगी */
+}
+
+.menu-icon.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* स्मूथ ट्रांजेक्शन के लिए इसे अपनी पुरानी .menu-icon span में जोड़ें */
+.menu-icon span {
+  transition: 0.3s ease-in-out;
+}
+
+/* मेनू को दिखाने/छुपाने के लिए */
+.nav-links {
+  display: none;
+  /* शुरू में छुपा रहेगा */
+  /* अपनी पुरानी स्टाइलिंग यहाँ रखें */
+}
+
+.nav-links.show {
+  display: block;
+  /* क्लिक करने पर दिखेगा */
+}
+
+
+
+/* --- MOBILE RESPONSIVE --- */
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    display: none;
+    /* Mobile pe links hide honge */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #0b061a;
+    flex-direction: column;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  /* JS se show hoga */
+
+  .welcome.trader {
+    display: none;
+  }
+
+  /* Mobile pe space ke liye welcome hide kar sakte hain ya chota */
+}
+
+/* --- Hero Section & Video Background --- */
+.hero-video {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  /* Desktop par 60% height */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* वीडियो और टेक्स्ट का कंटेनर */
+.hero-container {
+  position: relative;
+  /* यह सबसे ज़रूरी है */
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+/* वीडियो की स्टाइल */
+.hero-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Hero Text Overlay - अब यह ऊपर से शुरू होगा */
+.video-text {
+  position: absolute;
+  top: 40px;
+  /* Navbar के ठीक नीचे लाने के लिए (इसे कम-ज्यादा कर सकते हैं) */
+  left: 50%;
+  transform: translateX(-50%);
+  /* सिर्फ हॉरिजॉन्टल सेंटर करने के लिए */
+  text-align: center;
+  width: 90%;
+  color: #ffffff;
+  text-align: left;
+  z-index: 10;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 20px;
+  /* background: rgba(0, 0, 0, 0.2); /* अगर टेक्स्ट पढ़ने में दिक्कत हो तो इसे ऑन रखें */
+}
+
+/* --- मोबाइल के लिए खास सेटिंग (Max 768px) --- */
+@media (max-width: 768px) {
+  .video-text {
+    top: 50px;
+    /* मोबाइल पर नेवबार छोटा होता है, इसलिए गैप कम किया */
+    font-size: 1.1rem;
+    padding: 10px;
+  }
+}
+
+.purple {
+  color: #00ff88;
+  /* Purple color for Mukesh */
+}
+
+span {
+  color: #00ff88;
+}
+
+/* --- Mobile Specific Hero (Max 768px) --- */
+@media (max-width: 768px) {
+  .hero-video {
+    height: 40vh;
+    /* Mobile par video ki height thodi kam */
+  }
+
+  .video-text {
+    font-size: 1.2rem;
+    /* Mobile par text thoda chota taaki line na toote */
+    padding: 20px 10px;
+  }
+}
+
+/* --- About Me Section --- */
+.about-section {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.about-section h4 {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  /* स्मूथ एनिमेशन के लिए */
+  cursor: default;
+  display: block;
+  /* ज़ूम इफेक्ट को सही से दिखाने के लिए */
+}
+
+/* होवर इफेक्ट - वेब और मोबाइल दोनों के लिए */
+.about-section p:hover {
+  color: skyblue;
+  /* आपका सिग्नेचर पर्पल */
+  transform: scale(1.02);
+  /* साइज को 2% बढ़ा देगा (लेआउट खराब किए बिना) */
+  transform-origin: left;
+  /* टेक्स्ट बाईं ओर से ही बढ़ेगा, जिससे लाइन नहीं हिलेगी */
+}
+
+/* --- Mobile Specific About (Max 768px) --- */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 15px;
+    text-align: center;
+    /* Mobile par centered text zyada achha dikhta hai */
+  }
+
+  .about-section p {
+    font-size: 0.95rem;
+    /* Mobile font size adjust */
+  }
+}
+
+/* You tube live section */
+.live-status-section {
+  padding: 60px 20px;
+
+  text-align: center;
+}
+
+.live-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #000000 !important;
+  border-radius: 25px;
+  padding: 40px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  /* हल्की लाल बॉर्डर 'Live' फील के लिए */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.live-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.live-title h2 span {
+  color: #00ff88;
+}
+
+.live-title h2 {
+  color: #ff0000 !important;
+  /* शुद्ध लाल रंग */
+  font-weight: bold;
+}
+
+/* 🔴 Red Pulse Animation */
+.pulse-icon {
+  font-size: 1.5rem;
+  animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.slot-card {
+  background: rgba(15, 23, 42, 0.6);
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: 0.3s;
+}
+
+.slot-card:hover {
+  border-color: #ff0000;
+  /* होवर पर लाल चमक */
+  transform: translateY(-5px);
+}
+
+.slot-header {
+  color: #ef4444;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.slot-days {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.slot-time {
+  color: #a9b1c5;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+/* YouTube Button */
+.yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ff0000;
+  color: #ffffff;
+  padding: 12px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.yt-btn:hover {
+  background: #ffffff;
+  color: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+/* Mobile View */
+@media (max-width: 600px) {
+  .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slot-time {
+    font-size: 1.1rem;
+  }
+}
+
+/* Course Section */
+/* Course Section Overall */
+.course-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section-header-box h2 span {
+  color: #00ff88;
+}
+
+.section-header-box h2 {
+  color: #00f2fe !important;
+  /* शुद्ध सफ़ेद */
+  font-weight: 700;
+}
+
+.section-header-box p {
+  color: #a9b1c5 !important;
+  margin-bottom: 50px;
+  letter-spacing: 1px !important;
+}
+
+/* 6 Box Grid Layout */
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 Boxes per line */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual Card Styling */
+.poster-card {
+  background: #000000 !important;
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(160, 32, 240, 0.1);
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.poster-card:hover {
+  transform: translateY(-10px);
+  border-color: #00ff88;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+.poster-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.poster-card h3 {
+  color: #00ff88 !important;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px !important;
+}
+
+.price {
+  color: #e0e0e0 !important;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  letter-spacing: 1px !important;
+}
+
+/* Enroll Button */
+.poster-card button {
+  width: 100%;
+  padding: 12px;
+  background: #00ff88;
+  color: #000000 !important;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.poster-card button:hover {
+  background: palevioletred !important;
+  color: #000 !important;
+}
+
+/* Badge/Tag */
+.card-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #00ff88;
+  color: black;
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-weight: bold;
+  z-index: 5;
+}
+
+.card-tag.gold {
+  background: #ffd700;
+  color: #000;
+}
+
+.poster-grid {
+  opacity: 0;
+  /* Pehle se hide rahega */
+  transition: opacity 0.5s ease-in-out;
+  /* Smoothly dikhega */
+}
+
+
+/* --- Mobile View --- */
+@media (max-width: 1024px) {
+  .poster-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Tablets पर 2 */
+}
+
+@media (max-width: 650px) {
+  .poster-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile पर 1 (Full Width) */
+  .poster-card {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+}
+
+/*Section Separator*/
+.section-divider {
+  height: 1.5px;
+  border: none;
+  background: linear-gradient(90deg, #a020f0, #ff0000, #25d366, #a020f0);
+  background-size: 300% 100%;
+  animation: moveGradient 5s linear infinite;
+  margin: 40px auto;
+  width: 100%;
+  /* पूरी स्क्रीन पर न फैलकर 80% चौड़ाई रखेगा */
+  border-radius: 10px;
+}
+
+/* घूमने वाला एनिमेशन */
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.home-btn {
+  background-color: #00ff88;
+  /* आपका पर्पल कलर */
+  color: #a9b1c5;
+  padding: 12px 35px;
+  /* बटन को सही शेप देने के लिए */
+  border: none;
+  border-radius: 50px;
+  /* इससे किनारे पूरी तरह गोल (Pill shape) हो जाएंगे */
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  /* स्मूथ इफेक्ट के लिए */
+  text-align: center;
+}
+
+/* होवर इफेक्ट (Hover Effect) */
+.home-btn:hover {
+  background-color: #00ff88;
+  /* होवर पर थोड़ा गहरा पर्पल */
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  /* हल्का सा ग्लो */
+  transform: translateY(-2px);
+  /* हल्का सा ऊपर उठने वाला इफेक्ट */
+}
+
+h5 {
+  color: #e0e0e0 !important;
+  letter-spacing: 1px !important;
+  text-align: center !important;
+  margin-top: 70px !important;
+}
+
+/* --- 12. FOOTER & REVIEW SECTION (Desktop + Mobile) --- */
+.footer-review-section {
+  padding: 40px 20px;
+}
+
+.footer-review-section h3 {
+  color: #e0e0e0 !important;
+  letter-spacing: 1px !important;
+}
+
+.review-flex-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.review-form-box,
+.review-list-box {
+  flex: 1;
+  max-height: 400px;
+  min-width: 320px;
+  /* Mobile par width auto adjust hogi */
+  background: #000000 !important;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+/* Form Styles */
+#reviewForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input,
+textarea,
+select {
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Bahut halka white */
+  color: #ffffff;
+  /* Likha hua white dikhega */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Halka border */
+  backdrop-filter: blur(10px);
+  /* Glass effect */
+}
+
+#reviewForm input,
+#reviewForm select,
+#reviewForm textarea {
+  padding: 12px;
+  border: #00ff88;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* ⚡ Cyber Green Scrollbar Logic */
+#reviewDisplay {
+  max-height: 320px;
+  /* हेडिंग के बाद बचे हुए स्पेस के लिए */
+  overflow-y: auto;
+  padding-right: 10px;
+
+  /* स्क्रॉलबार को सुंदर बनाने के लिए (Custom Scrollbar) */
+}
+
+/* 🟢 CYBER GREEN SCROLLBAR (Taki look kharab na ho) */
+#reviewDisplay::-webkit-scrollbar {
+  width: 5px;
+}
+
+#reviewDisplay::-webkit-scrollbar-track {
+  background: #050505;
+  border-radius: 10px;
+}
+
+#reviewDisplay::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+/* Review cards ke beech thoda gap taki clean dikhe */
+#reviewDisplay>div {
+  margin-bottom: 12px;
+}
+
+#submitBtn {
+  position: relative;
+  background: #050505;
+  /* बटन का अंदरूनी कलर डार्क रखें ताकि लाइट चमके */
+  color: black !important;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  /* लाइट को बटन के अंदर रखने के लिए */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+/* घूमने वाली पर्पल लाइट (1-2 इंच की पट्टी) */
+#submitBtn::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  /* लाइट की लंबाई (करीब 1.5-2 इंच) */
+  height: 300%;
+  background: #00ff88;
+  animation: rotateBtn 3s linear infinite;
+}
+
+/* बटन का टेक्स्ट कवर (ताकि लाइट सिर्फ बॉर्डर पर दिखे) */
+#submitBtn::after {
+  content: "Post Review";
+  /* यहाँ अपना बटन टेक्स्ट लिखें */
+  position: absolute;
+  inset: 3px;
+  /* बॉर्डर की मोटाई */
+  background: palevioletred !important;
+  /* बटन का मुख्य कलर */
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* घूमने वाला एनिमेशन */
+@keyframes rotateBtn {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* होवर करने पर हल्का सा बड़ा होगा */
+#submitBtn:hover {
+  background: palevioletred !important;
+  color: black !important;
+  box-shadow: 0 0 20px #00ff88 !important;
+}
+
+/* --- FINAL MOBILE FIXES (Max 768px) --- */
+@media (max-width: 768px) {
+  .info-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-links {
+    text-align: center;
+    order: 2;
+    /* Policy links niche aayenge */
+  }
+
+  .disclaimer {
+    order: 1;
+    /* Disclaimer upar dikhega mobile par */
+    width: 100%;
+  }
+
+  .review-flex-container {
+    flex-direction: column;
+  }
+
+  .review-form-box,
+  .review-list-box {
+    width: 100%;
+  }
+
+  h5 {
+    font-size: 1rem;
+    text-align: center;
+    margin: 20px 0;
+  }
+}
+
+/* Form Styles - सभी बॉक्स बराबर करने के लिए */
+#reviewForm input,
+#reviewForm select,
+#reviewForm textarea {
+  padding: 12px;
+  border: #00ff88;
+  border-radius: 8px;
+  width: 100%;
+  /* पूरी चौड़ाई लेगा */
+  box-sizing: border-box;
+  /* पैडिंग को चौड़ाई के अंदर रखेगा, जिससे बॉक्स बाहर नहीं भागेंगे */
+  font-family: inherit;
+  /* फॉन्ट सेम रखेगा */
+  font-size: 14px;
+}
+
+#reviewForm textarea {
+  resize: vertical;
+  /* यूजर सिर्फ नीचे की तरफ खींच सकेगा, साइड में नहीं जिससे लेआउट नहीं बिगड़ेगा */
+  min-height: 100px;
+  /* एक फिक्स हाइट ताकि बॉक्स अच्छा दिखे */
+}
+
+/* इनपुट पर क्लिक करने पर आपका पर्पल बॉर्डर आए (Optional but looks pro) */
+#reviewForm input:focus,
+#reviewForm select:focus,
+#reviewForm textarea:focus {
+  outline: none;
+  border-color: palevioletred;
+  /* आपका पर्पल कलर */
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+/* कम्युनिटी हाइलाइट्स बॉक्स के लिए स्टाइल */
+.review-list-box {
+  border: 2px solid transparent;
+  /* डिफ़ॉल्ट बॉर्डर गायब रहेगा */
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+/* बॉक्स पर माउस ले जाने (Hover) पर इफ़ेक्ट */
+.review-list-box:hover {
+  border-color: #00ff88;
+  /* आपका पर्पल बॉर्डर */
+  transform: translateY(-5px);
+  /* हल्का सा ऊपर उठेगा */
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  /* पर्पल ग्लो */
+  background: rgb(55, 51, 51);
+  /* बैकग्राउंड थोड़ा हल्का होगा */
+}
+
+/* बॉक्स के अंदर के टाइटल (Top 10) को चमकाने के लिए */
+.review-list-box h3,
+.review-list-box h2 {
+  transition: color 0.3s ease;
+}
+
+.review-list-box:hover h3,
+.review-list-box:hover h2 {
+  color: #00ff88;
+  /* टाइटल भी पर्पल हो जाएगा */
+}
+
+/* बॉक्स के चारों तरफ घूमती हुई पर्पल लाइट */
+.review-list-box {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(15, 112, 38, 0.3);
+}
+
+.review-list-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, transparent, transparent, #00ff88);
+  animation: rotate 4s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* कंटेंट को ऊपर रखने के लिए */
+.review-list-box>* {
+  position: relative;
+  z-index: 1;
+}
+
+.review-form-box {
+  position: relative;
+  flex: 1;
+  min-width: 320px;
+  background: #000000;
+  padding: 25px;
+  border-radius: 15px;
+  overflow: hidden;
+  /* लाइट को बाहर जाने से रोकने के लिए */
+  z-index: 1;
+}
+
+/* घूमने वाली पर्पल पट्टी (सिर्फ होवर पर दिखेगी) */
+.review-form-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent,
+      transparent,
+      #00ff88);
+  /* आपका पर्पल कलर */
+  animation: rotateBox 4s linear infinite;
+  z-index: -1;
+  display: none;
+  /* डिफ़ॉल्ट में छुपा रहेगा */
+}
+
+/* अंदर का कवर ताकि लाइट सिर्फ किनारों पर दिखे */
+.review-form-box::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  /* बॉर्डर की मोटाई (जितना कम, उतनी पतली लाइन) */
+  background: #000000;
+  /* बॉक्स का ओरिजिनल बैकग्राउंड */
+  border-radius: 12px;
+  z-index: -1;
+}
+
+/* होवर करने पर लाइट जल उठेगी */
+.review-form-box:hover::before {
+  display: block;
+}
+
+/* घूमने वाला एनिमेशन */
+@keyframes rotateBox {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* मोबाइल के लिए टच पर भी काम करेगा */
+@media (max-width: 768px) {
+  .review-form-box:active::before {
+    display: block;
+  }
+}
+
+/*  Admin Review Replay Coment Style */
+.reply-badge {
+  color: #00ffa3;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 10px;
+}
+
+.admin-msg-box {
+  display: none;
+  /* Pehle se hide rahega */
+  background: rgba(0, 255, 163, 0.1);
+  border-left: 2px solid #00ffa3;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+
+/*-- Trading master --*/
+.trading-network {
+  padding: 60px 20px;
+  text-align: center;
+  color: #a9b1c5;
+
+  line-height: 1.6;
+  /* Line ke beech thoda gap taaki padhne mein aasani ho */
+  letter-spacing: 0.5px;
+  /* Letters ke beech halka sa space professional lagta hai */
+}
+
+.trading-network h2 {
+  color: #00f2fe !important;
+}
+
+.trading-network h3 {
+  color: #e0e0e0 !important;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.trading-network p {
+  color: #a9b1c5 !important;
+  letter-spacing: 1px !important;
+}
+
+.section-title span {
+  color: #00ff88;
+}
+
+/* Brand Color */
+.section-subtitle {
+  color: #a9b1c5;
+  margin-bottom: 40px;
+  font-size: 0.9rem;
+}
+
+.category-name {
+  text-align: left;
+  max-width: 1100px;
+  margin: 30px auto 15px;
+  color: #00ff88;
+  font-size: 1.2rem;
+  border-left: 4px solid #00ff88;
+  padding-left: 15px;
+}
+
+/* Grid Layout (Desktop) */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* एक लाइन में 4 बॉक्स */
+  gap: 15px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Box Styling (Like your Image) */
+.grid-box {
+  background: #000000;
+  /* Dark Glassy Look */
+  border: #00ff88;
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #a9b1c5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.grid-box span {
+  color: #00ff88;
+  /* Bullet point color */
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+/* Hover Effect: Purple Glow */
+.grid-box:hover {
+  background: #00ff88;
+  border-color: #00ff88;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  color: black;
+}
+
+/* --- Responsive (Mobile View) --- */
+@media screen and (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Tablets पर 3 बॉक्स */
+}
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* छोटे Tablets पर 2 बॉक्स */
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile पर 1 बॉक्स (Full Width) */
+  .grid-box {
+    padding: 12px 15px;
+  }
+}
+
+/*-- Service & tools --*/
+/* Services Section Container */
+.services-section {
+  /* Deep Navy */
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.services-section h2 {
+  color: #00f2fe !important;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Desktop पर 3 कार्ड्स */
+  gap: 25px;
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+
+/* Card Styling */
+.service-card {
+  background: #000000 !important;
+  border: 1px solid rgba(160, 32, 240, 0.1);
+  padding: 35px 25px;
+  border-radius: 20px;
+  text-align: left;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+/* Featured Card (Purple Glow) */
+.service-card.featured {
+  border-color: #00ff88;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+/* Icon Styling */
+.icon-box {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  color: #e0e0e0 !important;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.service-card p {
+  color: #e0e0e0 !important;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  letter-spacing: 1px !important;
+}
+
+/* Small Tag on Card */
+.tag {
+  display: inline-block;
+  background: rgba(160, 32, 240, 0.2);
+  color: #00ff88;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* --- Professional Hover Effect --- */
+.service-card:hover {
+  transform: scale(1.05);
+  /* कार्ड थोड़ा बड़ा होगा */
+  background: linear-gradient(145deg, #000000, #111b2d);
+  border-color: #00ff88;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+.service-card:hover h3 {
+  color: #00ff88;
+  /* हैडिंग पर्पल हो जाएगी */
+}
+
+/* टाइटल को सफ़ेद और पर्पल करने के लिए */
+.section-title {
+  color: #e0e0e0 !important;
+  /* 'Our' और बाकी टेक्स्ट सफ़ेद हो जाएगा */
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.services-section p {
+  color: #a9b1c5 !important;
+  letter-spacing: 1px !important;
+}
+
+/* सिर्फ 'Services & Tools' को पर्पल रखने के लिए */
+.section-title span {
+  color: #00ff88 !important;
+  /* आपका ब्रांड पर्पल कलर */
+}
+
+/* Tags के लिए होवर इफेक्ट */
+.service-card .tag {
+  transition: all 0.3s ease;
+  /* स्मूथ ट्रांजिशन के लिए */
+}
+
+/* माउस ले जाने (Hover) पर ये बदलाव होंगे */
+.service-card:hover .tag {
+  background-color: #00ff88 !important;
+  /* बैकग्राउंड पूरा पर्पल हो जाएगा */
+  color: black !important;
+  /* टेक्स्ट सफ़ेद हो जाएगा */
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  /* हल्का पर्पल ग्लो */
+}
+
+/* --- Mobile View --- */
+@media screen and (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Tablets पर 2 */
+}
+
+@media screen and (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile पर 1 (Full Width) */
+  .service-card {
+    padding: 25px 20px;
+  }
+}
+
+/*-- Master chart petern --*/
+.pattern-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.pattern-section p {
+  color: #a9b1c5 !important;
+  letter-spacing: 1px !important;
+}
+
+.pattern-section h2 {
+  color: #00f2fe !important;
+}
+
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 50px auto 0;
+}
+
+/* Pattern Card Styling */
+.pattern-card {
+  background: #000000 !important;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: left;
+  transition: 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.pattern-header h3 {
+  color: #e0e0e0 !important;
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+/* Badges for Bullish/Bearish */
+.trend-up {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.trend-down {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.logic-text b {
+  color: #5eb5c6 !important;
+  font-size: 0.95rem;
+  margin: 20px 0;
+  line-height: 1.6;
+}
+
+/* Hover Effect: Border Glow and Scale */
+.pattern-card:hover {
+  transform: translateY(-10px);
+  border-color: #00ff88;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  background: #111b2d;
+}
+
+.view-btn {
+  color: #00ff88;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 992px) {
+  .pattern-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pattern-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-footer {
+  background-color: #0b1121;
+  /* थोड़ा और डार्क गहराई के लिए */
+  padding: 60px 20px 20px;
+  border-top: 2px solid #00ff88;
+  color: #a9b1c5;
+}
+
+.main-footer h2 {
+  color: #e0e0e0 !important;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 40px;
+}
+
+.footer-logo {
+  color: #a9b1c5;
+  margin-bottom: 15px;
+}
+
+.footer-logo span {
+  color: #00ff88;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+  color: #e0e0e0 !important;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  color: #a9b1c5;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: #00ff88;
+  padding-left: 5px;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  filter: drop-shadow(0 0 5px #00ff88);
+  transform: scale(1.2);
+}
+
+.dev-tag {
+  margin-top: 20px;
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+}
+
+.footer-bottom span {
+  color: #ef4444;
+}
+
+/* Risk Warning in Red */
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-links ul li a:hover {
+    padding-left: 0;
+  }
+}
+
+/* Footer Styles social link */
+.footer-section {
+  background-color: #0b1121;
+  padding: 50px 20px;
+  text-align: center;
+  border-top: 2px solid #00ff88;
+  /* आपका ब्रांड पर्पल */
+}
+
+.footer-section h3 {
+  color: #e0e0e0 !important;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+/* Grid Layout: Desktop पर 3-3 के दो सेट या 6 एक लाइन में */
+.social-grid {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Common Link Style */
+.s-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: #000000 !important;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #a9b1c5 !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(160, 32, 240, 0.1);
+  min-width: 140px;
+  justify-content: center;
+}
+
+.s-link i {
+  font-size: 1.4rem;
+}
+
+/* --- Hover Colors --- */
+.s-link:hover {
+  transform: translateY(-5px);
+  color: #a9b1c5;
+  border-color: #00ff88;
+}
+
+.s-link.yt:hover {
+  background: #ff0000 !important;
+  color: #000 !important;
+}
+
+.s-link.ig:hover {
+  background: #ea4335 !important;
+  color: #000 !important;
+}
+
+.s-link.fb:hover {
+  background: #1877f2 !important;
+  color: #000 !important;
+}
+
+.s-link.tg:hover {
+  background: #0088cc !important;
+  color: #000 !important;
+}
+
+.s-link.wa:hover {
+  background: #25d366 !important;
+  color: #000 !important;
+}
+
+.s-link.gm:hover {
+  background: gray !important;
+  color: #000 !important;
+}
+
+.copyright {
+  margin-top: 40px;
+  color: #a9b1c5;
+  font-size: 0.85rem;
+}
+
+/* Mobile View: Adjust for small screens */
+@media (max-width: 600px) {
+  .social-grid {
+    gap: 10px;
+  }
+
+  .s-link {
+    padding: 10px;
+    min-width: 45%;
+    /* मोबाइल पर 2-2 की लाइन बनेगी */
+    font-size: 0.8rem;
+  }
+
+  .s-link span {
+    display: inline-block;
+  }
+
+  /* नाम दिखा रहेगा */
+}
+
+/* Footer Policy Links Styling */
+.footer-policy-links {
+  text-align: center;
+  padding: 20px 10px;
+  background-color: #0b1121;
+  /* डार्क बैकग्राउंड */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* हल्की बारीक लाइन ऊपर */
+}
+
+.policy-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* मोबाइल पर अपने आप दो लाइन में आ जाएगा */
+  gap: 15px;
+}
+
+.policy-wrapper a {
+  color: #a9b1c5;
+  /* हल्का ग्रे टेक्स्ट */
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+/* माउस ले जाने पर पर्पल हो जाएगा */
+.policy-wrapper a:hover {
+  color: #00ff88;
+}
+
+.divider {
+  color: rgba(160, 32, 240, 0.3);
+  /* हल्का पर्पल डिवाइडर */
+  font-size: 0.8rem;
+}
+
+/* --- Mobile View --- */
+@media (max-width: 600px) {
+  .policy-wrapper {
+    gap: 10px;
+  }
+
+  .divider {
+    display: none;
+    /* मोबाइल पर डिवाइडर हटा दें ताकि जगह बचे */
+  }
+
+  .policy-wrapper a {
+    background: rgba(160, 32, 240, 0.05);
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid rgba(160, 32, 240, 0.1);
+  }
+}
+
+.highlights-section {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.highlights-section h3 {
+  color: #e0e0e0 !important;
+}
+
+.highlights-card {
+  width: 100%;
+  max-width: 1100px;
+  background: #000000;
+  border: 1px solid rgba(160, 32, 240, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+.highlights-card h3 {
+  color: #00ff88;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.highlights-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.h-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a9b1c5;
+  font-weight: 500;
+
+  background: rgba(160, 32, 240, 0.1);
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: #00ff88;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.h-item i {
+  color: #00ff88;
+  /* Purple Icons */
+  font-size: 1.1rem;
+}
+
+.h-item:hover {
+  background: #00ff88;
+  color: #000;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+.h-item:hover i {
+  color: #a9b1c5;
+}
+
+/* Mobile View: एक के नीचे एक */
+@media (max-width: 768px) {
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* मोबाइल पर 2 कॉलम */
+  }
+
+  .h-item {
+    justify-content: center;
+  }
+}
+
+.trading-updates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+/* Card Common Style */
+.pl-card,
+.courses-card {
+  background: #000000 !important;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.pl-card:hover,
+.courses-card:hover {
+  border-color: #00ff88;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+.pl-card h2,
+.courses-card h2 {
+  color: #e0e0e0 !important;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+}
+
+.pl-card p {
+  color: #a9b1c5 !important;
+  letter-spacing: 1px !important;
+}
+
+/* P&L Button */
+.pl-box a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #000;
+  color: #00ff88 !important;
+  /* default text color */
+  border: 2px solid #00ff88;
+  padding: 15px 30px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.pl-box a * {
+  color: inherit !important;
+  /* ensures span or icon inside also inherits color */
+}
+
+.pl-box a:hover {
+  background: #00ff88 !important;
+  color: #000 !important;
+  /* hover text color black */
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ff88;
+}
+
+.pl-box a:hover * {
+  color: inherit !important;
+  /* ensures child elements also turn black */
+}
+
+/* Course Tags */
+.course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.course-tags span {
+  background: rgba(160, 32, 240, 0.1);
+  color: #a9b1c5;
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+  .trading-updates {
+    grid-template-columns: 1fr;
+  }
+
+  .pl-card,
+  .courses-card {
+    padding: 30px 20px;
+  }
+}
+
+.pdf-hub-section {
+  padding: 60px 20px;
+}
+
+.pdf-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #000000 !important;
+  padding: 40px;
+  border-radius: 25px;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+}
+
+.pdf-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pdf-header h2 span {
+  color: #00ff88;
+}
+
+.pdf-header p {
+  color: rgb(69, 64, 64);
+  font-size: 0.9rem;
+}
+
+.pdf-hub-section p {
+  color: #a9b1c5 !important;
+  letter-spacing: 1px !important;
+}
+
+.pdf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pdf-item {
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 15px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #a9b1c5;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.pdf-item i {
+  color: #00ff88;
+  font-size: 1.2rem;
+  margin-right: 15px;
+}
+
+.pdf-item span {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.download-icon {
+  color: #a9b1c5 !important;
+  font-size: 1rem !important;
+  opacity: 0.5;
+}
+
+/* Hover Effects */
+.pdf-item:hover {
+  background: rgba(160, 32, 240, 0.1);
+  border-color: #00ff88;
+  color: #a9b1c5;
+  transform: translateX(10px);
+  /* हल्का सा दाईं ओर खिसकेगा */
+}
+
+.pdf-item:hover .download-icon {
+  opacity: 1;
+  color: #a9b1c5 !important;
+}
+
+/* टाइटल को सफ़ेद करने के लिए */
+.pdf-header h2 {
+  color: #00f2fe !important;
+  font-weight: 700;
+}
+
+/* "Free Course PDF Hub" के अंदर के स्पैन (Span) को आपके ब्रांड कलर में रखने के लिए */
+.pdf-header h2 span {
+  color: #00ff88 !important;
+  /* आपका पर्पल कलर */
+}
+
+/* Mobile View */
+@media (max-width: 600px) {
+  .pdf-container {
+    padding: 30px 15px;
+  }
+
+  .pdf-item {
+    padding: 12px 15px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Calculator-sentiment-Index-Trading Desiplen */
+/* --- ज़बरदस्ती एक लाइन में लाने के लिए --- */
+.trading-tools-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  /* 3 Columns on Desktop */
+  gap: 30px !important;
+  max-width: 1200px !important;
+  margin: 50px auto !important;
+  padding: 0 20px !important;
+  align-items: stretch !important;
+  /* तीनों की लंबाई बराबर रखेगा */
+}
+
+.trading-tools-wrapper p {
+  color: #a9b1c5 !important;
+}
+
+/* --- हर बॉक्स की सेटिंग --- */
+.tool-card {
+  background: #000000 !important;
+  border: 1px solid rgba(160, 32, 240, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 30px !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: 0.3s !important;
+}
+
+.tool-card input {
+  color: #000;
+}
+
+.tool-card h2 {
+  color: #e0e0e0 !important;
+}
+
+.submit-discipline-btn {
+  background-color: #000 !important;
+  color: #00ff88 !important;
+  border: 2px solid #00ff88 !important;
+}
+
+.submit-discipline-btn:hover {
+  background-color: #00ff88 !important;
+  color: #000 !important;
+}
+
+.tool-card:hover {
+  border-color: #00ff88 !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2) !important;
+}
+
+/* --- मोबाइल के लिए (Responsive) --- */
+@media (max-width: 1024px) {
+  .trading-tools-wrapper {
+    grid-template-columns: 1fr !important;
+    /* मोबाइल पर एक लाइन */
+    max-width: 500px !important;
+  }
+}
+
+/* --- मोबाइल व्यू के लिए फाइनल फिक्स --- */
+@media (max-width: 768px) {
+
+  /* 1. कार्ड्स के बीच सही जगह बनाना */
+  .tool-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    /* हाइट को ऑटो रखें ताकि कंटेंट फिट हो सके */
+    margin-bottom: 30px !important;
+    padding: 20px !important;
+    position: relative !important;
+  }
+
+  /* 2. मार्केट सेंटीमेंट कार्ड के अंदर की ओवरलैपिंग ठीक करना */
+  .gauge-container,
+  .market-status-box,
+  .status-info-text {
+    position: static !important;
+    /* एब्सोल्यूट पोजीशन हटा दी */
+    width: 100% !important;
+    margin: 10px 0 !important;
+    transform: none !important;
+  }
+
+  /* 3. 'Current Bias' वाला हिस्सा (जो ओवरलैप हो रहा था) */
+  .status-info-text {
+    font-size: 16px !important;
+    padding: 10px !important;
+    background: rgba(0, 255, 136, 0.1);
+    /* हल्का बैकग्राउंड ताकि अलग दिखे */
+    border-radius: 10px;
+    margin-top: 15px !important;
+  }
+
+  /* 4. रिस्क कैलकुलेटर की हेडिंग को जगह देना */
+  .section-title {
+    font-size: 24px !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+    display: block !important;
+  }
+
+  .section-subtitle {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+    display: block !important;
+  }
+
+  /* 5. इनपुट बॉक्स को मोबाइल में बड़ा और साफ़ करना */
+  .calc-box {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .input-group {
+    text-align: left !important;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #aaa;
+  }
+}
+
+
+/* --- पुराने किसी भी 'Section' की फालतू विड्थ हटाना --- */
+.section-title,
+.section-subtitle {
+  width: 100% !important;
+}
+
+/* --- 1. Sentiment Meter (गायब मीटर वापस लाने के लिए) --- */
+.gauge-container {
+  width: 250px !important;
+  margin: 20px auto !important;
+  position: relative;
+  height: 150px;
+}
+
+.gauge-base {
+  width: 250px !important;
+  height: 125px !important;
+  background: linear-gradient(90deg,
+      #ef4444 0%,
+      #fbbf24 50%,
+      #22c55e 100%) !important;
+  border-radius: 125px 125px 0 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.gauge-base::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 90px;
+  background: #000000 !important;
+  /* कार्ड के बैकग्राउंड जैसा */
+  border-radius: 90px 90px 0 0;
+}
+
+.gauge-needle {
+  width: 4px !important;
+  height: 90px !important;
+  background: #a9b1c5 !important;
+  position: absolute;
+  bottom: 0;
+  left: 50% !important;
+  transform-origin: bottom center !important;
+  transform: rotate(45deg);
+  /* यहाँ से सुई की पोजीशन सेट करें */
+  z-index: 10;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+.label-fear,
+.label-neutral,
+.label-greed {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #a9b1c5;
+}
+
+.label-fear {
+  bottom: 5px;
+  left: 10px;
+}
+
+.label-neutral {
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.label-greed {
+  bottom: 5px;
+  right: 10px;
+}
+
+/* --- 2. Risk Calculator (इनपुट बॉक्स और बटन सुधारने के लिए) --- */
+.calc-box {
+  width: 100% !important;
+  text-align: left !important;
+}
+
+.input-group {
+  margin-bottom: 12px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-group label {
+  color: #000 !important;
+  font-size: 0.85rem !important;
+}
+
+.input-group input {
+  width: 100% !important;
+  /* बॉक्स पूरा चौड़ा होगा */
+  padding: 10px !important;
+  border: 1px solid rgba(160, 32, 240, 0.4) !important;
+  border-radius: 8px !important;
+  color: #000 !important;
+  outline: none !important;
+}
+
+/* =========================================
+   CALCULATOR BUTTON - SEAM PRO
+   ========================================= */
+.calc-btn {
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  /* Neon green base */
+  color: #00ff88;
+  /* Black text */
+  border: 2px solid #00ff88;
+  /* Neon border */
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.calc-btn:hover {
+  background: #00ff88;
+  /* Dark hover background */
+  color: #000;
+  /* Neon text on hover */
+  box-shadow: 0 0 20px #00ff88;
+  transform: translateY(-2px);
+}
+
+.calc-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 10px #00ff88;
+}
+
+/* --- 3. Result Display --- */
+.result-display {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* --- Daily Discipline Fix --- */
+.checklist-container {
+  text-align: left !important;
+  padding: 10px 0 !important;
+}
+
+.check-item {
+  display: flex !important;
+  align-items: center !important;
+  /* टिकबॉक्स और टेक्स्ट एक लाइन में */
+  gap: 15px !important;
+  margin-bottom: 18px !important;
+  cursor: pointer;
+  color: #a9b1c5 !important;
+  /* साफ़ दिखने वाला हल्का सफ़ेद */
+  font-size: 0.95rem !important;
+}
+
+/* टिकबॉक्स को साफ़ दिखाने के लिए */
+.custom-check {
+  min-width: 20px !important;
+  height: 20px !important;
+  border: 2px solid #00ff88 !important;
+  border-radius: 4px !important;
+  display: inline-block;
+  position: relative;
+}
+
+.check-item input:checked+.custom-check {
+  background: #00ff88 !important;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+/* --- Market Sentiment Text Fix --- */
+.sentiment-section p,
+.sentiment-value,
+#mood-text {
+  color: #a9b1c5 !important;
+  /* पूरा टेक्स्ट सफ़ेद */
+}
+
+#mood-text {
+  color: #00ff88 !important;
+  /* सिर्फ मूड वाला हिस्सा पर्पल चमकता हुआ */
+  text-shadow: 0 0 5px rgba(160, 32, 240, 0.5);
+}
+
+/* Market Status Container */
+.market-status-box {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  /* मोबाइल पर अपने आप सेट हो जाएगा */
+  margin-bottom: 15px;
+}
+
+/* Status Pills (छोटे गोल बटन्स) */
+.status-pill {
+  font-size: 0.7rem;
+  padding: 5px 10px;
+  border-radius: 50px;
+  background: rgba(30, 41, 59, 0.5);
+  color: #a9b1c5;
+  border: 1px solid rgba(160, 32, 240, 0.1);
+  font-weight: 600;
+  transition: 0.3s;
+  cursor: default;
+}
+
+/* होवर या एक्टिव होने पर कलर */
+.status-pill.bullish:hover {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border-color: #22c55e;
+}
+
+.status-pill.neutral:hover {
+  background: rgba(160, 32, 240, 0.15);
+  color: #00ff88;
+  border-color: #00ff88;
+}
+
+.status-pill.bearish:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Info Text नीचे वाली लाइन */
+.status-info-text {
+  font-size: 0.8rem;
+  color: #a9b1c5;
+}
+
+.active-status {
+  color: #00ff88;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.discipline-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.submit-discipline-btn {
+  width: 100%;
+  padding: 12px;
+  background: #00ff88;
+  color: #a9b1c5;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s all ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+}
+
+/* बटन दबाने पर छोटा सा एनिमेशन */
+.submit-discipline-btn:active {
+  transform: scale(0.95);
+}
+
+/* Trading jarnel*/
+.journal-container {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.journal-container :hover {
+  color: #00ff88 !important;
+  box-shadow: #00ff88 !important;
+}
+
+.journal-form,
+.journal-history {
+  background: #000000 !important;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+}
+
+.journal-form input,
+.journal-form select,
+.journal-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: #050505;
+  border: 1px solid rgba(160, 32, 240, 0.3);
+  border-radius: 8px;
+  color: #a9b1c5;
+  outline: none;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px !important;
+  background: #000;
+  color: #00ff88;
+  font-size: 0.9rem;
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #00ff88;
+  color: black;
+  box-shadow: 0 0 20px #00ff88;
+  transform: translateY(-2px);
+}
+
+/* History Items */
+.trade-item {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 10px;
+  border-left: 4px solid #00ff88;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px !important;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.pnl-plus {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.pnl-minus {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .journal-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* टेक्स्ट को सफेद करने के लिए */
+.journal-section h2,
+.section-subtitle,
+.input-label,
+.journal-history h3 {
+  color: #e0e0e0 !important;
+}
+
+.journal-section span {
+  color: #e0e0e0 !important;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.75rem !important;
+  margin-bottom: 3px !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Profit/Loss Toggle Buttons */
+.pnl-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.pnl-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #050505;
+  color: #a9b1c5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pnl-btn.active-prof {
+  background: #22c55e !important;
+  border-color: #22c55e;
+}
+
+.pnl-btn.active-loss {
+  background: #ef4444 !important;
+  border-color: #ef4444;
+}
+
+/* History Card Professional Styling */
+.trade-item {
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+  display: flex;
+  justify-content: space-between;
+  transition: 0.3s;
+}
+
+.trade-item:hover {
+  border-color: #00ff88;
+  transform: scale(1.02);
+}
+
+.item-info b {
+  color: #a9b1c5;
+  display: block;
+}
+
+.item-info small {
+  color: #a9b1c5;
+}
+
+.item-note {
+  color: #a9b1c5;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* --- 1. ऊपर के 3 छोटे बॉक्सेस (Stats) --- */
+.analytics-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  max-width: 1000px;
+  margin: 15px auto;
+  /* मार्जिन कम किया */
+}
+
+/* 1. बॉक्सेस को छोटा (Small) करने के लिए */
+.stat-card {
+  flex: 1;
+  background: #a9b1c5;
+  /* हल्का ग्रे बैकग्राउंड ताकि काला टेक्स्ट चमके */
+  padding: 10px !important;
+  /* पैडिंग बहुत कम की */
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #00ff88;
+}
+
+/* इन 3 बॉक्स के टेक्स्ट को काला (Black) करने के लिए */
+.stat-card small {
+  color: #000000 !important;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.stat-card h3 {
+  color: #000000 !important;
+  font-size: 1.1rem !important;
+  margin-top: 2px;
+}
+
+/* 2. Recent History के टेक्स्ट को सफ़ेद करने के लिए */
+.journal-history h3,
+.trade-item b,
+.trade-item small,
+.item-note {
+  color: #e0e0e0 !important;
+  /* पूरा टेक्स्ट सफ़ेद */
+}
+
+.trade-item small {
+  opacity: 0.7;
+  /* तारीख को थोड़ा हल्का सफ़ेद रखने के लिए */
+}
+
+/* 3. History Item का बैकग्राउंड और बॉर्डर */
+.trade-item {
+  padding: 12px !important;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 4. Scrollbar को सुंदर बनाने के लिए */
+#trade-list {
+  max-height: 300px;
+  /* लैपटॉप स्क्रीन के हिसाब से फिक्स हाइट */
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#trade-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+#trade-list::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+}
+
+/* P&L Toggle Fix */
+.pnl-btn {
+  background: #050505;
+  border: 1px solid #334155;
+  color: #a9b1c5;
+  padding: 10px;
+  cursor: pointer;
+  flex: 1;
+  border-radius: 8px;
+}
+
+.active-prof {
+  background: #22c55e !important;
+  border-color: #22c55e !important;
+}
+
+.active-loss {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+}
+
+.journal-form,
+.journal-history {
+  background: #000000 !important;
+  padding: 20px !important;
+  /* पैडिंग कम की ताकि स्क्रीन पर फिट आए */
+  border-radius: 15px;
+  border: 1px solid rgba(160, 32, 240, 0.2);
+}
+
+/* इनपुट फील्ड्स को थोड़ा छोटा करना */
+.journal-form input,
+.journal-form select,
+.journal-form textarea {
+  padding: 8px !important;
+  /* हाइट कम की */
+  margin-bottom: 10px !important;
+  font-size: 0.85rem;
+}
+
+.journal-form textarea {
+  height: 60px !important;
+  /* टेक्स्ट एरिया की हाइट कम की */
+}
+
+@media (max-width: 768px) {
+  .analytics-row {
+    flex-direction: column;
+  }
+
+  .journal-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trade-item b {
+  font-size: 1rem !important;
+  color: #a9b1c5 !important;
+}
+
+.trade-item small {
+  color: #a9b1c5 !important;
+  font-size: 0.8rem !important;
+}
+
+/* Success Popup Style */
+.save-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #22c55e;
+  /* Green */
+  color: #a9b1c5;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: 0.5s;
+  transform: translateY(-20px);
+}
+
+/* Save Button Cooldown (क्लिक के बाद चमक) */
+.save-btn:active {
+  transform: scale(0.95);
+  background: #a9b1c5 !important;
+  color: #00ff88 !important;
+}
+
+/* डिलीट बटन पर माउस ले जाने पर चमक */
+.trade-item button:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 5px #ef4444);
+}
+
+/*Seasion clock */
+/* 1. मार्केट क्लॉक बार (Purple Border) */
+.market-clock-bar {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  background: #050505;
+  padding: 12px 20px;
+  border-bottom: 2px solid #00ff88;
+  /* Purple Border */
+  flex-wrap: wrap;
+}
+
+/* मार्केट का नाम - Pure White */
+.market-name {
+  font-size: 0.8rem;
+  color: #ffffff !important;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* डिजिटल टाइम - Purple Glow */
+.digital-time {
+  font-size: 1.1rem;
+  color: #00ff88 !important;
+  /* Purple */
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  text-shadow: 0 0 12px rgba(160, 32, 240, 0.8);
+  /* Purple Glow */
+}
+
+/* Status Pill (Open/Closed) */
+.status-pill {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* OPEN - Neon Green */
+.open {
+  background: rgba(0, 255, 127, 0.1);
+  color: #00ff7f !important;
+  border: 1px solid #00ff7f;
+  box-shadow: 0 0 8px #00ff7f;
+}
+
+/* CLOSED - Bright Red */
+.closed {
+  background: rgba(255, 68, 68, 0.1);
+  color: #ff4444 !important;
+  border: 1px solid #ff4444;
+}
+
+/* 2. सभी जनरल टेक्स्ट जो वाइट (White) करने हैं */
+.section-title,
+.section-subtitle,
+p,
+label,
+h2,
+h3,
+.footer-about p {
+  color: #a9b1c5 !important;
+}
+
+/* 4. जर्नल इनपुट बॉक्स - Purple Border */
+.journal-input,
+.journal-form input,
+.journal-form select,
+.journal-form textarea {
+  width: 100%;
+  padding: 10px;
+  background: #000000 !important;
+  border: 1px solid #00ff88;
+  /* Purple Border */
+  border-radius: 8px;
+  color: #a9b1c5;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+/* Trade search box */
+.history-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(160, 32, 240, 0.2);
+}
+
+.history-top-bar h3 {
+  font-size: 1rem !important;
+  color: #a9b1c5 !important;
+  margin: 0 !important;
+}
+
+/* Date Filter Styling */
+.date-filter-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#search-date {
+  background: #050505;
+  border: 1px solid #00ff88;
+  border-radius: 6px;
+  color: #a9b1c5;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Reset Button */
+.date-filter-group button {
+  background: rgba(160, 32, 240, 0.1);
+  border: 1px solid #00ff88;
+  color: #a9b1c5;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.date-filter-group button:hover {
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+/* Scrollbar for History */
+.styled-scroll {
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.styled-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.styled-scroll::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+}
+
+/* कैलेंडर आइकॉन को सफ़ेद करने के लिए */
+#search-date::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  /* काले आइकॉन को सफ़ेद में बदल देगा */
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+/* माउस ले जाने पर आइकॉन थोड़ा और चमकेगा */
+#search-date::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.trading-pillars {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.pillar-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.pillar-box {
+  flex: 1;
+  min-width: 280px;
+  background: #000000 !important;
+  padding: 40px 20px;
+  border-radius: 20px;
+  position: relative;
+  transition: 0.4s ease;
+  border-bottom: 4px solid #00ff88;
+  /* इमेज वाला बॉटम पर्पल बॉर्डर */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pillar-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+.trading-pillars p {
+  color: #e0e0e0 !important;
+}
+
+.purple-text {
+  font-size: 3rem;
+  color: #00ff88 !important;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(56, 228, 85, 0.4);
+}
+
+.white-text {
+  font-size: 1.1rem;
+  color: #a9b1c5 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.pillar-footer {
+  font-size: 0.85rem;
+  color: #a9b1c5;
+  /* हल्का ग्रे टेक्स्ट */
+  line-height: 1.5;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* मोबाइल के लिए */
+@media (max-width: 768px) {
+  .pillar-container {
+    gap: 20px;
+  }
+
+  .pillar-box {
+    min-width: 100%;
+  }
+}
+
+/* Nav Alart Bell 
+/* Notification Container */
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+  margin-right: 20px;
+
+}
+
+/* Jo bhi aapki notification box ki class hai */
+.notification-box {
+  max-height: 400px;
+  /* Jitni height chahiye */
+  overflow-y: auto;
+  /* Isse scroll bar aa jayega */
+  overflow-x: hidden;
+}
+
+.bell-icon {
+  font-size: 1.4rem;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+}
+
+.bell-icon:hover {
+  color: #00ff88;
+}
+
+/* लाल डॉट (Badge) */
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ef4444;
+  color: #a9b1c5;
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  border-radius: 50%;
+  font-weight: bold;
+  border: 2px solid #050505;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Dropdown Panel */
+.notif-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 320px;
+  background: #000000 !important;
+  border: 1px solid rgba(160, 32, 240, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  display: none;
+  /* शुरू में छुपा रहेगा */
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.notif-header {
+  padding: 15px;
+  background: rgba(160, 32, 240, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.notif-header h3 {
+  font-size: 0.9rem;
+  color: #a9b1c5;
+}
+
+.notif-header span {
+  font-size: 0.75rem;
+  color: #00ff88;
+  cursor: pointer;
+}
+
+/* Item List */
+.notif-item {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: 0.3s;
+}
+
+.notif-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.notif-item.unread {
+  border-left: 3px solid #00ff88;
+  background: rgba(160, 32, 240, 0.05);
+}
+
+.notif-item p {
+  font-size: 0.8rem;
+  color: #a9b1c5;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.notif-item small {
+  font-size: 0.65rem;
+  color: #a9b1c5;
+}
+
+.notif-footer {
+  padding: 10px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.notif-footer a {
+  color: #00ff88;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Scroll bar lane ke liye */
+#notif-list {
+  max-height: 350px;
+  /* Jitni height chahiye */
+  overflow-y: auto;
+  /* Isse scroll aayega */
+  overflow-x: hidden;
+  padding-right: 5px;
+}
+
+/* Scrollbar ko thoda patla aur sundar banane ke liye (Optional) */
+#notif-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+#notif-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* AI PRO style */
+/* --- 1. AI Pro Nav Button (Animated Glow) --- */
+.ai-pro-glow-btn {
+  position: relative;
+  background: linear-gradient(135deg,
+      #00ff88 0%,
+      #6d28d9 100%) !important;
+  /* Original Purple Gradient */
+  color: #ffffff !important;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  z-index: 1001;
+  transition: 0.3s;
+}
+
+.ai-pro-glow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+/* --- 2. AI Pro Chat Modal (Pro Dark Theme) --- */
+#ai-chat-modal {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 360px;
+  height: 520px;
+  background: #050505;
+  /* Deep Navy Dark */
+  border: 1px solid rgba(160, 32, 240, 0.3);
+  /* Purple Border Glow */
+  border-radius: 20px;
+  z-index: 999999 !important;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+  overflow: hidden;
+}
+
+/* --- 3. Chat Header (Gradient) --- */
+.ai-chat-header {
+  background: linear-gradient(135deg, #00ff88 0%, #6d28d9 100%);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ai-chat-header button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- 4. Messages Area --- */
+.ai-messages {
+  height: 390px;
+  overflow-y: auto;
+  padding: 20px;
+  background: #050505;
+  color: #a9b1c5;
+  font-size: 14px;
+}
+
+.ai-msg {
+  background: #000000 !important;
+  /* Message Bubble */
+  padding: 12px 15px;
+  border-radius: 15px 15px 15px 0px;
+  margin-bottom: 15px;
+  border-left: 4px solid #00ff88;
+  /* Purple accent */
+  line-height: 1.5;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+/* --- 5. Chat Input (Modern Pill) --- */
+.ai-chat-input {
+  display: flex;
+  padding: 15px;
+  background: #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ai-chat-input input {
+  flex: 1;
+  background: #000000 !important;
+  border: 1px solid #334155;
+  color: #a9b1c5;
+  padding: 12px 20px;
+  border-radius: 30px;
+  outline: none;
+}
+
+#send-ai-btn {
+  background: linear-gradient(135deg, #00ff88 0%, #6d28d9 100%);
+  border: none;
+  color: #a9b1c5;
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
+}
+
+/* --- Mobile Responsiveness --- */
+@media screen and (max-width: 480px) {
+  #ai-chat-modal {
+    width: 92%;
+    height: 75vh;
+    right: 4%;
+    left: 4%;
+    bottom: 15px;
+  }
+
+  .ai-messages {
+    height: calc(75vh - 130px);
+  }
+}
+
+.pulse-ring {
+  pointer-events: none !important;
+  /* Ring ke 'RPAR-PAAR' click jane dega */
+  z-index: -1;
+  /* Button ke piche rakho abhi ke liye */
+}
+
+.ai-pro-glow-btn {
+  pointer-events: auto !important;
+  /* Click allow karega */
+  cursor: pointer !important;
+}
+
+#ai-chat-modal {
+  display: none;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 350px;
+  height: 500px;
+  background: #050505;
+  border: 2px solid #00ff88;
+  border-radius: 15px;
+  z-index: 2147483647 !important;
+  /* Browser ki maximum limit */
+}
+
+/* Pro Isometric & Responsive */
+#br30-trading-universe {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  color: #a9b1c5;
+}
+
+.hero-content h1 {
+  color: #e0e0e0 !important;
+  letter-spacing: 1px !important;
+}
+
+.hero-content p {
+  color: #a9b1c5 !important;
+  letter-spacing: 1px !important;
+}
+
+/* --- CENTER CORE LOGO --- */
+.core-logo {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 200px;
+}
+
+.logo-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3c52ff, #9d00ff);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+  box-shadow: 0 0 50px rgba(60, 82, 255, 0.6);
+  animation: floatCore 4s infinite ease-in-out;
+}
+
+/* --- PULSE EFFECT --- */
+.pulse-wave {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #3c52ff;
+  border-radius: 25px;
+  animation: ripple 3s linear infinite;
+}
+
+.wave-2 {
+  animation-delay: 1.5s;
+}
+
+/* --- FLOATING NODES --- */
+.float-node {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: randomFloat 6s infinite ease-in-out;
+}
+
+.n1 {
+  top: 20%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.n2 {
+  top: 25%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.n3 {
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 4s;
+}
+
+/* --- TECH FLOOR --- */
+.tech-floor {
+  position: absolute;
+  bottom: -100px;
+  width: 200%;
+  height: 600px;
+  transform: rotateX(75deg);
+  z-index: 1;
+}
+
+.grid-lines {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(60, 82, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(60, 82, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 10s linear infinite;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes floatCore {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(5deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(-5deg);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes randomFloat {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(15px, -30px);
+  }
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 40px;
+  }
+}
+
+/* --- TEXT & BUTTON --- */
+.hero-content {
+  position: absolute;
+  bottom: 15%;
+  z-index: 25;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.hero-content p {
+  color: #a9b1c5;
+  font-size: 1.1rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.pro-btn {
+  margin-top: 20px;
+  background: #00ff88;
+  border: none;
+  padding: 15px 40px;
+  color: black;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(60, 82, 255, 0.3);
+  transition: 0.3s;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.pro-btn:hover {
+  background: #000;
+  color: #00ff88;
+  border: #00ff88;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .core-logo {
+    width: 90px;
+    height: 90px;
+  }
+
+  .float-node {
+    font-size: 10px;
+    padding: 8px 15px;
+  }
+}
+
+.float-node {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.core-logo {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* VIP Trader */
+/* Container Background */
+.leaderboard-wrapper {
+  /* Premium Dark Mesh Gradient: कोनों में हल्का सा गहरा हरा ग्लो */
+
+  padding: 80px 20px;
+  /* थोड़ा ज्यादा स्पेस ताकि बैकग्राउंड अच्छा दिखे */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  /* हाइट अपनी ज़रूरत के हिसाब से रखें */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main Box with Neon Animation */
+.animated-leaderboard-box {
+  background: #000000 !important;
+  /* Solid Black ताकि बाहर के हिस्से से अलग दिखे */
+  border: 1.5px solid rgba(0, 255, 136, 0.2);
+  border-radius: 30px;
+  width: 100%;
+  max-width: 950px;
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+  /* बैकग्राउंड से ऊपर रखने के लिए */
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+  /* गहरा परछाई */
+  animation: borderGlow 3.5s infinite ease-in-out;
+}
+
+/* Desktop पर 2 Column, Mobile पर 1 */
+.traders-list-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 Columns */
+  gap: 12px;
+  min-height: 220px;
+  transition: opacity 0.5s ease;
+}
+
+/* Mobile Responsive Logic */
+@media (max-width: 768px) {
+  .traders-list-container {
+    grid-template-columns: 1fr;
+    /* Mobile पर 1 column */
+  }
+
+  .animated-leaderboard-box {
+    padding: 15px;
+  }
+}
+
+/* Sleek Trader Card */
+.trader-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: fadeInUp 0.4s forwards;
+}
+
+.rank-num {
+  color: #00ff88;
+  font-weight: 900;
+  width: 25px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1.5px solid #222;
+  object-fit: cover;
+}
+
+.user-name {
+  color: #e0e0e0 !important;
+  font-weight: 600;
+  font-size: 13px;
+  margin-left: 10px;
+  white-space: nowrap;
+  /* नाम एक ही लाइन में रहेगा */
+
+  /* इन नीचे वाली लाइन्स को बदलें या कमेंट करें */
+  max-width: 180px;
+  /* 120px से बढ़ाकर 180px कर दिया */
+  overflow: visible;
+  /* hidden की जगह visible करें */
+  text-overflow: clip;
+  /* ellipsis हटा दें ताकि dots न आएं */
+  letter-spacing: 1px !important;
+}
+
+.vip-badge {
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 900;
+  margin-left: 8px;
+  border: 0.5px solid rgba(0, 255, 136, 0.2);
+}
+
+/* Animations */
+@keyframes borderGlow {
+
+  0%,
+  100% {
+    border-color: rgba(34, 197, 94, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  50% {
+    border-color: rgba(34, 197, 94, 0.8);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header & Footer */
+.leaderboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.leaderboard-title {
+  color: #00ff88;
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.leaderboard-title .highlight-green {
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+  letter-spacing: 1px !important;
+}
+
+.leaderboard-subtitle {
+  color: #f5f5f7;
+  font-weight: 700;
+  letter-spacing: -0.5px !important;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin-top: 4px !important;
+}
+
+/* Title Highlight Styling */
+.leaderboard-title {
+  color: #00f2fe !important;
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.highlight-green {
+  color: #00ff88;
+  /* Green Color for VIP Traders */
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+/* Premium VIP Button Styling */
+.leaderboard-footer {
+  text-align: center;
+  margin-top: 30px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 25px !;
+  font-size: 11px;
+}
+
+.footer-note {
+  color: #a9b1c5 !important;
+  font-size: 10px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px !important;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif !important;
+}
+
+/* Bubbles Container */
+.leaderboard-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* Bubbles ko bahar jane se rokne ke liye */
+}
+
+.bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* Box ke niche rahega */
+  display: flex;
+  justify-content: space-around;
+}
+
+.bubbles span {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: #00ff88;
+  /* Green Bubbles */
+  margin: 0 4px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 15px #00ff8844,
+    0 0 30px #00ff8822;
+  animation: animateBubbles 15s linear infinite;
+  animation-duration: calc(125s / var(--i));
+  /* Alag-alag speed ke liye */
+  opacity: 0.5;
+  /* Bahut suttle rakhne ke liye */
+}
+
+/* Bubbles ki position aur size ko random karne ke liye */
+.bubbles span:nth-child(even) {
+  background: #a9b1c5;
+  width: 8px;
+  height: 8px;
+  opacity: 0.1;
+}
+
+@keyframes animateBubbles {
+  0% {
+    transform: translateY(100vh) scale(0);
+  }
+
+  100% {
+    transform: translateY(-10vh) scale(1);
+  }
+}
+
+/* Ensure container stays on top of bubbles */
+.animated-leaderboard-box {
+  position: relative;
+  z-index: 10;
+}
+
+/* VIP Button Styling */
+.vip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background-color: #000;
+  /* black background */
+  color: #00ff88;
+  /* neon green text */
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 12px;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  transition: all 0.3s ease;
+}
+
+.vip-btn:hover {
+  background-color: #00ff88;
+  /* green bg on hover */
+  color: #000;
+  /* text turns black */
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+  transform: translateY(-3px);
+}
+
+.vip-btn .btn-icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.vip-btn:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+.vip-btn:hover span {
+  color: #000 !important;
+}
+
+/* 90%/10% RULE */
+#br30-trading-section {
+  padding: 60px 15px;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  justify-content: center;
+}
+
+.trading-container {
+  display: flex;
+  justify-content: space-between;
+  /* ये तीनों को बैलेंस रखेगा */
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  gap: 20px;
+}
+
+.trading-col {
+  flex: 1;
+  /* दोनों साइड के डिब्बे बराबर साइज के होंगे */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* रिंग और टेक्स्ट को सेंटर में रखेगा */
+  min-width: 300px;
+}
+
+.trading-col-center {
+  flex: 0 0 120px;
+  /* चार्ट को फिक्स जगह मिलेगी */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+}
+
+/* Rings Glow Style */
+.ring-card {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.highlight-green {
+  letter-spacing: 1px !important;
+
+  color: #4ade80 !important;
+  /* थोड़ा ब्राइट नियॉन ग्रीन */
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.text-content p {
+  font-size: 14px !important;
+  /* छोटा रखने के लिए */
+  color: #a9b1c5 !important;
+  /* रेड कलर जो साफ़ दिखे */
+  line-height: 1.6 !important;
+  letter-spacing: 1px !important;
+}
+
+.text-content h3 {
+  color: #e0e0e0 !important;
+}
+
+.purple-glow {
+  border: 5px solid #27ff90;
+  box-shadow: 0 0 25px #27ff90;
+}
+
+.yellow-glow {
+  border: 5px solid #ccff00;
+  box-shadow: 0 0 25px #ccff00;
+}
+
+.trading-col h2,
+p {
+  color: #e0e0e0 !important;
+  letter-spacing: 1px !important;
+}
+
+.percent {
+  font-size: 36px;
+  margin: 0;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Text Content & Highlighting */
+.text-content {
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.text-content h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.title-green {
+  color: #27ff90;
+}
+
+.title-yellow {
+  color: #ccff00;
+}
+
+.highlight-green {
+  color: #27ff90;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+}
+
+/* Animated Candles */
+.candles-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 50px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.cndl {
+  width: 8px;
+  background: #27ff90;
+  height: 35px;
+  border-radius: 2px;
+}
+
+.red {
+  background: #ff4444;
+  height: 50px;
+}
+
+.live-text {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #e0e0e0 !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 950px) {
+  .trading-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+}
+/* #endregion */

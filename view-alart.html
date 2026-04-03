@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Market Alerts | Mukesh Raj</title>
+    <!-- 1. Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- 2. CDNJS library (Font Awesome icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f0f1b;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            border-bottom: 2px solid #6c5ce7;
+            padding-bottom: 10px;
+            color: #a29bfe;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #all-notif-list {
+            margin-top: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .notif-card {
+            background: #252545;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 5px solid #6c5ce7;
+            transition: 0.3s;
+        }
+
+        .notif-card:hover {
+            transform: translateX(5px);
+            background: #2d2d5a;
+        }
+
+        .notif-card p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .notif-card b {
+            color: #f1c40f;
+        }
+
+        .notif-card small {
+            color: #bbb;
+            display: block;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        /* Scrollbar Styling */
+        #all-notif-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #all-notif-list::-webkit-scrollbar-thumb {
+            background: #6c5ce7;
+            border-radius: 10px;
+        }
+
+        .back-btn {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            background: #4834d4;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>
+            <span>Live Market Alerts ⚡</span>
+            <a href="index.html" class="back-btn">← Home</a>
+        </h2>
+
+        <div id="all-notif-list">
+            <!-- Alerts yahan load honge -->
+            <p style="text-align:center; color:gray;">Alerts load ho rahe hain...</p>
+        </div>
+    </div>
+
+      <script src="config.js"></script>
+    <script>
+        async function fetchAllAlerts() {
+            // 1. Token nikalna zaroori hai refresh ke baad bhi
+            const token = localStorage.getItem('token');
+            const list = document.getElementById('all-notif-list');
+
+            try {
+                // 2. Fetch mein Headers bhej rahe hain
+                const response = await fetch(window.API_BASE_URL + '/api/notifications/all', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-auth-token": token // Backend ko token milte hi wo data de dega
+                    }
+                });
+
+                // 3. Agar Unauthorized (401) hai toh login page par bhejo ya error dikhao
+                if (response.status === 401) {
+                    list.innerHTML = "<p style='color:orange; text-align:center;'>Plese login Frist!</p>";
+                    return;
+                }
+
+                const alerts = await response.json();
+                list.innerHTML = ""; // Loader hatao
+
+                // 4. Check karo ki data Array hai ya nahi
+                if (!Array.isArray(alerts) || alerts.length === 0) {
+                    list.innerHTML = "<p style='text-align:center; color:gray;'>Koi alert record nahi mila.</p>";
+                    return;
+                }
+
+                alerts.forEach(data => {
+                    const name = data.senderName || "Admin Mukesh Raj";
+                    const card = `
+            <div class="notif-card" style="padding:15px; border-bottom:1px solid #444; margin-bottom:10px;">
+                <p>🚀 <b>${name}:</b> ${data.message}</p>
+                <small>📅 ${new Date(data.date).toLocaleDateString()} | ⏰ ${new Date(data.date).toLocaleTimeString()}</small>
+            </div>
+        `;
+                    list.insertAdjacentHTML('beforeend', card);
+                });
+            } catch (err) {
+                console.error("Error:", err);
+                list.innerHTML = "<p style='color:red; text-align:center;'>Server connect nahi ho pa raha!</p>";
+            }
+        }
+
+        // Page load hote hi run karo
+        document.addEventListener('DOMContentLoaded', fetchAllAlerts);
+
+    </script>
+
+</body>
+
+</html>

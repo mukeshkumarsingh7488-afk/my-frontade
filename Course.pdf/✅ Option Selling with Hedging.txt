@@ -1,0 +1,72 @@
+✅ Option Selling with Hedging कैसे करते हैं?
+Example 1: Call Sell with Call Buy (Hedge)
+
+मान लो Nifty 24000 पर है।
+
+आप 24200 CE बेचते हो (premium मिल रहा है ₹50)।
+
+साथ में 24500 CE खरीद लेते हो (premium देना पड़ता है ₹20)।
+
+अब क्या फायदा?
+
+अगर Nifty 24200 से ऊपर चला भी गया, 24500 के बाद आपका नुकसान रुक जाएगा।
+
+Risk fixed हो गया।
+
+Example 2: Put Sell with Put Buy (Hedge)
+
+आप 23800 PE बेचते हो।
+
+साथ में 23500 PE खरीद लेते हो।
+
+👉 यही idea होता है Bear Call Spread और Bull Put Spread जैसा।
+
+✅ Hedging करने का Step by Step तरीका
+1️⃣ सबसे पहले Selling Strike चुनो:
+
+Resistance या Support के हिसाब से।
+
+Option Chain में Highest OI वाला Strike देख कर।
+
+2️⃣ फिर Hedge Strike चुनो:
+
+कम से कम 2-3 Strike दूर वाला खरीदना।
+
+Premium कम हो लेकिन Protection मिले।
+
+3️⃣ Quantity same रखनी होती है:
+
+1 Lot sell = 1 Lot buy (Same expiry)।
+
+4️⃣ Margin कम हो जाता है:
+
+Naked selling में ज़्यादा margin लगता है।
+
+Hedge करने से broker margin कम करता है।
+
+✅ Live Example समझिए
+Stock: Nifty
+
+Strategy: Bear Call Spread
+
+Action	Strike	Premium	Quantity
+Sell Call	24200 CE	₹50	1 Lot
+Buy Call	24500 CE	₹20	1 Lot
+
+Net Premium: ₹30 मिल रहा है।
+
+Max Loss: Strike Difference (300) − Premium (30) = ₹270 * Lot Size
+
+✅ Important Notes:
+बिना Hedge के option selling dangerous होती है।
+
+Weekly expiry selling में Hedge almost ज़रूरी है।
+
+Margin calculation NSE Margin Calculator पर check कर सकते हैं।
+
+✅ Popular Hedging Strategies
+   Strategy	     Selling	    Buying	  Use Case
+Bear Call Spread	CE	  Higher CE	Market Down Expectation
+Bull Put Spread 	PE	   Lower PE	Market Up Expectation
+Iron Condor	  CE + PE Sell	 CE + PE Buy	Range-bound Market
+Straddle Hedging    ATM Sell	  OTM Buy	         Volatility Play

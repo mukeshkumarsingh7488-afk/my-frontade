@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Course - BR30Trader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <style>
+        /* =========================================
+           1. GLOBAL & WATCH PAGE LAYOUT
+        ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #1e293b;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        header a {
+            color: #a020f0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .watch-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-player {
+            flex: 2;
+            min-width: 300px;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 🔥 YT API ke liye Fixed Height Container */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        #main-video-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        #current-video-title {
+            padding: 15px;
+            color: #ffffff;
+            background: #1e293b;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            border-top: 1px solid #334155;
+        }
+
+        .video-list {
+            flex: 1;
+            min-width: 280px;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 15px;
+            height: fit-content;
+            border: 1px solid #334155;
+        }
+
+        .video-list h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #a020f0;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+
+        #playlist {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .video-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+            background: #050505;
+            border: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        .video-item:hover {
+            background: #a020f0;
+            color: #fff;
+            border-color: #a020f0;
+            transform: translateX(5px);
+        }
+
+        /* 🏆 CERTIFICATE POPUP OVERLAY */
+        #cert-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .cert-card {
+            background: #0a0a0a;
+            border: 2px solid #00ff88;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .cert-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #111;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .claim-btn {
+            background: #00ff88;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .watch-container {
+                padding: 10px;
+            }
+
+            .video-player,
+            .video-list {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1 id="course-title">Course Title</h1>
+        <nav><a href="mycourse.html">← Back to Courses</a></nav>
+    </header>
+
+    <div class="watch-container">
+        <!-- Video Player Section -->
+        <div class="video-player">
+            <div class="iframe-container">
+                <!-- 🔥 YouTube API yahan player inject karega -->
+                <!-- 🎥 SIRF YE RAKHO (Iframe ko bilkul hata do) -->
+                <div id="main-video-iframe"
+                    style="width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 15px;"></div>
+
+            </div>
+            <h2 id="current-video-title">Select a Video</h2>
+        </div>
+
+        <!-- Playlist Sidebar -->
+        <div class="video-list">
+            <h3>Course Content</h3>
+            <div id="playlist">
+                <p style="font-size: 13px; color: #94a3b8;">Loading playlist...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏆 CERTIFICATE POPUP -->
+    <div id="cert-overlay">
+        <div class="cert-card">
+            <h2 style="color: #00ff88; margin-bottom: 10px;">🏆 Congratulations!</h2>
+            <p style="color: #94a3b8; font-size: 14px;">Bhai, aapne course complete kar liya! Certificate ke liye apni
+                details bharein:</p>
+
+            <input type="text" id="certName" class="cert-input" placeholder="Aapka Full Name">
+            <input type="text" id="certMobile" class="cert-input" placeholder="Mobile Number">
+
+            <button class="claim-btn" onclick="submitCertificate()">Claim Certificate 🚀</button>
+            <p onclick="document.getElementById('cert-overlay').style.display='none'"
+                style="color: #ff4d4d; cursor: pointer; margin-top: 15px; font-size: 12px;">Maybe Later</p>
+        </div>
+    </div>
+
+      <script src="config.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        let player;
+        let currentCourseName = "";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('id');
+        const token = localStorage.getItem('token');
+
+        if (!token) window.location.href = "login.html";
+
+        // 🔥 STRONG YT ID FUNCTION (sab handle karega)
+        function getYTID(url) {
+            try {
+                console.log("🎥 Original URL:", url);
+
+                const u = new URL(url);
+
+                // youtu.be
+                if (u.hostname.includes("youtu.be")) {
+                    const id = u.pathname.slice(1);
+                    console.log("✅ ID (youtu.be):", id);
+                    return id;
+                }
+
+                // shorts
+                if (u.pathname.includes("/shorts/")) {
+                    const id = u.pathname.split("/shorts/")[1];
+                    console.log("✅ ID (shorts):", id);
+                    return id;
+                }
+
+                // normal watch
+                const id = u.searchParams.get("v");
+                console.log("✅ ID (watch):", id);
+                return id;
+
+            } catch (err) {
+                console.error("❌ URL Parse Error:", err);
+                return null;
+            }
+        }
+
+        // ✅ API READY
+        function onYouTubeIframeAPIReady() {
+            console.log("✅ YouTube API Loaded");
+            loadCourseContent();
+        }
+
+        // 🎥 LOAD COURSE
+        async function loadCourseContent() {
+            try {
+                console.log("📡 Fetching course...");
+
+                const res = await fetch(window.API_BASE_URL + `/api/courses/${courseId}`, {
+                    headers: { 'x-auth-token': token }
+                });
+
+                const course = await res.json();
+                console.log("📦 Course Data:", course);
+
+                currentCourseName = course.title;
+                document.getElementById('course-title').innerText = course.title;
+
+                if (course.videos && course.videos.length > 0) {
+
+                    const firstVid = course.videos[0];
+                    const videoId = getYTID(firstVid.videoUrl);
+
+                    console.log("🎯 Final Video ID:", videoId);
+
+                    if (!videoId) {
+                        console.error("❌ INVALID VIDEO ID — Check DB URL");
+                        return;
+                    }
+
+                    // 🔥 PLAYER CREATE
+                    player = new YT.Player('main-video-iframe', {
+                        height: '100%',
+                        width: '100%',
+                        videoId: videoId,
+                        playerVars: {
+                            rel: 0,
+                            modestbranding: 1
+                        },
+                        events: {
+                            onReady: () => console.log("✅ Player Ready"),
+                            onStateChange: onPlayerStateChange,
+                            onError: (e) => console.error("❌ Player Error:", e)
+                        }
+                    });
+
+                    document.getElementById('current-video-title').innerText = firstVid.title;
+
+                    // Playlist
+                    document.getElementById('playlist').innerHTML = course.videos.map((vid, i) => `
+                <div class="video-item" onclick="changeVideo('${vid.videoUrl}', '${vid.title}')">
+                    ${i + 1}. ${vid.title}
+                </div>
+            `).join('');
+                }
+
+            } catch (err) {
+                console.error("❌ FETCH ERROR:", err);
+            }
+        }
+
+        // 🔁 CHANGE VIDEO
+        function changeVideo(url, title) {
+            const vId = getYTID(url);
+
+            if (!vId) {
+                console.error("❌ Invalid Video Click");
+                return;
+            }
+
+            if (player) {
+                player.loadVideoById(vId);
+                document.getElementById('current-video-title').innerText = title;
+            }
+        }
+
+        // 🎯 VIDEO END
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                document.getElementById('cert-overlay').style.display = 'flex';
+            }
+        }
+
+        // 🏆 4. CERTIFICATE SUBMIT & AUTO-DOWNLOAD LOGIC (Dynamic Course Fix)
+        async function submitCertificate() {
+            const name = document.getElementById('certName').value;
+            const mobile = document.getElementById('certMobile').value;
+            const btn = document.querySelector('.claim-btn');
+
+            if (!name) return alert("Bhai, certificate ke liye apna poora naam toh likho!");
+
+            const originalText = btn.innerText;
+            btn.innerText = "GENERATING CERTIFICATE... ⏳";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`window.API_BASE_URL + /api/auth/claim-certificate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': token
+                    },
+                    // ✅ UPDATE: Yahan 'courseName' bhej rahe hain taaki certificate pe dynamic name aaye
+                    body: JSON.stringify({
+                        fullName: name,
+                        mobile: mobile,
+                        courseId: courseId,
+                        courseName: currentCourseName // 👈 Ye zaroori hai dynamic name ke liye
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    // ✅ Naye tab mein PDF kholo
+                    window.open(data.downloadUrl, '_blank');
+
+                    // 📥 FORCE DOWNLOAD Logic
+                    const link = document.createElement('a');
+                    link.href = data.downloadUrl;
+                    link.setAttribute('target', '_blank');
+                    link.download = `BR30_Certificate_${name.replace(/\s+/g, '_')}.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // ✨ PRO POPUP: Alert ko replace karke premium look diya hai
+                    Swal.fire({
+                        title: `<span style="color:#00ff88; font-weight:900;">SHABASH ${name.toUpperCase()}! 🏆</span>`,
+                        html: `
+                        <div style="color:#e2e8f0; font-size:15px; margin-top:10px;">
+                            Aapne <b>${currentCourseName}</b> ko successfully finish kar liya hai.<br><br>
+                            <span style="color:#94a3b8;">Aapka Certificate download ho raha hai aur ek copy aapke <b>Email</b> par bhi bhej di gayi hai. 🚀</span>
+                        </div>
+                    `,
+                        icon: 'success',
+                        iconColor: '#00ff88',
+                        background: '#0a0a0a', // Dark theme for premium look
+                        showConfirmButton: true,
+                        confirmButtonText: 'MAZA AA GAYA! 🔥',
+                        confirmButtonColor: '#00ff88',
+                        timer: 8000, // 8 second baad apne aap band ho jayega
+                        backdrop: `rgba(0,255,136,0.1)`, // Greenish transparent background
+                        customClass: {
+                            popup: 'border-vip' // Custom class for extra styling
+                        }
+                    });
+
+                    document.getElementById('cert-overlay').style.display = 'none';
+
+                } else {
+                    // ❌ ERROR POPUP: Agar backend se error aaye
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: data.msg || "Kuch gadbad hui, backend ne mana kar diya!",
+                        background: '#0a0a0a',
+                        color: '#fff',
+                        confirmButtonColor: '#ff4444'
+                    });
+                }
+            } catch (err) {
+                console.error("Submit Error:", err);
+                // 🌐 CONNECTION ERROR POPUP
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Server Issue!',
+                    text: 'Bhai, backend se connection nahi ho paa raha!',
+                    background: '#0a0a0a',
+                    color: '#fff'
+                });
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+
+        }
+
+        window.onload = loadCourseContent;
+    </script>
+
+</body>
+
+</html>

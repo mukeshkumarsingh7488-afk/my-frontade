@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Admin Alert Panel | BR30ᴛʀᴀᴅᴇʀ</title>
+    <style>
+        /* ... आपका पुराना CSS यहाँ रहेगा (मैंने इसे नहीं बदला) ... */
+        body {
+            background: #050505;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .admin-card {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #a020f0;
+            width: 400px;
+            box-shadow: 0 0 30px rgba(160, 32, 240, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #a020f0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: #050505;
+            border: 1px solid rgba(160, 32, 240, 0.5);
+            border-radius: 10px;
+            color: white;
+            padding: 15px;
+            outline: none;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #a020f0;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: white;
+            color: #a020f0;
+            box-shadow: 0 0 20px #a020f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-card">
+        <h2>Post <span>Live Alert</span> 🔔</h2>
+        <!-- Title Input (Firebase के लिए ज़रूरी) -->
+        <input type="text" id="admin-title" placeholder="Alert Title (e.g. MARKET UPDATE)">
+        <textarea id="admin-msg" placeholder="Type Market Alert (e.g. NIFTY Bullish Move!)"></textarea>
+
+        <button id="sendBtn" onclick="sendAlert()">BROADCAST ALERT 🚀</button>
+
+        <p id="status" style="margin-top: 15px; font-size: 0.8rem; color: #22c55e; display: none;">✅ Alert & Push Sent
+            Successfully!</p>
+    </div>
+
+      <script src="config.js"></script>
+    <script>
+        async function sendAlert() {
+            const title = document.getElementById('admin-title').value.trim();
+            const msg = document.getElementById('admin-msg').value.trim();
+            const status = document.getElementById('status');
+            const btn = document.getElementById('sendBtn');
+
+            if (!title || !msg) return alert("Title और Message दोनों लिखो भाई!");
+
+            btn.innerText = "Sending... ⏳";
+            btn.disabled = true;
+
+            try {
+                // 1. Purana System (Database mein save karne ke liye)
+                // DHAYAN SE DEKHO: Yahan sirf URL hona chahiye
+                await fetch(window.window.API_BASE_URL + '/api/notifications/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg, senderName: "Admin" })
+                });
+
+                // 2. Naya Firebase Push System (Phone par bhejne ke liye)
+                const pushResponse = await fetch(window.window.API_BASE_URL + '/api/admin/send-all', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title: title, message: msg })
+                });
+
+                if (pushResponse.ok) {
+                    status.style.display = 'block';
+                    document.getElementById('admin-title').value = "";
+                    document.getElementById('admin-msg').value = "";
+                    setTimeout(() => { status.style.display = 'none'; }, 4000);
+                } else {
+                    // Agar server 500 error deta hai toh yahan aayega
+                    alert("Server Eeeor.");
+                }
+            } catch (err) {
+                console.error("Error:", err);
+                alert("Server Se Connect Nahi Ho Raha!");
+            } finally {
+                btn.innerText = "BROADCAST ALERT 🚀";
+                btn.disabled = false;
+            }
+        }
+
+
+        // 1. Title में Enter दबाने पर 'Message' बॉक्स पर फोकस होगा
+        document.getElementById("admin-title").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // पेज रिफ्रेश या सबमिट होने से रोकेगा
+                document.getElementById("admin-msg").focus(); // अगले बॉक्स में कर्सर भेज देगा
+            }
+        });
+
+        // 2. Message में Enter दबाने पर 'Alert' सेंड हो जाएगा
+        document.getElementById("admin-msg").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendAlert(); // फाइनल मैसेज भेज देगा
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>

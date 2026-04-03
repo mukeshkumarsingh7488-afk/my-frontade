@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | BR30Trader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- [EXTERNAL ASSETS] Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           GLOBAL RESET & YOUR BRAND COLORS
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #050505;
+            /* आपका Midnight Blue बॉडी कलर */
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        /* [CONTAINER] Modern Dark Layout */
+        .admin-container {
+            background: #1e293b;
+            /* कार्ड्स के लिए थोड़ा हल्का डार्क */
+            width: 100%;
+            max-width: 900px;
+            /* चौड़ाई थोड़ी बढ़ाई ताकि डेस्कटॉप पर अच्छा दिखे */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(160, 32, 240, 0.2);
+            /* हल्का पर्पल बॉर्डर */
+        }
+
+        /* [HEADER] Branding Section */
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #ffffff;
+            /* बड़े टेक्स्ट वाइट */
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        h1 span {
+            color: #a020f0;
+            /* आपका पर्पल टच */
+        }
+
+        /* Back Button Style */
+        .back-btn {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: #a020f0;
+            /* पर्पल बटन */
+            transition: 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #8a1bd0;
+            transform: scale(1.05);
+        }
+
+        /* ============================================================
+           GRID SYSTEM: Responsive Layout
+           ============================================================ */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .form-section {
+            text-align: left;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+
+        /* आपका मांगा हुआ होवर इफ़ेक्ट */
+        .form-section:hover {
+            border-color: #a020f0;
+            box-shadow: 0 0 15px rgba(160, 32, 240, 0.2);
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #a020f0;
+            /* सेक्शन हेडिंग पर्पल */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ============================================================
+           FORM CONTROLS
+           ============================================================ */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #cbd5e1;
+            /* हल्का ग्रे ताकि वाइट टेक्स्ट से अलग दिखे */
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #050505;
+            /* इनपुट का बैकग्राउंड डार्क */
+            color: #ffffff;
+            font-size: 14px;
+            transition: 0.3s;
+            box-sizing: border-box;
+            /* मोबाइल फिक्स */
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #a020f0;
+            outline: none;
+            box-shadow: 0 0 8px rgba(160, 32, 240, 0.3);
+        }
+
+        /* [BUTTONS] Professional Purple Buttons */
+        button {
+            width: 100%;
+            background: #a020f0;
+            padding: 14px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #8a1bd0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(160, 32, 240, 0.4);
+        }
+
+        /* [ALERTS] Success Message Styling */
+        .success-msg {
+            background: rgba(37, 211, 102, 0.1);
+            color: #25d366;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            border: 1px solid #25d366;
+        }
+
+        /* ============================================================
+           MOBILE RESPONSIVENESS (No Dimension Break)
+           ============================================================ */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .admin-container {
+                padding: 20px;
+                border-radius: 10px;
+            }
+
+            .header-flex {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+                /* मोबाइल पर एक के नीचे एक */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- HEADER SECTION -->
+        <div class="header-flex">
+            <h1>🚀 <span>Admin</span> Panel</h1>
+            <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
+        </div>
+
+        <div class="admin-grid">
+
+            <!-- 1. COURSE CREATION CARD -->
+            <div class="form-section">
+                <h2>📚 Create Course</h2>
+                <form id="courseForm">
+                    <div class="form-group">
+                        <label>Course Title</label>
+                        <input type="text" id="title" placeholder="e.g. Master Options Trading" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description" rows="3" placeholder="Briefly describe the course content..."
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (INR)</label>
+                        <input type="number" id="price" placeholder="₹999" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Thumbnail Image</label>
+                        <input type="file" id="thumbnail" accept="image/*" required>
+                    </div>
+                    <button type="submit">Publish Course</button>
+                    <div id="courseMsg" class="success-msg">Course Created Successfully! 🎉</div>
+                </form>
+            </div>
+
+            <!-- 2. VIDEO UPLOAD CARD -->
+            <div class="form-section">
+                <h2>🎬 Add Course Content</h2>
+                <form id="videoForm">
+                    <div class="form-group">
+                        <label>Target Course</label>
+                        <select id="courseSelect" required>
+                            <option value="">Fetching courses...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Video Title</label>
+                        <input type="text" id="videoTitle" placeholder="e.g. Lesson 01: Setup" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Video URL (YouTube/Cloud)</label>
+                        <input type="text" id="videoUrl" placeholder="https://..." required>
+                    </div>
+                    <button type="submit">Add to Curriculum</button>
+                    <div id="videoMsg" class="success-msg">Video Integrated Successfully! 🎬</div>
+                </form>
+            </div>
+
+        </div> <!-- End Grid -->
+    </div>
+
+
+    <!-- ================= JAVASCRIPT SECTION ================= -->
+    <script>
+        /**
+  * 1. GLOBAL SETTINGS & AUTH CHECK
+  */
+        const BASE_URL = window.API_BASE_URL + '/api/courses';
+        const token = localStorage.getItem('token'); // Sirf ek baar declare kiya
+
+        if (!token) {
+            alert("Security Alert: Admin login required! 🔑");
+            window.location.href = "login.html";
+        } else {
+            console.log("🔑 Admin Token Found:", token);
+        }
+
+        /**
+         * 2. FUNCTION: Load Courses (Dropdown Bharne ke liye)
+         */
+        async function loadCourses() {
+            console.log("📡 Fetching courses for dropdown...");
+            try {
+                const res = await fetch(window.API_BASE_URL);
+                const courses = await res.json();
+                const select = document.getElementById('courseSelect');
+
+                if (!select) return;
+
+                select.innerHTML = '<option value="">-- Choose Target Course --</option>';
+                courses.forEach(c => {
+                    select.innerHTML += `<option value="${c._id}">${c.title}</option>`;
+                });
+                console.log("✅ Dropdown Updated!");
+            } catch (err) {
+                console.error("❌ Dropdown Load Error:", err);
+            }
+        }
+
+        /**
+         * 3. FUNCTION: Create Course (Step 1)
+         */
+        document.getElementById('courseForm').onsubmit = async (e) => {
+            e.preventDefault();
+            console.log("🚀 Publishing Course...");
+
+            const formData = new FormData();
+            formData.append('title', document.getElementById('title').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('price', document.getElementById('price').value);
+            formData.append('thumbnail', document.getElementById('thumbnail').files[0]);
+
+            try {
+                const res = await fetch(window.window.API_BASE_URL + '/api/courses/add', {
+                    method: 'POST',
+                    headers: { 'x-auth-token': token },
+                    body: formData
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert("✅ Course Ban Gaya Bhai!");
+                    loadCourses();
+                    e.target.reset();
+                } else {
+                    alert("❌ Error: " + (data.msg || "Server ne mana kar diya"));
+                    console.log("Server Response:", data);
+                }
+            } catch (err) {
+                console.error("🔥 Fetch Error:", err);
+                alert("Server connect nahi ho raha!");
+            }
+        };
+
+        /**
+         * 4. FUNCTION: Add Video (Step 2)
+         */
+        document.getElementById('videoForm').onsubmit = async (e) => {
+            e.preventDefault();
+
+            const courseId = document.getElementById('courseSelect').value;
+            if (!courseId) return alert("Pehle Course select karle bhai! 🛑");
+
+            const videoData = {
+                title: document.getElementById('videoTitle').value,
+                videoUrl: document.getElementById('videoUrl').value
+            };
+
+            console.log("📹 Adding Video to ID:", courseId);
+
+            try {
+                const res = await fetch(window.window.API_BASE_URL + `/api/courses/add-video/${courseId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': token
+                    },
+                    body: JSON.stringify(videoData)
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert("📹 Video successfully add ho gayi!");
+                    e.target.reset();
+                } else {
+                    alert("❌ Error: " + (data.msg || "Update Fail"));
+                }
+            } catch (err) {
+                console.error("🔥 Video Fetch Error:", err);
+            }
+        };
+
+        /**
+         * 5. ENTER KEY LOGIC (Focus Switch)
+         */
+        const allInputs = document.querySelectorAll('input, textarea, select');
+        allInputs.forEach((input, index) => {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const nextInput = allInputs[index + 1];
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                }
+            });
+        });
+
+
+        // Initial Load
+        window.onload = loadCourses;
+
+
+    </script>
+ <script src="config.js"></script>
+</body>
+
+</html>

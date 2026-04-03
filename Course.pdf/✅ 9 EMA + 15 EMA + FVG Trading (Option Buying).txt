@@ -1,0 +1,50 @@
+9 EMA + 15 EMA + FVG Trading Strategy (Buy Side)
+Timeframe: 5 Minute Chart
+✅ Step 1: Chart Setup
+Indicator 1:
+
+9 EMA (Exponential Moving Average)
+
+15 EMA (Exponential Moving Average)
+
+Indicator 2:
+
+FVG (Fair Value Gap Indicator)
+
+Timeframe: 5-Minute Candle
+
+✅ Step 2: Trade Entry Conditions (BUY)
+Price Condition:
+
+Current price 9 EMA और 15 EMA के ऊपर होना चाहिए।
+
+दोनों EMA ka slope upward होना चाहिए (Dono upar ki taraf ho).
+
+FVG Condition:
+
+Chart पर bullish FVG बनना चाहिए।
+
+FVG candle के ऊपर वाली candle close होनी चाहिए।
+
+Extra Confirmation (Optional):
+
+Volume पिछले 5 candles से ज़्यादा हो सकता है।
+
+Option chain में support दिख रहा हो (अगर option buying कर रहे हैं)।
+
+✅ Step 3: Trade Execution
+Entry:
+FVG के ऊपर वाली candle close के बाद next candle पर buy करना है।
+
+Stop Loss:
+FVG zone के नीचे या 15 EMA के नीचे SL लगाएं।
+
+Target:
+Risk:Reward कम से कम 1:1.5 रखना है।
+या फिर अगला Resistance level देख कर निकलना है।
+
+✅ Step 4: Notes for Trading Journal
+हर trade के बाद यह लिखना है:
+
+Date	Time	Stock/Option Name	Entry Price	SL	Target	Reason (EMA + FVG)	Result (Win/Loss)
+

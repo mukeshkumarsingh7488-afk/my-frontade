@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BR30 - Course Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            background: #050505;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-left: 5px solid #a020f0;
+            padding-left: 15px;
+        }
+
+        .back-btn {
+            background: #1a1a1a;
+            color: #a020f0;
+            border: 1px solid #a020f0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #a020f0;
+            color: white;
+        }
+
+        /* 📱 Grid Layout: Desktop 3, Mobile 1 */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: #0a0a0a;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 15px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: #a020f0;
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .course-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .course-card .price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn {
+            flex: 2;
+            background: #a020f0;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .del-btn {
+            flex: 1;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #course-grid {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>Course Management</h1>
+                <p style="color: #64748b; margin-top: -10px;">Update Prices & Details Instantly</p>
+            </div>
+            <a href="admin.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div id="course-grid" class="course-grid">
+            <!-- JavaScript se data yahan aayega -->
+            <p style="text-align: center; color: #a020f0; width: 100%;">🔄 Syncing with BR30 Database...</p>
+        </div>
+    </div>
+      <script src="config.js"></script>
+    <script>
+        /* ========================================================================
+           🚀 PRO LEVEL ADMIN DASHBOARD: Full Sync with Pro Comments
+      ======================================================================== */
+
+        // 🌐 1. FETCH COURSES: Database se saare courses nikaal kar grid mein dikhana
+        async function fetchCourses() {
+            try {
+                // API Call: Backend se data mangwao
+                const res = await fetch(window.API_BASE_URL + '/api/courses');
+                const courses = await res.json();
+                const grid = document.getElementById("course-grid");
+                const BASE_URL = window.API_BASE_URL + '/';
+
+                // ✨ Shuru mein grid ko chhupao taaki posters 1-1 karke na chamkein (Smooth Entry)
+                grid.style.opacity = "0";
+                grid.innerHTML = "";
+
+                let imagesLoadedCount = 0; // Tracking variable: Kitni images load ho gayi
+                const totalImages = courses.length;
+
+                // Agar database khali hai toh message dikhao
+                if (totalImages === 0) {
+                    grid.innerHTML = "<p style='text-align:center; color:#64748b; width:100%;'>Abhi tak koi course nahi hai bhai!</p>";
+                    grid.style.opacity = "1";
+                    return;
+                }
+
+                // Loop: Har ek course ke liye card banao
+                courses.forEach(c => {
+                    const card = document.createElement("div");
+                    card.className = "course-card";
+
+                    // 🎯 Thumbnail Logic: Database se 'thumbnail' uthao, BASE_URL jodo aur Timestamp lagao taaki turant update ho
+                    const displayImage = c.thumbnail
+                        ? (c.thumbnail.startsWith('http') ? c.thumbnail : `${BASE_URL}${c.thumbnail}`) + `?t=${new Date().getTime()}`
+                        : 'images/BR30TRADER.png';
+
+                    // HTML Structure: ID Tag, Image, Title, Price aur Buttons
+                    card.innerHTML = `
+                <div style="background: rgba(160, 32, 240, 0.1); border: 1px dashed #a020f0; padding: 6px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 10px; color: #a020f0; font-weight: bold; font-family: 'Courier New', monospace;">ID: ${c._id}</span>
+                    <button onclick="copyID('${c._id}')" title="Copy ID" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <img src="${displayImage}" class="course-img-preview" alt="course" style="border-radius: 10px; margin-bottom: 10px; width:100%; height:150px; object-fit:cover; background: #111;">
+                
+                <h3 style="color:#fff; margin-bottom: 8px; font-size: 18px;">${c.title}</h3>
+                <p class="price" style="color:#00ff88; font-weight:800; font-size: 22px; margin-bottom: 15px;">
+                    ₹${Number(c.price).toLocaleString('en-IN')}
+                </p>
+                
+                <div class="actions" style="display:flex; gap:10px;">
+                    <button class="edit-btn" style="flex:2; background:#a020f0; color:white; border:none; padding:12px; border-radius:10px; cursor:pointer; font-weight:bold;">
+                        <i class="fas fa-edit"></i> EDIT FULL COURSE
+                    </button>
+                    <button class="del-btn" style="flex:1; background:#ef4444; color:white; border:none; border-radius:10px; cursor:pointer;">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `;
+
+                    // 🖼️ Image Load Counter: Jab saari images load ho jayein tabhi grid ko dikhao
+                    const img = card.querySelector(".course-img-preview");
+                    img.onload = () => {
+                        imagesLoadedCount++;
+                        if (imagesLoadedCount === totalImages) {
+                            grid.style.opacity = "1"; // Boom! Saare posters ek saath chamkenge
+                        }
+                    };
+                    img.onerror = img.onload; // Photo error pe bhi grid dikha do taaki page freeze na ho
+
+                    // ✍️ EDIT & DELETE Click Events: Aapka purana modal aur delete logic yahan se trigger hota hai
+                    card.querySelector(".edit-btn").onclick = () => openEdit(c._id, c.title, c.price, c.thumbnail, c.videoUrl);
+                    card.querySelector(".del-btn").onclick = () => deleteCourse(c._id);
+
+                    grid.appendChild(card);
+                });
+
+                // 🛡️ Safety Timeout: Agar server slow hai, toh 2.5 sec baad apne aap grid dikha do
+                setTimeout(() => { grid.style.opacity = "1"; }, 2500);
+
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                document.getElementById("course-grid").style.opacity = "1";
+            }
+        }
+
+        // 📋 2. 1-CLICK COPY: Course ID copy karne ka feature
+        window.copyID = (id) => {
+            navigator.clipboard.writeText(id);
+            Swal.fire({
+                title: 'ID Copied! ✅',
+                text: id,
+                timer: 1000,
+                showConfirmButton: false,
+                background: '#0a0a0a',
+                color: '#00ff88'
+            });
+        };
+
+        // ✍️ 3. EDIT POPUP: SweetAlert se course details badalna aur thumbnail upload karna
+        async function openEdit(id, title, price, image, videoUrl) {
+            const { value: formValues } = await Swal.fire({
+                title: '<span style="color:#a020f0">Edit Full Course</span>',
+                background: '#0a0a0a',
+                color: '#fff',
+                html: `
+            <div style="text-align:left; padding: 0 10px;">
+                <label style="font-size:12px; color:#64748b;">Course Title</label>
+                <input id="sw-title" class="swal2-input" value="${title}" style="background:#111; color:white; border-color:#a020f0; margin-top:5px; width:85%;">
+                
+                <label style="font-size:12px; color:#64748b;">Price (INR)</label>
+                <input id="sw-price" class="swal2-input" value="${price}" type="number" style="background:#111; color:white; border-color:#a020f0; margin-top:5px; width:85%;">
+                
+                <label style="font-size:12px; color:#64748b;">Thumbnail (Folder se Select Karo)</label>
+                <input type="file" id="sw-file" class="swal2-input" accept="image/*" style="background:#111; color:white; border-color:#a020f0; margin-top:5px; width:85%; padding:10px; font-size:12px;">
+
+                <label style="font-size:12px; color:#64748b;">Video Link</label>
+                <input id="sw-video" class="swal2-input" value="${videoUrl || ''}" style="background:#111; color:white; border-color:#a020f0; margin-top:5px; width:85%;">
+            </div>
+        `,
+                showCancelButton: true,
+                confirmButtonText: 'SAVE CHANGES 🚀',
+                preConfirm: () => ({
+                    title: document.getElementById('sw-title').value,
+                    price: document.getElementById('sw-price').value,
+                    videoUrl: document.getElementById('sw-video').value,
+                    imageFile: document.getElementById('sw-file').files
+                })
+            });
+
+            if (formValues) {
+                try {
+                    // FormData ka use: Kyunki hum images (files) bhej rahe hain
+                    const formData = new FormData();
+                    formData.append('title', formValues.title);
+                    formData.append('price', formValues.price);
+                    formData.append('videoUrl', formValues.videoUrl);
+
+                    // Agar admin ne nayi file select ki hai toh use bhi add karo
+                    if (formValues.imageFile.length > 0) {
+                        formData.append('image', formValues.imageFile[0]);
+                    }
+
+                    const res = await fetch(window.API_BASE_URL + '/api/courses/update-course/${id}', {
+                        method: 'PUT',
+                        headers: { 'x-auth-token': localStorage.getItem('token') },
+                        body: formData // JSON nahi, pura FormData bhej diya
+                    });
+
+                    const data = await res.json();
+                    if (data.success) {
+                        Swal.fire({ title: 'Updated!', icon: 'success', background: '#0a0a0a', color: '#fff', timer: 1500, showConfirmButton: false });
+                        fetchCourses(); // Naya data refresh karo
+                    }
+                } catch (err) {
+                    console.error("Update fail:", err);
+                }
+            }
+        }
+
+        // 🗑️ 4. DELETE LOGIC: Course ko udaane ke liye conformation popup
+        async function deleteCourse(id) {
+            const check = await Swal.fire({
+                title: 'Delete Course?',
+                text: "Bhai, pakka udaana hai? Wapas nahi aayega!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                background: '#0a0a0a',
+                color: '#fff'
+            });
+
+            if (check.isConfirmed) {
+                try {
+                    const res = await fetch(window.API_BASE_URL + '/api/courses/delete-course/${id}', {
+                        method: 'DELETE',
+                        headers: { 'x-auth-token': localStorage.getItem('token') }
+                    });
+                    if (res.ok) {
+                        Swal.fire({ title: 'Deleted!', icon: 'success', background: '#0a0a0a', color: '#fff', timer: 1500, showConfirmButton: false });
+                        fetchCourses();
+                    }
+                } catch (err) {
+                    console.error("Delete Fail:", err);
+                }
+            }
+        }
+
+        // Page load par courses nikaalo
+        document.addEventListener("DOMContentLoaded", fetchCourses);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Courses - BR30trader01</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ============================================================
+           GLOBAL STYLES (Dark & Responsive)
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #050505;
+            /* Aapka Body Color */
+            color: #ffffff;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* HEADER SECTION */
+        header {
+            background: #1e293b;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #a020f0;
+        }
+
+        /* =========================================
+           MAIN CONTENT AREA
+        ========================================= */
+        #courseContent {
+            max-width: 600px;
+            /* Mobile par width control ke liye */
+            margin: 30px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        /* Individual Course Card */
+        .course-card {
+            background: #1e293b;
+            /* Card Background */
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .course-card:hover {
+            border-color: #a020f0;
+            transform: translateY(-5px);
+        }
+
+        .course-card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+        }
+
+        .course-card h3 {
+            color: #a020f0;
+            /* Purple Title */
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .course-card p {
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            /* Mobile par full width button */
+            background-color: #a020f0;
+            /* Brand Purple */
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #8219c4;
+            box-shadow: 0 5px 15px rgba(160, 32, 240, 0.3);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 16px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .course-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-title">
+            <img src="images/BR30™  LOGO.jpeg" alt="logo" class="logo">
+            <h1>BR30ᴛʀᴀᴅᴇʀ</h1>
+        </div>
+        <div class="welcome-title">
+            <h1>Welcome Trader</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+    </header>
+
+    <div id="courseContent">
+        <!-- JS injection happens here -->
+    </div>
+  <script src="config.js"></script>
+    <script>
+        const courseDiv = document.getElementById("courseContent");
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            alert("Please login first!");
+            window.location.href = "login.html";
+        } else {
+            fetchMyCourses();
+        }
+
+        // ✅ Sabse Professional Tarika (script.js ya mycourse.html mein)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ab yahan fetch function ko call karo
+            fetchMyCourses();
+        });
+
+        async function fetchMyCourses() {
+            try {
+                courseDiv.innerHTML = "<p style='color:#94a3b8;'>Loading your courses...</p>";
+
+                const res = await fetch(window.window.API_BASE_URL + '/api/courses/my-courses', {
+                    method: 'GET',
+                    headers: { 'x-auth-token': token }
+                });
+
+                const courses = await res.json();
+
+                if (res.status === 401 || res.status === 403) {
+                    alert("Session expired, please login again.");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                if (!courses || courses.length === 0) {
+                    courseDiv.innerHTML = `
+                        <h2 style="margin-top:50px;">No Courses Found 🔒</h2>
+                        <p style="color:#94a3b8; margin-bottom:20px;">Aapne abhi tak koi course purchase nahi kiya hai.</p>
+                        <button onclick="window.location.href='index.html#coursesection'">Browse Courses</button>
+                    `;
+                    return;
+                }
+
+                let html = `<h2>Welcome Back!</h2><p style="color:#94a3b8; margin-bottom:20px;">Your purchased courses:</p>`;
+
+                courses.forEach(course => {
+                    const thumbUrl = window.API_BASE_URL + '/' + course.thumbnail;
+                    html += `
+                        <div class="course-card">
+                            <img src="${thumbUrl}" alt="${course.title}">
+                            <h3>${course.title}</h3>
+                            <p>${course.description}</p>
+                            <button onclick="watchCourse('${course._id}')">Watch Now</button>
+                        </div>
+                    `;
+                });
+                courseDiv.innerHTML = html;
+
+            } catch (err) {
+                console.error("Error:", err);
+                courseDiv.innerHTML = "<p style='color:#f87171;'>Connection error. Please try again later.</p>";
+            }
+        }
+
+        function watchCourse(courseId) {
+            window.location.href = `watch.html?id=${courseId}`;
+        }
+    </script>
+  
+</body>
+
+</html>

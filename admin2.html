@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - User Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- ================= CSS FILES ================= -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <style>
+        body,
+        html {
+            overflow-x: hidden;
+            /* Page ko right-left hilne se rokega */
+            width: 100%;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .admin-box {
+            max-width: 1000px;
+            margin: auto;
+            background: #0a0a0a;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #1e293b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .vip-badge {
+            background: #00ff88;
+            color: black;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .btn-vip {
+            background: #a020f0;
+            color: white;
+        }
+
+        .btn-del {
+            background: #f87171;
+            color: white;
+        }
+
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .date-btn {
+            background: #1a1a1a;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .date-btn:hover {
+            background: #00ff88;
+            color: #000;
+        }
+
+        #userChart {
+            width: 100% !important;
+            height: 250px !important;
+        }
+
+
+   /* 🎨 CENTRALIZED STYLE */
+    
+        /* Modern Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00ff88;
+            border-radius: 10px;
+        }
+
+        #user-list tr:hover,
+        #sales-table-body tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.3s;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: #64748b;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .active-filter {
+            background: #00ff88 !important;
+            color: black !important;
+        }
+
+        /* कैलेंडर आइकॉन को सफेद करने के लिए */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+
+        /* ⚡ Sales Table Scrolling Container (Green Line Effect) */
+        /* ⚡ Sales Scrollbar (Upar wale user panel ki tarah same to same) */
+        .sales-scroll-panel {
+            max-height: 380px !important;
+            overflow-y: auto !important;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+        }
+
+        .sales-scroll-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sales-scroll-panel::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        .sales-scroll-panel::-webkit-scrollbar-thumb {
+            background: #00ff88;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            /* Glowing Green Effect */
+        }
+
+        /* 🏆 Certificate Column Premium Styling */
+        .cert-btn {
+            background: transparent;
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s all ease;
+        }
+
+        .cert-btn:hover {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .no-cert-text {
+            color: #334155;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Table layout ko balance karne ke liye */
+        table {
+            table-layout: auto;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+
+
+    <!-- 👥 1. USER MANAGEMENT SECTION -->
+    <div class="admin-box"
+        style="max-width: 1000px; margin: 20px auto; background: #0a0a0a; padding: 25px; border-radius: 20px; border: 1px solid #1e293b; box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);">
+        <h2 style="color: white; border-left: 4px solid #00ff88; padding-left: 15px; margin: 0 0 10px 0;">
+            <i class="fas fa-users-cog"></i> User Management Panel
+        </h2>
+        <p style="color: #64748b; margin-bottom: 20px; font-size: 13px;">Manage your students, VIP access, and Block
+            harami users here.</p>
+
+        <!-- 🔍 PRO SEARCH BAR -->
+        <input type="text" id="search-bar" oninput="searchUser(this.value)"
+            placeholder="🔍 Search by Email or Name (e.g. Mukesh)..."
+            style="width: 100%; padding: 15px; margin-bottom: 25px; background: #0f172a; border: 1px solid #00ff88; color: white; border-radius: 12px; font-size: 16px; outline: none; box-shadow: 0 0 15px rgba(0, 255, 136, 0.1); box-sizing: border-box;">
+
+
+        <!-- 📅 USER FILTER BY DATE BAR (Layout Friendly) -->
+        <div
+            style="display: flex; gap: 10px; margin: -10px 0 20px 0; align-items: center; padding: 10px; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;">
+            <span style="color: #64748b; font-size: 11px; font-weight: bold; text-transform: uppercase;">Filter
+                Date:</span>
+            <input type="date" id="date-picker" onchange="filterByDate(this.value)"
+                style="background: #050505; color: #00ff88; border: 1px solid #00ff88; padding: 4px 8px; border-radius: 6px; outline: none; font-size: 13px; cursor: pointer;">
+
+            <button id="show-all-btn" onclick="loadAllUsers()"
+                style="background: #00ff88; color: #000; border: 1px solid #00ff88; padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);">
+                SHOW ALL
+            </button>
+
+        </div>
+
+
+
+
+        <!-- 📜 SCROLLING CONTAINER: Fixed Height for Symmetry -->
+        <div
+            style="max-height: 380px; overflow-y: auto; border: 1px solid #1a1a1a; border-radius: 12px; scrollbar-width: thin; scrollbar-color: #00ff88 #000;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead
+                    style="position: sticky; top: 0; background: #0a0a0a; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                    <tr
+                        style="text-align: left; border-bottom: 2px solid #1e293b; color: #00ff88; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">
+                        <th style="padding: 18px 15px;">NAME</th>
+                        <th style="padding: 18px 15px;">EMAIL</th>
+                        <th style="padding: 18px 15px; text-align:center;">BADGE</th>
+                        <th style="padding: 18px 15px; text-align:center;">ACTIONS</th>
+                        <th style="padding: 18px 15px; text-align: center;">CERTIFICATE 🏆</th> <!-- 👈 Naya Column -->
+                    </tr>
+                </thead>
+                <tbody id="user-list">
+                    <tr>
+                        <td colspan="5" style="text-align:center; padding:40px; color:#64748b;">🔍 Loading Users Data...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <br>
+        <a href="dashboard.html"
+            style="color: #00ff88; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.3s; display: inline-block;">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- 💰 2. PRO SALES & REVENUE SECTION (ULTIMATE VERSION) -->
+    <div class="sales-container"
+        style="max-width: 1000px; margin: 40px auto; padding: 25px; background: #0a0a0a; border-radius: 20px; border: 1px solid #00ff88; box-shadow: 0 0 25px rgba(0, 255, 136, 0.1);">
+
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+
+            <!-- 📅 DATE SELECTOR SECTION -->
+            <div
+                style="display: flex; align-items: center; gap: 10px; background: #050505; padding: 8px 12px; border-radius: 12px; border: 1px solid #1e293b;">
+                <input type="date" id="salesStartDate"
+                    style="background: transparent; color: #00ff88; border: none; outline: none; font-size: 11px; cursor: pointer;">
+                <span style="color: #64748b; font-size: 11px;">to</span>
+                <input type="date" id="salesEndDate"
+                    style="background: transparent; color: #00ff88; border: none; outline: none; font-size: 11px; cursor: pointer;">
+
+                <button id="apply-btn" onclick="applyCalendarFilter()"
+                    style="background: rgba(255,255,255,0.05); color: #00ff88; border: 1px solid #00ff88; padding: 6px 15px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 10px; text-transform: uppercase; transition: 0.3s;">
+                    Apply
+                </button>
+
+                <button id="show-all-btn" onclick="resetSalesFilter()"
+                    style="background: #00ff88; color: black; border: none; padding: 6px 15px; border-radius: 8px; cursor: pointer; font-size: 10px; text-transform: uppercase; font-weight: bold; transition: 0.3s;">
+                    Show All
+                </button>
+            </div>
+
+            <!-- Right Side: Stats (Best Seller & Revenue) -->
+            <div style="display: flex; gap: 15px;">
+                <div
+                    style="background: rgba(160, 32, 240, 0.1); border: 1px solid #a020f0; padding: 10px 20px; border-radius: 15px; text-align: right; min-width: 120px;">
+                    <p
+                        style="color: #94a3b8; font-size: 10px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
+                        🔥 Best Seller</p>
+                    <h2 id="best-course-name"
+                        style="color: #a020f0; margin: 0; font-size: 18px; font-weight: 900; text-shadow: 0 0 10px rgba(160, 32, 240, 0.3);">
+                        Analyzing...</h2>
+                </div>
+
+                <div
+                    style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; padding: 10px 25px; border-radius: 15px; text-align: right; min-width: 140px;">
+                    <p
+                        style="color: #94a3b8; font-size: 10px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
+                        Revenue Track</p>
+                    <h2 id="total-revenue"
+                        style="color: #00ff88; margin: 0; font-size: 24px; font-weight: 900; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);">
+                        ₹0</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📥 DOWNLOAD & EXPORT TOOLS -->
+        <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+            <button onclick="downloadSalesReport()"
+                style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: bold; transition: 0.3s;">
+                <i class="fas fa-file-download"></i> Download Sales Report (CSV)
+            </button>
+        </div>
+
+        <!-- 📜 SCROLLING CONTAINER (With Neon Green Scrollbar) -->
+        <div class="sales-scroll-panel">
+            <table style="width: 100%; border-collapse: collapse; color: #94a3b8; text-align: left;">
+                <thead
+                    style="position: sticky; top: 0; background: #0a0a0a; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                    <tr
+                        style="border-bottom: 2px solid #1e293b; font-size: 12px; text-transform: uppercase; color: #00ff88;">
+                        <th style="padding: 18px 15px;">User Email</th>
+                        <th style="padding: 18px 15px;">Course Name</th>
+                        <th style="padding: 18px 15px;">Amount</th>
+                        <th style="padding: 18px 15px;">Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody id="sales-table-body">
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding:40px; color: #64748b;">🔍 Analyzing Sales
+                            Records...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+  <script src="config.js"></script>
+<script>
+    /* ============================================================
+       📦 GLOBAL STATE: Data ko store karne ke liye variables
+       ============================================================ */
+    let allUsers = [];  // Saare users ki list yahan rahegi
+    let allSales = [];  // Sales reports ka data yahan rahegi
+
+    /* ============================================================
+       🚀 INITIALIZATION: Page load hote hi dono tables bharna
+       ============================================================ */
+    window.onload = async () => {
+        console.log("🚀 Admin Panel Loading...");
+        await fetchUsers();     // 1. Sabse pehle Users ki list mangwao
+        await loadSalesData();  // 2. Phir Sales report load karo
+    };
+
+    /* ============================================================
+       👥 USER MANAGEMENT FUNCTIONS: Backend se connection
+       ============================================================ */
+
+    // 🔍 1. FETCH USERS: Backend API se User + Certificate data nikalna
+    async function fetchUsers() {
+        try {
+            const token = localStorage.getItem('token');
+            // Note: Backend check ke hisab se headers set kiye hain
+            const res = await fetch(window.window.API_BASE_URL + '/api/auth/all-users', {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                allUsers = data.users; // Global list update karo
+                renderTable(allUsers); // Table mein data render karo
+            }
+        } catch (err) {
+            console.error("❌ User Fetch Error:", err);
+        }
+    }
+
+    // ✨ 2. RENDER TABLE: User list ko HTML mein convert karna (With Certificate Icon)
+    function renderTable(users) {
+        const list = document.getElementById("user-list");
+        if (!list) return;
+
+        list.innerHTML = users.map(u => {
+            // 🏆 CERTIFICATE LOGIC: Agar file hai toh VIEW button, nahi toh PENDING
+            const certIcon = u.certificateFile ?
+                `<td style="padding: 15px; text-align: center;">
+                <a href="window.API_BASE_URL + '/certificates/${u.certificateFile}" target="_blank" style="color:#00ff88; text-decoration:none; display:inline-flex; flex-direction:column; align-items:center;">
+                    <i class="fas fa-file-pdf" style="font-size:18px;"></i>
+                    <span style="font-size:9px; font-weight:bold;">VIEW</span>
+                </a>
+            </td>` :
+                `<td style="padding: 15px; text-align: center; color:#334155; font-size:10px; font-weight:bold;">PENDING</td>`;
+
+            // 🛡️ ROW STRUCTURE: Individual User Row with Action Buttons
+            return `
+            <tr style="border-bottom: 1px solid #111; opacity: ${u.isBlocked ? '0.5' : '1'}; transition: 0.3s;">
+                <td style="padding: 15px; color: white; font-weight: bold;">${u.name}</td>
+                <td style="padding: 15px; color: #94a3b8; font-size: 13px;">${u.email}</td>
+                <td style="padding: 15px; text-align:center;">
+                    <span style="background: ${u.isVip ? '#a020f0' : '#334155'}; color: white; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight:bold;">
+                        ${u.isVip ? '💎 VIP' : 'Normal'}
+                    </span>
+                </td>
+                <td style="padding: 15px; text-align:center; white-space: nowrap;">
+                    <!-- 💎 VIP TOGGLE -->
+                    <button onclick="toggleVIP('${u._id}')" style="background:#a020f0; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:10px; font-weight:bold; margin-right:5px;">VIP</button>
+                    
+                    <!-- 🚫 BLOCK TOGGLE: Ek hi button se Block/Unblock -->
+                    <button onclick="toggleBlock('${u._id}')" style="background:${u.isBlocked ? '#00ff88' : '#fbbf24'}; color:black; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:10px; font-weight:bold; width: 75px;">
+                        ${u.isBlocked ? 'Unblock' : 'Block'}
+                    </button>
+                    
+                    <!-- 🗑️ DELETE USER -->
+                    <button onclick="deleteUser('${u._id}')" style="background:#f87171; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:10px; font-weight:bold; margin-left:5px;">DEL</button>
+                </td>
+                ${certIcon}
+            </tr>
+        `;
+        }).join('');
+    }
+
+    /* ============================================================
+       🛠️ ACTION HANDLERS: Buttons par click karne wala logic
+       ============================================================ */
+
+    // 🔄 1. VIP TOGGLE: Normal <-> VIP switch
+    async function toggleVIP(id) {
+        try {
+            const res = await fetch(window.window.API_BASE_URL + '/api/auth/update-vip/${id}', {
+                method: "PUT",
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            });
+            const data = await res.json();
+            if (data.success) fetchUsers(); // Success par list refresh karo
+        } catch (err) { console.error("VIP Toggle Error:", err); }
+    }
+
+    // 🚫 2. BLOCK TOGGLE: User ko rokna ya allow karna
+    async function toggleBlock(id) {
+        try {
+            const res = await fetch(window.window.API_BASE_URL + '/api/auth/block-user/${id}', {
+                method: "PUT",
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            });
+            const data = await res.json();
+            if (data.success) fetchUsers(); // Success par list refresh karo
+        } catch (err) { console.error("Block Toggle Error:", err); }
+    }
+
+    // 🗑️ 3. DELETE USER: User ko database se poori tarah udaana
+    async function deleteUser(id) {
+        if (!confirm("Bhai, pakka udaana hai? (Soche samjhe bina mat dabao!)")) return;
+        try {
+            const res = await fetch(window.window.API_BASE_URL + '/api/auth/delete-user/${id}', {
+                method: "DELETE",
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            });
+            const data = await res.json();
+            if (data.success) fetchUsers(); // Table refresh
+        } catch (err) { console.error("Delete Error:", err); }
+    }
+
+
+    /* ============================================================
+       📅 USER DATE FILTER: Registration date ke hisab se filter
+       ============================================================ */
+
+    // 🔍 1. FILTER BY DATE: MongoDB data se super fast filtering
+    function filterByDate(selectedDate) {
+        if (!selectedDate) return;
+
+        // 🎨 UI: 'Show All' button ko deactivate karo
+        const btn = document.getElementById('show-all-btn');
+        if (btn) {
+            btn.style.background = "transparent";
+            btn.style.color = "#64748b";
+            btn.style.borderColor = "#333";
+        }
+
+        // 🕵️ Data Filter Logic
+        const filtered = allUsers.filter(u => {
+            if (!u.createdAt) return false;
+            // ISO Date (YYYY-MM-DD) match karo
+            const userDate = new Date(u.createdAt).toISOString().split('T')[0];
+            return userDate === selectedDate;
+        });
+
+        renderTable(filtered); // Sirf filtered students dikhao
+
+        // UI Label Update
+        const label = document.getElementById('filter-label');
+        if (label) label.innerText = `Date: ${selectedDate}`;
+    }
+
+    // 🔄 2. RESET USER FILTER: Wapas saari list dikhao
+    function loadAllUsers() {
+        document.getElementById('date-picker').value = ''; // Calendar clear karo
+
+        // 🎨 UI: Button ko wapas Neon Green banao
+        const btn = document.getElementById('show-all-btn');
+        if (btn) {
+            btn.style.background = "#00ff88";
+            btn.style.color = "#000";
+            btn.style.borderColor = "#00ff88";
+        }
+
+        renderTable(allUsers); // Original global list load karo
+
+        const label = document.getElementById('filter-label');
+        if (label) label.innerText = `Showing: All Students`;
+    }
+
+    /* ============================================================
+       📊 SALES REPORT & DOWNLOAD: Business performance logic
+       ============================================================ */
+
+    // 📥 1. DOWNLOAD CSV: Sales report ko Excel format mein nikalna
+    function downloadSalesReport() {
+        const table = document.querySelector(".sales-container table");
+        if (!table) return alert("Bhai, pehle data load hone do!");
+
+        let csvRows = [];
+        const rows = table.querySelectorAll("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const rowData = [];
+            const cols = rows[i].querySelectorAll("td, th");
+
+            for (let j = 0; j < cols.length; j++) {
+                // 🛠️ Clean Data: Comma hatao aur Excel fix (Quotes) dalo
+                let data = cols[j].innerText.replace(/,/g, "").trim();
+                rowData.push(`"${data}"`);
+            }
+            csvRows.push(rowData.join(","));
+        }
+
+        // 🛡️ UTF-8 BOM FIX: Symbols (₹) ko Excel mein sahi dikhane ke liye
+        const BOM = "\uFEFF";
+        const csvString = BOM + csvRows.join("\n");
+
+        // 📁 File Download Logic
+        const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
+        const url = window.URL.createObjectURL(blob);
+        const date = new Date().toLocaleDateString('en-IN').replace(/\//g, "-");
+        const link = document.createElement("a");
+
+        link.setAttribute("href", url);
+        link.setAttribute("download", `BR30_Sales_Report_${date}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        console.log("✅ Sales Report Downloaded!");
+    }
+
+    /* ============================================================
+       📅 SALES DATE RANGE: Calendar filter for Business
+       ============================================================ */
+
+    // 🚀 1. APPLY RANGE: Do dates ke beech ka sales data
+    async function applyCalendarFilter() {
+        const start = document.getElementById("salesStartDate").value;
+        const end = document.getElementById("salesEndDate").value;
+
+        if (!start || !end) {
+            return alert("Bhai, 'Start' aur 'End' dono dates select karo!");
+        }
+        loadSalesData(start, end);
+    }
+
+    // 🔄 2. RESET SALES: Sales report ko reset karna
+    function resetSalesFilter() {
+        document.getElementById("salesStartDate").value = "";
+        document.getElementById("salesEndDate").value = "";
+        loadSalesData(); // 'All' data load hoga
+    }
+
+    // 📋 3. SALES DATA FETCHER: Revenue aur Table load karna
+    async function loadSalesData(startDate = '', endDate = '') {
+        const showAllBtn = document.getElementById("show-all-btn");
+        const applyBtn = document.getElementById("apply-btn");
+
+        // 🎨 UI Glow Logic: Buttons ka color switch karo
+        if (!startDate && !endDate) {
+            if (showAllBtn) { showAllBtn.style.background = "#00ff88"; showAllBtn.style.color = "black"; }
+        } else {
+            if (showAllBtn) { showAllBtn.style.background = "rgba(255,255,255,0.05)"; showAllBtn.style.color = "#94a3b8"; }
+            if (applyBtn) { applyBtn.style.background = "#00ff88"; applyBtn.style.color = "black"; }
+        }
+
+        try {
+            const url = window.API_BASE_URL + '/api/auth/sales-history?startDate=' + startDate + '&endDate=' + endDate;
+            const res = await fetch(url, {
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                // 💰 Revenue Update
+                document.getElementById("total-revenue").innerText = `₹${data.totalRevenue.toLocaleString('en-IN')}`;
+
+                // 🔥 BEST SELLER CALCULATION
+                const counts = {};
+                data.sales.forEach(sale => {
+                    const title = sale.courseName || (sale.course ? sale.course.title : null);
+                    if (title) counts[title] = (counts[title] || 0) + 1;
+                });
+                const bestSeller = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b, "No Sales");
+
+                if (document.getElementById("best-course-name")) {
+                    document.getElementById("best-course-name").innerText = bestSeller.toUpperCase();
+                }
+
+                // 📝 Render Sales Table
+                document.getElementById("sales-table-body").innerHTML = data.sales.map(sale => `
+            <tr style="border-bottom: 1px solid #111;">
+                <td style="padding: 15px; color: white;">${sale.user?.email || 'Unknown'}</td>
+                <td style="padding: 15px; color: #00ff88; font-weight: bold;">${sale.courseName || sale.course?.title}</td>
+                <td style="padding: 15px; color: white; font-weight: 800;">₹${sale.amount}</td>
+                <td style="padding: 15px; font-size: 11px; opacity: 0.7;">${new Date(sale.createdAt).toLocaleString('en-IN')}</td>
+            </tr>`).join('');
+            }
+        } catch (err) {
+            console.error("❌ Sales Data Error:", err);
+        }
+    }
+</script>
+<!-- ================= JS FILES ================= -->
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Axios (API call ke liye) -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+
+
+</body>
+
+</html>

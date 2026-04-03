@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register with OTP - BR30TRADER</title>
+
+    <!-- 1. Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- 2. CDNJS library (Font Awesome icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           GLOBAL & BACKGROUND STYLES
+        ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #050505;
+            /* Aapka Body Color */
+            padding: 20px;
+        }
+
+        /* =========================================
+           REGISTRATION CONTAINER (Responsive)
+        ========================================= */
+        .container {
+            width: 100%;
+            max-width: 380px;
+            background: #1e293b;
+            /* Dark Card Color */
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ffffff;
+            /* White Text */
+            font-weight: 600;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* Input Box Styling */
+        .input-box {
+            display: flex;
+            align-items: center;
+            background: #050505;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 5px 12px;
+            margin-bottom: 15px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .input-box:focus-within {
+            border-color: #a020f0;
+            /* Purple Focus */
+        }
+
+        .input-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            padding: 10px 5px;
+            font-size: 15px;
+        }
+
+        /* Toggle Password Button */
+        .toggle-btn {
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: 18px;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #a020f0;
+            /* Brand Purple */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #8219c4;
+            transform: translateY(-2px);
+        }
+
+        /* Footer Links */
+        .links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #a020f0;
+            /* Purple Link */
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Adjustment */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="register-heading">Register</h2>
+
+        <!-- SECTION 1: REGISTRATION (Wrapped in FORM for Password Saving) -->
+        <form id="register-section" onsubmit="handleRegister(event)">
+            <label>Full Name</label>
+            <div class="input-box">
+                <input id="username" name="username" placeholder="Only letters allowed" required
+                    oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')">
+            </div>
+
+            <label>Email Address</label>
+            <div class="input-box">
+                <input id="email" name="email" type="email" placeholder="example@mail.com" autocomplete="email"
+                    required>
+            </div>
+
+            <label>Password</label>
+            <div class="input-box">
+                <!-- autocomplete="new-password" se Google prompt trigger hota hai -->
+                <input id="password" name="password" type="password" placeholder="8+ chars, 1 Special (@#$%^&*)"
+                    autocomplete="new-password" required>
+                <span class="toggle-btn" id="toggleBtn" onclick="togglePassword()" style="cursor:pointer">👁️</span>
+            </div>
+
+            <button type="submit" id="regBtn">Send OTP</button>
+        </form>
+
+        <!-- SECTION 2: OTP VERIFICATION (Wrapped in FORM) -->
+        <form id="otp-section" style="display: none;" onsubmit="handleVerify(event)">
+            <p style="text-align: center; font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Verification code sent
+                to email.</p>
+            <label>Enter 6-Digit OTP</label>
+            <div class="input-box">
+                <input id="otpInput" type="number" placeholder="Ex: 123456" required>
+            </div>
+            <button type="submit" id="verifyBtn">Verify & Register</button>
+
+            <!-- Timer & Resend -->
+            <div style="text-align: center; margin-top: 15px;">
+                <p id="timerText" style="font-size: 12px; color: #94a3b8;">Resend in <span id="timer">30</span>s</p>
+                <button type="button" id="resendBtn" onclick="resendOTP()"
+                    style="display: none; background: none; color: #3b82f6; border: none; cursor: pointer; text-decoration: underline; font-size: 13px;">Resend
+                    OTP</button>
+            </div>
+        </form>
+
+        <div class="links">
+
+            <a href="login.html" onclick="window.location.href='login.html'; return false;"
+                style="cursor: pointer; display: inline-block; padding: 10px;">
+                Already have an account? Login
+            </a>
+        </div>
+    </div>
+
+      <script src="config.js"></script>
+    <script>
+        const API_URL = window.API_BASE_URL + '/api/auth';
+
+        function togglePassword() {
+            const pass = document.getElementById("password");
+            const btn = document.getElementById("toggleBtn");
+            pass.type = pass.type === "password" ? "text" : "password";
+            btn.textContent = pass.type === "password" ? "👁️" : "🙈";
+        }
+
+        function validateInput(name, email, pass) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
+            if (name.length < 3) return "Name too short!";
+            if (!emailRegex.test(email)) return "Invalid Email!";
+            if (!passRegex.test(pass)) return "Use 8+ chars with 1 Special Character!";
+            return null;
+        }
+
+        let timerInterval;
+        function startTimer() {
+            let timeLeft = 30;
+            const resendBtn = document.getElementById("resendBtn");
+            const timerText = document.getElementById("timerText");
+            const timerDisplay = document.getElementById("timer");
+
+            resendBtn.style.display = "none";
+            timerText.style.display = "block";
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    resendBtn.style.display = "block";
+                    timerText.style.display = "none";
+                } else {
+                    timerDisplay.innerText = timeLeft;
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Change: Added 'e' to handle form submit signal
+        async function handleRegister(e) {
+            if (e) e.preventDefault(); // Browser ko signal milega ki 'Submit' hua hai
+
+            regBtn.disabled = true;
+            regBtn.innerText = "Sending OTP... ⏳";
+
+            const name = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            const error = validateInput(name, email, password);
+            if (error) return alert(error);
+
+            try {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/register', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password }),
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert("OTP Sent!");
+                    document.getElementById("register-section").style.display = "none";
+                    document.getElementById("otp-section").style.display = "block";
+                    startTimer();
+                } else {
+                    alert(data.msg || "Registration Failed!");
+                }
+            } catch (err) { alert("Server Error!"); }
+        }
+
+
+        async function handleVerify(e) {
+            if (e) e.preventDefault(); // 1. Refresh roka
+
+            const verifyBtn = document.getElementById("verifyBtn");
+
+            // 2. Button ko turant freeze karo taaki double click na ho
+            verifyBtn.disabled = true;
+            verifyBtn.innerText = "Verifying... ⏳";
+
+            const otpInput = document.getElementById("otpInput"); // Check if ID matches HTML
+            const emailInput = document.getElementById("email");
+
+            const otp = otpInput ? otpInput.value.trim() : "";
+            const email = emailInput ? emailInput.value.trim() : "";
+
+            if (otp.length < 6) {
+                alert("Enter 6-digit OTP!");
+                verifyBtn.disabled = false;
+                verifyBtn.innerText = "Verify & Register";
+                return;
+            }
+
+            try {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/verify-otp', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, otp }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // ✅ SUCCESS: Sirf ek hara (Green) alert
+                    alert("✅ Account Verified Successfully!");
+                    // Redirect se pehle thoda sa 100ms ka gap taaki alert clear ho jaye
+                    setTimeout(() => {
+                        window.location.replace("login.html");
+                    }, 100);
+                } else {
+                    // ❌ ERROR: Galat OTP pe yahan aayega
+                    alert("❌ " + (data.msg || "Verification Failed!"));
+                    verifyBtn.disabled = false;
+                    verifyBtn.innerText = "Verify & Register";
+                }
+            } catch (err) {
+                // 🔥 Catch block ka alert: Sirf tab dikhao jab network fail ho
+                console.error("Fetch Error:", err);
+                alert("❌ Server Error! Please check your connection.");
+                verifyBtn.disabled = false;
+                verifyBtn.innerText = "Verify & Register";
+            }
+        }
+
+
+        // Resend logic helper
+        function resendOTP() {
+            handleRegister();
+        }
+
+        // Global Enter logic (Now triggers the active form's submit)
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const isOtpVisible = document.getElementById("otp-section").style.display === "block";
+                if (isOtpVisible) handleVerify();
+                else handleRegister();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

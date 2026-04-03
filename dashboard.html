@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard | User Panel</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ============================================================
+           GLOBAL STYLES (Dark Theme & Responsive)
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #050505;
+            /* Aapka Body Color */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ============================================================
+           DASHBOARD CARD (Mobile Friendly)
+           ============================================================ */
+        .dashboard-card {
+            background: #1e293b;
+            /* Card Color */
+            padding: 35px 25px;
+            border-radius: 24px;
+            border: 1px solid #334155;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Avatar Section */
+        .user-avatar {
+            font-size: 40px;
+            background: #050505;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #a020f0;
+            /* Aapka Purple Color */
+            box-shadow: 0 0 15px rgba(160, 32, 240, 0.2);
+        }
+
+        /* Typography */
+        h2#user {
+            color: #ffffff;
+            /* White Text */
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #94a3b8;
+            /* Muted text */
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* ============================================================
+           NAVIGATION & PURPLE BUTTONS
+           ============================================================ */
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s ease;
+            background: #050505;
+            color: white;
+            border: 1px solid #334155;
+        }
+
+        /* Purple Hover Effect */
+        .nav-btn:hover {
+            background: #a020f0;
+            /* Purple */
+            border-color: #a020f0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(160, 32, 240, 0.3);
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+            background: transparent;
+            color: #f87171;
+            /* Danger color */
+            border: 1px solid #f87171;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #f87171;
+            color: white;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .dashboard-card {
+                padding: 25px 20px;
+            }
+
+            h2#user {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-card" style="max-width: 450px;">
+        <div class="card-header">
+            <div class="user-avatar">👤</div>
+            <h2 id="user">Welcome Admin</h2>
+            <p>Control Center</p>
+        </div>
+
+        <!-- 📊 Stats Display -->
+        <div class="stats-container" style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <div style="background: #050505; padding: 10px; border-radius: 12px; flex: 1; border: 1px solid #334155;">
+                <p style="font-size: 10px; margin-bottom: 5px;">TOTAL</p>
+                <h3 id="total-count" style="color: white;">0</h3>
+            </div>
+            <div style="background: #050505; padding: 10px; border-radius: 12px; flex: 1; border: 1px solid #a020f0;">
+                <p style="font-size: 10px; margin-bottom: 5px; color: #a020f0;">VIP</p>
+                <h3 id="vip-count" style="color: white;">0</h3>
+            </div>
+            <div style="background: #050505; padding: 10px; border-radius: 12px; flex: 1; border: 1px solid #334155;">
+                <p style="font-size: 10px; margin-bottom: 5px;">NORMAL</p>
+                <h3 id="normal-count" style="color: white;">0</h3>
+            </div>
+        </div>
+
+        <!-- ✉️ Marketing & Coupon Management -->
+        <div
+            style="background: #0f172a; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #334155;">
+            <h4 style="color: #94a3b8; font-size: 12px; margin-bottom: 10px; text-align: left;"><i
+                    class="fas fa-bullhorn"></i> BULK MARKETING</h4>
+
+            <select id="mail-target" class="nav-btn" style="width: 100%; margin-bottom: 8px;">
+                <option value="all">Target: All Users</option>
+                <option value="vip">Target: VIP Only</option>
+                <option value="normal">Target: Normal Only</option>
+            </select>
+
+            <input type="text" id="mail-subject" placeholder="Offer Subject (e.g. 30% OFF)" class="nav-btn"
+                style="width: 100%; margin-bottom: 8px; text-align: left;">
+
+            <textarea id="mail-body" placeholder="Message... (HTML Allowed)" class="nav-btn"
+                style="width: 100%; height: 60px; text-align: left; resize: none; margin-bottom: 10px;"></textarea>
+
+            <button onclick="sendBulkMail()" id="send-btn" class="nav-btn"
+                style="background: #a020f0; width: 100%; border: none; font-weight: bold; cursor: pointer; margin-bottom: 12px;">
+                🚀 Send Blast Now
+            </button>
+
+            <!-- 🚫 Naya: Coupon Control Section -->
+            <div style="border-top: 1px solid #334155; padding-top: 12px;">
+                <button onclick="cancelActiveCoupon()" id="cancel-btn" class="nav-btn"
+                    style="background: transparent; border: 1.5px solid #f87171; color: #f87171; width: 100%; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                    🚫 Cancel Active Coupon
+                </button>
+                <p id="coupon-status" style="color: #94a3b8; font-size: 10px; margin-top: 8px; text-align: center;">
+                    (Stop current website discount instantly)
+                </p>
+            </div>
+        </div>
+
+        <!-- 🔗 Admin Navigation Buttons -->
+        <div class="nav-links">
+            <a href="admin.html" class="nav-btn"><i class="fas fa-users-cog"></i> Admin Panel</a>
+            <a href="admin2.html" class="nav-btn"
+                style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88;">
+                <i class="fas fa-users-cog"></i> User Management (Admin 2)
+            </a>
+            <a href="email.html" class="nav-btn"><i class="fas fa-envelope"></i> Admin Email</a>
+            <a href="admin-alerts.html" class="nav-btn"><i class="fas fa-bell"></i> Admin-alert</a>
+            <a href="courseedit.html" class="nav-btn"><i class="fas fa-edit"></i> Course Edit</a>
+            <a href="review.html" class="nav-btn"><i class="fas fa-star"></i> Review Management</a>
+            <a href="index.html" target="_blank" class="nav-btn" style="opacity: 0.8; border: 1px dashed #94a3b8;">
+
+                <i class="fas fa-external-link-alt"></i> Back to Home (New Tab)
+            </a>
+        </div>
+    </div>
+
+      <script src="config.js"></script>
+    <script>
+        // 0. 🛡️ Admin Security Check (Sirf aapke liye)
+        document.addEventListener("DOMContentLoaded", () => {
+            const role = localStorage.getItem("role");
+            const token = localStorage.getItem("token");
+            const username = localStorage.getItem("username") || "Admin";
+
+            if (!token || role !== "admin") {
+                alert("Bhai, ye sirf Admin ke liye hai!");
+                window.location.href = "login.html"; // Wapas bhej do agar admin nahi hai
+            } else {
+                document.getElementById("user").innerText = "Welcome, " + username;
+                loadStats(); // Agar admin hai toh stats load karo
+            }
+        });
+
+        // 1. 📊 Stats Load Karne Ka Logic
+        async function loadStats() {
+            try {
+                const token = localStorage.getItem("token"); // LocalStorage se token nikalo
+
+                if (!token) {
+                    console.error("Bhai, token hi nahi mila!");
+                    return;
+                }
+
+                const res = await fetch(window.API_BASE_URL + '/api/auth/user-stats', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}` // 🔥 'Bearer ' ke baad space zaruri hai
+                    }
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    document.getElementById("total-count").innerText = data.totalUsers;
+                    document.getElementById("vip-count").innerText = data.vipCount;
+                    document.getElementById("normal-count").innerText = data.normalCount;
+                } else {
+                    console.error("Server se error aaya:", data.msg);
+                }
+            } catch (e) {
+                console.error("Stats fetch karne mein locha:", e.message);
+            }
+        }
+
+
+        // 2. ✉️ Bulk Mail Bhejne Ka Logic (BCC Target System)
+        async function sendBulkMail() {
+            const btn = document.getElementById("send-btn");
+            const target = document.getElementById("mail-target").value;
+            const subject = document.getElementById("mail-subject").value;
+            const htmlContent = document.getElementById("mail-body").value;
+
+            if (!subject || !htmlContent) return alert("Bhai, Subject aur Message likhna zaroori hai!");
+
+            btn.innerText = "Mails Bheji Ja Rahi Hain...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/send-offers', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    // Backend controller ko target (all/vip/normal) bhej rahe hain
+                    body: JSON.stringify({ target, subject, htmlContent })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert("🚀 " + data.message);
+                    // Clear fields after success
+                    document.getElementById("mail-subject").value = "";
+                    document.getElementById("mail-body").value = "";
+                } else {
+                    alert("Galti: " + data.message);
+                }
+            } catch (err) {
+                alert("Server connection locha! Backend ON hai?");
+            } finally {
+                btn.innerText = "🚀 Send Blast Now";
+                btn.disabled = false;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+
+        async function cancelActiveCoupon() {
+            // 1. Confirm karo pehle
+            if (!confirm("Bhai, kya aap sach mein current discount offer ko band karna chahte ho?")) return;
+
+            const btn = document.getElementById("cancel-btn");
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/cancel-coupon', {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    alert("✅ " + data.msg);
+                    location.reload(); // Page refresh karo stats update karne ke liye
+                } else {
+                    alert("❌ Galti: " + data.msg);
+                }
+            } catch (err) {
+                alert("Server connection mein locha hai!");
+            } finally {
+                btn.innerText = "🚫 Cancel Current Coupon";
+                btn.disabled = false;
+            }
+        }
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const username = localStorage.getItem("username") || "Guest";
+            const userDisplay = document.getElementById("user");
+            userDisplay.innerText = "Welcome, " + username;
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password - BR30TRADER</title>
+
+    <!-- 1. Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- 2. CDNJS library (Font Awesome icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           GLOBAL & BODY STYLES (Dark Theme)
+        ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #050505;
+            /* Aapka Body Color */
+            padding: 20px;
+        }
+
+        /* =========================================
+           CONTAINER (Responsive & Dark)
+        ========================================= */
+        .container {
+            width: 100%;
+            max-width: 360px;
+            background: #1e293b;
+            /* Card Background */
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        h2 {
+            color: #ffffff;
+            /* White Text */
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Input Styling */
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            background: #050505;
+            /* Input background matches body */
+            color: white;
+            outline: none;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #a020f0;
+            /* Purple Focus */
+            box-shadow: 0 0 8px rgba(160, 32, 240, 0.2);
+        }
+
+        /* Purple Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #a020f0;
+            /* Brand Purple */
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background: #8219c4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(160, 32, 240, 0.3);
+        }
+
+        /* Footer Link */
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #a020f0;
+            /* Purple Link */
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Adjustment */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="login-heading">Reset Password</h2>
+
+        <!-- Browser signal ke liye FORM tag zaroori hai -->
+        <form id="resetForm" onsubmit="resetPassword(event)">
+
+            <label>Registered Email</label>
+            <div class="input-box">
+                <!-- name="email" aur autocomplete="username" Google ko hint deta hai -->
+                <input id="email" name="email" type="email" placeholder="example@mail.com" autocomplete="username"
+                    required>
+            </div>
+
+            <label>Reset OTP/Token</label>
+            <div class="input-box">
+                <input id="token" name="token" type="text" placeholder="Enter 6-digit OTP" required>
+            </div>
+
+            <label>New Password</label>
+            <div class="input-box">
+                <!-- autocomplete="new-password" se 'Save/Update Password' ka prompt aata hai -->
+                <input id="newPassword" name="password" type="password" placeholder="8+ chars, 1 Special"
+                    autocomplete="new-password" required>
+            </div>
+
+            <!-- Button type submit hona chahiye -->
+            <button type="submit" id="resetBtn">Update Password</button>
+        </form>
+
+        <div class="links">
+            <a href="login.html">Back to Login</a>
+        </div>
+    </div>
+
+      <script src="config.js"></script>
+    <script>
+        // event parameter add kiya taaki refresh roke aur browser signal capture kare
+        async function resetPassword(event) {
+            if (event) event.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const token = document.getElementById("token").value.trim();
+            const newPassword = document.getElementById("newPassword").value;
+            const btn = document.getElementById("resetBtn");
+
+            // Basic Validation
+            if (!email || !token || !newPassword) {
+                alert("Bhai, please enter all details!");
+                return;
+            }
+
+            // Strength Check
+            const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+            if (!passRegex.test(newPassword)) {
+                return alert("Password weak hai! Use 8+ chars & Special Character.");
+            }
+
+            btn.innerText = "Updating...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/reset-password', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, token, newPassword }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert("Password updated successfully! 🚀");
+                    // 1 second ka gap taaki browser password save karne ka popup dikha sake
+                    setTimeout(() => {
+                        window.location.href = "login.html";
+                    }, 1000);
+                } else {
+                    alert(data.msg || data.message || "Invalid OTP or Email!");
+                    btn.innerText = "Update Password";
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                alert("Server Connection Error!");
+                btn.innerText = "Update Password";
+                btn.disabled = false;
+            }
+        }
+
+        // Enter key support
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('resetBtn').click();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
