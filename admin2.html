@@ -110,8 +110,8 @@
         }
 
 
-   /* 🎨 CENTRALIZED STYLE */
-    
+        /* 🎨 CENTRALIZED STYLE */
+
         /* Modern Scrollbar Styling */
         ::-webkit-scrollbar {
             width: 6px;
@@ -379,7 +379,7 @@
 
 </body>
 
-  <script src="config.js"></script>
+<script src="config.js"></script>
 <script>
     /* ============================================================
        📦 GLOBAL STATE: Data ko store karne ke liye variables
@@ -428,13 +428,12 @@
             // 🏆 CERTIFICATE LOGIC: Agar file hai toh VIEW button, nahi toh PENDING
             const certIcon = u.certificateFile ?
                 `<td style="padding: 15px; text-align: center;">
-                <a href="window.API_BASE_URL + '/certificates/${u.certificateFile}" target="_blank" style="color:#00ff88; text-decoration:none; display:inline-flex; flex-direction:column; align-items:center;">
+                <a href="${window.API_BASE_URL}/certificates/${u.certificateFile}" target="_blank" style="color:#00ff88; text-decoration:none; display:inline-flex; flex-direction:column; align-items:center;">
                     <i class="fas fa-file-pdf" style="font-size:18px;"></i>
                     <span style="font-size:9px; font-weight:bold;">VIEW</span>
                 </a>
             </td>` :
                 `<td style="padding: 15px; text-align: center; color:#334155; font-size:10px; font-weight:bold;">PENDING</td>`;
-
             // 🛡️ ROW STRUCTURE: Individual User Row with Action Buttons
             return `
             <tr style="border-bottom: 1px solid #111; opacity: ${u.isBlocked ? '0.5' : '1'}; transition: 0.3s;">
@@ -470,7 +469,7 @@
     // 🔄 1. VIP TOGGLE: Normal <-> VIP switch
     async function toggleVIP(id) {
         try {
-            const res = await fetch(`${window.API_BASE_URL}/api/auth/update-vip/${id}`,  {
+            const res = await fetch(`${window.API_BASE_URL}/api/auth/update-vip/${id}`, {
                 method: "PUT",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });
@@ -482,7 +481,7 @@
     // 🚫 2. BLOCK TOGGLE: User ko rokna ya allow karna
     async function toggleBlock(id) {
         try {
-         const res = await fetch(`${window.API_BASE_URL}/api/auth/block-user/${id}`, {
+            const res = await fetch(`${window.API_BASE_URL}/api/auth/block-user/${id}`, {
                 method: "PUT",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });
@@ -495,7 +494,7 @@
     async function deleteUser(id) {
         if (!confirm("Bhai, pakka udaana hai? (Soche samjhe bina mat dabao!)")) return;
         try {
-           const res = await fetch(`${window.API_BASE_URL}/api/auth/delete-user/${id}`, {
+            const res = await fetch(`${window.API_BASE_URL}/api/auth/delete-user/${id}`, {
                 method: "DELETE",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });
