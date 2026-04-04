@@ -174,28 +174,30 @@
 </head>
 
 <body>
-    <div class="profile-card">
-        <!-- User Avatar Section -->
-        <div class="photo-container">
-            <img id="profilePic" src="" class="profile-pic" alt="Profile"
-                onclick="document.getElementById('fileInput').click();" style="cursor: pointer;">
-            <label for="fileInput" class="upload-label">📷</label>
-            <input type="file" id="fileInput" style="display: none;" accept="image/*">
-        </div>
+    <!-- ✅ Ye wala update kar lo (Sirf crossorigin add kiya hai) -->
+    <div class="photo-container">
+        <img id="profilePic" src="" class="profile-pic" alt="Profile"
+            onclick="document.getElementById('fileInput').click();" style="cursor: pointer;" crossorigin="anonymous">
+        <!-- 👈 Ye line sabse zaroori hai -->
 
-        <h2 id="userName">Loading...</h2>
-        <p id="userEmail">Loading...</p>
+        <label for="fileInput" class="upload-label">📷</label>
+        <input type="file" id="fileInput" style="display: none;" accept="image/*">
+    </div>
 
-        <div class="edit-box">
-            <input type="text" id="editName" placeholder="Enter New Name" style="display:none;">
-        </div>
 
-        <div class="buttons">
-            <button id="editBtn">Edit Profile</button>
-            <button id="saveBtn" style="display:none;">Save Changes</button>
-            <button id="logoutBtn" onclick="logout()">Logout</button>
-            <a href="index.html" class="back-home">Back to Home</a>
-        </div>
+    <h2 id="userName">Loading...</h2>
+    <p id="userEmail">Loading...</p>
+
+    <div class="edit-box">
+        <input type="text" id="editName" placeholder="Enter New Name" style="display:none;">
+    </div>
+
+    <div class="buttons">
+        <button id="editBtn">Edit Profile</button>
+        <button id="saveBtn" style="display:none;">Save Changes</button>
+        <button id="logoutBtn" onclick="logout()">Logout</button>
+        <a href="index.html" class="back-home">Back to Home</a>
+    </div>
     </div>
 
     <script src="config.js"></script>
@@ -252,7 +254,7 @@
 
 
         // 2. PHOTO UPLOAD LOGIC
-            document.getElementById('fileInput').addEventListener('change', async function () {
+        document.getElementById('fileInput').addEventListener('change', async function () {
             const file = this.files[0];
             if (!file) return;
 
@@ -288,9 +290,9 @@
                 } else {
                     alert(data.msg || "Upload failed!");
                 }
-            } catch (err) { 
+            } catch (err) {
                 console.error(err);
-                alert("Server connection error!"); 
+                alert("Server connection error!");
             }
         });
 
