@@ -1364,17 +1364,22 @@ async function syncLatestPrices() {
       if (card) {
         console.log(`Updating Course: ${course.title}`);
 
-        // ✅ STEP 2: THUMBNAIL UPDATE
+        // ✅ STEP 2: THUMBNAIL UPDATE (Double Path Fix)
         const imgTag = card.querySelector(".course-img");
         if (imgTag && course.thumbnail) {
+
+          // 🛠️ Agar database se '/uploads/' pehle se aa raha hai, toh use hata do
+          const cleanThumbnail = course.thumbnail.replace('/uploads/', '');
+
           const fullPath = course.thumbnail.startsWith("http")
             ? course.thumbnail
-            : UPLOADS_URL + course.thumbnail;
+            : `${window.API_BASE_URL}/uploads/${cleanThumbnail}`;
 
-          console.log("Asli Image Link:", fullPath);
+          console.log("Asli Image Link:", fullPath); // Ab ye single /uploads/ dikhayega
           imgTag.src = `${fullPath}?t=${new Date().getTime()}`;
           console.log(`🖼️ Thumbnail Updated for: ${course.title}`);
         }
+
 
         // ✅ STEP 3: PRICE UPDATE
         const priceTag = card.querySelector("p.price");
