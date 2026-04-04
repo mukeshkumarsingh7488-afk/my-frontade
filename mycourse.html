@@ -184,7 +184,7 @@
     <div id="courseContent">
         <!-- JS injection happens here -->
     </div>
-  <script src="config.js"></script>
+    <script src="config.js"></script>
     <script>
         const courseDiv = document.getElementById("courseContent");
         const token = localStorage.getItem("token");
@@ -231,15 +231,17 @@
                 let html = `<h2>Welcome Back!</h2><p style="color:#94a3b8; margin-bottom:20px;">Your purchased courses:</p>`;
 
                 courses.forEach(course => {
-                    const thumbUrl = window.API_BASE_URL + '/' + course.thumbnail;
+                    const thumbUrl = (window.API_BASE_URL + '/' + course.thumbnail)
+                        .replace(/([^:]\/)\/+/g, "$1"); // 👈 double slash remove
+
                     html += `
-                        <div class="course-card">
-                            <img src="${thumbUrl}" alt="${course.title}">
-                            <h3>${course.title}</h3>
-                            <p>${course.description}</p>
-                            <button onclick="watchCourse('${course._id}')">Watch Now</button>
-                        </div>
-                    `;
+        <div class="course-card">
+            <img src="${thumbUrl}" alt="${course.title}">
+            <h3>${course.title}</h3>
+            <p>${course.description}</p>
+            <button onclick="watchCourse('${course._id}')">Watch Now</button>
+        </div>
+    `;
                 });
                 courseDiv.innerHTML = html;
 
@@ -253,7 +255,7 @@
             window.location.href = `watch.html?id=${courseId}`;
         }
     </script>
-  
+
 </body>
 
 </html>
