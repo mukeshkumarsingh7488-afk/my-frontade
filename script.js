@@ -216,7 +216,7 @@ async function loadTopReviews() {
     displayArea.innerHTML = reviews.map((r) => {
       // 1. Path nikaalo (Check multiple fields for safety)
       const userName = (r.userId && r.userId.name) || r.username || "User";
-     let rawPath = (r.userId && r.userId.profilePic) || r.profilePic || "";
+      let rawPath = (r.userId && r.userId.profilePic) || r.profilePic || "";
       let profileImg;
 
       // 2. CHECK LOGIC (Modern & Simple)
@@ -1061,18 +1061,15 @@ async function loadLatestPrice() {
     const res = await fetch(window.API_BASE_URL + '/api/courses');
     const courses = await res.json();
 
-    // Maan lo pehla course (Option Selling) aapka main course hai
     const course = courses[0] || courses;
 
     if (course) {
-      // ✅ Home Page par Price update karo (Agar element hai toh)
       const priceElement = document.getElementById("course-price");
       if (priceElement) {
         priceElement.innerText = `₹${course.price}`;
         console.log("✅ Price Updated from DB: ₹", course.price);
       }
 
-      // ✅ Sabhi buttons par dynamic ID set karo taaki sahi course khule
       document.querySelectorAll(".payBtn").forEach((btn) => {
         btn.setAttribute("data-id", course._id);
         btn.dataset.id = course._id;
@@ -1083,18 +1080,43 @@ async function loadLatestPrice() {
   }
 }
 
-// 2. 💳 MAIN CHECKOUT FUNCTION (With Sales Hunter & Mail Logic)
+// 🔥 WhatsApp Retry Function (NEW ADD)
+async function retryWhatsApp(courseId) {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const message = `Hi BR30 Team, mera payment fail ho gaya hai.
+
+Name: ${user?.name || "N/A"}
+Email: ${user?.email || "N/A"}
+Course ID: ${courseId}
+
+Please help me retry.`;
+
+    const url = `https://wa.me/917488802267?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+  } catch (err) {
+    console.error("WhatsApp Error:", err);
+  }
+}
+
+// 2. 💳 MAIN CHECKOUT FUNCTION
 const checkout = async function (courseId) {
   console.log("🚀 Checkout Started for ID:", courseId);
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("Bhai, pehle Login toh karo! ✋");
-    window.location.href = "login.html";
+    Swal.fire({
+      icon: "warning",
+      title: "Login Required",
+      text: "Bhai, pehle login karo!",
+    }).then(() => {
+      window.location.href = "login.html";
+    });
     return;
   }
 
-  // 🔥 STATUS ALERT: User ne Click kiya, Window band ki, ya Fail hua (Sabka Mail jayega)
   const sendStatusAlert = async (status, reason) => {
     try {
       await fetch(window.API_BASE_URL + '/api/payment/payment-failed', {
@@ -1115,14 +1137,12 @@ const checkout = async function (courseId) {
     }
   };
 
-  // 🎯 STEP 1: Click hote hi "INTERESTED" alert bhej do (Paisa khulne se pehle)
   sendStatusAlert(
     "INTERESTED",
     "User ne Buy Now dabaya hai (Checkout Screen Opened).",
   );
 
   try {
-    // 🌐 Backend ko sirf ID bhejo, wo DB se naya Price uthayega (100% Dynamic)
     const res = await fetch(window.API_BASE_URL + '/api/payment/order', {
       method: "POST",
       headers: {
@@ -1137,13 +1157,13 @@ const checkout = async function (courseId) {
 
     const options = {
       key: "rzp_test_SMoo8eTbcEjuw",
-      amount: data.order.amount, // ✅ Backend se aane wala Dynamic Price
+      amount: data.order.amount,
       currency: "INR",
       name: "BR30TRADER ACADEMY",
       description: "VIP Enrollment 🏆",
       order_id: data.order.id,
+
       handler: async function (response) {
-        // ✅ SUCCESS VERIFICATION
         const verifyRes = await fetch(
           window.API_BASE_URL + '/api/payment/verify',
           {
@@ -1162,36 +1182,75 @@ const checkout = async function (courseId) {
         );
 
         if (verifyRes.ok) {
-          alert("Congratulations! 🎊 Course Unlock ho gaya.");
-          window.location.href = "mycourse.html";
+          Swal.fire({
+            icon: "success",
+            title: "Payment Successful 🎉",
+            text: "Course Unlock ho gaya!",
+          }).then(() => {
+            window.location.href = "mycourse.html";
+          });
+        } else {
+          sendStatusAlert("FAILED", "Payment verify failed");
+
+          Swal.fire({
+            icon: "error",
+            title: "Verification Failed",
+            text: "Retry via WhatsApp support",
+            confirmButtonText: "Retry on WhatsApp",
+          }).then(() => {
+            retryWhatsApp(courseId);
+          });
         }
       },
+
       modal: {
         ondismiss: function () {
-          // 📧 User ne checkout band kiya (Abandoned) - Iska mail jayega
           sendStatusAlert(
             "ABANDONED",
-            "User ne payment window खुद band kar di (No completion).",
+            "User ne payment window band kar di (No completion).",
           );
+
+          Swal.fire({
+            icon: "warning",
+            title: "Payment Cancelled",
+            text: "Retry via WhatsApp support",
+            confirmButtonText: "Retry on WhatsApp",
+          }).then(() => {
+            retryWhatsApp(courseId);
+          });
         },
       },
-      theme: { color: "#00ff88" }, // ✨ Elite Neon Green Theme
+
+      theme: { color: "#00ff88" },
     };
 
     const rzp = new Razorpay(options);
 
-    // ❌ REAL BANK FAILURE: (Iska mail bhi jayega)
     rzp.on("payment.failed", function (response) {
       sendStatusAlert(
         "FAILED",
         `Actual Bank Failure: ${response.error.description}`,
       );
+
+      Swal.fire({
+        icon: "error",
+        title: "Payment Failed",
+        text: response.error.description,
+        confirmButtonText: "Retry on WhatsApp",
+      }).then(() => {
+        retryWhatsApp(courseId);
+      });
     });
 
     rzp.open();
   } catch (err) {
     console.error("Error Detail:", err);
-    alert("Error: " + err.message);
+
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: err.message,
+    });
   }
 };
 
@@ -1646,6 +1705,28 @@ async function syncAdminData() {
     });
   } catch (err) {
     console.error("❌ Sync Logic Fail:", err);
+  }
+}
+
+// WhaatsApp Link Retry Logic (Agar pehle fail hua tha toh)
+// 🔥 FUTURE FEATURE: Dynamic WhatsApp Link (Currently not in use)
+async function retryWhatsApp() {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const response = await axios.post("/api/whatsapp-link", {
+      name: user.name,
+      email: user.email,
+      course: "Trading Course"
+    });
+
+    const url = response.data.url;
+
+    window.open(url, "_blank");
+
+  } catch (error) {
+    console.error("WhatsApp error:", error);
+    alert("Something went wrong");
   }
 }
 //#endregion
