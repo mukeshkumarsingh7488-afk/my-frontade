@@ -254,7 +254,7 @@
             const token = localStorage.getItem('token');
 
             try {
-                const res = await fetch(window.API_BASE_URL + '/update-profile', {
+                const res = await fetch(window.API_BASE_URL + '/api/auth/update-profile', {
                     method: 'PUT',
                     headers: { 'x-auth-token': token },
                     body: formData
