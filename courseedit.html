@@ -139,7 +139,7 @@
             <p style="text-align: center; color: #a020f0; width: 100%;">🔄 Syncing with BR30 Database...</p>
         </div>
     </div>
-      <script src="config.js"></script>
+    <script src="config.js"></script>
     <script>
         /* ========================================================================
            🚀 PRO LEVEL ADMIN DASHBOARD: Full Sync with Pro Comments
@@ -175,7 +175,11 @@
 
                     // 🎯 Thumbnail Logic: Database se 'thumbnail' uthao, BASE_URL jodo aur Timestamp lagao taaki turant update ho
                     const displayImage = c.thumbnail
-                        ? (c.thumbnail.startsWith('http') ? c.thumbnail : `${BASE_URL}${c.thumbnail}`) + `?t=${new Date().getTime()}`
+                        ? (
+                            c.thumbnail.startsWith('http')
+                                ? c.thumbnail
+                                : (BASE_URL + '/' + c.thumbnail).replace(/([^:]\/)\/+/g, "$1")
+                        ) + `?t=${Date.now()}`
                         : 'images/BR30TRADER.png';
 
                     // HTML Structure: ID Tag, Image, Title, Price aur Buttons
