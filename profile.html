@@ -230,24 +230,25 @@
                 document.getElementById('userEmail').innerText = email;
                 document.getElementById('editName').value = name;
 
-                // ✅ 🏆 PROFILE IMAGE FIX (Brackets Fixed)
+                // ✅ NEW CLOUDINARY LOGIC (REPLACE OLD ONE)
                 const picElement = document.getElementById('profilePic');
 
-                if (profilePic && typeof profilePic === 'string' && profilePic.length > 5) {
-                    const fileName = profilePic.split(/[\\/]/).pop();
+                // Agar profilePic ek valid URL hai (http se start ho raha hai)
+                if (profilePic && typeof profilePic === 'string' && profilePic.startsWith('http')) {
 
-                    const imageUrl = `${window.API_BASE_URL}/uploads/${fileName}?t=${Date.now()}`;
-                    console.log("IMAGE URL:", imageUrl); // DEBUG
+                    // Cloudinary ka direct URL use karein
+                    picElement.src = profilePic;
 
-                    picElement.src = imageUrl;
-
+                    // Agar kisi wajah se image load na ho (Broken link)
                     picElement.onerror = () => {
                         picElement.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=a020f0&color=fff&size=128&bold=true`;
                     };
 
                 } else {
+                    // Agar photo database mein nahi hai
                     picElement.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=a020f0&color=fff&size=128&bold=true`;
                 }
+
 
             } catch (err) {
                 console.error("Profile Load Error:", err);
@@ -258,48 +259,69 @@
 
 
         // 2. PHOTO UPLOAD LOGIC
-        document.getElementById('fileInput').addEventListener('change', async function () {
-            const file = this.files[0];
-            if (!file) return;
+     document.getElementById('fileInput').addEventListener('change', async function () {
+    const file = this.files[0];
+    if (!file) {
+        console.warn("⚠️ No file selected!");
+        return;
+    }
 
-            const formData = new FormData();
-            formData.append('profilePic', file);
+    console.log("📂 File Selected:", file.name, "| Size:", (file.size / 1024).toFixed(2), "KB");
 
-            const token = localStorage.getItem('token');
+    const formData = new FormData();
+    // 🚨 DHAYAN DEIN: Backend me upload.single('profilePic') hona chahiye
+    formData.append('profilePic', file); 
 
-            try {
-                const res = await fetch(window.API_BASE_URL + '/api/auth/update-profile', {
-                    method: 'PUT',
-                    headers: { 'x-auth-token': token }, // Backend agar x-auth-token check kar raha hai toh theek hai
-                    body: formData
-                });
+    const token = localStorage.getItem('token');
+    console.log("🔑 Auth Token Found:", token ? "Yes" : "No");
 
-                const data = await res.json();
-                if (res.ok) {
-                    // 1. Nayi Photo ka Clean Path nikalo
-                    const updatedUser = data.user || data;
-                    const newPic = updatedUser.profilePic;
-                    const fileName = newPic.split(/[\\/]/).pop();
-
-                    // 2. UI Update karo (Backticks aur Clean URL ke saath)
-                    document.getElementById('profilePic').src = `${window.API_BASE_URL}/uploads/${fileName}?t=${Date.now()}`;
-
-                    // 3. 🚨 SABSE ZAROORI: LocalStorage update karo warna refresh pe purana dikhega
-                    const existingData = JSON.parse(localStorage.getItem('userData')) || {};
-                    const newData = { ...existingData, profilePic: newPic };
-                    localStorage.setItem('userData', JSON.stringify(newData));
-
-                    alert("Photo Updated! 🚀");
-                    location.reload(); // Refresh zaroori hai taaki poora page sync ho jaye
-                } else {
-                    alert(data.msg || "Upload failed!");
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Server connection error!");
-            }
+    try {
+        console.log("🚀 Uploading to:", window.API_BASE_URL + '/api/auth/update-profile');
+        
+        const res = await fetch(window.API_BASE_URL + '/api/auth/update-profile', {
+            method: 'PUT',
+            headers: { 
+                'x-auth-token': token 
+                // Note: 'Content-Type' yahan manually mat likhna, browser auto-set karega
+            },
+            body: formData
         });
 
+        const data = await res.json();
+        console.log("📥 Server Response:", data);
+
+        if (res.ok) {
+            // Cloudinary ka pura URL extract karein
+            const updatedUser = data.user || data;
+            const newPicUrl = updatedUser.profilePic;
+
+            console.log("✅ Upload Success! New Cloudinary URL:", newPicUrl);
+
+            // 1. UI Update (Direct URL use karein)
+            const picElement = document.getElementById('profilePic');
+            picElement.src = newPicUrl;
+            console.log("🖼️ UI Image Source Updated.");
+
+            // 2. LocalStorage Sync
+            let userData = JSON.parse(localStorage.getItem('userData')) || {};
+            userData.profilePic = newPicUrl;
+            localStorage.setItem('userData', JSON.stringify(userData));
+            console.log("💾 LocalStorage Updated with new image URL.");
+
+            alert("Profile Photo Updated! 🚀");
+            
+            // Optional: Reload agar baki UI components refresh karne hain
+            // location.reload(); 
+
+        } else {
+            console.error("❌ Upload Failed:", data.msg || "Unknown Error");
+            alert(data.msg || "Upload failed!");
+        }
+    } catch (err) {
+        console.error("🚨 Critical Error during upload:", err);
+        alert("Server connection error! Check console for details.");
+    }
+});
 
         // 3. EDIT UI TOGGLE
         document.getElementById('editBtn').addEventListener('click', () => {
@@ -319,38 +341,54 @@
         });
 
         // 4. NAME SAVE LOGIC
-        document.getElementById('saveBtn').addEventListener('click', async () => {
-            const newName = document.getElementById('editName').value.trim();
-            const token = localStorage.getItem('token');
+  document.getElementById('saveBtn').addEventListener('click', async () => {
+    const newName = document.getElementById('editName').value.trim();
+    const token = localStorage.getItem('token');
 
-            if (!newName) return alert("Name cannot be empty!");
+    if (!newName) return alert("Name cannot be empty!");
 
-            try {
-                const res = await fetch(window.API_BASE_URL + '/api/auth/update-profile', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // 'Authorization' header use karo kyunki middleware wahi check kar raha hai
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({ name: newName })
-                });
+    console.log("📝 Updating Name to:", newName);
 
-                const data = await res.json();
-                if (res.ok) {
-                    document.getElementById('userName').innerText = data.name || newName;
-                    // UI Reset
-                    document.getElementById('userName').style.display = 'block';
-                    document.getElementById('editName').style.display = 'none';
-                    document.getElementById('editBtn').style.display = 'inline-block';
-                    document.getElementById('saveBtn').style.display = 'none';
-                    alert("Name Updated! ✅");
-                } else {
-                    alert("Update failed!");
-                }
-            } catch (err) { console.error("Update Error:", err); }
+    try {
+        const res = await fetch(window.API_BASE_URL + '/api/auth/update-profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // 🚨 DHAYAN DEIN: Is header ko apne profile pic wale header se match karein
+                'x-auth-token': token 
+            },
+            body: JSON.stringify({ name: newName })
         });
 
+        const data = await res.json();
+        console.log("📥 Name Update Response:", data);
+
+        if (res.ok) {
+            const finalName = data.name || (data.user && data.user.name) || newName;
+            document.getElementById('userName').innerText = finalName;
+            
+            // UI Reset logic
+            document.getElementById('userName').style.display = 'block';
+            document.getElementById('editName').style.display = 'none';
+            document.getElementById('editBtn').style.display = 'inline-block';
+            document.getElementById('saveBtn').style.display = 'none';
+
+            // LocalStorage update (Professional Practice)
+            let userData = JSON.parse(localStorage.getItem('userData')) || {};
+            userData.name = finalName;
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            console.log("✅ Name Updated Successfully.");
+            alert("Name Updated! ✅");
+        } else {
+            console.error("❌ Name Update Failed:", data.msg);
+            alert(data.msg || "Update failed!");
+        }
+    } catch (err) { 
+        console.error("🚨 Critical Name Update Error:", err); 
+        alert("Server error while updating name.");
+    }
+});
         function logout() {
             if (confirm(" Conform Logout ?")) {
                 localStorage.clear();
