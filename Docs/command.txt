@@ -10,6 +10,14 @@ Ctrl + Shift + P    Developer: Reload Window
 
 
 frondate push to github   
+# 1. Check current status
+git status
+
+# 2. Stage all changes
 git add .
-git commit -m "fix: renamed folder and files for clean URLs"
+
+# 3. Commit with message
+git commit -m "*"
+
+# 4. Push to main branch (ya master, jaisa repo me hai)
 git push origin main
