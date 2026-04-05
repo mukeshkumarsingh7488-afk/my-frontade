@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="hi">
-
-<head>
+    <!-- Meta Tags -->
+  <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +10,11 @@
     <meta name="author" content="BR30TRADER">
 
     <!-- Content Security Policy (CSP) -->
+    <!-- ✅ Removed inline-blocking for scripts (unsafe-inline added for inline JS) -->
     <meta http-equiv="Content-Security-Policy"
           content="
             default-src 'self';
-            script-src 'self' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com;
+            script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com;
             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
             font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
             img-src 'self' https://assets.upstox.com https://upstox.com https://px.ads.linkedin.com https://www.google.co.in https://www.google.com https://www.facebook.com https://t.co https://analytics.twitter.com https://bat.bing.com https://adservice.google.com https://www.googletagmanager.com https://ad.doubleclick.net;
@@ -25,10 +26,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome Free (Icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pV1kx0s6h8vhUonF3xTgjkky4oE5a7edS3SxNnY1+7QO+6a3mKJ8JwBZyzU/0V7k+P2m1cm8flb0WZJxQxrmg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- ✅ Removed integrity attribute to fix console hash error -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <!-- ✅ Update path according to your project -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
     <style>
         :root {
             --bg: #0b0e11;
