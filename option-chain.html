@@ -1,139 +1,162 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Option Chain & Greeks - BR30TRADER</title>
-    
-    <!-- Professional Fonts & Icons -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Option Chain - BR30TRADER</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0b0e11; --card: #1e2329; --border: #2b3139; --text: #eaecef;
+    --call: #02c076; --put: #f84960; --strike: #f0b90b; --scrollbar: #2b3139;
+}
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    margin:0; padding:20px;
+}
+.header-strip {
+    display:flex; justify-content:space-between; align-items:center;
+    background: var(--card); padding:10px 20px; border-radius:8px;
+    border:1px solid var(--border); margin-bottom:10px;
+}
+.spot-box { font-size:20px; font-weight:bold; color:var(--strike); font-family:'Roboto Mono', monospace; }
+select { background:#2b3139; color:white; border:1px solid var(--border); padding:6px 12px; border-radius:4px; cursor:pointer; }
+.expiry-buttons { margin-left:20px; display:flex; gap:8px; }
+.expiry-buttons button {
+    background:#2b3139; color:white; border:1px solid var(--border);
+    padding:5px 10px; border-radius:4px; cursor:pointer; font-size:13px;
+}
+.expiry-buttons button.active { background:var(--strike); color:#0b0e11; }
 
-    <style>
-        :root { --bg: #0b0e11; --card: #1e2329; --border: #2b3139; --text: #eaecef; --call: #02c076; --put: #f84960; --strike: #f0b90b; }
-        body { background: var(--bg); color: var(--text); font-family: 'Roboto', sans-serif; margin: 0; padding: 20px; }
-        
-        .header-strip { display: flex; justify-content: space-between; align-items: center; background: var(--card); padding: 15px 25px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); }
-        .spot-box { font-size: 20px; font-weight: bold; color: var(--strike); font-family: 'Roboto Mono', monospace; }
-        
-        select { background: #2b3139; color: white; border: 1px solid var(--border); padding: 8px 15px; border-radius: 4px; outline: none; cursor: pointer; }
+.oc-container { overflow:auto; border:1px solid var(--border); border-radius:8px; background:var(--card); max-height:70vh; }
+table { width:1200px; border-collapse:collapse; }
+th, td { padding:8px 10px; text-align:center; font-family:'Roboto Mono', monospace; font-size:13px; border-bottom:1px solid var(--border); }
+th { position:sticky; top:0; background:#161a1e; border-bottom:2px solid var(--border); z-index:10; }
+.strike-price { background:#161a1e; font-weight:bold; color:var(--strike); border-left:2px solid var(--strike); border-right:2px solid var(--strike); position:sticky; left:0; z-index:9; }
+.call-ltp { color:var(--call); }
+.put-ltp { color:var(--put); }
+.itm-call { background: rgba(2,192,118,0.08); }
+.itm-put { background: rgba(248,73,96,0.08); }
 
-        .oc-container { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--card); }
-        table { width: 100%; border-collapse: collapse; min-width: 1000px; }
-        th { position: sticky; top: 0; background: #161a1e; padding: 12px; font-size: 12px; border-bottom: 2px solid var(--border); z-index: 10; }
-        td { padding: 10px; border-bottom: 1px solid var(--border); text-align: center; font-family: 'Roboto Mono', monospace; font-size: 13px; }
-        
-        .strike-price { background: #161a1e; font-weight: bold; color: var(--strike); border-left: 2px solid var(--strike); border-right: 2px solid var(--strike); }
-        .call-ltp { color: var(--call); }
-        .put-ltp { color: var(--put); }
-        .itm-call { background: rgba(2, 192, 118, 0.08); } /* In The Money Calls */
-        .itm-put { background: rgba(248, 73, 96, 0.08); }  /* In The Money Puts */
-        
-        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 100; visibility: hidden; }
-        .loading-overlay.active { visibility: visible; }
-    </style>
+::-webkit-scrollbar { height:10px; width:10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius:5px; }
+
+.loading-overlay {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.8);
+    display: flex; justify-content:center; align-items:center;
+    z-index:100; visibility:hidden;
+}
+.loading-overlay.active { visibility: visible; }
+</style>
 </head>
 <body>
 
-    <div class="header-strip">
-        <div>
-            <select id="indexSelect" onchange="changeIndex()">
-                <option value="NIFTY">NIFTY 50</option>
-                <option value="BANKNIFTY">BANK NIFTY</option>
-                <option value="FINNIFTY">FIN NIFTY</option>
-            </select>
-        </div>
-        <div class="spot-box" id="spotDisplay">Spot: Loading...</div>
-        <div id="expiryInfo" style="font-size: 14px; opacity: 0.8;">Expiry: Loading...</div>
+<div class="header-strip">
+    <div>
+        <select id="indexSelect" onchange="changeIndex()">
+            <option value="NIFTY">NIFTY 50</option>
+            <option value="BANKNIFTY">BANK NIFTY</option>
+            <option value="FINNIFTY">FIN NIFTY</option>
+        </select>
+        <div class="expiry-buttons" id="expiryButtons"></div>
     </div>
+    <div class="spot-box" id="spotDisplay">Spot: Loading...</div>
+</div>
 
-    <div class="oc-container">
-        <table id="optionChainTable">
-            <thead>
-                <tr>
-                    <th colspan="5" style="color: var(--call); border-bottom: 2px solid var(--call);">CALLS</th>
-                    <th rowspan="2" style="background: #161a1e;">STRIKE</th>
-                    <th colspan="5" style="color: var(--put); border-bottom: 2px solid var(--put);">PUTS</th>
-                </tr>
-                <tr>
-                    <th>OI</th> <th>IV</th> <th>Theta</th> <th>Delta</th> <th>LTP</th>
-                    <th>LTP</th> <th>Delta</th> <th>Theta</th> <th>IV</th> <th>OI</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <!-- Data will be injected here -->
-            </tbody>
-        </table>
-    </div>
+<div class="oc-container">
+    <table id="optionChainTable">
+        <thead>
+            <tr>
+                <th colspan="8" style="color:var(--call); border-bottom:2px solid var(--call);">CALLS</th>
+                <th rowspan="2" class="strike-price">STRIKE</th>
+                <th colspan="8" style="color:var(--put); border-bottom:2px solid var(--put);">PUTS</th>
+            </tr>
+            <tr>
+                <th>Volume</th><th>OI</th><th>OI(chg)</th><th>IV</th><th>Vega</th><th>Gamma</th><th>Theta</th><th>Delta</th><th>LTP</th>
+                <th>LTP</th><th>Delta</th><th>Theta</th><th>Gamma</th><th>Vega</th><th>IV</th><th>OI(chg)</th><th>OI</th><th>Volume</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
 
-    <div id="loader" class="loading-overlay">
-        <i class="fas fa-circle-notch fa-spin fa-3x" style="color: var(--strike);"></i>
-    </div>
+<div id="loader" class="loading-overlay">
+    <i style="color: var(--strike); font-size:50px;">🔄 Loading...</i>
+</div>
 
-    <script>
-        // 🚨 CONFIG: Apna Render URL dalo
-        const API_BASE = "https://my-backend-1-avpd.onrender.com";
-        let currentIndex = "NIFTY";
+<script>
+const API_BASE = "https://my-backend-1-avpd.onrender.com";
+let currentIndex = "NIFTY";
+let currentExpiry = "";
 
-        async function fetchOptionChain() {
-            try {
-                const res = await fetch(`${API_BASE}/api/upstox/option-chain/${currentIndex}`);
-                const result = await res.json();
+async function fetchOptionChain() {
+    document.getElementById("loader").classList.add("active");
+    try {
+        const res = await fetch(`${API_BASE}/api/upstox/option-chain/${currentIndex}`);
+        const result = await res.json();
+        if(result.success){
+            setupExpiryButtons(result.expiryDates);
+            if(!currentExpiry) currentExpiry = result.expiryDates[0];
+            renderTable(result.data[currentExpiry], result.spotPrice);
+        } else { console.error("Fetch Error:", result.error); }
+    } catch(err){ console.error("Server Error:", err); }
+    finally{ document.getElementById("loader").classList.remove("active"); }
+}
 
-                if (result.success) {
-                    renderTable(result);
-                } else {
-                    console.error("Fetch Error:", result.error);
-                }
-            } catch (err) {
-                console.error("Server Connection Error:", err);
-            }
-        }
+function setupExpiryButtons(expiries){
+    const container = document.getElementById("expiryButtons");
+    container.innerHTML = expiries.map(date=>{
+        const active = date===currentExpiry?'active':'';
+        return `<button class="${active}" onclick="selectExpiry('${date}')">${date}</button>`;
+    }).join('');
+}
 
-        function renderTable(result) {
-            const body = document.getElementById("tableBody");
-            const spot = result.spotPrice;
-            document.getElementById("spotDisplay").innerText = `Spot: ${spot.toFixed(2)}`;
-            document.getElementById("expiryInfo").innerText = `Expiry: ${result.expiryDate}`;
+function selectExpiry(date){
+    currentExpiry = date;
+    fetchOptionChain();
+}
 
-            body.innerHTML = result.data.map(row => {
-                // ITM Logic: Calls ke liye Strike < Spot, Puts ke liye Strike > Spot
-                const callITM = row.strike_price < spot ? "itm-call" : "";
-                const putITM = row.strike_price > spot ? "itm-put" : "";
+function renderTable(data, spot){
+    document.getElementById("spotDisplay").innerText = `Spot: ${spot.toFixed(2)}`;
+    const body = document.getElementById("tableBody");
+    body.innerHTML = data.map(row=>{
+        const callITM = row.strike_price < spot ? "itm-call": "";
+        const putITM = row.strike_price > spot ? "itm-put": "";
+        return `<tr>
+             <td class="${putITM}">${row.put.volume}</td>
+            <td class="${callITM}">${row.call.oi}</td>
+            <td class="${callITM}">${row.call.oi_chg}</td>
+            <td class="${callITM}">${row.call.iv}</td>
+            <td class="${callITM}">${row.call.vega}</td>
+            <td class="${callITM}">${row.call.gamma}</td>
+            <td class="${callITM}">${row.call.theta}</td>
+            <td class="${callITM}">${row.call.delta}</td>
+            <td class="call-ltp ${callITM}">${row.call.ltp}</td>
 
-                return `
-                    <tr>
-                        <td class="${callITM}">${(row.call.oi / 1000).toFixed(1)}k</td>
-                        <td class="${callITM}">${row.call.iv.toFixed(1)}</td>
-                        <td class="${callITM}">${row.call.theta}</td>
-                        <td class="${callITM}">${row.call.delta}</td>
-                        <td class="call-ltp ${callITM}">${row.call.ltp.toFixed(2)}</td>
-                        
-                        <td class="strike-price">${row.strike_price}</td>
-                        
-                        <td class="put-ltp ${putITM}">${row.put.ltp.toFixed(2)}</td>
-                        <td class="${putITM}">${row.put.delta}</td>
-                        <td class="${putITM}">${row.put.theta}</td>
-                        <td class="${putITM}">${row.put.iv.toFixed(1)}</td>
-                        <td class="${putITM}">${(row.put.oi / 1000).toFixed(1)}k</td>
-                    </tr>
-                `;
-            }).join('');
-        }
+            <td class="strike-price">${row.strike_price}<br><small style="color:#aaa;font-size:10px;">PCR: ${row.pcr.toFixed(2)}</small></td>
 
-        function changeIndex() {
-            currentIndex = document.getElementById("indexSelect").value;
-            document.getElementById("loader").classList.add("active");
-            fetchOptionChain().finally(() => {
-                document.getElementById("loader").classList.remove("active");
-            });
-        }
+            <td class="put-ltp ${putITM}">${row.put.ltp}</td>
+            <td class="${putITM}">${row.put.delta}</td>
+            <td class="${putITM}">${row.put.theta}</td>
+            <td class="${putITM}">${row.put.gamma}</td>
+            <td class="${putITM}">${row.put.vega}</td>
+            <td class="${putITM}">${row.put.iv}</td>
+            <td class="${putITM}">${row.put.oi_chg}</td>
+            <td class="${putITM}">${row.put.oi}</td>
+              <td class="${putITM}">${row.put.volume}</td>
+        </tr>`;
+    }).join('');
+}
 
-        // Auto Refresh har 5 second mein (Market Hours mein pro lagega)
-        setInterval(fetchOptionChain, 5000);
-        window.onload = fetchOptionChain;
-    </script>
+function changeIndex(){ currentIndex = document.getElementById("indexSelect").value; currentExpiry=""; fetchOptionChain(); }
+
+setInterval(fetchOptionChain,5000);
+window.onload = fetchOptionChain;
+</script>
+
 </body>
 </html>
