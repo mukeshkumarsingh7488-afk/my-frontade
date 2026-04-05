@@ -2084,7 +2084,7 @@ select {
   width: 8px;
 }
 .pdf-list.scrollable::-webkit-scrollbar-thumb {
-  background-color: #a020f0;
+  background-color: #00ff88;
   border-radius: 4px;
 }
 .pdf-list.scrollable::-webkit-scrollbar-track {
