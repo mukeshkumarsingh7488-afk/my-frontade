@@ -1,180 +1,350 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pro Option Chain - BR30TRADER</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cloudflare.com">
-<style>
-:root {
-    --bg: #0b0e11; --card: #1e2329; --border: #2b3139; --text: #eaecef;
-    --call: #02c076; --put: #f84960; --strike: #f0b90b; --scrollbar: #2b3139;
-}
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Roboto', sans-serif;
-    margin:0; padding:20px;
-}
-.header-strip {
-    display:flex; justify-content:space-between; align-items:center;
-    background: var(--card); padding:10px 20px; border-radius:8px;
-    border:1px solid var(--border); margin-bottom:10px;
-}
-.spot-box { font-size:20px; font-weight:bold; color:var(--strike); font-family:'Roboto Mono', monospace; }
-select { background:#2b3139; color:white; border:1px solid var(--border); padding:6px 12px; border-radius:4px; cursor:pointer; }
-.expiry-buttons { margin-left:20px; display:flex; gap:8px; }
-.expiry-buttons button {
-    background:#2b3139; color:white; border:1px solid var(--border);
-    padding:5px 10px; border-radius:4px; cursor:pointer; font-size:13px;
-}
-.expiry-buttons button.active { background:var(--strike); color:#0b0e11; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Option Chain - BR30TRADER</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- ✅ Sahi FontAwesome Link (Isse icons chamkenge) -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        :root {
+            --bg: #0b0e11;
+            --card: #1e2329;
+            --border: #2b3139;
+            --text: #eaecef;
+            --call: #02c076;
+            --put: #f84960;
+            --strike: #f0b90b;
+            --scrollbar: #2b3139;
+        }
 
-/* 🔑 Login Button Style */
-.login-btn {
-    background: var(--strike); color: #000; font-weight: bold;
-    border: none; padding: 8px 15px; border-radius: 4px;
-    cursor: pointer; display: flex; align-items: center; gap: 8px;
-    transition: 0.3s; font-size: 14px;
-}
-.login-btn:hover { background: #d4a308; transform: scale(1.02); }
-.dot { height: 8px; width: 8px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
-@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-.oc-container { overflow:auto; border:1px solid var(--border); border-radius:8px; background:var(--card); max-height:75vh; }
-table { width:1400px; border-collapse:collapse; }
-th, td { padding:8px 10px; text-align:center; font-family:'Roboto Mono', monospace; font-size:12px; border-bottom:1px solid var(--border); }
-th { position:sticky; top:0; background:#161a1e; border-bottom:2px solid var(--border); z-index:10; }
-.strike-price { background:#161a1e; font-weight:bold; color:var(--strike); border-left:2px solid var(--strike); border-right:2px solid var(--strike); position:sticky; left:0; z-index:9; }
-.call-ltp { color:var(--call); font-weight: bold; }
-.put-ltp { color:var(--put); font-weight: bold; }
-.itm-call { background: rgba(2,192,118,0.08); }
-.itm-put { background: rgba(248,73,96,0.08); }
+        .header-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
 
-::-webkit-scrollbar { height:10px; width:10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius:5px; }
+        .spot-box {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--strike);
+            font-family: 'Roboto Mono', monospace;
+        }
 
-.loading-overlay {
-    position: fixed; top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.8);
-    display: flex; flex-direction: column; justify-content:center; align-items:center;
-    z-index:100; visibility:hidden;
-}
-.loading-overlay.active { visibility: visible; }
-</style>
-</head>
-<body>
+        select {
+            background: #2b3139;
+            color: white;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-<div class="header-strip">
-    <div style="display:flex; align-items:center;">
-        <select id="indexSelect" onchange="changeIndex()">
-            <option value="NIFTY">NIFTY 50</option>
-            <option value="BANKNIFTY">BANK NIFTY</option>
-            <option value="FINNIFTY">FIN NIFTY</option>
-        </select>
-        <div class="expiry-buttons" id="expiryButtons"></div>
-    </div>
-    
-    <div class="spot-box" id="spotDisplay">Spot: Loading...</div>
+        .expiry-buttons {
+            margin-left: 20px;
+            display: flex;
+            gap: 8px;
+        }
 
-    <!-- 🔑 Connect Upstox Button -->
-    <button class="login-btn" onclick="connectUpstox()">
-        <i class="fas fa-key"></i> Connect Upstox <span class="dot"></span>
-    </button>
-</div>
+        .expiry-buttons button {
+            background: #2b3139;
+            color: white;
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
 
-<div class="oc-container">
-    <table id="optionChainTable">
-        <thead>
-            <tr>
-                <th colspan="9" style="color:var(--call); border-bottom:2px solid var(--call); font-size: 16px;">CALLS</th>
-                <th rowspan="2" class="strike-price">STRIKE</th>
-                <th colspan="9" style="color:var(--put); border-bottom:2px solid var(--put); font-size: 16px;">PUTS</th>
-            </tr>
-            <tr style="background: #1e2329;">
-                <th>Vol</th><th>OI</th><th>OI(chg)</th><th>IV</th><th>Vega</th><th>Gamma</th><th>Theta</th><th>Delta</th><th>LTP</th>
-                <th>LTP</th><th>Delta</th><th>Theta</th><th>Gamma</th><th>Vega</th><th>IV</th><th>OI(chg)</th><th>OI</th><th>Vol</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-    </table>
-</div>
+        .expiry-buttons button.active {
+            background: var(--strike);
+            color: #0b0e11;
+        }
 
-<div id="loader" class="loading-overlay">
-    <i class="fas fa-sync fa-spin" style="color: var(--strike); font-size:50px;"></i>
-    <p style="margin-top: 15px; font-weight: bold; color: var(--strike);">Fetching Live Greeks...</p>
-</div>
+        /* 🔑 Login Button Style */
+        .login-btn {
+            background: var(--strike);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            font-size: 14px;
+            text-decoration: none;
+        }
 
-<script>
-const API_BASE = "https://my-backend-1-avpd.onrender.com";
-let currentIndex = "NIFTY";
-let currentExpiry = "";
+        .login-btn:hover {
+            background: #d4a308;
+            transform: scale(1.02);
+        }
 
-function connectUpstox() {
-    window.open(`${API_BASE}/api/upstox/login`, '_blank');
-}
+        .dot {
+            height: 8px;
+            width: 8px;
+            background-color: red;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
 
-async function fetchOptionChain() {
-    // Sirf pehli baar loader dikhayenge, background refresh pe nahi
-    if(document.getElementById("tableBody").innerHTML === "") {
-        document.getElementById("loader").classList.add("active");
-    }
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
 
-    try {
-        const res = await fetch(`${API_BASE}/api/upstox/option-chain/${currentIndex}`);
-        const result = await res.json();
-        
-        if(result.success){
-            // Agar backend single expiry bhej raha hai toh use array mein wrap karein
-            const expiryList = Array.isArray(result.expiryDates) ? result.expiryDates : [result.expiryDate];
-            setupExpiryButtons(expiryList);
-            
-            if(!currentExpiry) currentExpiry = expiryList[0];
-            
-            // Render data (Agar data structure { date: [] } hai toh)
-            const tableData = result.data[currentExpiry] || result.data;
-            renderTable(tableData, result.spotPrice);
-        } else { 
-            console.error("Fetch Error:", result.error); 
-            if(result.error.includes("Login")) {
-                alert("⚠️ Upstox Token Expired! Please click 'Connect Upstox' button.");
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
             }
         }
-    } catch(err){ 
-        console.error("Server Connection Error:", err); 
-    } finally {
-        document.getElementById("loader").classList.remove("active");
-    }
-}
 
-function setupExpiryButtons(expiries){
-    const container = document.getElementById("expiryButtons");
-    container.innerHTML = expiries.map(date=>{
-        const active = date===currentExpiry?'active':'';
-        return `<button class="${active}" onclick="selectExpiry('${date}')">${date}</button>`;
-    }).join('');
-}
+        .oc-container {
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            max-height: 75vh;
+        }
 
-function selectExpiry(date){
-    currentExpiry = date;
-    fetchOptionChain();
-}
+        table {
+            width: 1500px;
+            border-collapse: collapse;
+        }
 
-function renderTable(data, spot){
-    document.getElementById("spotDisplay").innerText = `Spot: ${spot.toFixed(2)}`;
-    const body = document.getElementById("tableBody");
-    
-    body.innerHTML = data.map(row=>{
-        const callITM = row.strike_price < spot ? "itm-call": "";
-        const putITM = row.strike_price > spot ? "itm-put": "";
-        
-        return `<tr>
+        th,
+        td {
+            padding: 8px 10px;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: #161a1e;
+            border-bottom: 2px solid var(--border);
+            z-index: 10;
+        }
+
+        .strike-price {
+            background: #161a1e;
+            font-weight: bold;
+            color: var(--strike);
+            border-left: 2px solid var(--strike);
+            border-right: 2px solid var(--strike);
+            position: sticky;
+            left: 0;
+            z-index: 9;
+        }
+
+        .call-ltp {
+            color: var(--call);
+            font-weight: bold;
+        }
+
+        .put-ltp {
+            color: var(--put);
+            font-weight: bold;
+        }
+
+        .itm-call {
+            background: rgba(2, 192, 118, 0.08);
+        }
+
+        .itm-put {
+            background: rgba(248, 73, 96, 0.08);
+        }
+
+        ::-webkit-scrollbar {
+            height: 10px;
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar);
+            border-radius: 5px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            visibility: hidden;
+        }
+
+        .loading-overlay.active {
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-strip">
+        <div style="display:flex; align-items:center;">
+            <select id="indexSelect" onchange="changeIndex()">
+                <option value="NIFTY">NIFTY 50</option>
+                <option value="BANKNIFTY">BANK NIFTY</option>
+                <option value="FINNIFTY">FIN NIFTY</option>
+            </select>
+            <div class="expiry-buttons" id="expiryButtons"></div>
+        </div>
+
+        <div class="spot-box" id="spotDisplay">Spot: Loading...</div>
+
+        <!-- 🔑 Connect Upstox Button (Naye Tab mein khulega) -->
+        <a href="https://my-backend-1-avpd.onrender.com/api/upstox/login" target="_blank" class="login-btn"
+            style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            <i class="fas fa-key"></i> Connect Upstox <span class="dot"></span>
+        </a>
+    </div>
+
+    <div class="oc-container">
+        <table id="optionChainTable">
+            <thead>
+                <tr>
+                    <th colspan="9" style="color:var(--call); border-bottom:2px solid var(--call); font-size: 16px;">
+                        CALLS</th>
+                    <th rowspan="2" class="strike-price">STRIKE</th>
+                    <th colspan="9" style="color:var(--put); border-bottom:2px solid var(--put); font-size: 16px;">PUTS
+                    </th>
+                </tr>
+                <tr style="background: #1e2329;">
+                    <th>Vol</th>
+                    <th>OI</th>
+                    <th>OI(chg)</th>
+                    <th>IV</th>
+                    <th>Vega</th>
+                    <th>Gamma</th>
+                    <th>Theta</th>
+                    <th>Delta</th>
+                    <th>LTP</th>
+                    <th>LTP</th>
+                    <th>Delta</th>
+                    <th>Theta</th>
+                    <th>Gamma</th>
+                    <th>Vega</th>
+                    <th>IV</th>
+                    <th>OI(chg)</th>
+                    <th>OI</th>
+                    <th>Vol</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <div id="loader" class="loading-overlay">
+        <i class="fas fa-sync fa-spin" style="color: var(--strike); font-size:50px;"></i>
+        <p style="margin-top: 15px; font-weight: bold; color: var(--strike);">Fetching Live Greeks...</p>
+    </div>
+
+    <script>
+        const API_BASE = "https://my-backend-1-avpd.onrender.com";
+        let currentIndex = "NIFTY";
+        let currentExpiry = "";
+
+        // ✅ Naye tab mein login open karne ka sahi function
+        function connectUpstox() {
+            window.open(`${API_BASE}/api/upstox/login`, '_blank');
+        }
+
+        async function fetchOptionChain() {
+            if (document.getElementById("tableBody").innerHTML === "") {
+                document.getElementById("loader").classList.add("active");
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/upstox/option-chain/${currentIndex}`);
+                const result = await res.json();
+
+                if (result.success) {
+                    const expiryList = Array.isArray(result.expiryDates) ? result.expiryDates : [result.expiryDate];
+                    setupExpiryButtons(expiryList);
+
+                    if (!currentExpiry) currentExpiry = expiryList[0];
+
+                    const tableData = result.data || [];
+                    renderTable(tableData, result.spotPrice);
+                } else {
+                    console.error("Fetch Error:", result.error);
+                    if (result.error.includes("connect") || result.error.includes("login")) {
+                        console.log("Token expired, waiting for login...");
+                    }
+                }
+            } catch (err) {
+                console.error("Server Connection Error:", err);
+            } finally {
+                document.getElementById("loader").classList.remove("active");
+            }
+        }
+
+        function setupExpiryButtons(expiries) {
+            const container = document.getElementById("expiryButtons");
+            if (!expiries[0]) return;
+            container.innerHTML = expiries.map(date => {
+                const active = date === currentExpiry ? 'active' : '';
+                return `<button class="${active}" onclick="selectExpiry('${date}')">${date}</button>`;
+            }).join('');
+        }
+
+        function selectExpiry(date) {
+            currentExpiry = date;
+            fetchOptionChain();
+        }
+
+        function renderTable(data, spot) {
+            document.getElementById("spotDisplay").innerText = `Spot: ${spot.toFixed(2)}`;
+            const body = document.getElementById("tableBody");
+
+            body.innerHTML = data.map(row => {
+                const callITM = row.strike_price < spot ? "itm-call" : "";
+                const putITM = row.strike_price > spot ? "itm-put" : "";
+
+                return `<tr>
             <td class="${callITM}">${row.call.volume || 0}</td>
             <td class="${callITM}">${(row.call.oi / 1000).toFixed(1)}k</td>
-            <td class="${callITM}">${(row.call.oi_chg || 0).toFixed(0)}</td>
-            <td class="${callITM}">${(row.call.iv || 0).toFixed(1)}</td>
+            <td class="${callITM}">${row.call.oi_chg || 0}</td>
+            <td class="${callITM}">${row.call.iv || 0}</td>
             <td class="${callITM}">${row.call.vega || 0}</td>
             <td class="${callITM}">${row.call.gamma || 0}</td>
             <td class="${callITM}">${row.call.theta || 0}</td>
@@ -188,24 +358,24 @@ function renderTable(data, spot){
             <td class="${putITM}">${row.put.theta || 0}</td>
             <td class="${putITM}">${row.put.gamma || 0}</td>
             <td class="${putITM}">${row.put.vega || 0}</td>
-            <td class="${putITM}">${(row.put.iv || 0).toFixed(1)}</td>
-            <td class="${putITM}">${(row.put.oi_chg || 0).toFixed(0)}</td>
+            <td class="${putITM}">${row.put.iv || 0}</td>
+            <td class="${putITM}">${row.put.oi_chg || 0}</td>
             <td class="${putITM}">${(row.put.oi / 1000).toFixed(1)}k</td>
             <td class="${putITM}">${row.put.volume || 0}</td>
         </tr>`;
-    }).join('');
-}
+            }).join('');
+        }
 
-function changeIndex(){ 
-    currentIndex = document.getElementById("indexSelect").value; 
-    currentExpiry = ""; 
-    fetchOptionChain(); 
-}
+        function changeIndex() {
+            currentIndex = document.getElementById("indexSelect").value;
+            currentExpiry = "";
+            fetchOptionChain();
+        }
 
-// Auto Refresh har 5 second mein
-setInterval(fetchOptionChain, 5000);
-window.onload = fetchOptionChain;
-</script>
+        setInterval(fetchOptionChain, 5000);
+        window.onload = fetchOptionChain;
+    </script>
 
 </body>
+
 </html>
