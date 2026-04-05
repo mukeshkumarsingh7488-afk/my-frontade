@@ -1,6 +1,15 @@
 /* #region Styles My Code */
 /* --- Desktop & Mobile Perfect Header --- */
 body {
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Standard syntax */
+}
+
+body {
   /* Premium Dark Mesh Gradient: कोनों में हल्का सा गहरा हरा ग्लो */
   background-color: #050505;
   background-image:
@@ -684,6 +693,71 @@ span {
 
 
 /* Course Section */
+/* Skeleton Effect: Grey chamakta hua animation */
+.skeleton {
+  background: #2a2a2a;
+  background-image: linear-gradient(90deg, #2a2a2a 25%, #333 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 12px;
+  min-height: 180px;
+  /* Image ka area reserve rakhega */
+}
+
+.skeleton-text {
+  background: #333 !important;
+  color: transparent !important;
+  /* Load hote waqt ₹-- ko chhupa dega */
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 80px;
+  height: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Image hidden rakho jab tak load na ho jaye (optional) */
+.course-img {
+  width: 100%;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.course-img.loading {
+  opacity: 0;
+}
+
 /* Course Section Overall */
 .course-section {
   padding: 80px 20px;
@@ -2071,9 +2145,11 @@ select {
 
 /*-- PDF Hub --*/
 .pdf-list.scrollable {
-  max-height: 400px; /* Section height */
-  overflow-y: auto;   /* Vertical scroll */
-  border: 1px solid rgba(255,255,255,0.1);
+  max-height: 400px;
+  /* Section height */
+  overflow-y: auto;
+  /* Vertical scroll */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px;
   border-radius: 8px;
   background: #111;
@@ -2083,10 +2159,12 @@ select {
 .pdf-list.scrollable::-webkit-scrollbar {
   width: 8px;
 }
+
 .pdf-list.scrollable::-webkit-scrollbar-thumb {
   background-color: #00ff88;
   border-radius: 4px;
 }
+
 .pdf-list.scrollable::-webkit-scrollbar-track {
   background: #222;
 }
@@ -4220,4 +4298,5 @@ p {
     gap: 40px;
   }
 }
+
 /* #endregion */
