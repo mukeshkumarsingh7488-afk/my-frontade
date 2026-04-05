@@ -131,22 +131,6 @@ p {
   z-index: 1000;
   width: 100%;
 }
-/* --- LIVE BLINKING BADGE --- */
-.live-blink {
-    background: #ff0000;
-    color: white;
-    font-size: 9px;
-    padding: 2px 5px;
-    border-radius: 3px;
-    vertical-align: middle;
-    margin-left: 5px;
-    animation: blinker 1.5s linear infinite;
-}
-
-@keyframes blinker {
-    50% { opacity: 0.2; }
-}
-
 
 .nav-container {
   display: flex;
@@ -569,7 +553,7 @@ span {
   }
 }
 
-/* You tube live section */
+/* You tube live section (Temprorry coment line no 556 to 683)
 .live-status-section {
   padding: 60px 20px;
 
@@ -583,7 +567,6 @@ span {
   border-radius: 25px;
   padding: 40px;
   border: 1px solid rgba(255, 0, 0, 0.2);
-  /* हल्की लाल बॉर्डर 'Live' फील के लिए */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
@@ -601,11 +584,11 @@ span {
 
 .live-title h2 {
   color: #ff0000 !important;
-  /* शुद्ध लाल रंग */
+
   font-weight: bold;
 }
 
-/* 🔴 Red Pulse Animation */
+/* 🔴 Red Pulse Animation 
 .pulse-icon {
   font-size: 1.5rem;
   animation: pulse-red 1.5s infinite;
@@ -645,7 +628,6 @@ span {
 
 .slot-card:hover {
   border-color: #ff0000;
-  /* होवर पर लाल चमक */
   transform: translateY(-5px);
 }
 
@@ -668,7 +650,7 @@ span {
   margin-top: 5px;
 }
 
-/* YouTube Button */
+/* YouTube Button
 .yt-btn {
   display: inline-flex;
   align-items: center;
@@ -688,7 +670,7 @@ span {
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
 }
 
-/* Mobile View */
+/* Mobile View 
 @media (max-width: 600px) {
   .schedule-grid {
     grid-template-columns: 1fr;
@@ -698,6 +680,8 @@ span {
     font-size: 1.1rem;
   }
 }
+ */
+
 
 /* Course Section */
 /* Course Section Overall */
@@ -3350,14 +3334,14 @@ h3,
   border-radius: 10px;
 }
 
-/* AI PRO style */
-/* --- 1. AI Pro Nav Button (Animated Glow) --- */
+/* AI PRO style (Temprory coment line no 3337 to 3506)
+/* --- 1. AI Pro Nav Button (Animated Glow) ---
 .ai-pro-glow-btn {
   position: relative;
   background: linear-gradient(135deg,
       #00ff88 0%,
       #6d28d9 100%) !important;
-  /* Original Purple Gradient */
+  /* Original Purple Gradient 
   color: #ffffff !important;
   padding: 8px 20px;
   border-radius: 50px;
@@ -3378,7 +3362,7 @@ h3,
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
 }
 
-/* --- 2. AI Pro Chat Modal (Pro Dark Theme) --- */
+/* --- 2. AI Pro Chat Modal (Pro Dark Theme) --- 
 #ai-chat-modal {
   display: none;
   position: fixed;
@@ -3387,16 +3371,16 @@ h3,
   width: 360px;
   height: 520px;
   background: #050505;
-  /* Deep Navy Dark */
+  /* Deep Navy Dark
   border: 1px solid rgba(160, 32, 240, 0.3);
-  /* Purple Border Glow */
+  /* Purple Border Glow
   border-radius: 20px;
   z-index: 999999 !important;
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
   overflow: hidden;
 }
 
-/* --- 3. Chat Header (Gradient) --- */
+/* --- 3. Chat Header (Gradient) --- 
 .ai-chat-header {
   background: linear-gradient(135deg, #00ff88 0%, #6d28d9 100%);
   padding: 15px 20px;
@@ -3423,7 +3407,7 @@ h3,
   align-items: center;
 }
 
-/* --- 4. Messages Area --- */
+/* --- 4. Messages Area --- 
 .ai-messages {
   height: 390px;
   overflow-y: auto;
@@ -3435,17 +3419,17 @@ h3,
 
 .ai-msg {
   background: #000000 !important;
-  /* Message Bubble */
+  /* Message Bubble 
   padding: 12px 15px;
   border-radius: 15px 15px 15px 0px;
   margin-bottom: 15px;
   border-left: 4px solid #00ff88;
-  /* Purple accent */
+  /* Purple accent 
   line-height: 1.5;
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
 }
 
-/* --- 5. Chat Input (Modern Pill) --- */
+/* --- 5. Chat Input (Modern Pill) --- 
 .ai-chat-input {
   display: flex;
   padding: 15px;
@@ -3478,7 +3462,7 @@ h3,
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
 }
 
-/* --- Mobile Responsiveness --- */
+/* --- Mobile Responsiveness --- 
 @media screen and (max-width: 480px) {
   #ai-chat-modal {
     width: 92%;
@@ -3495,14 +3479,14 @@ h3,
 
 .pulse-ring {
   pointer-events: none !important;
-  /* Ring ke 'RPAR-PAAR' click jane dega */
+  /* Ring ke 'RPAR-PAAR' click jane dega 
   z-index: -1;
-  /* Button ke piche rakho abhi ke liye */
+  /* Button ke piche rakho abhi ke liye
 }
 
 .ai-pro-glow-btn {
   pointer-events: auto !important;
-  /* Click allow karega */
+  /* Click allow karega 
   cursor: pointer !important;
 }
 
@@ -3517,8 +3501,9 @@ h3,
   border: 2px solid #00ff88;
   border-radius: 15px;
   z-index: 2147483647 !important;
-  /* Browser ki maximum limit */
+  /* Browser ki maximum limit 
 }
+  */
 
 /* Pro Isometric & Responsive */
 #br30-trading-universe {
