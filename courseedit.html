@@ -296,7 +296,7 @@
 
                     // Agar admin ne nayi file select ki hai toh use bhi add karo
                     if (formValues.imageFile.length > 0) {
-                        formData.append('image', formValues.imageFile[0]);
+                       formData.append('thumbnail', formValues.imageFile[0]);
                     }
 
                     const res = await fetch(`${window.API_BASE_URL}/api/courses/update-course/${id}`, {
