@@ -1,0 +1,6 @@
+
+{
+"action": "generate_image",
+
+"action_input": "{'prompt': 'A high-quality, professional YouTube thumbnail for a trading strategy. Background: Dark, modern trading setup with multiple monitors showing candlestick charts. Main Text (Large and bold, 3D style): \"ADVANCE BTST MASTERY\". Secondary Text (Bright and clear): \"20 EMA 03:15 STRATEGY\". Sub Text (Below Secondary Text): \"BEST TIME FRAME 🤔\". Highlight Badge: \"ACCURACY 65%+\" in a glowing gold or green rounded box. Visual Elements: Glowing green and red exponential moving average (EMA) lines crossing on a chart, floating currency symbols like $, ₹, and €, and a person's hand pointing at a significant bullish breakout on the screen. Lower Text: \"MARKET BLAST MOVE 🚀\". Style: Vibrant neon colors, high contrast, cinematic lighting, ultra-detailed 4k resolution.'}"
+}
