@@ -1468,34 +1468,32 @@ async function syncLatestPrices() {
           if (course.thumbnail && course.thumbnail.trim() !== "") {
             let fullPath = "";
 
-            // ✅ Case 1: Agar Cloudinary ka full URL hai (e.g., https://cloudinary.com...)
+            // ✅ Case 1: Agar Database mein Cloudinary ka FULL URL hai (New System)
             if (course.thumbnail.startsWith("http")) {
               fullPath = course.thumbnail;
             }
-            // ✅ Case 2: Agar purana relative path hai (e.g., /uploads/image.jpg)
+            // ✅ Case 2: Agar purana relative path hai (Old System backup)
             else {
               const cleanThumbnail = course.thumbnail.replace(/^\/?uploads\//, "");
               fullPath = `${window.API_BASE_URL}/uploads/${cleanThumbnail}`;
             }
 
-            console.log("✅ Final Image URL:", fullPath);
+            // 🔥 Optimization: Cloudinary link ko fast load karne ke liye
+            if (fullPath.includes("cloudinary")) {
+              fullPath = fullPath.replace("/upload/", "/upload/f_auto,q_auto,w_600/");
+            }
 
-            // 🔥 Cache busting: Isse Admin update karega toh turant dikhega
-            imgTag.src = `${fullPath}?t=${Date.now()}`;
-            imgTag.style.display = "block"; // Ensure visible if previously hidden
-
+            imgTag.src = fullPath; // No need for ?t= anymore as Cloudinary handles it
+            imgTag.style.display = "block";
           } else {
-            console.warn(`⚠️ Thumbnail missing for: ${course.title}`);
             imgTag.style.display = "none";
           }
 
-          // ❌ Error Handling
           imgTag.onerror = function () {
-            console.error("❌ Image load failed:", this.src);
-            // Placeholder image agar load fail ho jaye
             this.src = "https://placeholder.com";
           };
         }
+
 
         // ✅ STEP 3: PRICE UPDATE
         const priceTag = card.querySelector("p.price");
