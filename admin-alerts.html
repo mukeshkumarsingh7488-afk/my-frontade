@@ -2,91 +2,118 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <head>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <!-- ✅ Google Tag Manager -->
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L' + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-TT7SLZ4L');
+        </script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- ✅ Basic -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Alert Panel | BR30ᴛʀᴀᴅᴇʀ</title>
-    <style>
-        /* ... आपका पुराना CSS यहाँ रहेगा (मैंने इसे नहीं बदला) ... */
-        body {
-            background: #050505;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+        <!-- ❌ IMPORTANT (SEO OFF for admin page) -->
+        <meta name="robots" content="noindex, nofollow">
 
-        .admin-card {
-            background: #1e293b;
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #a020f0;
-            width: 400px;
-            box-shadow: 0 0 30px rgba(160, 32, 240, 0.2);
-            text-align: center;
-        }
+        <title>Admin Alert Panel | BR30 Trader</title>
 
-        h2 {
-            color: #a020f0;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+        <!-- ✅ Favicon -->
+        <link rel="icon" href="https://i.ibb.co/q3gCfkJ9/BR30-LOGO.jpg">
 
-        input,
-        textarea {
-            width: 100%;
-            background: #050505;
-            border: 1px solid rgba(160, 32, 240, 0.5);
-            border-radius: 10px;
-            color: white;
-            padding: 15px;
-            outline: none;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
+        <!-- ✅ Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        textarea {
-            height: 100px;
-            resize: none;
-        }
+        <!-- ✅ Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            /* ... आपका पुराना CSS यहाँ रहेगा (मैंने इसे नहीं बदला) ... */
+            body {
+                background: #050505;
+                color: white;
+                font-family: 'Poppins', sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #a020f0;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+            .admin-card {
+                background: #1e293b;
+                padding: 40px;
+                border-radius: 20px;
+                border: 1px solid #a020f0;
+                width: 400px;
+                box-shadow: 0 0 30px rgba(160, 32, 240, 0.2);
+                text-align: center;
+            }
 
-        button:hover {
-            background: white;
-            color: #a020f0;
-            box-shadow: 0 0 20px #a020f0;
-        }
-    </style>
-</head>
+            h2 {
+                color: #a020f0;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                background: #050505;
+                border: 1px solid rgba(160, 32, 240, 0.5);
+                border-radius: 10px;
+                color: white;
+                padding: 15px;
+                outline: none;
+                margin-bottom: 15px;
+                box-sizing: border-box;
+            }
+
+            textarea {
+                height: 100px;
+                resize: none;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px;
+                background: #a020f0;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            button:hover {
+                background: white;
+                color: #a020f0;
+                box-shadow: 0 0 20px #a020f0;
+            }
+        </style>
+    </head>
 
 <body>
-
+    <!-- ✅ GTM noscript start -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- ✅ GTM noscript end -->
     <div class="admin-card">
         <h2>Post <span>Live Alert</span> 🔔</h2>
-        <!-- Title Input (Firebase के लिए ज़रूरी) -->
+        <!-- Title Input (Firebase के लिए ज़रूरी) -->
         <input type="text" id="admin-title" placeholder="Alert Title (e.g. MARKET UPDATE)">
         <textarea id="admin-msg" placeholder="Type Market Alert (e.g. NIFTY Bullish Move!)"></textarea>
 

@@ -1902,6 +1902,12 @@ select {
   color: #e0e0e0 !important;
 }
 
+.h-item,
+.h-item:hover,
+.h-item:focus {
+  text-decoration: none;
+}
+
 .highlights-card {
   width: 100%;
   max-width: 1100px;

@@ -2,20 +2,40 @@
 <html lang="en">
 
 <head>
+    <!-- ✅ Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L' + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TT7SLZ4L');
+    </script>
+
+    <!-- ✅ Basic -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BR30 - Course Management</title>
 
-    <!-- Favicon -->
+    <!-- ✅ Title -->
+    <title>Course Management Dashboard | BR30 Trader</title>
+
+    <!-- ✅ Robots (Admin page = no index) -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- ✅ Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Font Awesome -->
+    <!-- ✅ Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Animate.css -->
+    <!-- ✅ Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-    <!-- SweetAlert2 & Axios -->
+    <!-- ✅ SweetAlert2 & Axios -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
     <style>
@@ -133,6 +153,11 @@
 </head>
 
 <body>
+    <!-- ✅ GTM noscript -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
     <div class="container">
         <div class="header">
             <div>
@@ -296,7 +321,7 @@
 
                     // Agar admin ne nayi file select ki hai toh use bhi add karo
                     if (formValues.imageFile.length > 0) {
-                       formData.append('thumbnail', formValues.imageFile[0]);
+                        formData.append('thumbnail', formValues.imageFile[0]);
                     }
 
                     const res = await fetch(`${window.API_BASE_URL}/api/courses/update-course/${id}`, {
