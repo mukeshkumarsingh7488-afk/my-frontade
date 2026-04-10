@@ -3834,6 +3834,7 @@ h3,
 /* Sleek Trader Card */
 .trader-item {
   display: flex;
+  gap: 12px;
   align-items: center;
   background: rgba(255, 255, 255, 0.03);
   padding: 10px 15px;
@@ -3845,9 +3846,10 @@ h3,
 .rank-num {
   color: #00ff88;
   font-weight: 900;
-  width: 25px;
+  min-width: 55px;
   font-size: 14px;
   opacity: 0.6;
+  text-align: right !important;
 }
 
 .user-avatar {
