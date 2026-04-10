@@ -1333,8 +1333,6 @@ async function fetchTraders() {
 
 function displayNextBatch() {
   const listContainer = document.getElementById("topTradersList");
-  
-  // Agar data nahi hai toh wapas jao
   if (!listContainer || !allTraders || allTraders.length === 0) return;
 
   listContainer.style.opacity = "0";
@@ -1342,56 +1340,40 @@ function displayNextBatch() {
   setTimeout(() => {
     listContainer.innerHTML = "";
 
-    // --- NEW LOGIC: RANK 1 STICKY ---
-    // Rank 1 hamesha index 0 wala banda rahega
-    const stickyTrader = allTraders[0]; 
-    renderTraderRow(stickyTrader, 1, 0); 
+    // 1. Rank #1 (Hamesha fix rahega)
+    const stickyTrader = allTraders[0];
+    appendTraderHTML(stickyTrader, 1, 0);
 
-    // Baaki ke traders (Index 1 se start) jo slide honge
-    const slidingTraders = allTraders.slice(1);
-    const batchSize = itemsPerPage - 1; // 5 users
-    const batch = slidingTraders.slice(currentIndex, currentIndex + batchSize);
+    // 2. Sliding Traders (Rank 2 se aage)
+    const slidingList = allTraders.slice(1);
+    const batchSize = itemsPerPage - 1; // 5 log
+    const batch = slidingList.slice(currentIndex, currentIndex + batchSize);
 
     batch.forEach((trader, index) => {
-      const globalRank = currentIndex + index + 2; // Rank 2 se start
-      renderTraderRow(trader, globalRank, index + 1);
+      appendTraderHTML(trader, currentIndex + index + 2, index + 1);
     });
-    // --------------------------------
 
     listContainer.style.opacity = "1";
-
-    // Index update logic
-    currentIndex = (currentIndex + batchSize >= slidingTraders.length) ? 0 : currentIndex + batchSize;
+    currentIndex = (currentIndex + batchSize >= slidingList.length) ? 0 : currentIndex + batchSize;
   }, 500);
 }
 
-// Helper function: Isko displayNextBatch ke niche paste kar dena
-function renderTraderRow(trader, globalIndex, indexDelay) {
-    const listContainer = document.getElementById("topTradersList");
-    const rawPath = trader.profilePic || "";
-    let userPic;
+// Ye helper function displayNextBatch ke neeche hi rehne dena
+function appendTraderHTML(trader, rank, delay) {
+  const listContainer = document.getElementById("topTradersList");
+  const rawPath = trader.profilePic || "";
+  let userPic = (rawPath && rawPath.startsWith("http")) ? rawPath : 
+                (rawPath ? `${window.API_BASE_URL}/uploads/${rawPath.split(/[\\/]/).pop()}` : 
+                `https://ui-avatars.com{encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true`);
 
-    if (rawPath && typeof rawPath === "string" && rawPath.length > 5) {
-        if (rawPath.startsWith("http")) {
-            userPic = rawPath;
-        } else {
-            const fileName = rawPath.split(/[\\/]/).pop();
-            userPic = `${window.API_BASE_URL}/uploads/${fileName}`;
-        }
-    } else {
-        userPic = `https://ui-avatars.com{encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true`;
-    }
-
-    const row = `
-        <div class="trader-item" style="animation-delay: ${indexDelay * 0.05}s;">
-            <span class="rank-num">#${globalIndex}</span>
-            <img src="${userPic}" class="user-avatar" 
-                 onerror="this.src='https://ui-avatars.com{encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true'">
-            <span class="user-name">${trader.name}</span>
-            <span class="vip-badge">💎VIP</span>
-        </div>
-    `;
-    listContainer.insertAdjacentHTML("beforeend", row);
+  const row = `
+    <div class="trader-item" style="animation-delay: ${delay * 0.05}s;">
+        <span class="rank-num">#${rank}</span>
+        <img src="${userPic}" class="user-avatar" onerror="this.src='https://ui-avatars.com{encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true'">
+        <span class="user-name">${trader.name}</span>
+        <span class="vip-badge">💎VIP</span>
+    </div>`;
+  listContainer.insertAdjacentHTML("beforeend", row);
 }
 
 
