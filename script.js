@@ -1182,7 +1182,7 @@ const checkout = async function (courseId) {
 
     // ❌ REAL BANK FAILURE: (Iska mail bhi jayega)
     rzp.on("payment.failed", function (response) {
-       console.log("❌ PAYMENT FAILED EVENT TRIGGERED");
+      console.log("❌ PAYMENT FAILED EVENT TRIGGERED");
       sendStatusAlert(
         "FAILED",
         `Actual Bank Failure: ${response.error.description}`,
@@ -1295,7 +1295,7 @@ const itemsPerPage = 6; // अब 6 नाम एक साथ दिखें�
 async function fetchTraders() {
   try {
     // 1. LocalStorage se token uthao
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
 
     // 2. Fetch request mein Headers add karo
     const res = await fetch(window.API_BASE_URL + '/api/courses/leaderboard', {
@@ -1307,7 +1307,7 @@ async function fetchTraders() {
     });
 
     let data = await res.json();
-    
+
     // Check karo data array hai ya object {data: [...]}
     allTraders = Array.isArray(data) ? data : (data.data || []);
 
@@ -1316,13 +1316,13 @@ async function fetchTraders() {
       // Agar user login hai, toh check karo uska naam list mein kahan hai
       const user = JSON.parse(localStorage.getItem("user")); // Agar user info store hai
       if (user && user.isVip) {
-          const myIndex = allTraders.findIndex(t => t.name === user.name);
-          if (myIndex > 0) {
-              const myProfile = allTraders.splice(myIndex, 1)[0];
-              allTraders.unshift(myProfile);
-          }
+        const myIndex = allTraders.findIndex(t => t.name === user.name);
+        if (myIndex > 0) {
+          const myProfile = allTraders.splice(myIndex, 1)[0];
+          allTraders.unshift(myProfile);
+        }
       }
-      
+
       displayNextBatch();
     }
   } catch (err) {
@@ -1333,64 +1333,62 @@ async function fetchTraders() {
 
 function displayNextBatch() {
   const listContainer = document.getElementById("topTradersList");
-  
-  // 1. Safety Check: Agar data nahi aaya abhi tak, toh function roko
-  if (!listContainer || !allTraders || allTraders.length === 0) {
-      console.log("Waiting for data...");
-      return;
-  }
+  if (!listContainer || allTraders.length === 0) return;
 
   listContainer.style.opacity = "0";
 
   setTimeout(() => {
     listContainer.innerHTML = "";
 
-    try {
-        // 2. Rank #1 Fix (Hamesha index 0 wala banda)
-        const stickyTrader = allTraders[0];
-        if (stickyTrader) {
-            appendTraderHTML(stickyTrader, 1, 0);
+    // 🔥 Rank 1 FIX (first user always same)
+    const fixedTrader = allTraders[0];
+
+    // 🔁 Remaining users rotate honge (index 1 se start)
+    const rotatingList = allTraders.slice(1);
+
+    const batch = rotatingList.slice(currentIndex, currentIndex + (itemsPerPage - 1));
+
+    // 👉 Final list = [fixed + rotating]
+    const finalList = [fixedTrader, ...batch];
+
+    finalList.forEach((trader, index) => {
+      const globalIndex = index + 1; // always 1 to N (reset every slide)
+      const rawPath = trader.profilePic || "";
+      let userPic;
+
+      if (rawPath && typeof rawPath === "string" && rawPath.length > 5) {
+        if (rawPath.startsWith("http")) {
+          userPic = rawPath;
+        } else {
+          const fileName = rawPath.split(/[\\/]/).pop();
+          userPic = `${window.API_BASE_URL}/uploads/${fileName}`;
         }
+      } else {
+        userPic = `https://ui-avatars.com/api/?name=${encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true`;
+      }
 
-        // 3. Sliding Traders (Rank 2 se aage)
-        const slidingList = allTraders.slice(1);
-        if (slidingList.length > 0) {
-            const batchSize = itemsPerPage - 1; // 5 users
-            const batch = slidingList.slice(currentIndex, currentIndex + batchSize);
+      const row = `
+        <div class="trader-item" style="animation-delay: ${index * 0.05}s;">
+            <span class="rank-num">#${globalIndex}</span>
+            <img src="${userPic}" class="user-avatar"
+                 onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true'">
+            <span class="user-name">${trader.name}</span>
+            <span class="vip-badge">💎VIP</span>
+        </div>
+      `;
 
-            batch.forEach((trader, index) => {
-                appendTraderHTML(trader, currentIndex + index + 2, index + 1);
-            });
-
-            // Index update logic
-            currentIndex = (currentIndex + batchSize >= slidingList.length) ? 0 : currentIndex + batchSize;
-        }
-    } catch (err) {
-        console.error("Leaderboard Error:", err);
-    }
+      listContainer.insertAdjacentHTML("beforeend", row);
+    });
 
     listContainer.style.opacity = "1";
+
+    // 🔁 Rotation sirf baaki users ka hoga
+    currentIndex =
+      currentIndex + (itemsPerPage - 1) >= rotatingList.length
+        ? 0
+        : currentIndex + (itemsPerPage - 1);
+
   }, 500);
-}
-
-// Helper function ko displayNextBatch ke neeche rakho
-function appendTraderHTML(trader, rank, delay) {
-  const listContainer = document.getElementById("topTradersList");
-  if (!trader) return;
-
-  const rawPath = trader.profilePic || "";
-  let userPic = (rawPath && rawPath.startsWith("http")) ? rawPath : 
-                (rawPath ? `${window.API_BASE_URL}/uploads/${rawPath.split(/[\\/]/).pop()}` : 
-                `https://ui-avatars.com{encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true`);
-
-  const row = `
-    <div class="trader-item" style="animation-delay: ${delay * 0.05}s;">
-        <span class="rank-num">#${rank}</span>
-        <img src="${userPic}" class="user-avatar" onerror="this.src='https://ui-avatars.com{encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true'">
-        <span class="user-name">${trader.name}</span>
-        <span class="vip-badge">💎VIP</span>
-    </div>`;
-  listContainer.insertAdjacentHTML("beforeend", row);
 }
 
 
