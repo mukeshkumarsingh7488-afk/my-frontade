@@ -1294,13 +1294,42 @@ const itemsPerPage = 6; // अब 6 नाम एक साथ दिखें�
 
 async function fetchTraders() {
   try {
-    const res = await fetch(window.API_BASE_URL + '/api/courses/leaderboard');
-    allTraders = await res.json();
-    if (allTraders.length > 0) displayNextBatch();
+    // 1. LocalStorage se token uthao
+    const token = localStorage.getItem("token"); 
+
+    // 2. Fetch request mein Headers add karo
+    const res = await fetch(window.API_BASE_URL + '/api/courses/leaderboard', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Token bhejna zaroori hai
+      }
+    });
+
+    let data = await res.json();
+    
+    // Check karo data array hai ya object {data: [...]}
+    allTraders = Array.isArray(data) ? data : (data.data || []);
+
+    if (allTraders.length > 0) {
+      // 3. Frontend par bhi Rank 1 check (Security ke liye)
+      // Agar user login hai, toh check karo uska naam list mein kahan hai
+      const user = JSON.parse(localStorage.getItem("user")); // Agar user info store hai
+      if (user && user.isVip) {
+          const myIndex = allTraders.findIndex(t => t.name === user.name);
+          if (myIndex > 0) {
+              const myProfile = allTraders.splice(myIndex, 1)[0];
+              allTraders.unshift(myProfile);
+          }
+      }
+      
+      displayNextBatch();
+    }
   } catch (err) {
     console.error("Fetch Error:", err);
   }
 }
+
 
 function displayNextBatch() {
   const listContainer = document.getElementById("topTradersList");

@@ -1,0 +1,37 @@
+User-agent: *
+# Private / Admin Pages - Crawl nahi karne
+Disallow: /admin-alerts.html
+Disallow: /admin.html
+Disallow: /admin2.html
+Disallow: /courseedit.html
+Disallow: /dashboard.html
+Disallow: /email.html
+Disallow: /login.html
+Disallow: /mycourse.html
+Disallow: /profile.html
+Disallow: /register.html
+Disallow: /reset.html
+Disallow: /review.html
+Disallow: /verify.html
+Disallow: /view-alart.html
+Disallow: /watch.html
+
+# Public Pages - Crawl allowed
+Allow: /about.html
+Allow: /aboutus.html
+Allow: /basictoadvance.html
+Allow: /contact.html
+Allow: /disclaimer.html
+Allow: /index.html
+Allow: /lifetimeaccess.html
+Allow: /livemarketanalysis.html
+Allow: /privacy.html
+Allow: /refund.html
+Allow: /riskmanagement.html
+Allow: /service.html
+Allow: /supportcommunity.html
+Allow: /terms.html
+Allow: /verify.html
+
+# Sitemap location
+Sitemap: https://br30trader.com/sitemap.xml
