@@ -305,6 +305,36 @@ p {
   }
 }
 
+/* मोबाइल स्क्रीन (768px से कम) के लिए */
+@media screen and (max-width: 768px) {
+  
+  /* Welcome मैसेज को पूरी तरह छुपाने के लिए */
+  .welcome.trader {
+    display: none !important;
+      margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  /* अगर आप चाहते हैं कि मोबाइल पर Logo का टेक्स्ट दिखे (चूंकि Welcome हट गया है) */
+  .logo-text {
+    display: block !important;
+    font-size: 1.1rem;
+  }
+
+
+  .logo-title a {
+    display: flex !important;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  /* अगर आप चाहते हैं कि वेब पर Welcome दिखे तो इसे 'block' रखें */
+  .welcome.trader {
+    display: block; 
+  }
+}
+
 
 /* 1. पूरे हेडर को एक लाइन में सेट करना */
 header {
