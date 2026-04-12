@@ -285,7 +285,6 @@ p {
        margin-left: -20px; 
         text-align: left;
     transform: translate(-50%, -50%) !important;
-    display: block !important;
     /* सुनिश्चित करें कि ये छुपा न हो */
     z-index: 9999 !important;
     width: auto !important;
@@ -302,6 +301,14 @@ p {
   .nav-right {
     gap: 8px !important;
     /* बेल और मेनू के बीच की दूरी कम करें */
+  }
+}
+
+/* --- Web View (Desktop) के लिए सेटिंग्स --- */
+@media screen and (min-width: 769px) {
+  /* वेब पर 'Welcome' दिखेगा */
+  .welcome.trader {
+    display: block !important;
   }
 }
 
