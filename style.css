@@ -338,7 +338,7 @@ p {
 @media screen and (min-width: 769px) {
   /* अगर आप चाहते हैं कि वेब पर Welcome दिखे तो इसे 'block' रखें */
   .welcome.trader {
-    display: block; 
+    display: block !important; 
   }
 }
 
