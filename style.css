@@ -181,61 +181,32 @@ p {
 }
 
 /* Desktop Navigation Links */
-/* ================= NAVBAR ================= */
-/* ================= RESET BASIC ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ================= NAVBAR WRAPPER ================= */
-nav {
-  width: 100%;
-  padding: 12px 20px;
-  background: #020617;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-/* ================= NAV CONTAINER ================= */
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ================= NAV LINKS ================= */
+/* nav container */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 20px;
 }
 
-/* ================= NAV ITEM ================= */
+/* nav item */
 .nav-item {
   position: relative;
 }
 
-/* ================= MAIN LINKS ================= */
+/* main links */
 .nav-item > a {
   color: #e2e8f0;
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 500;
   padding: 6px 8px;
-  display: inline-block;
-  transition: all 0.25s ease;
+  transition: 0.25s;
 }
 
-/* hover */
 .nav-item > a:hover {
   color: #00ffcc;
-  text-shadow: 0 0 6px rgba(0,255,200,0.4);
 }
 
-/* ================= DROPDOWN FIX ================= */
-
-/* invisible bridge (no disappear issue) */
+/* 🔥 invisible bridge (fix disappear issue) */
 .nav-item.dropdown::after {
   content: "";
   position: absolute;
@@ -245,20 +216,20 @@ nav {
   height: 12px;
 }
 
-/* dropdown box */
+/* dropdown */
 .nav-dropdown {
   position: absolute;
   top: 100%;
   left: 0;
   margin-top: 8px;
 
+  width: 220px;
   background: #020617;
-  min-width: 190px;
 
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
 
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
   overflow: hidden;
 
   /* animation */
@@ -272,24 +243,18 @@ nav {
 /* dropdown links */
 .nav-dropdown a {
   display: block;
-  padding: 11px 15px;
+  padding: 12px 16px;
   color: #e2e8f0;
   text-decoration: none;
   font-size: 0.9rem;
   transition: 0.2s;
 }
 
-/* hover dropdown links */
+/* hover */
 .nav-dropdown a:hover {
-  background: #122527;
+  background: #0f172a;
   color: #00ffcc;
-}
-
-/* divider */
-.nav-dropdown hr {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  margin: 5px 0;
+  padding-left: 20px;
 }
 
 /* show dropdown */
@@ -299,19 +264,15 @@ nav {
   pointer-events: auto;
 }
 
-/* ================= REMOVE HAMBURGER ================= */
-.menu-icon {
-  display: none !important;
+/* arrow rotate */
+.nav-item.dropdown > a::after {
+  content: " ▼";
+  font-size: 0.7rem;
 }
 
-/* ================= FORCE NAV SHOW (NO HIDE ISSUE) ================= */
-@media (max-width: 768px) {
-  .nav-links {
-    display: flex !important;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+.nav-item.dropdown:hover > a::after {
+  transform: rotate(180deg);
+  display: inline-block;
 }
 
 /* Right Group (AI + Bell) */
