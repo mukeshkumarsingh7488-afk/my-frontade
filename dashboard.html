@@ -477,7 +477,7 @@
     </div>
 
     <div class="main-content">
-      <div class="header" id="user">
+      <div class="header">
         <h2 style="font-size: 20px; letter-spacing: 0.5px">
          👑 Master Admin Dashboard 
         </h2>
@@ -556,19 +556,18 @@
    <script src="config.js"></script>
     <script>
         // 0. 🛡️ Admin Security Check (Sirf aapke liye)
-        document.addEventListener("DOMContentLoaded", () => {
-            const role = localStorage.getItem("role");
-            const token = localStorage.getItem("token");
-            const username = localStorage.getItem("username") || "Admin";
+document.addEventListener("DOMContentLoaded", () => {
+    const role = localStorage.getItem("role");
+    const token = localStorage.getItem("token");
 
-            if (!token || role !== "admin") {
-                alert("Bhai, ye sirf Admin ke liye hai!");
-                window.location.href = "login.html"; // Wapas bhej do agar admin nahi hai
-            } else {
-                document.getElementById("user").innerText = "Welcome, " + username;
-                loadStats(); // Agar admin hai toh stats load karo
-            }
-        });
+    if (!token || role !== "admin") {
+        alert("Bhai, ye sirf Admin ke liye hai!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    loadStats(); // Agar admin hai toh stats load karo
+});
 
         // 1. 📊 Stats Load Karne Ka Logic
         async function loadStats() {
@@ -688,7 +687,5 @@ document.addEventListener("DOMContentLoaded", loadStats);
         }
 
     </script>
-
-<script> document.addEventListener("DOMContentLoaded", () => { const username = localStorage.getItem("username") || "Guest"; const userDisplay = document.getElementById("user"); userDisplay.innerText = "Welcome, " + username; }); </script>
   </body>
 </html>
