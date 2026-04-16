@@ -1543,36 +1543,34 @@ async function syncLatestPrices() {
 document.addEventListener("DOMContentLoaded", syncLatestPrices);
 
 // COUPEN OFFER DISCOUNT LOGIC cousrs scetion oneclick coupen apply
-// 1. GLOBAL VARIABLE
-let currentCoupon = null;
+window.currentCoupon = null;
 
 // 2. ⏳ Load Coupon Function
 async function loadLatestCoupon() {
-  console.log("🔍 Checking for Discount...");
+  console.log("🔍 Checking for Active Discount...");
   try {
-    // Pura URL use karo taaki error na aaye
     const res = await fetch(`${window.API_BASE_URL}/api/auth/latest-coupon`);
     const data = await res.json();
 
     if (data.success && data.coupon) {
-      currentCoupon = data.coupon;
+      // ✅ Pro Level: Global Variable set kiya
+      window.currentCoupon = data.coupon;
 
-      // 🎯 Boxes ko dhundo
       const boxes = document.querySelectorAll(".coupon-display-box");
       if (boxes.length === 0) {
-        console.error("❌ Error: HTML mein '.coupon-display-box' nahi mila!");
+        console.warn("⚠️ Warning: HTML mein '.coupon-display-box' nahi mila!");
         return;
       }
 
       boxes.forEach((box) => {
-        box.style.display = "block"; // 🔥 Dikhao box ko
+        box.style.display = "flex"; // Ya "block" jo aapke design mein fit ho
 
-        // Code aur Discount update
+        // 🎯 Elements update (with optional chaining to prevent errors)
         const codeSpan = box.querySelector(".active-code");
-        if (codeSpan) codeSpan.innerText = currentCoupon.code;
+        if (codeSpan) codeSpan.innerText = data.coupon.code;
 
         const discLabel = box.querySelector(".discount-val");
-        if (discLabel) discLabel.innerText = currentCoupon.discount;
+        if (discLabel) discLabel.innerText = data.coupon.discount;
 
         // ⏳ Countdown logic
         let expiryTag = box.querySelector(".expiry-countdown");
@@ -1585,15 +1583,17 @@ async function loadLatestCoupon() {
         }
         expiryTag.innerText = `⏳ Only ${data.daysLeft || 7} Days Left!`;
       });
-      console.log("✅ Coupon Loaded Successfully!");
+      console.log("✅ Coupon Loaded:", data.coupon.code);
     } else {
       console.log("ℹ️ No active coupon found.");
+      window.currentCoupon = null;
       document
         .querySelectorAll(".coupon-display-box")
         .forEach((box) => (box.style.display = "none"));
     }
   } catch (e) {
-    console.error("❌ Fetch Error:", e);
+    console.error("❌ Coupon Fetch Error:", e);
+    window.currentCoupon = null; // Error pe null rakho taaki purana logic fail na ho
   }
 }
 
