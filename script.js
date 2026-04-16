@@ -1553,7 +1553,6 @@ async function loadLatestCoupon() {
     const data = await res.json();
 
     if (data.success && data.coupon) {
-      // ✅ Pro Level: Global Variable set kiya
       window.currentCoupon = data.coupon;
 
       const boxes = document.querySelectorAll(".coupon-display-box");
@@ -1563,14 +1562,36 @@ async function loadLatestCoupon() {
       }
 
       boxes.forEach((box) => {
-        box.style.display = "flex"; // Ya "block" jo aapke design mein fit ho
+        // ✅ UI FIX: Box alignment ko sahi kiya
+        box.style.display = "flex";
+        box.style.flexDirection = "column"; // Elements vertically align honge
+        box.style.alignItems = "center";
+        box.style.justifyContent = "center";
 
-        // 🎯 Elements update (with optional chaining to prevent errors)
+        // 🎯 Elements update
         const codeSpan = box.querySelector(".active-code");
         if (codeSpan) codeSpan.innerText = data.coupon.code;
 
         const discLabel = box.querySelector(".discount-val");
         if (discLabel) discLabel.innerText = data.coupon.discount;
+
+        // ✅ BUTTON STYLE FIX: "APPLIED!" button ko makkhan banaya
+        const applyBtn =
+          box.querySelector("button") ||
+          box.querySelector(".apply-discount-btn");
+        if (applyBtn) {
+          applyBtn.innerHTML = "✔ APPLIED";
+          applyBtn.style.background = "#059669"; // Emerald Green
+          applyBtn.style.color = "white";
+          applyBtn.style.padding = "5px 12px";
+          applyBtn.style.fontSize = "10px";
+          applyBtn.style.borderRadius = "50px"; // Rounded pill shape
+          applyBtn.style.border = "none";
+          applyBtn.style.fontWeight = "bold";
+          applyBtn.style.cursor = "default";
+          applyBtn.style.marginTop = "5px";
+          applyBtn.style.boxShadow = "0 0 10px rgba(5, 150, 105, 0.3)";
+        }
 
         // ⏳ Countdown logic
         let expiryTag = box.querySelector(".expiry-countdown");
@@ -1578,7 +1599,7 @@ async function loadLatestCoupon() {
           expiryTag = document.createElement("div");
           expiryTag.className = "expiry-countdown";
           expiryTag.style =
-            "color: #f87171; font-size: 11px; margin-top: 8px; font-weight: 800; text-transform: uppercase; animation: blink-expiry 1.5s infinite;";
+            "color: #f87171; font-size: 10px; margin-top: 8px; font-weight: 800; text-transform: uppercase; animation: blink-expiry 1.5s infinite;";
           box.appendChild(expiryTag);
         }
         expiryTag.innerText = `⏳ Only ${data.daysLeft || 7} Days Left!`;
@@ -1593,7 +1614,7 @@ async function loadLatestCoupon() {
     }
   } catch (e) {
     console.error("❌ Coupon Fetch Error:", e);
-    window.currentCoupon = null; // Error pe null rakho taaki purana logic fail na ho
+    window.currentCoupon = null;
   }
 }
 
