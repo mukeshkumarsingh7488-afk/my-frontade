@@ -508,7 +508,7 @@
 
       <div class="stats-grid">
         <div class="stat-card blue">
-          <h3>TOTAL</h3>
+          <h3>TOTAL USER</h3>
           <p id="total-count">₹0</p>
         </div>
         <div class="stat-card green">
@@ -588,7 +588,10 @@ const res = await fetch(`${window.API_BASE_URL}/api/auth/user-stats`, {
                     }
                 });
 
+                console.log("STATUS:", res.status);
+
                 const data = await res.json();
+                console.log("DATA:", data);
 
                 if (data.success) {
                     document.getElementById("total-count").innerText = data.totalUsers;
@@ -601,7 +604,8 @@ const res = await fetch(`${window.API_BASE_URL}/api/auth/user-stats`, {
                 console.error("Stats fetch karne mein locha:", e.message);
             }
         }
-
+// ✅ IMPORTANT CALL
+document.addEventListener("DOMContentLoaded", loadStats);
 
         // 2. ✉️ Bulk Mail Bhejne Ka Logic (BCC Target System)
         async function sendBulkMail() {
