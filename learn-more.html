@@ -1,154 +1,474 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- =========================
+       Google Tag Manager
+  ========================== -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TT7SLZ4L");
+    </script>
+
+    <!-- Basic Setup -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BR30 Trading - Learn More</title>
+
+    <!-- 🔥 Learn More Page Title -->
+    <title>BR30 Trader | Learn More - Trading Strategies & VIP Access</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Learn more about BR30 Trader strategies including option buying, selling, scalping, BTST, crypto & VIP trading system."
+    />
+
+    <meta
+      name="keywords"
+      content="BR30 Trader, learn trading, option buying strategy, option selling, scalping, BTST, crypto trading India, VIP trading"
+    />
+
+    <meta name="author" content="BR30 Trader" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://br30trader.com/learn-more.html" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg"
+      type="image/png"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="BR30 Trader | Learn More Page" />
+    <meta
+      property="og:description"
+      content="Explore BR30 Trader advanced strategies and VIP trading system."
+    />
+    <meta
+      property="og:image"
+      content="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg"
+    />
+    <meta property="og:url" content="https://br30trader.com/learn-more.html" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BR30 Trader Learn More" />
+    <meta
+      name="twitter:description"
+      content="Advanced trading strategies, VIP access & market education."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg"
+    />
+
+    <!-- Google Verification -->
+    <meta
+      name="google-site-verification"
+      content="u6_JlN-IlwPHN6vE3oG5rGPQdrqYgzFkbyLshK_RaHU"
+    />
+
+    <!-- Facebook Pixel -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+
+      fbq("init", "977178398211683");
+      fbq("track", "PageView");
+    </script>
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1BGGYNDEKH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-1BGGYNDEKH");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <!-- Trustpilot -->
+    <script
+      type="text/javascript"
+      src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+      async
+    ></script>
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BR30 Trader",
+        "url": "https://br30trader.com/",
+        "logo": "https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg",
+        "founder": {
+          "@type": "Person",
+          "name": "Mukesh Raj"
+        }
+      }
+    </script>
 
     <style>
+      :root {
+        --primary: #a855f7;
+        --secondary: #d4af37; /* Gold */
+        --bg-dark: #080808;
+        --card-bg: rgba(255, 255, 255, 0.03);
+        --border: rgba(255, 255, 255, 0.1);
+      }
+
       body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0f0f0f;
-        color: #fff;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg-dark);
+        color: #e2e8f0;
+        line-height: 1.6;
+        letter-spacing: 0.5px; /* Professional spacing */
       }
 
       .container {
-        max-width: 900px;
+        max-width: 850px;
         margin: auto;
-        padding: 20px;
+        padding: 40px 20px;
       }
 
       h1 {
         text-align: center;
-        color: #a855f7;
-        margin-bottom: 30px;
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 50px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #ec4899;
+      }
+
+      h1 span {
+        background: linear-gradient(to right, #a855f7, #ec4899);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
       }
 
       .card {
-        background: #161616;
-        border: 1px solid #2a2a2a;
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
       }
 
       .step {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 10px;
+        gap: 15px;
+        margin-bottom: 20px;
       }
 
       .badge {
-        background: #a855f7;
-        padding: 8px 12px;
-        border-radius: 50%;
-        font-weight: bold;
+        background: linear-gradient(135deg, #a855f7, #7e22ce);
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-weight: 800;
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: #fff;
+        letter-spacing: 1px;
+      }
+
+      p {
+        color: #94a3b8;
+        font-size: 1rem;
+        text-align: justify;
+      }
+
+      /* 📋 Listing Style for Strategies */
+      .strategy-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 12px;
+      }
+
+      .strategy-item {
+        background: rgba(168, 85, 247, 0.08);
+        padding: 12px 18px;
+        border-radius: 10px;
+        border-left: 4px solid var(--primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #f1f5f9;
+        display: flex;
+        align-items: center;
+        letter-spacing: 1px;
+      }
+
+      .strategy-item::before {
+        content: "📈";
+        margin-right: 10px;
       }
 
       .vip-box {
-        background: linear-gradient(135deg, #2b1055, #4b1248);
-        border: 1px solid #a855f7;
-        padding: 25px;
-        border-radius: 15px;
+        background: linear-gradient(145deg, #1e1b4b, #312e81);
+        border: 2px solid var(--primary);
+        padding: 40px;
+        border-radius: 30px;
         text-align: center;
-        margin-top: 30px;
+        margin-top: 50px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .vip-box::after {
+        content: "VIP";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        font-size: 8rem;
+        font-weight: 900;
+        opacity: 0.05;
+        color: #fff;
       }
 
       .vip-box h2 {
-        margin-bottom: 10px;
+        font-size: 2rem;
+        color: var(--secondary);
+        margin-bottom: 15px;
+        letter-spacing: 1px;
       }
 
       .btn {
         display: inline-block;
-        margin-top: 15px;
-        background: #ff4d4d;
+        margin-top: 25px;
+        background: linear-gradient(90deg, #ff4d4d, #f91b1b);
         color: white;
-        padding: 12px 20px;
-        border-radius: 25px;
+        padding: 16px 35px;
+        border-radius: 50px;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 800;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
         transition: 0.3s;
+        box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
       }
 
       .btn:hover {
-        background: #ff1f1f;
-        transform: scale(1.05);
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 15px 30px rgba(255, 77, 77, 0.5);
       }
 
       .home {
         text-align: center;
-        margin-top: 30px;
+        margin-top: 40px;
       }
 
       .home a {
-        color: #aaa;
+        color: #64748b;
         text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: 0.3s;
       }
 
       .home a:hover {
-        color: #fff;
+        color: var(--primary);
+        letter-spacing: 2px;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2rem;
+        }
+        .vip-box {
+          padding: 25px;
+        }
+        .strategy-list {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
 
   <body>
+    <!-- ✅ Google Analytics (GA4) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1BGGYNDEKH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-1BGGYNDEKH");
+    </script>
+
     <div class="container">
-      <h1>🚀 BR30 Trading - Learn More</h1>
+      <h1>🚀 Learn More</h1>
 
       <!-- SECTION 1 -->
       <div class="card">
         <div class="step">
-          <div class="badge">1</div>
+          <div class="badge">01</div>
           <h3>Professional Trading System</h3>
         </div>
         <p>
-          Humara BR30 Trading system aapko beginner se pro trader banane ke liye
-          design kiya gaya hai. Live market guidance + strategy learning.
+          BR30 Trading ek advanced learning ecosystem hai jahan aapko beginner
+          se pro trader banne ke liye complete roadmap milta hai. Yahan hum sirf
+          theory nahi, real market based practical strategies sikhate hain jo
+          live trading mein use hoti hain.
         </p>
+
+        <p style="color: #fff; font-weight: 600; margin-top: 25px">
+          📊 Our Core Strategies:
+        </p>
+        <ul class="strategy-list">
+          <li class="strategy-item">Advanced Option Buying</li>
+          <li class="strategy-item">Advanced Option Selling</li>
+          <li class="strategy-item">Advanced BTST Mastery</li>
+          <li class="strategy-item">Crypto & Forex Pro</li>
+          <li class="strategy-item" style="border-color: gold">
+            One Side Momentum (VIP)
+          </li>
+          <li class="strategy-item">Scalping Strategy Pro</li>
+        </ul>
       </div>
 
       <!-- SECTION 2 -->
-      <div class="card">
+      <div class="card" style="animation-delay: 0.2s">
         <div class="step">
-          <div class="badge">2</div>
+          <div class="badge">02</div>
           <h3>Interactive Learning</h3>
         </div>
         <p>
-          Sirf videos nahi — aapka progress track hota hai. 100% completion ke
-          baad certificate automatically generate hota hai.
+          Sirf videos nahi — aapka real-time progress track hota hai. Har module
+          complete hone par aapka confidence build hota hai aur 100% completion
+          ke baad
+          <b>Professional Certificate</b>
+          automatically generate hota hai.
         </p>
       </div>
 
       <!-- SECTION 3 -->
-      <div class="card">
+      <div class="card" style="animation-delay: 0.4s">
         <div class="step">
-          <div class="badge">3</div>
-          <h3>Assets & Tools</h3>
+          <div class="badge">03</div>
+          <h3>Premium Assets & Tools</h3>
         </div>
         <p>
-          Indicators, trading journals, premium templates aur expert tools sab
-          available hain jo real traders use karte hain.
+          Aapko milenge exclusive Indicators, trading journals, aur premium
+          templates. Ye wo tools hain jinhe expert traders market analyze karne
+          ke liye use karte hain.
         </p>
       </div>
 
       <!-- VIP SECTION (BOTTOM CTA) -->
-      <div class="vip-box">
-        <h2>💎 Unlock VIP Access</h2>
-        <p>
-          VIP members ko milta hai exclusive signals, premium assets, advanced
-          strategies aur private updates.
+      <div class="vip-box" style="animation-delay: 0.6s">
+        <h2>💎 Unlock VIP Membership</h2>
+        <p style="text-align: center; color: #cbd5e1">
+          VIP members ko milte hain exclusive signals, premium assets, advanced
+          private strategies aur lifetime updates.
         </p>
 
-        <!-- IMPORTANT BUTTON -->
-        <a href="index.html#coursesection" class="btn"> Get VIP Access Now </a>
+        <a href="index.html#coursesection" class="btn">Get VIP Access Now</a>
       </div>
 
       <!-- BACK -->
       <div class="home">
-        <a href="index.html">🏠 Back to Home</a>
+        <a href="index.html">← BACK TO HOME</a>
       </div>
     </div>
   </body>
