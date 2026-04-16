@@ -1,216 +1,474 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <!-- =========================
+       Google Tag Manager
+  ========================== -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TT7SLZ4L");
+    </script>
+
+    <!-- Basic Setup -->
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 🔥 Learn More Page Title -->
+    <title>BR30 Trader | Learn More - Trading Strategies & VIP Access</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Learn more about BR30 Trader strategies including option buying, selling, scalping, BTST, crypto & VIP trading system."
+    />
+
+    <meta
+      name="keywords"
+      content="BR30 Trader, learn trading, option buying strategy, option selling, scalping, BTST, crypto trading India, VIP trading"
+    />
+
+    <meta name="author" content="BR30 Trader" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://br30trader.com/learn-more.html" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg"
+      type="image/png"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="BR30 Trader | Learn More Page" />
+    <meta
+      property="og:description"
+      content="Explore BR30 Trader advanced strategies and VIP trading system."
+    />
+    <meta
+      property="og:image"
+      content="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg"
+    />
+    <meta property="og:url" content="https://br30trader.com/learn-more.html" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BR30 Trader Learn More" />
+    <meta
+      name="twitter:description"
+      content="Advanced trading strategies, VIP access & market education."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg"
+    />
+
+    <!-- Google Verification -->
+    <meta
+      name="google-site-verification"
+      content="u6_JlN-IlwPHN6vE3oG5rGPQdrqYgzFkbyLshK_RaHU"
+    />
+
+    <!-- Facebook Pixel -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+
+      fbq("init", "977178398211683");
+      fbq("track", "PageView");
+    </script>
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1BGGYNDEKH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-1BGGYNDEKH");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <!-- Trustpilot -->
+    <script
+      type="text/javascript"
+      src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+      async
+    ></script>
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BR30 Trader",
+        "url": "https://br30trader.com/",
+        "logo": "https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg",
+        "founder": {
+          "@type": "Person",
+          "name": "Mukesh Raj"
+        }
+      }
+    </script>
+
     <style>
-      /* Web & Laptop Rendering Fix (Laptop par text saaf dikhne ke liye) */
-      .email-body {
-        background-color: #000000;
-        padding: 40px 20px;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        margin: 0;
-      }
-      .card {
-        max-width: 500px;
-        margin: auto;
-        background: #0a0a0a;
-        border-radius: 24px;
-        border: 2px solid #ff4d4d;
-        overflow: hidden;
-        box-shadow: 0 0 30px rgba(255, 77, 77, 0.2);
-      }
-      .banner {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-bottom: 2px solid #ff4d4d;
+      :root {
+        --primary: #a855f7;
+        --secondary: #d4af37; /* Gold */
+        --bg-dark: #080808;
+        --card-bg: rgba(255, 255, 255, 0.03);
+        --border: rgba(255, 255, 255, 0.1);
       }
 
-      /* Content Styling - Force White on Web */
-      .content {
-        padding: 40px 30px;
-        text-align: center;
-        color: #ffffff !important;
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg-dark);
+        color: #e2e8f0;
+        line-height: 1.6;
+        letter-spacing: 0.5px; /* Professional spacing */
       }
-      .security-txt {
-        color: #ff4d4d !important;
-        font-size: 22px;
+
+      .container {
+        max-width: 850px;
+        margin: auto;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.8rem;
         font-weight: 800;
-        margin-bottom: 10px;
+        margin-bottom: 50px;
+        letter-spacing: 2px;
         text-transform: uppercase;
+        color: #ec4899;
+      }
+
+      h1 span {
+        background: linear-gradient(to right, #a855f7, #ec4899);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .badge {
+        background: linear-gradient(135deg, #a855f7, #7e22ce);
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-weight: 800;
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: #fff;
         letter-spacing: 1px;
       }
 
-      /* Mobile OTP Box Fix */
-      .otp-box {
-        background: rgba(255, 77, 77, 0.05);
-        border: 1px dashed #ff4d4d;
-        border-radius: 16px;
-        padding: 25px;
-        margin: 30px 0;
-      }
-      .otp-code {
-        margin: 0;
-        font-size: 35px;
-        letter-spacing: 8px;
-        color: #ff4d4d !important;
-        font-weight: 800;
-        text-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
-        word-break: break-all;
+      p {
+        color: #94a3b8;
+        font-size: 1rem;
+        text-align: justify;
       }
 
-      .footer {
-        background: #000000;
-        padding: 30px;
+      /* 📋 Listing Style for Strategies */
+      .strategy-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 12px;
+      }
+
+      .strategy-item {
+        background: rgba(168, 85, 247, 0.08);
+        padding: 12px 18px;
+        border-radius: 10px;
+        border-left: 4px solid var(--primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #f1f5f9;
+        display: flex;
+        align-items: center;
+        letter-spacing: 1px;
+      }
+
+      .strategy-item::before {
+        content: "📈";
+        margin-right: 10px;
+      }
+
+      .vip-box {
+        background: linear-gradient(145deg, #1e1b4b, #312e81);
+        border: 2px solid var(--primary);
+        padding: 40px;
+        border-radius: 30px;
         text-align: center;
-        border-top: 1px solid #1a1a1a;
+        margin-top: 50px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       }
-      .security-tag {
-        color: #ff4d4d !important;
-        font-weight: 700;
-        font-size: 14px;
+
+      .vip-box::after {
+        content: "VIP";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        font-size: 8rem;
+        font-weight: 900;
+        opacity: 0.05;
+        color: #fff;
       }
-      .signature {
-        color: #64748b !important;
-        font-size: 13px;
-        line-height: 1.6;
+
+      .vip-box h2 {
+        font-size: 2rem;
+        color: var(--secondary);
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 25px;
+        background: linear-gradient(90deg, #ff4d4d, #f91b1b);
+        color: white;
+        padding: 16px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.3s;
+        box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+      }
+
+      .btn:hover {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 15px 30px rgba(255, 77, 77, 0.5);
+      }
+
+      .home {
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .home a {
+        color: #64748b;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .home a:hover {
+        color: var(--primary);
+        letter-spacing: 2px;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2rem;
+        }
+        .vip-box {
+          padding: 25px;
+        }
+        .strategy-list {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
-  <body class="email-body">
-    <div class="card">
-      <!-- Security Banner -->
-      <img
-        src="https://i.ibb.co/ns0Ww0gg/red-burner-jpg.jpg"
-        alt="Security Banner"
-        class="banner"
-      />
 
-      <div class="content">
-        <div class="security-txt">Password Reset Request</div>
+  <body>
+    <!-- ✅ Google Analytics (GA4) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1BGGYNDEKH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-1BGGYNDEKH");
+    </script>
 
-        <!-- Pro English & Web Clear Text -->
-        <p style="color: #cbd5e1 !important; font-size: 15px; line-height: 1.6">
-          Hi <b>${name}</b>, we received a request to reset your password. Use
-          the secure verification code below to proceed.
+    <div class="container">
+      <h1>🚀 Learn More</h1>
+
+      <!-- SECTION 1 -->
+      <div class="card">
+        <div class="step">
+          <div class="badge">01</div>
+          <h3>Professional Trading System</h3>
+        </div>
+        <p>
+          BR30 Trading ek advanced learning ecosystem hai jahan aapko beginner
+          se pro trader banne ke liye complete roadmap milta hai. Yahan hum sirf
+          theory nahi, real market based practical strategies sikhate hain jo
+          live trading mein use hoti hain.
         </p>
 
-        <div class="otp-box">
-          <h1 class="otp-code">${otp}</h1>
-        </div>
+        <p style="color: #fff; font-weight: 600; margin-top: 25px">
+          📊 Our Core Strategies:
+        </p>
+        <ul class="strategy-list">
+          <li class="strategy-item">Advanced Option Buying</li>
+          <li class="strategy-item">Advanced Option Selling</li>
+          <li class="strategy-item">Advanced BTST Mastery</li>
+          <li class="strategy-item">Crypto & Forex Pro</li>
+          <li class="strategy-item" style="border-color: gold">
+            One Side Momentum (VIP)
+          </li>
+          <li class="strategy-item">Scalping Strategy Pro</li>
+        </ul>
+      </div>
 
-        <p
-          style="color: #ff4d4d !important; font-size: 12px; font-weight: bold"
-        >
-          ⚠️ Valid for 5 minutes only.
+      <!-- SECTION 2 -->
+      <div class="card" style="animation-delay: 0.2s">
+        <div class="step">
+          <div class="badge">02</div>
+          <h3>Interactive Learning</h3>
+        </div>
+        <p>
+          Sirf videos nahi — aapka real-time progress track hota hai. Har module
+          complete hone par aapka confidence build hota hai aur 100% completion
+          ke baad <b>Professional Certificate</b> automatically generate hota
+          hai.
         </p>
       </div>
 
-      <div class="footer">
-        <div class="signature">
-          Regards,<br />
-          <span class="security-tag">BR30 Support Team</span><br />
-          Official Support & Security Division
+      <!-- SECTION 3 -->
+      <div class="card" style="animation-delay: 0.4s">
+        <div class="step">
+          <div class="badge">03</div>
+          <h3>Premium Assets & Tools</h3>
         </div>
+        <p>
+          Aapko milenge exclusive Indicators, trading journals, aur premium
+          templates. Ye wo tools hain jinhe expert traders market analyze karne
+          ke liye use karte hain.
+        </p>
+      </div>
 
-        <!-- OFFICIAL NO-REPLY NOTE -->
-        <p
-          style="
-            color: #475569 !important;
-            font-size: 10px;
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-          "
-        >
-          🚫 <b>Note:</b> This is an automated security email. Please
-          <b>do not reply</b> to this message.
+      <!-- VIP SECTION (BOTTOM CTA) -->
+      <div class="vip-box" style="animation-delay: 0.6s">
+        <h2>💎 Unlock VIP Membership</h2>
+        <p style="text-align: center; color: #cbd5e1">
+          VIP members ko milte hain exclusive signals, premium assets, advanced
+          private strategies aur lifetime updates.
         </p>
 
-        <!-- 🚀 Social Links -->
-        <div
-          style="
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #111;
-          "
-        >
-          <p style="color: #00ff88; font-size: 11px; letter-spacing: 2px">
-            JOIN OUR COMMUNITY 🚀
-          </p>
+        <a href="index.html#coursesection" class="btn"> Get VIP Access Now </a>
+      </div>
 
-          <!-- YouTube -->
-          <a href="https://www.youtube.com" target="_blank">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
-              width="22"
-              style="margin: 0 5px"
-            />
-          </a>
-
-          <!-- Instagram -->
-          <a
-            href="https://www.instagram.com/br30traderofficial?igsh=MWN5eHBscWY5bXFvMw=="
-            target="_blank"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-              width="22"
-              style="margin: 0 5px"
-            />
-          </a>
-
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/share/1DDJYGYYDf/" target="_blank">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-              width="17"
-              style="
-                background: #1877f2;
-                border-radius: 50%;
-                padding: 3px;
-                margin: 0 5px;
-              "
-            />
-          </a>
-
-          <!-- Telegram -->
-          <a href="https://t.me/+F8mDhdfiGaI1NDY1" target="_blank">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"
-              width="22"
-              style="margin: 0 5px"
-            />
-          </a>
-
-          <!-- WhatsApp -->
-          <a
-            href="https://chat.whatsapp.com/B4t82SWBcgOIZTeQXp1wDI"
-            target="_blank"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-              width="22"
-              style="margin: 0 5px"
-            />
-          </a>
-        </div>
-
-        <div
-          style="
-            margin-top: 25px;
-            font-size: 10px;
-            color: #576172;
-            text-align: center;
-          "
-        >
-          © 2026 BR30 Global Service. Secure Access Guaranteed.
-        </div>
+      <!-- BACK -->
+      <div class="home">
+        <a href="index.html">← BACK TO HOME</a>
       </div>
     </div>
   </body>
 </html>
-`;
