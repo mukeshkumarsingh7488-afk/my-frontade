@@ -1047,7 +1047,7 @@ if (
 /* ============================================================
    🚀 BR30 TRADER - ULTRA PRO MAX DYNAMIC PAYMENT ENGINE
 ============================================================ */
-
+//#region
 // 1. ✨ DYNAMIC PRICE LOADER (Same as before)
 async function loadLatestPrice() {
   try {
@@ -1185,7 +1185,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
+//#endregion
 // Window objects for global access
 window.checkout = checkout;
 window.toggleNotifications = function () {

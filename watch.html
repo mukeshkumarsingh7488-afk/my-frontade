@@ -244,14 +244,14 @@
 
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
+    <noscript>
+      <iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L"
         height="0"
         width="0"
         style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
+      ></iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <header>
       <h1 id="course-title">Course Title</h1>
@@ -463,11 +463,18 @@
         }
       }
 
-      // 🏆 4. CERTIFICATE SUBMIT & AUTO-DOWNLOAD LOGIC (Dynamic Course Fix)
+      // 🏆 4. CERTIFICATE SUBMIT & AUTO-DOWNLOAD LOGIC
       async function submitCertificate() {
         const name = document.getElementById("certName").value;
         const mobile = document.getElementById("certMobile").value;
         const btn = document.querySelector(".claim-btn");
+
+        // Safety Check for Base URL (Pichle error ko rokne ke liye)
+        const finalBaseUrl =
+          window.API_BASE_URL ||
+          (window.location.hostname === "localhost"
+            ? "http://localhost:5000"
+            : "");
 
         if (!name)
           return alert("Bhai, certificate ke liye apna poora naam toh likho!");
@@ -478,19 +485,18 @@
 
         try {
           const res = await fetch(
-            `${window.API_BASE_URL}/api/auth/claim-certificate`,
+            `${finalBaseUrl}/api/auth/claim-certificate`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
                 "x-auth-token": token,
               },
-              // ✅ UPDATE: Yahan 'courseName' bhej rahe hain taaki certificate pe dynamic name aaye
               body: JSON.stringify({
                 fullName: name,
-                mobile: mobile,
+                mobile: mobile, // ✅ Backend ko ja raha hai
                 courseId: courseId,
-                courseName: currentCourseName, // 👈 Ye zaroori hai dynamic name ke liye
+                courseName: currentCourseName,
               }),
             },
           );
@@ -501,7 +507,7 @@
             // ✅ Naye tab mein PDF kholo
             window.open(data.downloadUrl, "_blank");
 
-            // 📥 FORCE DOWNLOAD Logic
+            // 📥 FORCE DOWNLOAD Logic (Premium Feature)
             const link = document.createElement("a");
             link.href = data.downloadUrl;
             link.setAttribute("target", "_blank");
@@ -510,43 +516,37 @@
             link.click();
             document.body.removeChild(link);
 
-            // ✨ PRO POPUP: Alert ko replace karke premium look diya hai
+            // ✨ Elite SUCCESS POPUP
             Swal.fire({
               title: `<span style="color:#00ff88; font-weight:900;">SHABASH ${name.toUpperCase()}! 🏆</span>`,
               html: `
-                        <div style="color:#e2e8f0; font-size:15px; margin-top:10px;">
-                            Aapne <b>${currentCourseName}</b> ko successfully finish kar liya hai.<br><br>
-                            <span style="color:#94a3b8;">Aapka Certificate download ho raha hai aur ek copy aapke <b>Email</b> par bhi bhej di gayi hai. 🚀</span>
-                        </div>
-                    `,
+          <div style="color:#e2e8f0; font-size:15px; margin-top:10px;">
+            Aapne <b>${currentCourseName}</b> ko successfully finish kar liya hai.<br><br>
+            <span style="color:#94a3b8;">Aapka Certificate download ho raha hai aur ek copy aapke <b>Email</b> par bhi bhej di gayi hai. 🚀</span>
+          </div>
+        `,
               icon: "success",
               iconColor: "#00ff88",
-              background: "#0a0a0a", // Dark theme for premium look
+              background: "#0a0a0a",
               showConfirmButton: true,
               confirmButtonText: "MAZA AA GAYA! 🔥",
               confirmButtonColor: "#00ff88",
-              timer: 8000, // 8 second baad apne aap band ho jayega
-              backdrop: `rgba(0,255,136,0.1)`, // Greenish transparent background
-              customClass: {
-                popup: "border-vip", // Custom class for extra styling
-              },
+              timer: 8000,
+              backdrop: `rgba(0,255,136,0.1)`,
             });
 
             document.getElementById("cert-overlay").style.display = "none";
           } else {
-            // ❌ ERROR POPUP: Agar backend se error aaye
             Swal.fire({
               icon: "error",
               title: "Oops!",
-              text: data.msg || "Kuch gadbad hui, backend ne mana kar diya!",
+              text: data.msg || "Kuch gadbad hui!",
               background: "#0a0a0a",
               color: "#fff",
-              confirmButtonColor: "#ff4444",
             });
           }
         } catch (err) {
           console.error("Submit Error:", err);
-          // 🌐 CONNECTION ERROR POPUP
           Swal.fire({
             icon: "warning",
             title: "Server Issue!",
@@ -559,8 +559,6 @@
           btn.disabled = false;
         }
       }
-
-      window.onload = loadCourseContent;
     </script>
     <script></script>
   </body>
