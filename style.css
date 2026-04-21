@@ -219,9 +219,9 @@ p {
   background: #020617;
 
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
 
   opacity: 0;
   transform: translateY(8px);
@@ -265,7 +265,6 @@ p {
 }
 
 @media (max-width: 480px) {
-
   /* 1. लोगो और आइकन्स को थोड़ा छोटा करें ताकि बीच में जगह बने */
   .logo {
     width: 35px !important;
@@ -282,8 +281,8 @@ p {
     position: relative !important;
     left: 50% !important;
     top: 50% !important;
-       margin-left: -20px; 
-        text-align: left;
+    margin-left: -20px;
+    text-align: left;
     transform: translate(-50%, -50%) !important;
     /* सुनिश्चित करें कि ये छुपा न हो */
     z-index: 9999 !important;
@@ -314,11 +313,10 @@ p {
 
 /* मोबाइल स्क्रीन (768px से कम) के लिए */
 @media screen and (max-width: 768px) {
-  
   /* Welcome मैसेज को पूरी तरह छुपाने के लिए */
   .welcome.trader {
     display: none !important;
-      margin-left: 8px;
+    margin-left: 8px;
     white-space: nowrap;
   }
 
@@ -327,7 +325,6 @@ p {
     display: block !important;
     font-size: 1.1rem;
   }
-
 
   .logo-title a {
     display: flex !important;
@@ -338,10 +335,9 @@ p {
 @media screen and (min-width: 769px) {
   /* अगर आप चाहते हैं कि वेब पर Welcome दिखे तो इसे 'block' रखें */
   .welcome.trader {
-    display: block !important; 
+    display: block !important;
   }
 }
-
 
 /* 1. पूरे हेडर को एक लाइन में सेट करना */
 header {
@@ -368,11 +364,11 @@ header {
 }
 
 .welcome.trader h1 {
-  color: #FFD700;
+  color: #ffd700;
   /* गोल्ड या सफ़ेद जो आपको पसंद हो */
   white-space: nowrap;
   /* ताकि नाम एक ही लाइन में रहे */
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* 3. नेवबार (दाईं ओर के आइकन्स) को सेट करना */
@@ -400,8 +396,6 @@ header {
     /* मोबाइल में थोड़ा छोटा */
   }
 }
-
-
 
 /* पूरे हेडर को मैनेज करने के लिए */
 header {
@@ -466,16 +460,13 @@ header {
   transition: 0.3s ease-in-out;
 }
 
+/* JS se show hoga */
 
+.welcome.trader {
+  display: none;
+}
 
-  /* JS se show hoga */
-
-  .welcome.trader {
-    display: none;
-  }
-
-  /* Mobile pe space ke liye welcome hide kar sakte hain ya chota */
-
+/* Mobile pe space ke liye welcome hide kar sakte hain ya chota */
 
 /* --- Hero Section & Video Background --- */
 .hero-video {
@@ -748,7 +739,6 @@ span {
 }
  */
 
-
 /* Course Section */
 /* Course Section Overall */
 .course-section {
@@ -864,7 +854,6 @@ span {
   transition: opacity 0.5s ease-in-out;
   /* Smoothly dikhega */
 }
-
 
 /* --- Mobile View --- */
 @media (max-width: 1024px) {
@@ -1033,7 +1022,7 @@ select {
 }
 
 /* Review cards ke beech thoda gap taki clean dikhe */
-#reviewDisplay>div {
+#reviewDisplay > div {
   margin-bottom: 12px;
 }
 
@@ -1230,7 +1219,7 @@ select {
 }
 
 /* कंटेंट को ऊपर रखने के लिए */
-.review-list-box>* {
+.review-list-box > * {
   position: relative;
   z-index: 1;
 }
@@ -1255,9 +1244,7 @@ select {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(transparent,
-      transparent,
-      #00ff88);
+  background: conic-gradient(transparent, transparent, #00ff88);
   /* आपका पर्पल कलर */
   animation: rotateBox 4s linear infinite;
   z-index: -1;
@@ -1319,7 +1306,6 @@ select {
   border-radius: 5px;
   font-size: 0.9rem;
 }
-
 
 /*-- Trading master --*/
 .trading-network {
@@ -2140,7 +2126,6 @@ select {
   }
 }
 
-
 /*-- PDF Hub --*/
 .pdf-list.scrollable {
   max-height: 400px;
@@ -2338,7 +2323,6 @@ select {
 
 /* --- मोबाइल व्यू के लिए फाइनल फिक्स --- */
 @media (max-width: 768px) {
-
   /* 1. कार्ड्स के बीच सही जगह बनाना */
   .tool-card {
     display: flex !important;
@@ -2403,7 +2387,6 @@ select {
   }
 }
 
-
 /* --- पुराने किसी भी 'Section' की फालतू विड्थ हटाना --- */
 .section-title,
 .section-subtitle {
@@ -2421,10 +2404,12 @@ select {
 .gauge-base {
   width: 250px !important;
   height: 125px !important;
-  background: linear-gradient(90deg,
-      #ef4444 0%,
-      #fbbf24 50%,
-      #22c55e 100%) !important;
+  background: linear-gradient(
+    90deg,
+    #ef4444 0%,
+    #fbbf24 50%,
+    #22c55e 100%
+  ) !important;
   border-radius: 125px 125px 0 0 !important;
   position: relative;
   overflow: hidden;
@@ -2496,18 +2481,27 @@ select {
 }
 
 .input-group label {
-  color: #000 !important;
+  color: #a9b1c5 !important;
   font-size: 0.85rem !important;
+  font-weight: 500;
 }
-
 .input-group input {
   width: 100% !important;
-  /* बॉक्स पूरा चौड़ा होगा */
-  padding: 10px !important;
-  border: 1px solid rgba(160, 32, 240, 0.4) !important;
+  padding: 12px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
   border-radius: 8px !important;
-  color: #000 !important;
+  color: #fff !important;
+  caret-color: #00ff88 !important;
+  font-size: 1rem !important;
   outline: none !important;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #00ff88 !important;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2) !important;
+  background: rgba(0, 255, 136, 0.02) !important;
 }
 
 /* =========================================
@@ -2579,7 +2573,7 @@ select {
   position: relative;
 }
 
-.check-item input:checked+.custom-check {
+.check-item input:checked + .custom-check {
   background: #00ff88 !important;
   box-shadow: 0 0 10px #00ff88;
 }
@@ -2737,7 +2731,7 @@ select {
 
 .save-btn:hover {
   background: #00ff88;
-  color: black;
+  color: black !important;
   box-shadow: 0 0 20px #00ff88;
   transform: translateY(-2px);
 }
@@ -2812,6 +2806,7 @@ select {
 .pnl-btn.active-prof {
   background: #22c55e !important;
   border-color: #22c55e;
+  color: #000000 !important;
 }
 
 .pnl-btn.active-loss {
@@ -3282,7 +3277,6 @@ h3,
   position: relative;
   cursor: pointer;
   margin-right: 20px;
-
 }
 
 /* Jo bhi aapki notification box ki class hai */
@@ -3722,7 +3716,6 @@ h3,
 
 /* --- ANIMATIONS --- */
 @keyframes floatCore {
-
   0%,
   100% {
     transform: translateY(0) rotate(5deg);
@@ -3746,7 +3739,6 @@ h3,
 }
 
 @keyframes randomFloat {
-
   0%,
   100% {
     transform: translate(0, 0);
@@ -3948,7 +3940,6 @@ h3,
 
 /* Animations */
 @keyframes borderGlow {
-
   0%,
   100% {
     border-color: rgba(34, 197, 94, 0.2);
