@@ -3,25 +3,30 @@ const API_BASE = `${window.API_BASE_URL}/api/reviews`;
 let allReviews = []; // Global data for searching
 
 // 1. Fetch Reviews
+/**
+ * @function fetchReviews
+ * @description Fetches all reviews from the database and updates the UI stats.
+ */
 async function fetchReviews() {
   try {
     const res = await fetch(`${API_BASE}/all`);
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    if (!res.ok) throw new Error(`Fetch failed with status: ${res.status}`);
 
     allReviews = await res.json();
 
-    // 🔥 यहाँ बदलाव है: डेटा की लंबाई को बॉक्स में दिखा रहे हैं
+    // Update Total Review Count Display
     const statReviewsElem = document.getElementById("statReviews");
     if (statReviewsElem) {
-      // .toLocaleString('en-IN') से नंबर 2,202 जैसा दिखेगा
       statReviewsElem.innerText = allReviews.length.toLocaleString("en-IN");
     }
 
     renderReviews(allReviews);
   } catch (error) {
-    console.error("Error:", error);
-    document.getElementById("review-list").innerHTML =
-      `<p style='color:red; text-align:center;'>Error: Backend connection failed.</p>`;
+    console.error("Critical Error:", error);
+    const listElem = document.getElementById("review-list");
+    if (listElem) {
+      listElem.innerHTML = `<p style='color:red; text-align:center;'>Error: Database connection failed.</p>`;
+    }
   }
 }
 
@@ -131,31 +136,17 @@ async function submitReply(id) {
 
 fetchReviews();
 
-// reset btn
+/**
+ * @function resetAllFilters
+ * @description Clears search filter and re-fetches latest data.
+ */
 function resetAllFilters() {
-  try {
-    // 1. सर्च बॉक्स को खाली करो
-    const searchInput = document.getElementById("searchUser");
-    if (searchInput) {
-      searchInput.value = "";
-    }
+  const searchInput = document.getElementById("searchUser");
 
-    const refreshBtn = event.currentTarget;
-    if (refreshBtn) {
-      refreshBtn.style.transform = "rotate(360deg)";
-      refreshBtn.style.transition = "transform 0.5s ease";
-      setTimeout(() => {
-        refreshBtn.style.transform = "rotate(0deg)";
-      }, 500);
-    }
-
-    if (typeof fetchReviews === "function") {
-      fetchReviews();
-      console.log("Data Reloaded from DB! 🚀");
-    } else if (allReviews) {
-      renderReviews(allReviews);
-    }
-  } catch (error) {
-    console.error("Reset Error:", error);
+  if (searchInput) {
+    searchInput.value = "";
   }
+
+  // Refresh data from backend
+  fetchReviews();
 }
