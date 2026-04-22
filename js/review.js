@@ -7,7 +7,16 @@ async function fetchReviews() {
   try {
     const res = await fetch(`${API_BASE}/all`);
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
     allReviews = await res.json();
+
+    // 🔥 यहाँ बदलाव है: डेटा की लंबाई को बॉक्स में दिखा रहे हैं
+    const statReviewsElem = document.getElementById("statReviews");
+    if (statReviewsElem) {
+      // .toLocaleString('en-IN') से नंबर 2,202 जैसा दिखेगा
+      statReviewsElem.innerText = allReviews.length.toLocaleString("en-IN");
+    }
+
     renderReviews(allReviews);
   } catch (error) {
     console.error("Error:", error);
@@ -16,7 +25,7 @@ async function fetchReviews() {
   }
 }
 
-// 2. Render Function
+// 2. Render Function (इसमें कोई बदलाव नहीं, पहले जैसा ही है)
 function renderReviews(data) {
   const list = document.getElementById("review-list");
   list.innerHTML =
@@ -121,3 +130,17 @@ async function submitReply(id) {
 }
 
 fetchReviews();
+
+// reset btn
+function resetAllFilters() {
+  const searchInput = document.getElementById("searchUser");
+  if (searchInput) {
+    searchInput.value = "";
+  }
+
+  if (typeof renderReviews === "function" && allReviews) {
+    renderReviews(allReviews);
+  }
+
+  fetchReviews();
+}
