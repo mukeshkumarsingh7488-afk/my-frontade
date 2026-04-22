@@ -327,16 +327,19 @@ socket.on("updateTotalReviewCount", (newCount) => {
 // 3. UI को अपडेट करने वाला फंक्शन (एनीमेशन के साथ)
 function updateCountUI(number) {
   const countElement = document.getElementById("countNumber");
-  if (countElement) {
-    const formattedNumber = Number(number).toLocaleString("en-IN");
+  if (!countElement) return;
 
-    countElement.innerText = formattedNumber;
+  const cleanNumber = Number(String(number).replace(/[^0-9.-]+/g, "")) || 0;
 
-    countElement.classList.add("count-update-flash");
-    setTimeout(() => {
-      countElement.classList.remove("count-update-flash");
-    }, 1000);
-  }
+  const formattedNumber = new Intl.NumberFormat("en-IN").format(cleanNumber);
+
+  // 🔥 yaha change
+  countElement.textContent = formattedNumber;
+
+  countElement.classList.add("count-update-flash");
+  setTimeout(() => {
+    countElement.classList.remove("count-update-flash");
+  }, 1000);
 }
 
 // फंक्शन कॉल करें
