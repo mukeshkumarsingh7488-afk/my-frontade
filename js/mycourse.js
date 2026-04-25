@@ -1,3 +1,4 @@
+//#region
 const courseDiv = document.getElementById("courseContent");
 const token = localStorage.getItem("token");
 
@@ -49,7 +50,6 @@ async function fetchMyCourses() {
       `;
 
     courses.forEach((course) => {
-      // ✅ SAFE THUMBNAIL LOGIC (FINAL FIX)
       const thumbUrl = course.thumbnail
         ? course.thumbnail.startsWith("http")
           ? course.thumbnail
@@ -83,3 +83,4 @@ async function fetchMyCourses() {
 function watchCourse(courseId) {
   window.location.href = `watch.html?id=${courseId}`;
 }
+//#endregion

@@ -1,3 +1,4 @@
+//#region
 let player;
 let currentCourseName = "";
 
@@ -14,21 +15,18 @@ function getYTID(url) {
 
     const u = new URL(url);
 
-    // youtu.be
     if (u.hostname.includes("youtu.be")) {
       const id = u.pathname.slice(1);
       console.log("✅ ID (youtu.be):", id);
       return id;
     }
 
-    // shorts
     if (u.pathname.includes("/shorts/")) {
       const id = u.pathname.split("/shorts/")[1];
       console.log("✅ ID (shorts):", id);
       return id;
     }
 
-    // normal watch
     const id = u.searchParams.get("v");
     console.log("✅ ID (watch):", id);
     return id;
@@ -70,7 +68,6 @@ async function loadCourseContent() {
         return;
       }
 
-      // 🔥 PLAYER CREATE
       player = new YT.Player("main-video-iframe", {
         height: "100%",
         width: "100%",
@@ -88,7 +85,6 @@ async function loadCourseContent() {
 
       document.getElementById("current-video-title").innerText = firstVid.title;
 
-      // Playlist
       document.getElementById("playlist").innerHTML = course.videos
         .map(
           (vid, i) => `
@@ -132,7 +128,6 @@ async function submitCertificate() {
   const mobile = document.getElementById("certMobile").value;
   const btn = document.querySelector(".claim-btn");
 
-  // Safety Check for Base URL (Pichle error ko rokne ke liye)
   const finalBaseUrl =
     window.API_BASE_URL ||
     (window.location.hostname === "localhost" ? "http://localhost:5000" : "");
@@ -153,7 +148,7 @@ async function submitCertificate() {
       },
       body: JSON.stringify({
         fullName: name,
-        mobile: mobile, // ✅ Backend ko ja raha hai
+        mobile: mobile,
         courseId: courseId,
         courseName: currentCourseName,
       }),
@@ -162,10 +157,8 @@ async function submitCertificate() {
     const data = await res.json();
 
     if (data.success) {
-      // ✅ Naye tab mein PDF kholo
       window.open(data.downloadUrl, "_blank");
 
-      // 📥 FORCE DOWNLOAD Logic (Premium Feature)
       const link = document.createElement("a");
       link.href = data.downloadUrl;
       link.setAttribute("target", "_blank");
@@ -217,3 +210,4 @@ async function submitCertificate() {
     btn.disabled = false;
   }
 }
+//#endregion

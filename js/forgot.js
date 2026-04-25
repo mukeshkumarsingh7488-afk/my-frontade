@@ -1,3 +1,4 @@
+//#region
 const API_URL = `${window.API_BASE_URL}/api/auth`;
 
 function togglePassword() {
@@ -9,7 +10,7 @@ function togglePassword() {
 
 // 1. Request OTP Logic
 async function handleRequestOTP(e) {
-  if (e) e.preventDefault(); // Browser signal capture
+  if (e) e.preventDefault();
 
   const email = document.getElementById("resetEmail").value.trim();
   const btn = document.getElementById("reqBtn");
@@ -46,7 +47,7 @@ async function handleRequestOTP(e) {
 
 // 2. Reset Password Logic
 async function handleResetPassword(e) {
-  if (e) e.preventDefault(); // Important for Password Manager
+  if (e) e.preventDefault();
 
   const email = document.getElementById("resetEmail").value;
   const otp = document.getElementById("resetOtp").value;
@@ -71,7 +72,7 @@ async function handleResetPassword(e) {
 
     if (res.ok) {
       alert("Password Changed Successfully! 🚀");
-      // Browser gets time to show "Update Password" prompt
+
       setTimeout(() => {
         window.location.href = "login.html";
       }, 800);
@@ -118,3 +119,4 @@ document.addEventListener("keypress", (e) => {
     else document.getElementById("reqBtn").click();
   }
 });
+//#endregion

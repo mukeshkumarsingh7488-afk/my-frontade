@@ -1,3 +1,4 @@
+//#region
 const API_URL = window.API_BASE_URL + "/api/auth";
 
 function togglePassword() {
@@ -42,7 +43,7 @@ function startTimer() {
 
 // Change: Added 'e' to handle form submit signal
 async function handleRegister(e) {
-  if (e) e.preventDefault(); // Browser ko signal milega ki 'Submit' hua hai
+  if (e) e.preventDefault();
 
   regBtn.disabled = true;
   regBtn.innerText = "Sending OTP... ⏳";
@@ -75,16 +76,16 @@ async function handleRegister(e) {
   }
 }
 
+// HANDKE VERIFY
 async function handleVerify(e) {
-  if (e) e.preventDefault(); // 1. Refresh roka
+  if (e) e.preventDefault();
 
   const verifyBtn = document.getElementById("verifyBtn");
 
-  // 2. Button ko turant freeze karo taaki double click na ho
   verifyBtn.disabled = true;
   verifyBtn.innerText = "Verifying... ⏳";
 
-  const otpInput = document.getElementById("otpInput"); // Check if ID matches HTML
+  const otpInput = document.getElementById("otpInput");
   const emailInput = document.getElementById("email");
 
   const otp = otpInput ? otpInput.value.trim() : "";
@@ -107,20 +108,16 @@ async function handleVerify(e) {
     const data = await res.json();
 
     if (res.ok) {
-      // ✅ SUCCESS: Sirf ek hara (Green) alert
       alert("✅ Account Verified Successfully!");
-      // Redirect se pehle thoda sa 100ms ka gap taaki alert clear ho jaye
       setTimeout(() => {
         window.location.replace("login.html");
       }, 100);
     } else {
-      // ❌ ERROR: Galat OTP pe yahan aayega
       alert("❌ " + (data.msg || "Verification Failed!"));
       verifyBtn.disabled = false;
       verifyBtn.innerText = "Verify & Register";
     }
   } catch (err) {
-    // 🔥 Catch block ka alert: Sirf tab dikhao jab network fail ho
     console.error("Fetch Error:", err);
     alert("❌ Server Error! Please check your connection.");
     verifyBtn.disabled = false;
@@ -142,3 +139,4 @@ document.addEventListener("keypress", (e) => {
     else handleRegister();
   }
 });
+//#endregion

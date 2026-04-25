@@ -1,3 +1,4 @@
+//#region
 const API_BASE = `${window.API_BASE_URL}/api/reviews`;
 
 let allReviews = []; // Global data for searching
@@ -14,7 +15,6 @@ async function fetchReviews() {
 
     allReviews = await res.json();
 
-    // Update Total Review Count Display
     const statReviewsElem = document.getElementById("statReviews");
     if (statReviewsElem) {
       statReviewsElem.innerText = allReviews.length.toLocaleString("en-IN");
@@ -100,11 +100,11 @@ async function deleteReview(id) {
 
 // 6. Pro Reply Box Logic (Toggle & Auto-Close)
 function toggleReplyBox(event, id) {
-  event.stopPropagation(); // Page click ko rokne ke liye
+  event.stopPropagation();
   const box = document.getElementById(`reply-box-${id}`);
   const isAlreadyOpen = box.style.display === "block";
 
-  closeAllReplyBoxes(); // Pehle baaki sab band karo
+  closeAllReplyBoxes();
 
   if (!isAlreadyOpen) {
     box.style.display = "block";
@@ -150,3 +150,4 @@ function resetAllFilters() {
   // Refresh data from backend
   fetchReviews();
 }
+//#endregion

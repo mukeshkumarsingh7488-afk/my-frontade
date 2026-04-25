@@ -14,7 +14,7 @@ var typed = new Typed("#element", {
    Socket.io Connection Setup (admin Alart)
   ===========================================*/
 const socket = io(window.API_BASE_URL, {
-  path: "/socket.io/", // Agar backend pe custom path hai toh yahan define hota hai
+  path: "/socket.io/",
   transports: ["websocket"],
   closeOnBeforeunload: true,
   reconnectionAttempts: 5,
@@ -24,7 +24,6 @@ const socket = io(window.API_BASE_URL, {
 socket.on("connect", () => {
   console.log("✅ Live connection ban gaya! ID:", socket.id);
 
-  // Example: dynamic userId, apne user se fetch kar sakte ho
   const userId = "69bfdc6e61e19c17bf18d597";
   socket.emit("join", userId);
 });
@@ -37,7 +36,6 @@ socket.on("connect_error", (err) => {
 socket.on("live_users_count", (count) => {
   console.log("🔥 Live Users:", count);
 
-  // Agar element hai to update kare, nahi to skip kare
   const liveUsersElem = document.getElementById("liveCount");
   if (liveUsersElem) {
     liveUsersElem.innerText = count;
@@ -48,7 +46,6 @@ socket.on("live_users_count", (count) => {
 socket.on("notification", (data) => {
   console.log("📩 Notification:", data);
 
-  // Optional: agar alert chahiye to
   if (data && data.message) {
     alert("New Notification: " + data.message);
   }
@@ -61,6 +58,7 @@ window.toggleNotifications = function () {
 // Page load hote hi synchronization shuru karo
 document.addEventListener("DOMContentLoaded", syncAdminData);
 
+//#region
 /* ====================================
    2. Firebess function start 
   ================================== */
@@ -103,7 +101,6 @@ async function saveTokenToDatabase(token) {
       return;
     }
 
-    // 3. Backend ko Request
     const response = await fetch(`${window.API_BASE_URL}/api/save-fcm-token`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -160,20 +157,17 @@ window.finalTest = async function () {
 };
 finalTest();
 
-// 🔥 Service Worker register (background notification ke liye)
 navigator.serviceWorker
   .register("/firebase-messaging-sw.js")
   .then(() => console.log("✅ Service Worker Registered"))
-  .catch((err) => console.log("❌ SW Error:", err)); // firebess end
-
+  .catch((err) => console.log("❌ SW Error:", err));
+//#endregion
 /* =========================================
    3.  Review submil & LOADING LOGIC   
 ========================================= */
-// 2. Main Submit Event
 document.getElementById("reviewForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // 1. Latest User Data nikaalo
   const storedData = localStorage.getItem("userData");
   if (!storedData) {
     alert("Please, Login first!");
@@ -183,12 +177,9 @@ document.getElementById("reviewForm").addEventListener("submit", async (e) => {
 
   const user = JSON.parse(storedData);
 
-  // 2. Clear IDs nikaalo (Multiple checks for safety)
   const finalUserId =
     user._id || user.id || (user.user && (user.user._id || user.user.id));
 
-  // 3. 🚨 PROFILE PIC FIX: Direct Cloudinary URL uthao
-  // Agar profile page par update hua hai, toh wahi url yahan use hoga
   const latestProfilePic =
     user.profilePic || (user.user && user.user.profilePic) || "";
 
@@ -197,10 +188,10 @@ document.getElementById("reviewForm").addEventListener("submit", async (e) => {
     rating: document.getElementById("userRating").value,
     comment: document.getElementById("userComment").value.trim(),
     userId: finalUserId,
-    profilePic: latestProfilePic, // Ye ab Cloudinary ka direct link (http...) bhejega
+    profilePic: latestProfilePic,
   };
 
-  console.log("📝 Posting Review with Data:", data); // Debugging ke liye
+  console.log("📝 Posting Review with Data:", data);
 
   try {
     const response = await fetch(`${window.API_BASE_URL}/api/reviews/add`, {
@@ -214,7 +205,6 @@ document.getElementById("reviewForm").addEventListener("submit", async (e) => {
     if (response.ok) {
       alert("Thanks for your review! ✅");
       document.getElementById("reviewForm").reset();
-      // Yahan function ka naam check kar lena (loadTopReviews ya fetchReviews)
       if (typeof loadTopReviews === "function") loadTopReviews();
     } else {
       alert(result.message || "Error while posting review!");
@@ -229,13 +219,10 @@ document.getElementById("reviewForm").addEventListener("submit", async (e) => {
 async function loadTopReviews() {
   try {
     const response = await fetch(`${window.API_BASE_URL}/api/reviews/top10`);
-    const data = await response.json(); // 1. 'reviews' की जगह 'data' नाम रखा है
-
-    // 2. BACKEND CHANGE: अब डेटा 'data.reviews' के अंदर है
+    const data = await response.json();
     const reviews = data.reviews || [];
     const totalCount = data.totalCount || 0;
 
-    // 🔥 3. UI UPDATE: यहाँ आपका नया काउंट सेट होगा
     const countElement = document.getElementById("countNumber");
     if (countElement) {
       countElement.innerText = totalCount;
@@ -305,11 +292,10 @@ async function loadTopReviews() {
 
 // ✅ 2. Pro Toggle Logic (Outside Click Support)
 window.toggleReplyBox = function (event, id) {
-  event.stopPropagation(); // Stop click from reaching window listener immediately
+  event.stopPropagation();
   const box = document.getElementById(`reply-box-${id}`);
   const allBoxes = document.querySelectorAll(".reply-box-item");
 
-  // Close all other open boxes first
   allBoxes.forEach((b) => {
     if (b.id !== `reply-box-${id}`) b.style.display = "none";
   });
@@ -326,7 +312,6 @@ window.toggleReplyBox = function (event, id) {
 window.addEventListener("click", function (event) {
   const allBoxes = document.querySelectorAll(".reply-box-item");
   allBoxes.forEach((box) => {
-    // If click is outside the box and not on a 'View Reply' button, close it
     if (box.style.display === "block" && !box.contains(event.target)) {
       box.style.display = "none";
     }
@@ -346,14 +331,10 @@ if (commentBox) {
 loadTopReviews();
 
 // --- Review Count Logic ---
-
-// 1. पेज लोड होते ही डेटाबेस से शुरूआती काउंट लाने के लिए
 async function loadInitialCount() {
   try {
     const response = await fetch(`${window.API_BASE_URL}/api/reviews/top10`);
     const data = await response.json();
-
-    // बैकएंड अब 'totalCount' भेज रहा है,
     if (data.totalCount !== undefined) {
       updateCountUI(data.totalCount);
     }
@@ -362,7 +343,6 @@ async function loadInitialCount() {
   }
 }
 
-// 2. सॉकेट के ज़रिए रियल-टाइम अपडेट सुनना
 socket.on("updateTotalReviewCount", (newCount) => {
   console.log("Naya review aaya! New Count:", newCount);
   updateCountUI(newCount);
@@ -377,7 +357,6 @@ function updateCountUI(number) {
 
   const formattedNumber = new Intl.NumberFormat("en-IN").format(cleanNumber);
 
-  // 🔥 yaha change
   countElement.textContent = formattedNumber;
 
   countElement.classList.add("count-update-flash");
@@ -388,8 +367,6 @@ function updateCountUI(number) {
 
 // फंक्शन कॉल करें
 loadInitialCount();
-
-//Review Logic end..
 
 /* ============================================
       scroll bar function 
@@ -406,7 +383,7 @@ window.onscroll = function () {
   if (progressBar) {
     progressBar.style.width = scrolled + "%";
   }
-}; // scroll bar function end.
+};
 
 /* ============================================
      Calculatore
@@ -429,7 +406,6 @@ function calculateRisk() {
 
     let quantity = Math.floor(totalRiskAmount / riskPerShare);
 
-    // Results
     document.getElementById("risk-amt").innerText =
       "₹" + totalRiskAmount.toLocaleString();
     document.getElementById("qty-result").innerText = quantity;
@@ -441,18 +417,14 @@ function calculateRisk() {
 window.submitDailyCheck = submitDailyCheck;
 window.calculateRisk = calculateRisk;
 
-// Calculater function end.
-
 /* ============================================
    disiplean card submit logic
   ===========================================*/
 function submitDailyCheck() {
-  // Sabse pehle saare checkboxes pakdo (Tool Card ke andar se)
   const checkboxes = document.querySelectorAll(
     '.tool-card input[type="checkbox"]',
   );
 
-  // Check karo ki koi bhi ek tick hai ya nahi
   const isAnyChecked = Array.from(checkboxes).some((box) => box.checked);
 
   if (!isAnyChecked) {
@@ -463,7 +435,6 @@ function submitDailyCheck() {
   const successMsg = document.getElementById("success-msg");
   const submitBtn = document.querySelector(".submit-discipline-btn");
 
-  // Animation Start
   submitBtn.innerText = "Reporting...";
   submitBtn.style.opacity = "0.7";
 
@@ -473,21 +444,17 @@ function submitDailyCheck() {
     if (successMsg) successMsg.style.display = "block";
 
     setTimeout(() => {
-      // 3 second baad wapas normal kar do
       submitBtn.innerText = "Submit Daily Report 📝";
       submitBtn.style.background =
         "linear-gradient(135deg, #a020f0 0%, #6d28d9 100%)";
       submitBtn.style.opacity = "1";
       if (successMsg) successMsg.style.display = "none";
 
-      // Saare boxes khali kar do
       checkboxes.forEach((box) => (box.checked = false));
     }, 3000);
   }, 1000);
 }
 window.submitDailyCheck = submitDailyCheck;
-
-// desiplean card submit logic end.
 
 /* ============================================
    trade jarnel automation
@@ -502,14 +469,13 @@ function setStatus(status) {
   }
 }
 
-// --- 2. Save Trade to Backend ---
 async function saveTrade() {
   const name = document.getElementById("trade-name").value.trim();
   const type = document.getElementById("trade-type").value;
   const status = document.getElementById("trade-status").value;
   const pnl = parseFloat(document.getElementById("trade-pnl").value);
   const note = document.getElementById("trade-note").value.trim();
-  const token = localStorage.getItem("token"); // लॉगिन के समय वाला टोकन
+  const token = localStorage.getItem("token");
 
   if (!token) {
     alert("⚠️ Please Login first to save trades!");
@@ -528,7 +494,7 @@ async function saveTrade() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": token, // आपका बैकएंड यही हेडर मांग रहा है
+        "x-auth-token": token,
       },
       body: JSON.stringify(tradeData),
     });
@@ -536,7 +502,7 @@ async function saveTrade() {
     if (response.ok) {
       showPopup(`✅ Saved: ${name}`);
       resetForm();
-      fetchUserTrades(); // ताजा डेटा मंगाएं
+      fetchUserTrades();
     } else {
       const err = await response.json();
       alert("❌ Error: " + err.msg);
@@ -550,7 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveBtn = document.getElementById("saveTradeBtn");
   if (saveBtn) {
     saveBtn.addEventListener("click", (e) => {
-      e.preventDefault(); // Form reload hone se rokega
+      e.preventDefault();
       saveTrade();
     });
   }
@@ -641,8 +607,6 @@ function displayTrades(trades) {
     )
     .join("");
 }
-
-// ... पुराने फ़ंक्शंस (saveTrade, fetchUserTrades आदि) ...
 async function deleteTrade(id) {
   if (!confirm("⚠️ Conform Delete?")) return;
 
@@ -814,42 +778,33 @@ updateMarketClocks(); // Sesion clock end.
 /* ============================================
           Nav Alert Bell Function (Module Ready)
   ===========================================*/
-
-// DOM load hone ka wait karein taaki elements mil sakein
 document.addEventListener("DOMContentLoaded", () => {
   const bellBtn = document.querySelector(".bell-icon");
   const dropdown = document.getElementById("notif-dropdown");
   const badge = document.getElementById("notif-count");
 
-  // 1. Click Event Listener (onclick ki jagah)
   if (bellBtn) {
     bellBtn.addEventListener("click", (e) => {
-      e.stopPropagation(); // Menu toggle hone se rokne ke liye
+      e.stopPropagation();
 
-      // Dropdown toggle logic
       if (dropdown) {
         if (dropdown.style.display === "block") {
           dropdown.style.display = "none";
         } else {
           dropdown.style.display = "block";
-          // Jab user dekh le, toh badge hata do (Optional)
-          // if(badge) badge.style.display = "none";
         }
       }
     });
   }
 
-  // 2. Bahar click karne par band karne ka logic
   window.addEventListener("click", (event) => {
     if (dropdown && dropdown.style.display === "block") {
-      // Agar click bell icon par NAHI hai, toh dropdown band kar do
       if (!event.target.closest(".bell-icon")) {
         dropdown.style.display = "none";
       }
     }
   });
 
-  // 3. Pehle se load ho rahi fetchNotifications ko yahan call karein
   if (typeof fetchNotifications === "function") {
     fetchNotifications();
   }
@@ -857,7 +812,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- डेटाबेस से असली अलर्ट्स मंगाने के लिए ---
 async function fetchNotifications() {
-  // 1. JWT Token nikalo
   const token = localStorage.getItem("token");
 
   try {
@@ -867,27 +821,21 @@ async function fetchNotifications() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // 🚨 YE BADLAV ZAROORI HAI: 'x-auth-token' hata kar 'Authorization' dalo
           Authorization: "Bearer " + token,
         },
       },
     );
 
-    // 2. Error handling
     if (response.status === 401) {
       console.error("401 Unauthorized: Token missing or invalid.");
-      // Agar logout ho raha hai, toh yahan redirect mat karna, bas return karo
       return;
     }
-
-    // ... baaki ka logic (res.json() etc.) iske niche rehne do
 
     const notifs = await response.json();
 
     const list = document.getElementById("notif-list");
     const badge = document.getElementById("notif-count");
 
-    // 3. Check karo ki notifs ek Array hai (TypeError fix karne ke liye)
     if (Array.isArray(notifs)) {
       if (notifs.length > 0) {
         if (badge) {
@@ -931,7 +879,7 @@ window.toggleNotifications = toggleNotifications;
 
 // Example: Front-end se backend ko notification bhejna
 function sendTestNotification() {
-  const userId = "69bfdc6e61e19c17bf18d597"; // apne userId ke hisab se
+  const userId = "69bfdc6e61e19c17bf18d597";
   const message = "Hello! This is a test notification!";
 
   socket.emit("send_notification", { userId, message });
@@ -940,7 +888,6 @@ function sendTestNotification() {
 
 // --- 2. Function: Database se purane Alerts load karne ke liye ---
 async function loadNotifications() {
-  // 1. Token nikalo (Bina iske backend refresh par data nahi dega)
   const token = localStorage.getItem("token");
 
   try {
@@ -948,11 +895,10 @@ async function loadNotifications() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": token, // YE SABSE ZAROORI HAI REFRESH KE LIYE
+        "x-auth-token": token,
       },
     });
 
-    // Agar 401 error aaye toh console mein dikhega
     if (res.status === 401) {
       console.error("Token missing or expired! Please login again.");
       return;
@@ -965,19 +911,17 @@ async function loadNotifications() {
 
     container.innerHTML = "";
 
-    // 2. Check karo ki data array hai ya nahi (TypeError fix karne ke liye)
     if (!Array.isArray(notifications) || notifications.length === 0) {
       container.innerHTML =
         '<p style="padding:15px; color:gray; text-align:center;">Abhi koi alert nahi hai.</p>';
       return;
     }
 
-    // 3. Purane messages ko list mein dikhana
     notifications.forEach((notif) => {
-      const title = notif.senderName || "Admin Alert"; // Model se match karo
+      const title = notif.senderName || "Admin Alert";
       const message = notif.message;
       const time = notif.date
-        ? new Date(notif.date).toLocaleString() // Poora date-time dikhao
+        ? new Date(notif.date).toLocaleString()
         : "Recent";
 
       const html = `
@@ -993,7 +937,6 @@ async function loadNotifications() {
   }
 }
 
-// Page load hote hi purane alerts dikhao
 document.addEventListener("DOMContentLoaded", loadNotifications);
 
 // --- 3. Real-Time Update (Backend: io.emit("admin_alert") se match) ---
@@ -1003,18 +946,14 @@ socket.on("new_alert", (data) => {
   const title = data.title || "📢 Admin Alert";
   const message = data.message || "Naya message aaya hai!";
 
-  // ✅ STEP 1: Turant Screen pe Alert Popup (Browser Alert)
   alert(`📢 ${title}\n\n${message}`);
 
-  // ✅ STEP 2: Desktop Notification (Agar permission hai)
   if (Notification.permission === "granted") {
     new Notification(title, { body: message });
   }
 
-  // ✅ STEP 3: Notification Panel Update (Bina refresh kiye)
   const container = document.getElementById("notif-list");
   if (container) {
-    // Agar "Abhi koi alert nahi hai" likha hai toh use saaf karo
     if (container.innerText.includes("Abhi koi alert nahi hai")) {
       container.innerHTML = "";
     }
@@ -1026,10 +965,8 @@ socket.on("new_alert", (data) => {
       </div>
     `;
 
-    // Naya message sabse upar dikhao
     container.insertAdjacentHTML("afterbegin", newHTML);
 
-    // Ghanti (Bell) pe badge dikhao (Agar hai toh)
     const badge = document.getElementById("notif-count");
     if (badge) {
       badge.style.display = "block";
@@ -1046,7 +983,6 @@ window.toggleNotifications = async function () {
 
   if (panel.style.display === "none" || panel.style.display === "") {
     panel.style.display = "block";
-    // Badge hide kar do jab panel khul jaye
     const badge = document.getElementById("notif-count");
     if (badge) badge.style.display = "none";
   } else {
@@ -1071,7 +1007,7 @@ if (clearBtn) {
       );
 
       if (response.ok) {
-        fetchNotifications(); // UI refresh karne ke liye
+        fetchNotifications();
         alert("Cleared successfully!");
       }
     } catch (err) {
@@ -1083,7 +1019,6 @@ if (clearBtn) {
 // Page load par fetch call karo
 window.onload = fetchNotifications;
 
-// Permission maangna browser notification ke liye
 if (
   Notification.permission !== "granted" &&
   Notification.permission !== "denied"
@@ -1095,7 +1030,6 @@ if (
    🚀 BR30 TRADER - ULTRA PRO MAX DYNAMIC PAYMENT ENGINE
 ============================================================ */
 //#region
-// 1. ✨ DYNAMIC PRICE LOADER (Same as before)
 async function loadLatestPrice() {
   try {
     const res = await fetch(`${window.API_BASE_URL}/api/courses`);
@@ -1115,13 +1049,10 @@ async function loadLatestPrice() {
   }
 }
 
-// 2. 💳 MAIN CHECKOUT FUNCTION (Fixed & Auto-Coupon Sync)
 const checkout = async function (courseId) {
   console.log("🚀 Checkout Started for ID:", courseId);
   const token = localStorage.getItem("token");
 
-  // ✅ FIXED LOGIC: Global variable 'currentCoupon' se code uthao
-  // Agar variable mein coupon hai toh wo lega, warna empty string jayega
   const couponCode =
     window.currentCoupon && window.currentCoupon.code
       ? window.currentCoupon.code
@@ -1150,22 +1081,19 @@ const checkout = async function (courseId) {
   sendStatusAlert("INTERESTED", "User ne Checkout Screen kholi.");
 
   try {
-    // 🌐 STEP 1: Order Create (Coupon ke saath)
     const res = await fetch(`${window.API_BASE_URL}/api/payment/order`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-auth-token": token },
       body: JSON.stringify({
         courseId: courseId,
-        couponCode: couponCode, // 🔥 YE MISSING THA
+        couponCode: couponCode,
       }),
     });
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.msg || "Order failed!");
 
-    // 🌐 STEP 2: Razorpay Options Setup
     const options = {
-      // PRO TIP: Hamesha backend se aayi hui key use karo: data.key ya data.razorpayKey
       key: data.key,
       amount: data.order.amount,
       currency: "INR",
@@ -1173,7 +1101,6 @@ const checkout = async function (courseId) {
       description: "VIP Enrollment 🏆",
       order_id: data.order.id,
       handler: async function (response) {
-        // ✅ SUCCESS VERIFICATION
         const verifyRes = await fetch(
           `${window.API_BASE_URL}/api/payment/verify`,
           {
@@ -1187,7 +1114,7 @@ const checkout = async function (courseId) {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
               courseId: courseId,
-              amount: data.order.amount / 100, // Verification ke liye final price
+              amount: data.order.amount / 100,
             }),
           },
         );
@@ -1211,20 +1138,18 @@ const checkout = async function (courseId) {
       sendStatusAlert("FAILED", `Bank Failure: ${response.error.description}`);
     });
 
-    rzp.open(); // 🔥 Ab ye khulega!
+    rzp.open();
   } catch (err) {
     console.error("Error Detail:", err);
     alert("Error: " + err.message);
   }
 };
 
-// 🎬 INITIALIZE: DOM Load hote hi logic active karo
 document.addEventListener("DOMContentLoaded", () => {
   console.log("✅ BR30 ULTRA System Active");
 
-  loadLatestPrice(); // 1. Sabse pehle DB se Latest Price load karo
+  loadLatestPrice();
 
-  // 2. Click Listeners set karo (type="module" safe way)
   document.body.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("payBtn")) {
       const id = e.target.getAttribute("data-id") || e.target.dataset.id;
@@ -1255,7 +1180,7 @@ window.toggleNotifications = async function () {
      Admin Send email Logic 
 ============================================ */
 const sendMail = async (subject, message) => {
-  const token = localStorage.getItem("token"); // JWT Token uthaya
+  const token = localStorage.getItem("token");
 
   if (!token) {
     alert("Bhai, login expire ho gaya hai!");
@@ -1267,7 +1192,7 @@ const sendMail = async (subject, message) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": token, // Backend auth check karega
+        "x-auth-token": token,
       },
       body: JSON.stringify({ subject, message }),
     });
@@ -1284,7 +1209,6 @@ const sendMail = async (subject, message) => {
   }
 };
 
-// --- 2. Button Click par function ko chalao ---
 const sendBtn = document.getElementById("send-bulk-btn");
 if (sendBtn) {
   sendBtn.addEventListener("click", () => {
@@ -1296,7 +1220,7 @@ if (sendBtn) {
       return;
     }
 
-    sendBtn.innerText = "Bhej raha hoon..."; // Loader feel
+    sendBtn.innerText = "Bhej raha hoon...";
     sendBtn.disabled = true;
 
     sendMail(sub, msg).then(() => {
@@ -1313,7 +1237,7 @@ const API_URL = `${window.API_BASE_URL}`;
 let allTraders = [];
 let currentIndex = 0;
 const itemsPerPage = 6;
-let sliderInterval = null; // 🔥 NEW
+let sliderInterval = null;
 
 // 🔥 AUTO CALL
 document.addEventListener("DOMContentLoaded", () => {
@@ -1372,19 +1296,17 @@ async function fetchTraders() {
       allTraders.unshift(myProfile);
     }
 
-    // remove duplicates
     allTraders = allTraders.filter(
       (v, i, a) => a.findIndex((t) => t._id === v._id) === i,
     );
 
     displayNextBatch();
 
-    // 🔥 AUTO SLIDER START (IMPORTANT)
     if (sliderInterval) clearInterval(sliderInterval);
 
     sliderInterval = setInterval(() => {
       displayNextBatch();
-    }, 4000); // 3 sec change
+    }, 4000);
   } catch (err) {
     console.error("❌ Fetch Error:", err);
   }
@@ -1470,14 +1392,13 @@ async function sendBulkMail() {
 
   try {
     const response = await fetch("/api/send-offers", {
-      // Sahi API path check karein
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        target: target, // "all", "vip", ya "normal"
+        target: target,
         subject: subject,
         htmlContent: htmlContent,
       }),
@@ -1498,11 +1419,9 @@ async function syncLatestPrices() {
     const res = await fetch(window.API_BASE_URL + "/api/courses");
     const courses = await res.json();
 
-    // 💡 BASE_URL (UPLOADS)
     const UPLOADS_URL = `${window.API_BASE_URL}/uploads/`;
 
     courses.forEach((course) => {
-      // 🎯 STEP 1: Specific Card dhoondo
       const card = document.querySelector(
         `.poster-card[data-id="${course._id}"]`,
       );
@@ -1510,19 +1429,15 @@ async function syncLatestPrices() {
       if (card) {
         console.log(`Updating Course: ${course.title}`);
 
-        // ✅ STEP 2: THUMBNAIL UPDATE (Double Path Fix)
         const imgTag = card.querySelector(".course-img");
 
         if (imgTag) {
           if (course.thumbnail && course.thumbnail.trim() !== "") {
             let fullPath = "";
 
-            // ✅ Case 1: Agar Database mein Cloudinary ka FULL URL hai (New System)
             if (course.thumbnail.startsWith("http")) {
               fullPath = course.thumbnail;
-            }
-            // ✅ Case 2: Agar purana relative path hai (Old System backup)
-            else {
+            } else {
               const cleanThumbnail = course.thumbnail.replace(
                 /^\/?uploads\//,
                 "",
@@ -1530,7 +1445,6 @@ async function syncLatestPrices() {
               fullPath = `${window.API_BASE_URL}/uploads/${cleanThumbnail}`;
             }
 
-            // 🔥 Optimization: Cloudinary link ko fast load karne ke liye
             if (fullPath.includes("cloudinary")) {
               fullPath = fullPath.replace(
                 "/upload/",
@@ -1538,7 +1452,7 @@ async function syncLatestPrices() {
               );
             }
 
-            imgTag.src = fullPath; // No need for ?t= anymore as Cloudinary handles it
+            imgTag.src = fullPath;
             imgTag.style.display = "block";
           } else {
             imgTag.style.display = "none";
@@ -1549,20 +1463,16 @@ async function syncLatestPrices() {
           };
         }
 
-        // ✅ STEP 3: PRICE UPDATE
         const priceTag = card.querySelector("p.price");
         if (priceTag) {
           const formattedPrice = Number(course.price).toLocaleString("en-IN");
           priceTag.innerText = `Price: ₹${formattedPrice}`;
         }
-
-        // ✅ STEP 4: TITLE UPDATE
         const titleTag = card.querySelector(".course-title");
         if (titleTag && course.title) {
           titleTag.innerText = course.title;
         }
 
-        // ✅ STEP 5: ENROLL BUTTON (PayBtn)
         const payBtn = card.querySelector(".payBtn");
         if (payBtn) {
           payBtn.setAttribute("data-id", course._id);
@@ -1573,7 +1483,6 @@ async function syncLatestPrices() {
       }
     });
 
-    // 🔥 MAGIC STEP: Smooth display
     const grid = document.querySelector(".poster-grid");
     if (grid) {
       grid.style.opacity = "1";
@@ -1609,30 +1518,27 @@ async function loadLatestCoupon() {
       }
 
       boxes.forEach((box) => {
-        // ✅ UI FIX: Box alignment ko sahi kiya
         box.style.display = "flex";
-        box.style.flexDirection = "column"; // Elements vertically align honge
+        box.style.flexDirection = "column";
         box.style.alignItems = "center";
         box.style.justifyContent = "center";
 
-        // 🎯 Elements update
         const codeSpan = box.querySelector(".active-code");
         if (codeSpan) codeSpan.innerText = data.coupon.code;
 
         const discLabel = box.querySelector(".discount-val");
         if (discLabel) discLabel.innerText = data.coupon.discount;
 
-        // ✅ BUTTON STYLE FIX: "APPLIED!" button ko makkhan banaya
         const applyBtn =
           box.querySelector("button") ||
           box.querySelector(".apply-discount-btn");
         if (applyBtn) {
           applyBtn.innerHTML = "✔ APPLIED";
-          applyBtn.style.background = "#059669"; // Emerald Green
+          applyBtn.style.background = "#059669";
           applyBtn.style.color = "white";
           applyBtn.style.padding = "5px 12px";
           applyBtn.style.fontSize = "10px";
-          applyBtn.style.borderRadius = "50px"; // Rounded pill shape
+          applyBtn.style.borderRadius = "50px";
           applyBtn.style.border = "none";
           applyBtn.style.fontWeight = "bold";
           applyBtn.style.cursor = "default";
@@ -1693,12 +1599,10 @@ document.addEventListener("DOMContentLoaded", () => {
       let discountAmount = (originalPrice * currentCoupon.discount) / 100;
       let newPrice = Math.round(originalPrice - discountAmount);
 
-      // ✨ Price UI Update
       priceElement.innerHTML = `Price: 
         <span style="text-decoration: line-through; color: #94a3b8; font-size: 14px; margin-right: 8px;">₹${originalPrice.toLocaleString()}</span> 
         <b style="color: #4ade80; font-size: 20px; text-shadow: 0 0 10px rgba(74, 222, 128, 0.4);">₹${newPrice.toLocaleString()}</b>`;
 
-      // ✅ Button Success
       target.innerHTML = `<i class="fas fa-check-circle"></i> Applied!`;
       target.style.background =
         "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)";
@@ -1708,7 +1612,6 @@ document.addEventListener("DOMContentLoaded", () => {
       card.setAttribute("data-coupon-applied", "true");
     }
 
-    // --- B. ENROLL NOW (PAYMENT) LOGIC ---
     if (target.classList.contains("payBtn")) {
       const courseId = target.getAttribute("data-id");
       const card = target.closest(".poster-card");
@@ -1742,7 +1645,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
         if (data.order) {
           alert(`Success! Final Price: ₹${data.finalPrice}`);
-          // openRazorpay(data.order);
         } else {
           alert(data.msg || "Order creation failed!");
         }
@@ -1774,7 +1676,6 @@ async function syncAdminData() {
     const courses = await res.json();
 
     courses.forEach((c) => {
-      // 🎯 Database Title (e.g. 'Advance Option Buying') se card dhoondo
       const targetBtn = document.querySelector(
         `.payBtn[data-course="${c.title}"]`,
       );
@@ -1783,14 +1684,12 @@ async function syncAdminData() {
       );
 
       if (targetBtn) {
-        // ✅ LATEST ID: Ab button mein Admin Panel wali nayi ID aa gayi
         targetBtn.setAttribute("data-id", c._id);
         targetBtn.dataset.id = c._id;
         console.log(`✅ ID Updated for: ${c.title} -> ${c._id}`);
       }
 
       if (targetPrice) {
-        // 💰 LATEST PRICE: Price bhi database wala chamkega
         targetPrice.innerText = `Price: ₹${Number(c.price).toLocaleString("en-IN")}`;
       }
     });
@@ -1828,16 +1727,13 @@ function updateNavbar() {
   const accountBtn = document.getElementById("navAccountBtn");
 
   if (username && accountBtn) {
-    // User ka pehla naam nikaalo (e.g. "Mukesh Singh" -> "Mukesh")
     const firstName = username.split(" ")[0];
 
-    // Button ka text update karo
     accountBtn.innerHTML = `👤 ${firstName} <span class="triangle-icon">▼</span>`;
 
-    // Optional: Agar Login link ko hide karna hai login ke baad
     const loginLink = document.querySelector('a[href="pages/login.html"]');
     if (loginLink) {
-      loginLink.innerHTML = "🔄 Switch Account"; // Ya hide kar do: loginLink.style.display = 'none';
+      loginLink.innerHTML = "🔄 Switch Account";
     }
   }
 }

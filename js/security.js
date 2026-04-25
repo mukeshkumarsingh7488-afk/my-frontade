@@ -1,3 +1,4 @@
+//#region
 // 🚫 Right Click Block
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 
@@ -31,3 +32,4 @@ setInterval(() => {
 }, 100);
 
 // cleane consol
+//#endregion

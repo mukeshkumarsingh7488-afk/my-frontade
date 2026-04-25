@@ -1,3 +1,4 @@
+//#region
 /* ============================================================
        📦 GLOBAL STATE: Data ko store karne ke liye variables
        ============================================================ */
@@ -9,8 +10,8 @@ let allSales = []; // Sales reports ka data yahan rahegi
        ============================================================ */
 window.onload = async () => {
   console.log("🚀 Admin Panel Loading...");
-  await fetchUsers(); // 1. Sabse pehle Users ki list mangwao
-  await loadSalesData(); // 2. Phir Sales report load karo
+  await fetchUsers();
+  await loadSalesData();
 };
 
 /* ============================================================
@@ -21,15 +22,15 @@ window.onload = async () => {
 async function fetchUsers() {
   try {
     const token = localStorage.getItem("token");
-    // Note: Backend check ke hisab se headers set kiye hain
+
     const res = await fetch(`${window.API_BASE_URL}/api/auth/all-users`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
 
     if (data.success) {
-      allUsers = data.users; // Global list update karo
-      renderTable(allUsers); // Table mein data render karo
+      allUsers = data.users;
+      renderTable(allUsers);
     }
   } catch (err) {
     console.error("❌ User Fetch Error:", err);
@@ -43,7 +44,6 @@ function renderTable(users) {
 
   list.innerHTML = users
     .map((u) => {
-      // 🏆 CERTIFICATE LOGIC: Agar file hai toh VIEW button, nahi toh PENDING
       const certIcon = u.certificateFile
         ? `<td style="padding: 15px; text-align: center;">
                 <a href="${window.API_BASE_URL}/certificates/${u.certificateFile}" target="_blank" style="color:#00ff88; text-decoration:none; display:inline-flex; flex-direction:column; align-items:center;">
@@ -52,7 +52,7 @@ function renderTable(users) {
                 </a>
             </td>`
         : `<td style="padding: 15px; text-align: center; color:#334155; font-size:10px; font-weight:bold;">PENDING</td>`;
-      // 🛡️ ROW STRUCTURE: Individual User Row with Action Buttons
+
       return `
             <tr style="border-bottom: 1px solid #111; opacity: ${u.isBlocked ? "0.5" : "1"}; transition: 0.3s;">
                 <td style="padding: 15px; color: white; font-weight: bold;">${u.name}</td>
@@ -96,7 +96,7 @@ async function toggleVIP(id) {
       },
     );
     const data = await res.json();
-    if (data.success) fetchUsers(); // Success par list refresh karo
+    if (data.success) fetchUsers();
   } catch (err) {
     console.error("VIP Toggle Error:", err);
   }
@@ -113,7 +113,7 @@ async function toggleBlock(id) {
       },
     );
     const data = await res.json();
-    if (data.success) fetchUsers(); // Success par list refresh karo
+    if (data.success) fetchUsers();
   } catch (err) {
     console.error("Block Toggle Error:", err);
   }
@@ -132,7 +132,7 @@ async function deleteUser(id) {
       },
     );
     const data = await res.json();
-    if (data.success) fetchUsers(); // Table refresh
+    if (data.success) fetchUsers();
   } catch (err) {
     console.error("Delete Error:", err);
   }
@@ -146,34 +146,29 @@ async function deleteUser(id) {
 function filterByDate(selectedDate) {
   if (!selectedDate) return;
 
-  // 🎨 UI: 'Show All' button ko deactivate karo
   const btn = document.getElementById("show-all-btn");
   if (btn) {
     btn.style.background = "transparent";
     btn.style.color = "#64748b";
     btn.style.borderColor = "#333";
   }
-
-  // 🕵️ Data Filter Logic
   const filtered = allUsers.filter((u) => {
     if (!u.createdAt) return false;
-    // ISO Date (YYYY-MM-DD) match karo
+
     const userDate = new Date(u.createdAt).toISOString().split("T")[0];
     return userDate === selectedDate;
   });
 
-  renderTable(filtered); // Sirf filtered students dikhao
+  renderTable(filtered);
 
-  // UI Label Update
   const label = document.getElementById("filter-label");
   if (label) label.innerText = `Date: ${selectedDate}`;
 }
 
 // 🔄 2. RESET USER FILTER: Wapas saari list dikhao
 function loadAllUsers() {
-  document.getElementById("date-picker").value = ""; // Calendar clear karo
+  document.getElementById("date-picker").value = "";
 
-  // 🎨 UI: Button ko wapas Neon Green banao
   const btn = document.getElementById("show-all-btn");
   if (btn) {
     btn.style.background = "#00ff88";
@@ -181,7 +176,7 @@ function loadAllUsers() {
     btn.style.borderColor = "#00ff88";
   }
 
-  renderTable(allUsers); // Original global list load karo
+  renderTable(allUsers);
 
   const label = document.getElementById("filter-label");
   if (label) label.innerText = `Showing: All Students`;
@@ -204,18 +199,15 @@ function downloadSalesReport() {
     const cols = rows[i].querySelectorAll("td, th");
 
     for (let j = 0; j < cols.length; j++) {
-      // 🛠️ Clean Data: Comma hatao aur Excel fix (Quotes) dalo
       let data = cols[j].innerText.replace(/,/g, "").trim();
       rowData.push(`"${data}"`);
     }
     csvRows.push(rowData.join(","));
   }
 
-  // 🛡️ UTF-8 BOM FIX: Symbols (₹) ko Excel mein sahi dikhane ke liye
   const BOM = "\uFEFF";
   const csvString = BOM + csvRows.join("\n");
 
-  // 📁 File Download Logic
   const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
   const url = window.URL.createObjectURL(blob);
   const date = new Date().toLocaleDateString("en-IN").replace(/\//g, "-");
@@ -257,7 +249,6 @@ async function loadSalesData(startDate = "", endDate = "") {
   const showAllBtn = document.getElementById("show-all-btn");
   const applyBtn = document.getElementById("apply-btn");
 
-  // 🎨 UI Glow Logic: Buttons ka color switch karo
   if (!startDate && !endDate) {
     if (showAllBtn) {
       showAllBtn.style.background = "#00ff88";
@@ -285,11 +276,9 @@ async function loadSalesData(startDate = "", endDate = "") {
     const data = await res.json();
 
     if (data.success) {
-      // 💰 Revenue Update
       document.getElementById("total-revenue").innerText =
         `₹${data.totalRevenue.toLocaleString("en-IN")}`;
 
-      // 🔥 BEST SELLER CALCULATION
       const counts = {};
       data.sales.forEach((sale) => {
         const title =
@@ -323,3 +312,4 @@ async function loadSalesData(startDate = "", endDate = "") {
     console.error("❌ Sales Data Error:", err);
   }
 }
+//#endregion

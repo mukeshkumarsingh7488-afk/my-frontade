@@ -1,30 +1,30 @@
-/* #region Styles My Code */
-/* --- Desktop & Mobile Perfect Header --- */
+/* #region ━━━━━ 🎨 WELCOME DESIGNER | GLOBAL UI FRAMEWORK LIVE ━━━━━ */
+/**
+ * 🎨 MAIN GLOBAL STYLESHEET (V2026)
+ * Logic: Root Variables, Typography System, Reset Rules & Global Utility Classes
+ * Purpose: The foundational design system and visual core of BRR30KART
+ * Status: 2026 Production Ready | MSR PRO Design Standards
+ * --------------------------------------------------------------------------
+ */
+
 body {
   -webkit-user-select: none;
-  /* Safari */
   -ms-user-select: none;
-  /* IE 10+ */
   user-select: none;
-  /* Standard syntax */
 }
 
 body {
-  /* Premium Dark Mesh Gradient: कोनों में हल्का सा गहरा हरा ग्लो */
   background-color: #050505;
   background-image:
     radial-gradient(at 0% 0%, rgba(0, 255, 136, 0.05) 0px, transparent 90%),
     radial-gradient(at 100% 100%, rgba(0, 255, 136, 0.05) 0px, transparent 90%);
-  /* थोड़ा ज्यादा स्पेस ताकि बैकग्राउंड अच्छा दिखे */
 }
 
-/* सबसे ऊपर डालें */
 html {
   visibility: hidden;
   opacity: 0;
 }
 
-/* जैसे ही सब लोड होगा, पेज चमकेगा */
 html.loaded {
   visibility: visible;
   opacity: 1;
@@ -35,14 +35,12 @@ html.loaded {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* इससे विड्थ खराब नहीं होगी */
 }
 
 body,
 html {
   width: 100%;
   overflow-x: hidden;
-  /* साइड स्क्रॉल रोकने के लिए */
 }
 
 header {
@@ -56,26 +54,20 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Purani border-bottom hata kar ye niche wala code use karein */
   border-bottom: none;
 }
 
 /* scroll-progress */
 #scroll-progress {
   position: fixed;
-  /* Screen par lock karne ke liye */
   top: 0;
   left: 0;
   width: 0%;
-  /* JS se control hoga */
   height: 2px;
   background: #00ff88 !important;
-  /* Brand Purple */
   z-index: 99999 !important;
-  /* Sabse upar (Header se bhi upar) */
   box-shadow: 0 0 15px #00ff88;
   transition: width 0.15s ease-out;
-  /* Smooth movement */
 }
 
 /* --- THE MULTI-COLOR LINE (Full Width) --- */
@@ -86,14 +78,10 @@ header::after {
   left: 0;
   width: 100%;
   height: 2px;
-  /* Patli aur clean line */
-  /* Aapka Purple + Neon Blue + Pink ka combo */
   background: linear-gradient(90deg, #329869, #00d2ff, #592059, #2e5f48);
   background-size: 300% 100%;
   animation: borderMove 4s linear infinite;
-  /* Line move karegi */
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
-  /* Glowing Effect */
 }
 
 /* Animation Logic */
@@ -112,11 +100,9 @@ header::after {
   body {
     padding-top: 100px;
   }
-
-  /* Mobile par gap adjust karne ke liye */
 }
 
-/* ⚠️ IMPORTANT: Body mein gap dena zaroori hai varna content header ke niche chhup jayega */
+/* ⚠️ IMPORTANT:*/
 body {
   padding-top: 80px;
 }
@@ -152,10 +138,8 @@ p {
 .nav-container {
   display: flex !important;
   justify-content: flex-end !important;
-  /* इससे दोनों आइटम दाईं ओर चले जाएंगे */
   align-items: center !important;
   gap: 15px !important;
-  /* बेल और मेनू बटन के बीच की दूरी यहाँ से कम-ज्यादा करें */
 }
 
 /* Left Group */
@@ -177,7 +161,6 @@ p {
 
 .nav-right-side {
   text-align: right;
-  /* इससे अंदर के सभी बटन दाईं ओर खिसक जाएंगे */
 }
 
 /* Desktop Navigation Links */
@@ -203,7 +186,7 @@ p {
   top: 100%;
   right: 0;
   width: 100%;
-  height: 15px; /* gap cover */
+  height: 15px;
 }
 
 /* dropdown */
@@ -211,18 +194,12 @@ p {
   position: absolute;
   top: 100%;
   right: 0;
-
-  /* ❌ margin hata de (ye hi problem hai) */
   margin-top: 0;
-
   width: 240px;
   background: #020617;
-
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
@@ -265,7 +242,6 @@ p {
 }
 
 @media (max-width: 480px) {
-  /* 1. लोगो और आइकन्स को थोड़ा छोटा करें ताकि बीच में जगह बने */
   .logo {
     width: 35px !important;
     height: 35px !important;
@@ -273,10 +249,8 @@ p {
 
   .logo-text {
     display: none !important;
-    /* मोबाइल पर नाम छुपा दें, सिर्फ लोगो रहने दें */
   }
 
-  /* 2. वेलकम को मोबाइल के हिसाब से सेट करें */
   .welcome.trader {
     position: relative !important;
     left: 50% !important;
@@ -284,43 +258,33 @@ p {
     margin-left: -20px;
     text-align: left;
     transform: translate(-50%, -50%) !important;
-    /* सुनिश्चित करें कि ये छुपा न हो */
     z-index: 9999 !important;
     width: auto !important;
   }
 
   .welcome.trader h1 {
     font-size: 0.9rem !important;
-    /* मोबाइल के लिए छोटा साइज */
     white-space: nowrap !important;
     letter-spacing: 0px !important;
   }
 
-  /* 3. नेवबार के दाएं हिस्से को थोड़ा खिसकाएं */
   .nav-right {
     gap: 8px !important;
-    /* बेल और मेनू के बीच की दूरी कम करें */
   }
 }
 
-/* --- Web View (Desktop) के लिए सेटिंग्स --- */
 @media screen and (min-width: 769px) {
-  /* वेब पर 'Welcome' दिखेगा */
   .welcome.trader {
     display: block !important;
   }
 }
-
-/* मोबाइल स्क्रीन (768px से कम) के लिए */
 @media screen and (max-width: 768px) {
-  /* Welcome मैसेज को पूरी तरह छुपाने के लिए */
   .welcome.trader {
     display: none !important;
     margin-left: 8px;
     white-space: nowrap;
   }
 
-  /* अगर आप चाहते हैं कि मोबाइल पर Logo का टेक्स्ट दिखे (चूंकि Welcome हट गया है) */
   .logo-text {
     display: block !important;
     font-size: 1.1rem;
@@ -333,45 +297,35 @@ p {
 }
 
 @media screen and (min-width: 769px) {
-  /* अगर आप चाहते हैं कि वेब पर Welcome दिखे तो इसे 'block' रखें */
   .welcome.trader {
     display: block !important;
   }
 }
 
-/* 1. पूरे हेडर को एक लाइन में सेट करना */
 header {
   display: flex;
   justify-content: space-between;
-  /* लोगो बाएं और नेवबार दाएं */
   align-items: center;
   padding: 15px 5%;
-  /* "Welcome" को सेंटर करने के लिए यह जरूरी है */
   background-color: #000;
-  /* आपका बैकग्राउंड कलर */
   min-height: 60px;
 }
 
-/* 2. Welcome Message को बिल्कुल सेंटर में लाना */
 .welcome.trader {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* यह स्क्रीन के बिल्कुल बीच में लाएगा */
   text-align: center;
   z-index: 10;
 }
 
 .welcome.trader h1 {
   color: #ffd700;
-  /* गोल्ड या सफ़ेद जो आपको पसंद हो */
   white-space: nowrap;
-  /* ताकि नाम एक ही लाइन में रहे */
   font-family: "Poppins", sans-serif;
 }
 
-/* 3. नेवबार (दाईं ओर के आइकन्स) को सेट करना */
 .navbar {
   display: flex;
   align-items: center;
@@ -381,42 +335,32 @@ header {
   display: flex;
   align-items: center;
   gap: 15px;
-  /* बेल और मेनू के बीच की दूरी */
 }
 
-/* मोबाइल के लिए छोटा सुधार */
 @media (max-width: 768px) {
   .logo-text {
     display: none;
-    /* मोबाइल में सिर्फ लोगो दिखेगा ताकि 'Welcome' को जगह मिले */
   }
 
   .welcome.trader h1 {
     font-size: 1rem !important;
-    /* मोबाइल में थोड़ा छोटा */
   }
 }
 
-/* पूरे हेडर को मैनेज करने के लिए */
 header {
   display: flex;
   justify-content: space-between;
-  /* लोगो बाएं और बाकी सब दाएं */
   align-items: center;
   padding: 10px 15px;
   background: #000;
-  /* ब्लैक बैकग्राउंड */
 }
 
-/* दाईं ओर के दोनों आइकन्स के लिए */
 .nav-right {
   display: flex;
   align-items: center;
   gap: 15px;
-  /* बेल और मेनू के बीच की दूरी */
 }
 
-/* मेनू बटन (Hamburger) की स्टाइलिंग */
 .menu-icon {
   display: flex;
   flex-direction: column;
@@ -431,36 +375,29 @@ header {
   height: 3px;
   width: 100%;
   background-color: #fff;
-  /* सफेद धारियां */
   border-radius: 2px;
 }
 
-/* बेल आइकन को थोड़ा सा एडजस्ट करने के लिए */
 .bell-container {
   position: relative;
   cursor: pointer;
 }
 
-/* जब मेनू खुला हो (Active Class) */
 .menu-icon.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
 
 .menu-icon.active span:nth-child(2) {
   opacity: 0;
-  /* बीच वाली लाइन गायब हो जाएगी */
 }
 
 .menu-icon.active span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* स्मूथ ट्रांजेक्शन के लिए इसे अपनी पुरानी .menu-icon span में जोड़ें */
 .menu-icon span {
   transition: 0.3s ease-in-out;
 }
-
-/* JS se show hoga */
 
 .welcome.trader {
   display: none;
@@ -473,7 +410,6 @@ header {
   position: relative;
   width: 100%;
   height: 85vh;
-  /* Desktop par 60% height */
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -493,30 +429,24 @@ header {
   z-index: -1;
 }
 
-/* वीडियो और टेक्स्ट का कंटेनर */
 .hero-container {
   position: relative;
-  /* यह सबसे ज़रूरी है */
   width: 100%;
   height: auto;
   overflow: hidden;
 }
 
-/* वीडियो की स्टाइल */
 .hero-container {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
 
-/* Hero Text Overlay - अब यह ऊपर से शुरू होगा */
 .video-text {
   position: absolute;
   top: 40px;
-  /* Navbar के ठीक नीचे लाने के लिए (इसे कम-ज्यादा कर सकते हैं) */
   left: 50%;
   transform: translateX(-50%);
-  /* सिर्फ हॉरिजॉन्टल सेंटर करने के लिए */
   text-align: center;
   width: 90%;
   color: #ffffff;
@@ -525,14 +455,11 @@ header {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 20px;
-  /* background: rgba(0, 0, 0, 0.2); /* अगर टेक्स्ट पढ़ने में दिक्कत हो तो इसे ऑन रखें */
 }
 
-/* --- मोबाइल के लिए खास सेटिंग (Max 768px) --- */
 @media (max-width: 768px) {
   .video-text {
     top: 50px;
-    /* मोबाइल पर नेवबार छोटा होता है, इसलिए गैप कम किया */
     font-size: 1.1rem;
     padding: 10px;
   }
@@ -540,23 +467,19 @@ header {
 
 .purple {
   color: #00ff88;
-  /* Purple color for Mukesh Raj */
 }
 
 span {
   color: #00ff88;
 }
 
-/* --- Mobile Specific Hero (Max 768px) --- */
 @media (max-width: 768px) {
   .hero-video {
     height: 40vh;
-    /* Mobile par video ki height thodi kam */
   }
 
   .video-text {
     font-size: 1.2rem;
-    /* Mobile par text thoda chota taaki line na toote */
     padding: 20px 10px;
   }
 }
@@ -580,33 +503,24 @@ span {
   margin-bottom: 15px;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  /* स्मूथ एनिमेशन के लिए */
   cursor: default;
   display: block;
-  /* ज़ूम इफेक्ट को सही से दिखाने के लिए */
 }
 
-/* होवर इफेक्ट - वेब और मोबाइल दोनों के लिए */
 .about-section p:hover {
   color: skyblue;
-  /* आपका सिग्नेचर पर्पल */
   transform: scale(1.02);
-  /* साइज को 2% बढ़ा देगा (लेआउट खराब किए बिना) */
   transform-origin: left;
-  /* टेक्स्ट बाईं ओर से ही बढ़ेगा, जिससे लाइन नहीं हिलेगी */
 }
 
-/* --- Mobile Specific About (Max 768px) --- */
 @media (max-width: 768px) {
   .about-section {
     padding: 15px;
     text-align: center;
-    /* Mobile par centered text zyada achha dikhta hai */
   }
 
   .about-section p {
     font-size: 0.95rem;
-    /* Mobile font size adjust */
   }
 }
 
@@ -740,7 +654,6 @@ span {
  */
 
 /* Course Section */
-/* Course Section Overall */
 .course-section {
   padding: 80px 20px;
   text-align: center;
@@ -752,7 +665,6 @@ span {
 
 .section-header-box h2 {
   color: #00f2fe !important;
-  /* शुद्ध सफ़ेद */
   font-weight: 700;
 }
 
@@ -766,7 +678,6 @@ span {
 .poster-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 Boxes per line */
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
@@ -850,9 +761,7 @@ span {
 
 .poster-grid {
   opacity: 0;
-  /* Pehle se hide rahega */
   transition: opacity 0.5s ease-in-out;
-  /* Smoothly dikhega */
 }
 
 /* --- Mobile View --- */
@@ -860,8 +769,6 @@ span {
   .poster-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  /* Tablets पर 2 */
 }
 
 @media (max-width: 650px) {
@@ -885,11 +792,9 @@ span {
   animation: moveGradient 5s linear infinite;
   margin: 40px auto;
   width: 100%;
-  /* पूरी स्क्रीन पर न फैलकर 80% चौड़ाई रखेगा */
   border-radius: 10px;
 }
 
-/* घूमने वाला एनिमेशन */
 @keyframes moveGradient {
   0% {
     background-position: 0% 50%;
@@ -902,31 +807,23 @@ span {
 
 .home-btn {
   background-color: #00ff88;
-  /* आपका पर्पल कलर */
   color: #a9b1c5;
   padding: 12px 35px;
-  /* बटन को सही शेप देने के लिए */
   border: none;
   border-radius: 50px;
-  /* इससे किनारे पूरी तरह गोल (Pill shape) हो जाएंगे */
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
   transition: all 0.3s ease;
-  /* स्मूथ इफेक्ट के लिए */
   text-align: center;
 }
 
-/* होवर इफेक्ट (Hover Effect) */
 .home-btn:hover {
   background-color: #00ff88;
-  /* होवर पर थोड़ा गहरा पर्पल */
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
-  /* हल्का सा ग्लो */
   transform: translateY(-2px);
-  /* हल्का सा ऊपर उठने वाला इफेक्ट */
 }
 
 h5 {
@@ -959,7 +856,6 @@ h5 {
   flex: 1;
   max-height: 400px;
   min-width: 320px;
-  /* Mobile par width auto adjust hogi */
   background: #000000 !important;
   padding: 25px;
   border-radius: 15px;
@@ -977,13 +873,9 @@ input,
 textarea,
 select {
   background-color: rgba(255, 255, 255, 0.05);
-  /* Bahut halka white */
   color: #ffffff;
-  /* Likha hua white dikhega */
   border: 1px solid rgba(255, 255, 255, 0.1);
-  /* Halka border */
   backdrop-filter: blur(10px);
-  /* Glass effect */
 }
 
 #reviewForm input,
@@ -998,11 +890,8 @@ select {
 /* ⚡ Cyber Green Scrollbar Logic */
 #reviewDisplay {
   max-height: 320px;
-  /* हेडिंग के बाद बचे हुए स्पेस के लिए */
   overflow-y: auto;
   padding-right: 10px;
-
-  /* स्क्रॉलबार को सुंदर बनाने के लिए (Custom Scrollbar) */
 }
 
 /* 🟢 CYBER GREEN SCROLLBAR (Taki look kharab na ho) */
@@ -1029,7 +918,6 @@ select {
 #submitBtn {
   position: relative;
   background: #050505;
-  /* बटन का अंदरूनी कलर डार्क रखें ताकि लाइट चमके */
   color: black !important;
   padding: 14px;
   border-radius: 8px;
@@ -1038,40 +926,32 @@ select {
   width: 100%;
   border: none;
   overflow: hidden;
-  /* लाइट को बटन के अंदर रखने के लिए */
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s;
 }
 
-/* घूमने वाली पर्पल लाइट (1-2 इंच की पट्टी) */
 #submitBtn::before {
   content: "";
   position: absolute;
   width: 150px;
-  /* लाइट की लंबाई (करीब 1.5-2 इंच) */
   height: 300%;
   background: #00ff88;
   animation: rotateBtn 3s linear infinite;
 }
 
-/* बटन का टेक्स्ट कवर (ताकि लाइट सिर्फ बॉर्डर पर दिखे) */
 #submitBtn::after {
   content: "Post Review";
-  /* यहाँ अपना बटन टेक्स्ट लिखें */
   position: absolute;
   inset: 3px;
-  /* बॉर्डर की मोटाई */
   background: palevioletred !important;
-  /* बटन का मुख्य कलर */
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* घूमने वाला एनिमेशन */
 @keyframes rotateBtn {
   from {
     transform: rotate(0deg);
@@ -1082,7 +962,6 @@ select {
   }
 }
 
-/* होवर करने पर हल्का सा बड़ा होगा */
 #submitBtn:hover {
   background: palevioletred !important;
   color: black !important;
@@ -1099,12 +978,10 @@ select {
   .info-links {
     text-align: center;
     order: 2;
-    /* Policy links niche aayenge */
   }
 
   .disclaimer {
     order: 1;
-    /* Disclaimer upar dikhega mobile par */
     width: 100%;
   }
 
@@ -1124,7 +1001,6 @@ select {
   }
 }
 
-/* Form Styles - सभी बॉक्स बराबर करने के लिए */
 #reviewForm input,
 #reviewForm select,
 #reviewForm textarea {
@@ -1132,52 +1008,37 @@ select {
   border: #00ff88;
   border-radius: 8px;
   width: 100%;
-  /* पूरी चौड़ाई लेगा */
   box-sizing: border-box;
-  /* पैडिंग को चौड़ाई के अंदर रखेगा, जिससे बॉक्स बाहर नहीं भागेंगे */
   font-family: inherit;
-  /* फॉन्ट सेम रखेगा */
   font-size: 14px;
 }
 
 #reviewForm textarea {
   resize: vertical;
-  /* यूजर सिर्फ नीचे की तरफ खींच सकेगा, साइड में नहीं जिससे लेआउट नहीं बिगड़ेगा */
   min-height: 100px;
-  /* एक फिक्स हाइट ताकि बॉक्स अच्छा दिखे */
 }
 
-/* इनपुट पर क्लिक करने पर आपका पर्पल बॉर्डर आए (Optional but looks pro) */
 #reviewForm input:focus,
 #reviewForm select:focus,
 #reviewForm textarea:focus {
   outline: none;
   border-color: palevioletred;
-  /* आपका पर्पल कलर */
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
 }
 
-/* कम्युनिटी हाइलाइट्स बॉक्स के लिए स्टाइल */
 .review-list-box {
   border: 2px solid transparent;
-  /* डिफ़ॉल्ट बॉर्डर गायब रहेगा */
   transition: all 0.4s ease;
   cursor: pointer;
 }
 
-/* बॉक्स पर माउस ले जाने (Hover) पर इफ़ेक्ट */
 .review-list-box:hover {
   border-color: #00ff88;
-  /* आपका पर्पल बॉर्डर */
   transform: translateY(-5px);
-  /* हल्का सा ऊपर उठेगा */
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
-  /* पर्पल ग्लो */
   background: rgb(55, 51, 51);
-  /* बैकग्राउंड थोड़ा हल्का होगा */
 }
 
-/* बॉक्स के अंदर के टाइटल (Top 10) को चमकाने के लिए */
 .review-list-box h3,
 .review-list-box h2 {
   transition: color 0.3s ease;
@@ -1186,10 +1047,8 @@ select {
 .review-list-box:hover h3,
 .review-list-box:hover h2 {
   color: #00ff88;
-  /* टाइटल भी पर्पल हो जाएगा */
 }
 
-/* बॉक्स के चारों तरफ घूमती हुई पर्पल लाइट */
 .review-list-box {
   position: relative;
   overflow: hidden;
@@ -1218,7 +1077,6 @@ select {
   }
 }
 
-/* कंटेंट को ऊपर रखने के लिए */
 .review-list-box > * {
   position: relative;
   z-index: 1;
@@ -1232,11 +1090,9 @@ select {
   padding: 25px;
   border-radius: 15px;
   overflow: hidden;
-  /* लाइट को बाहर जाने से रोकने के लिए */
   z-index: 1;
 }
 
-/* घूमने वाली पर्पल पट्टी (सिर्फ होवर पर दिखेगी) */
 .review-form-box::before {
   content: "";
   position: absolute;
@@ -1245,31 +1101,24 @@ select {
   width: 200%;
   height: 200%;
   background: conic-gradient(transparent, transparent, #00ff88);
-  /* आपका पर्पल कलर */
   animation: rotateBox 4s linear infinite;
   z-index: -1;
   display: none;
-  /* डिफ़ॉल्ट में छुपा रहेगा */
 }
 
-/* अंदर का कवर ताकि लाइट सिर्फ किनारों पर दिखे */
 .review-form-box::after {
   content: "";
   position: absolute;
   inset: 4px;
-  /* बॉर्डर की मोटाई (जितना कम, उतनी पतली लाइन) */
   background: #000000;
-  /* बॉक्स का ओरिजिनल बैकग्राउंड */
   border-radius: 12px;
   z-index: -1;
 }
 
-/* होवर करने पर लाइट जल उठेगी */
 .review-form-box:hover::before {
   display: block;
 }
 
-/* घूमने वाला एनिमेशन */
 @keyframes rotateBox {
   from {
     transform: rotate(0deg);
@@ -1280,7 +1129,6 @@ select {
   }
 }
 
-/* मोबाइल के लिए टच पर भी काम करेगा */
 @media (max-width: 768px) {
   .review-form-box:active::before {
     display: block;
@@ -1298,7 +1146,6 @@ select {
 
 .admin-msg-box {
   display: none;
-  /* Pehle se hide rahega */
   background: rgba(0, 255, 163, 0.1);
   border-left: 2px solid #00ffa3;
   padding: 10px;
@@ -1319,17 +1166,15 @@ select {
 
 #countNumber {
   font-weight: bold;
-  color: #00ff88; /* हल्का हरा रंग जो डार्क थीम पर अच्छा लगता है */
+  color: #00ff88;
   transition: all 0.3s ease;
 }
 
-/* नंबर अपडेट होने पर चमकने वाला इफ़ेक्ट */
 .count-update-flash {
   text-shadow: 0 0 15px #00ff88;
   transform: scale(1.2);
 }
 
-/* लाइव जैसा दिखने के लिए एक छोटा सा ब्लिंकिंग डॉट */
 .pulse-icon {
   height: 8px;
   width: 8px;
@@ -1363,9 +1208,7 @@ select {
   color: #a9b1c5;
 
   line-height: 1.6;
-  /* Line ke beech thoda gap taaki padhne mein aasani ho */
   letter-spacing: 0.5px;
-  /* Letters ke beech halka sa space professional lagta hai */
 }
 
 .trading-network h2 {
@@ -1390,7 +1233,6 @@ select {
   color: #00ff88;
 }
 
-/* Brand Color */
 .section-subtitle {
   color: #a9b1c5;
   margin-bottom: 40px;
@@ -1411,16 +1253,13 @@ select {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* एक लाइन में 4 बॉक्स */
   gap: 15px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* Box Styling (Like your Image) */
 .grid-box {
   background: #000000;
-  /* Dark Glassy Look */
   border: #00ff88;
   padding: 15px 20px;
   border-radius: 10px;
@@ -1435,7 +1274,6 @@ select {
 
 .grid-box span {
   color: #00ff88;
-  /* Bullet point color */
   margin-right: 12px;
   font-size: 1.2rem;
 }
@@ -1454,8 +1292,6 @@ select {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  /* Tablets पर 3 बॉक्स */
 }
 
 @media screen and (max-width: 768px) {
@@ -1463,7 +1299,6 @@ select {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* छोटे Tablets पर 2 बॉक्स */
   .section-title {
     font-size: 1.6rem;
   }
@@ -1474,16 +1309,13 @@ select {
     grid-template-columns: 1fr;
   }
 
-  /* Mobile पर 1 बॉक्स (Full Width) */
   .grid-box {
     padding: 12px 15px;
   }
 }
 
 /*-- Service & tools --*/
-/* Services Section Container */
 .services-section {
-  /* Deep Navy */
   padding: 80px 20px;
   text-align: center;
 }
@@ -1495,7 +1327,6 @@ select {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* Desktop पर 3 कार्ड्स */
   gap: 25px;
   max-width: 1200px;
   margin: 40px auto 0;
@@ -1513,7 +1344,6 @@ select {
   overflow: hidden;
 }
 
-/* Featured Card (Purple Glow) */
 .service-card.featured {
   border-color: #00ff88;
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
@@ -1553,7 +1383,6 @@ select {
 /* --- Professional Hover Effect --- */
 .service-card:hover {
   transform: scale(1.05);
-  /* कार्ड थोड़ा बड़ा होगा */
   background: linear-gradient(145deg, #000000, #111b2d);
   border-color: #00ff88;
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
@@ -1561,13 +1390,10 @@ select {
 
 .service-card:hover h3 {
   color: #00ff88;
-  /* हैडिंग पर्पल हो जाएगी */
 }
 
-/* टाइटल को सफ़ेद और पर्पल करने के लिए */
 .section-title {
   color: #e0e0e0 !important;
-  /* 'Our' और बाकी टेक्स्ट सफ़ेद हो जाएगा */
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 10px;
@@ -1578,26 +1404,18 @@ select {
   letter-spacing: 1px !important;
 }
 
-/* सिर्फ 'Services & Tools' को पर्पल रखने के लिए */
 .section-title span {
   color: #00ff88 !important;
-  /* आपका ब्रांड पर्पल कलर */
 }
 
-/* Tags के लिए होवर इफेक्ट */
 .service-card .tag {
   transition: all 0.3s ease;
-  /* स्मूथ ट्रांजिशन के लिए */
 }
 
-/* माउस ले जाने (Hover) पर ये बदलाव होंगे */
 .service-card:hover .tag {
   background-color: #00ff88 !important;
-  /* बैकग्राउंड पूरा पर्पल हो जाएगा */
   color: black !important;
-  /* टेक्स्ट सफ़ेद हो जाएगा */
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2);
-  /* हल्का पर्पल ग्लो */
 }
 
 /* --- Mobile View --- */
@@ -1718,7 +1536,6 @@ select {
 
 .main-footer {
   background-color: #0b1121;
-  /* थोड़ा और डार्क गहराई के लिए */
   padding: 60px 20px 20px;
   border-top: 2px solid #00ff88;
   color: #a9b1c5;
@@ -1803,8 +1620,6 @@ select {
 }
 
 /* Risk Warning in Red */
-
-/* Mobile View */
 @media screen and (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
@@ -1822,7 +1637,6 @@ select {
   padding: 50px 20px;
   text-align: center;
   border-top: 2px solid #00ff88;
-  /* आपका ब्रांड पर्पल */
 }
 
 .footer-section h3 {
@@ -1832,7 +1646,6 @@ select {
   letter-spacing: 1px;
 }
 
-/* Grid Layout: Desktop पर 3-3 के दो सेट या 6 एक लाइन में */
 .social-grid {
   display: flex;
   justify-content: center;
@@ -1915,15 +1728,12 @@ select {
   .s-link {
     padding: 10px;
     min-width: 45%;
-    /* मोबाइल पर 2-2 की लाइन बनेगी */
     font-size: 0.8rem;
   }
 
   .s-link span {
     display: inline-block;
   }
-
-  /* नाम दिखा रहेगा */
 }
 
 /* Footer Policy Links Styling */
@@ -1931,9 +1741,7 @@ select {
   text-align: center;
   padding: 20px 10px;
   background-color: #0b1121;
-  /* डार्क बैकग्राउंड */
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  /* हल्की बारीक लाइन ऊपर */
 }
 
 .policy-wrapper {
@@ -1941,27 +1749,23 @@ select {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  /* मोबाइल पर अपने आप दो लाइन में आ जाएगा */
   gap: 15px;
 }
 
 .policy-wrapper a {
   color: #a9b1c5;
-  /* हल्का ग्रे टेक्स्ट */
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 500;
   transition: 0.3s;
 }
 
-/* माउस ले जाने पर पर्पल हो जाएगा */
 .policy-wrapper a:hover {
   color: #00ff88;
 }
 
 .divider {
   color: rgba(160, 32, 240, 0.3);
-  /* हल्का पर्पल डिवाइडर */
   font-size: 0.8rem;
 }
 
@@ -1973,7 +1777,6 @@ select {
 
   .divider {
     display: none;
-    /* मोबाइल पर डिवाइडर हटा दें ताकि जगह बचे */
   }
 
   .policy-wrapper a {
@@ -2043,7 +1846,6 @@ select {
 
 .h-item i {
   color: #00ff88;
-  /* Purple Icons */
   font-size: 1.1rem;
 }
 
@@ -2058,12 +1860,10 @@ select {
   color: #a9b1c5;
 }
 
-/* Mobile View: एक के नीचे एक */
 @media (max-width: 768px) {
   .highlights-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* मोबाइल पर 2 कॉलम */
   }
 
   .h-item {
@@ -2116,7 +1916,6 @@ select {
   gap: 12px;
   background: #000;
   color: #00ff88 !important;
-  /* default text color */
   border: 2px solid #00ff88;
   padding: 15px 30px;
   border-radius: 12px;
@@ -2128,20 +1927,17 @@ select {
 
 .pl-box a * {
   color: inherit !important;
-  /* ensures span or icon inside also inherits color */
 }
 
 .pl-box a:hover {
   background: #00ff88 !important;
   color: #000 !important;
-  /* hover text color black */
   transform: scale(1.05);
   box-shadow: 0 0 20px #00ff88;
 }
 
 .pl-box a:hover * {
   color: inherit !important;
-  /* ensures child elements also turn black */
 }
 
 /* Course Tags */
@@ -2178,9 +1974,7 @@ select {
 /*-- PDF Hub --*/
 .pdf-list.scrollable {
   max-height: 400px;
-  /* Section height */
   overflow-y: auto;
-  /* Vertical scroll */
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px;
   border-radius: 8px;
@@ -2274,7 +2068,6 @@ select {
   border-color: #00ff88;
   color: #a9b1c5;
   transform: translateX(10px);
-  /* हल्का सा दाईं ओर खिसकेगा */
 }
 
 .pdf-item:hover .download-icon {
@@ -2282,16 +2075,13 @@ select {
   color: #a9b1c5 !important;
 }
 
-/* टाइटल को सफ़ेद करने के लिए */
 .pdf-header h2 {
   color: #00f2fe !important;
   font-weight: 700;
 }
 
-/* "Free Course PDF Hub" के अंदर के स्पैन (Span) को आपके ब्रांड कलर में रखने के लिए */
 .pdf-header h2 span {
   color: #00ff88 !important;
-  /* आपका पर्पल कलर */
 }
 
 /* Mobile View */
@@ -2307,24 +2097,20 @@ select {
 }
 
 /* Calculator-sentiment-Index-Trading Desiplen */
-/* --- ज़बरदस्ती एक लाइन में लाने के लिए --- */
 .trading-tools-wrapper {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  /* 3 Columns on Desktop */
   gap: 30px !important;
   max-width: 1200px !important;
   margin: 50px auto !important;
   padding: 0 20px !important;
   align-items: stretch !important;
-  /* तीनों की लंबाई बराबर रखेगा */
 }
 
 .trading-tools-wrapper p {
   color: #a9b1c5 !important;
 }
 
-/* --- हर बॉक्स की सेटिंग --- */
 .tool-card {
   background: #000000 !important;
   border: 1px solid rgba(160, 32, 240, 0.2) !important;
@@ -2361,50 +2147,40 @@ select {
   box-shadow: 0 15px 40px rgba(38, 193, 95, 0.2) !important;
 }
 
-/* --- मोबाइल के लिए (Responsive) --- */
 @media (max-width: 1024px) {
   .trading-tools-wrapper {
     grid-template-columns: 1fr !important;
-    /* मोबाइल पर एक लाइन */
     max-width: 500px !important;
   }
 }
 
-/* --- मोबाइल व्यू के लिए फाइनल फिक्स --- */
 @media (max-width: 768px) {
-  /* 1. कार्ड्स के बीच सही जगह बनाना */
   .tool-card {
     display: flex !important;
     flex-direction: column !important;
     height: auto !important;
-    /* हाइट को ऑटो रखें ताकि कंटेंट फिट हो सके */
     margin-bottom: 30px !important;
     padding: 20px !important;
     position: relative !important;
   }
 
-  /* 2. मार्केट सेंटीमेंट कार्ड के अंदर की ओवरलैपिंग ठीक करना */
   .gauge-container,
   .market-status-box,
   .status-info-text {
     position: static !important;
-    /* एब्सोल्यूट पोजीशन हटा दी */
     width: 100% !important;
     margin: 10px 0 !important;
     transform: none !important;
   }
 
-  /* 3. 'Current Bias' वाला हिस्सा (जो ओवरलैप हो रहा था) */
   .status-info-text {
     font-size: 16px !important;
     padding: 10px !important;
     background: rgba(0, 255, 136, 0.1);
-    /* हल्का बैकग्राउंड ताकि अलग दिखे */
     border-radius: 10px;
     margin-top: 15px !important;
   }
 
-  /* 4. रिस्क कैलकुलेटर की हेडिंग को जगह देना */
   .section-title {
     font-size: 24px !important;
     margin-top: 10px !important;
@@ -2418,7 +2194,6 @@ select {
     display: block !important;
   }
 
-  /* 5. इनपुट बॉक्स को मोबाइल में बड़ा और साफ़ करना */
   .calc-box {
     display: flex !important;
     flex-direction: column !important;
@@ -2436,13 +2211,11 @@ select {
   }
 }
 
-/* --- पुराने किसी भी 'Section' की फालतू विड्थ हटाना --- */
 .section-title,
 .section-subtitle {
   width: 100% !important;
 }
 
-/* --- 1. Sentiment Meter (गायब मीटर वापस लाने के लिए) --- */
 .gauge-container {
   width: 250px !important;
   margin: 20px auto !important;
@@ -2473,7 +2246,6 @@ select {
   width: 180px;
   height: 90px;
   background: #000000 !important;
-  /* कार्ड के बैकग्राउंड जैसा */
   border-radius: 90px 90px 0 0;
 }
 
@@ -2486,7 +2258,6 @@ select {
   left: 50% !important;
   transform-origin: bottom center !important;
   transform: rotate(45deg);
-  /* यहाँ से सुई की पोजीशन सेट करें */
   z-index: 10;
   box-shadow: 0 0 10px #00ff88;
 }
@@ -2516,7 +2287,7 @@ select {
   right: 10px;
 }
 
-/* --- 2. Risk Calculator (इनपुट बॉक्स और बटन सुधारने के लिए) --- */
+/* --- 2. Risk Calculator --- */
 .calc-box {
   width: 100% !important;
   text-align: left !important;
@@ -2560,11 +2331,8 @@ select {
   width: 100%;
   padding: 12px;
   background: #000;
-  /* Neon green base */
   color: #00ff88;
-  /* Black text */
   border: 2px solid #00ff88;
-  /* Neon border */
   border-radius: 12px;
   font-weight: bold;
   font-size: 1rem;
@@ -2575,9 +2343,7 @@ select {
 
 .calc-btn:hover {
   background: #00ff88;
-  /* Dark hover background */
   color: #000;
-  /* Neon text on hover */
   box-shadow: 0 0 20px #00ff88;
   transform: translateY(-2px);
 }
@@ -2603,16 +2369,13 @@ select {
 .check-item {
   display: flex !important;
   align-items: center !important;
-  /* टिकबॉक्स और टेक्स्ट एक लाइन में */
   gap: 15px !important;
   margin-bottom: 18px !important;
   cursor: pointer;
   color: #a9b1c5 !important;
-  /* साफ़ दिखने वाला हल्का सफ़ेद */
   font-size: 0.95rem !important;
 }
 
-/* टिकबॉक्स को साफ़ दिखाने के लिए */
 .custom-check {
   min-width: 20px !important;
   height: 20px !important;
@@ -2632,12 +2395,10 @@ select {
 .sentiment-value,
 #mood-text {
   color: #a9b1c5 !important;
-  /* पूरा टेक्स्ट सफ़ेद */
 }
 
 #mood-text {
   color: #00ff88 !important;
-  /* सिर्फ मूड वाला हिस्सा पर्पल चमकता हुआ */
   text-shadow: 0 0 5px rgba(160, 32, 240, 0.5);
 }
 
@@ -2653,11 +2414,10 @@ select {
   justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
-  /* मोबाइल पर अपने आप सेट हो जाएगा */
   margin-bottom: 15px;
 }
 
-/* Status Pills (छोटे गोल बटन्स) */
+/* Status Pills  */
 .status-pill {
   font-size: 0.7rem;
   padding: 5px 10px;
@@ -2670,7 +2430,6 @@ select {
   cursor: default;
 }
 
-/* होवर या एक्टिव होने पर कलर */
 .status-pill.bullish:hover {
   background: rgba(34, 197, 94, 0.15);
   color: #22c55e;
@@ -2689,7 +2448,6 @@ select {
   border-color: #ef4444;
 }
 
-/* Info Text नीचे वाली लाइन */
 .status-info-text {
   font-size: 0.8rem;
   color: #a9b1c5;
@@ -2724,7 +2482,6 @@ select {
   font-size: 0.85rem;
 }
 
-/* बटन दबाने पर छोटा सा एनिमेशन */
 .submit-discipline-btn:active {
   transform: scale(0.95);
 }
@@ -2814,7 +2571,6 @@ select {
   }
 }
 
-/* टेक्स्ट को सफेद करने के लिए */
 .journal-section h2,
 .section-subtitle,
 .input-label,
@@ -2895,29 +2651,23 @@ select {
   font-style: italic;
 }
 
-/* --- 1. ऊपर के 3 छोटे बॉक्सेस (Stats) --- */
 .analytics-row {
   display: flex;
   justify-content: center;
   gap: 15px;
   max-width: 1000px;
   margin: 15px auto;
-  /* मार्जिन कम किया */
 }
 
-/* 1. बॉक्सेस को छोटा (Small) करने के लिए */
 .stat-card {
   flex: 1;
   background: #a9b1c5;
-  /* हल्का ग्रे बैकग्राउंड ताकि काला टेक्स्ट चमके */
   padding: 10px !important;
-  /* पैडिंग बहुत कम की */
   border-radius: 10px;
   text-align: center;
   border: 1px solid #00ff88;
 }
 
-/* इन 3 बॉक्स के टेक्स्ट को काला (Black) करने के लिए */
 .stat-card small {
   color: #000000 !important;
   font-weight: 600;
@@ -2930,21 +2680,18 @@ select {
   margin-top: 2px;
 }
 
-/* 2. Recent History के टेक्स्ट को सफ़ेद करने के लिए */
+/* 2. Recent History */
 .journal-history h3,
 .trade-item b,
 .trade-item small,
 .item-note {
   color: #e0e0e0 !important;
-  /* पूरा टेक्स्ट सफ़ेद */
 }
 
 .trade-item small {
   opacity: 0.7;
-  /* तारीख को थोड़ा हल्का सफ़ेद रखने के लिए */
 }
 
-/* 3. History Item का बैकग्राउंड और बॉर्डर */
 .trade-item {
   padding: 12px !important;
   border-radius: 10px;
@@ -2955,10 +2702,8 @@ select {
   align-items: center;
 }
 
-/* 4. Scrollbar को सुंदर बनाने के लिए */
 #trade-list {
   max-height: 300px;
-  /* लैपटॉप स्क्रीन के हिसाब से फिक्स हाइट */
   overflow-y: auto;
   padding-right: 5px;
 }
@@ -2997,24 +2742,20 @@ select {
 .journal-history {
   background: #000000 !important;
   padding: 20px !important;
-  /* पैडिंग कम की ताकि स्क्रीन पर फिट आए */
   border-radius: 15px;
   border: 1px solid rgba(160, 32, 240, 0.2);
 }
 
-/* इनपुट फील्ड्स को थोड़ा छोटा करना */
 .journal-form input,
 .journal-form select,
 .journal-form textarea {
   padding: 8px !important;
-  /* हाइट कम की */
   margin-bottom: 10px !important;
   font-size: 0.85rem;
 }
 
 .journal-form textarea {
   height: 60px !important;
-  /* टेक्स्ट एरिया की हाइट कम की */
 }
 
 @media (max-width: 768px) {
@@ -3043,7 +2784,6 @@ select {
   top: 20px;
   right: 20px;
   background: #22c55e;
-  /* Green */
   color: #a9b1c5;
   padding: 15px 25px;
   border-radius: 10px;
@@ -3071,21 +2811,18 @@ select {
   transform: translateY(-20px);
 }
 
-/* Save Button Cooldown (क्लिक के बाद चमक) */
 .save-btn:active {
   transform: scale(0.95);
   background: #a9b1c5 !important;
   color: #00ff88 !important;
 }
 
-/* डिलीट बटन पर माउस ले जाने पर चमक */
 .trade-item button:hover {
   transform: scale(1.2);
   filter: drop-shadow(0 0 5px #ef4444);
 }
 
 /*Seasion clock */
-/* 1. मार्केट क्लॉक बार (Purple Border) */
 .market-clock-bar {
   display: flex;
   justify-content: center;
@@ -3097,7 +2834,6 @@ select {
   flex-wrap: wrap;
 }
 
-/* मार्केट का नाम - Pure White */
 .market-name {
   font-size: 0.8rem;
   color: #ffffff !important;
@@ -3105,15 +2841,12 @@ select {
   text-transform: uppercase;
 }
 
-/* डिजिटल टाइम - Purple Glow */
 .digital-time {
   font-size: 1.1rem;
   color: #00ff88 !important;
-  /* Purple */
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   text-shadow: 0 0 12px rgba(160, 32, 240, 0.8);
-  /* Purple Glow */
 }
 
 /* Status Pill (Open/Closed) */
@@ -3124,7 +2857,6 @@ select {
   font-weight: bold;
 }
 
-/* OPEN - Neon Green */
 .open {
   background: rgba(0, 255, 127, 0.1);
   color: #00ff7f !important;
@@ -3132,14 +2864,12 @@ select {
   box-shadow: 0 0 8px #00ff7f;
 }
 
-/* CLOSED - Bright Red */
 .closed {
   background: rgba(255, 68, 68, 0.1);
   color: #ff4444 !important;
   border: 1px solid #ff4444;
 }
 
-/* 2. सभी जनरल टेक्स्ट जो वाइट (White) करने हैं */
 .section-title,
 .section-subtitle,
 p,
@@ -3150,7 +2880,6 @@ h3,
   color: #a9b1c5 !important;
 }
 
-/* 4. जर्नल इनपुट बॉक्स - Purple Border */
 .journal-input,
 .journal-form input,
 .journal-form select,
@@ -3159,7 +2888,6 @@ h3,
   padding: 10px;
   background: #000000 !important;
   border: 1px solid #00ff88;
-  /* Purple Border */
   border-radius: 8px;
   color: #a9b1c5;
   margin-bottom: 15px;
@@ -3232,16 +2960,13 @@ h3,
   border-radius: 10px;
 }
 
-/* कैलेंडर आइकॉन को सफ़ेद करने के लिए */
 #search-date::-webkit-calendar-picker-indicator {
   filter: invert(1);
-  /* काले आइकॉन को सफ़ेद में बदल देगा */
   cursor: pointer;
   opacity: 0.8;
   transition: 0.3s;
 }
 
-/* माउस ले जाने पर आइकॉन थोड़ा और चमकेगा */
 #search-date::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
   transform: scale(1.1);
@@ -3270,7 +2995,6 @@ h3,
   position: relative;
   transition: 0.4s ease;
   border-bottom: 4px solid #00ff88;
-  /* इमेज वाला बॉटम पर्पल बॉर्डर */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -3303,13 +3027,11 @@ h3,
 .pillar-footer {
   font-size: 0.85rem;
   color: #a9b1c5;
-  /* हल्का ग्रे टेक्स्ट */
   line-height: 1.5;
   padding-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* मोबाइल के लिए */
 @media (max-width: 768px) {
   .pillar-container {
     gap: 20px;
@@ -3328,12 +3050,9 @@ h3,
   margin-right: 20px;
 }
 
-/* Jo bhi aapki notification box ki class hai */
 .notification-box {
   max-height: 400px;
-  /* Jitni height chahiye */
   overflow-y: auto;
-  /* Isse scroll bar aa jayega */
   overflow-x: hidden;
 }
 
@@ -3348,7 +3067,6 @@ h3,
   color: #00ff88;
 }
 
-/* लाल डॉट (Badge) */
 .notification-badge {
   position: absolute;
   top: -5px;
@@ -3391,7 +3109,6 @@ h3,
   border-radius: 15px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   display: none;
-  /* शुरू में छुपा रहेगा */
   z-index: 10000;
   overflow: hidden;
 }
@@ -3416,7 +3133,6 @@ h3,
   cursor: pointer;
 }
 
-/* Item List */
 .notif-item {
   padding: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -3456,17 +3172,13 @@ h3,
   font-weight: bold;
 }
 
-/* Scroll bar lane ke liye */
 #notif-list {
   max-height: 350px;
-  /* Jitni height chahiye */
   overflow-y: auto;
-  /* Isse scroll aayega */
   overflow-x: hidden;
   padding-right: 5px;
 }
 
-/* Scrollbar ko thoda patla aur sundar banane ke liye (Optional) */
 #notif-list::-webkit-scrollbar {
   width: 5px;
 }
@@ -3877,15 +3589,11 @@ h3,
 /* VIP Trader */
 /* Container Background */
 .leaderboard-wrapper {
-  /* Premium Dark Mesh Gradient: कोनों में हल्का सा गहरा हरा ग्लो */
-
   padding: 80px 20px;
-  /* थोड़ा ज्यादा स्पेस ताकि बैकग्राउंड अच्छा दिखे */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 600px;
-  /* हाइट अपनी ज़रूरत के हिसाब से रखें */
   position: relative;
   overflow: hidden;
 }
@@ -3893,7 +3601,6 @@ h3,
 /* Main Box with Neon Animation */
 .animated-leaderboard-box {
   background: #000000 !important;
-  /* Solid Black ताकि बाहर के हिस्से से अलग दिखे */
   border: 1.5px solid rgba(0, 255, 136, 0.2);
   border-radius: 30px;
   width: 100%;
@@ -3901,9 +3608,7 @@ h3,
   padding: 40px;
   position: relative;
   z-index: 2;
-  /* बैकग्राउंड से ऊपर रखने के लिए */
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
-  /* गहरा परछाई */
   animation: borderGlow 3.5s infinite ease-in-out;
 }
 
@@ -3911,7 +3616,6 @@ h3,
 .traders-list-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* 2 Columns */
   gap: 12px;
   min-height: 220px;
   transition: opacity 0.5s ease;
@@ -3921,7 +3625,6 @@ h3,
 @media (max-width: 768px) {
   .traders-list-container {
     grid-template-columns: 1fr;
-    /* Mobile पर 1 column */
   }
 
   .animated-leaderboard-box {
@@ -3964,15 +3667,9 @@ h3,
   font-size: 13px;
   margin-left: 10px;
   white-space: nowrap;
-  /* नाम एक ही लाइन में रहेगा */
-
-  /* इन नीचे वाली लाइन्स को बदलें या कमेंट करें */
   max-width: 180px;
-  /* 120px से बढ़ाकर 180px कर दिया */
   overflow: visible;
-  /* hidden की जगह visible करें */
   text-overflow: clip;
-  /* ellipsis हटा दें ताकि dots न आएं */
   letter-spacing: 1px !important;
 }
 
@@ -4056,7 +3753,6 @@ h3,
 
 .highlight-green {
   color: #00ff88;
-  /* Green Color for VIP Traders */
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
@@ -4083,7 +3779,6 @@ h3,
 .leaderboard-wrapper {
   position: relative;
   overflow: hidden;
-  /* Bubbles ko bahar jane se rokne ke liye */
 }
 
 .bubbles {
@@ -4091,7 +3786,6 @@ h3,
   width: 100%;
   height: 100%;
   z-index: 1;
-  /* Box ke niche rahega */
   display: flex;
   justify-content: space-around;
 }
@@ -4101,7 +3795,6 @@ h3,
   width: 15px;
   height: 15px;
   background: #00ff88;
-  /* Green Bubbles */
   margin: 0 4px;
   border-radius: 50%;
   box-shadow:
@@ -4109,9 +3802,7 @@ h3,
     0 0 30px #00ff8822;
   animation: animateBubbles 15s linear infinite;
   animation-duration: calc(125s / var(--i));
-  /* Alag-alag speed ke liye */
   opacity: 0.5;
-  /* Bahut suttle rakhne ke liye */
 }
 
 /* Bubbles ki position aur size ko random karne ke liye */
@@ -4145,9 +3836,7 @@ h3,
   gap: 8px;
   padding: 12px 28px;
   background-color: #000;
-  /* black background */
   color: #00ff88;
-  /* neon green text */
   font-weight: 700;
   text-decoration: none;
   border-radius: 12px;
@@ -4158,9 +3847,7 @@ h3,
 
 .vip-btn:hover {
   background-color: #00ff88;
-  /* green bg on hover */
   color: #000;
-  /* text turns black */
   box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
   transform: translateY(-3px);
 }
@@ -4190,7 +3877,6 @@ h3,
 .trading-container {
   display: flex;
   justify-content: space-between;
-  /* ये तीनों को बैलेंस रखेगा */
   align-items: flex-start;
   max-width: 1200px;
   width: 100%;
@@ -4199,17 +3885,14 @@ h3,
 
 .trading-col {
   flex: 1;
-  /* दोनों साइड के डिब्बे बराबर साइज के होंगे */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* रिंग और टेक्स्ट को सेंटर में रखेगा */
   min-width: 300px;
 }
 
 .trading-col-center {
   flex: 0 0 120px;
-  /* चार्ट को फिक्स जगह मिलेगी */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4231,16 +3914,13 @@ h3,
   letter-spacing: 1px !important;
 
   color: #4ade80 !important;
-  /* थोड़ा ब्राइट नियॉन ग्रीन */
   font-family: "Poppins", sans-serif !important;
   font-weight: 400 !important;
 }
 
 .text-content p {
   font-size: 14px !important;
-  /* छोटा रखने के लिए */
   color: #a9b1c5 !important;
-  /* रेड कलर जो साफ़ दिखे */
   line-height: 1.6 !important;
   letter-spacing: 1px !important;
 }
@@ -4368,3 +4048,10 @@ p {
   width: 100%;
 }
 /* #endregion */
+/* ==========================================================================
+   ✅ UI STATUS: GLOBAL FRAMEWORK ORGANIZED & OPTIMIZED.
+   ⚡ PERFORMANCE: UTILITY CLASSES & GLOBAL RESETS FULLY SYNCED.
+   🚀 DEPLOYMENT: STYLE.CSS READY FOR SITE-WIDE PRODUCTION!
+   ========================================================================== */
+
+/* 🏁 --- END OF GLOBAL UI MODULE --- */

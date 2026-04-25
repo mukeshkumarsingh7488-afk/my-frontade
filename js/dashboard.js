@@ -1,3 +1,4 @@
+//#region
 // 0. 🛡️ Admin Security Check (Sirf aapke liye)
 document.addEventListener("DOMContentLoaded", () => {
   const role = localStorage.getItem("role");
@@ -9,13 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  loadStats(); // Agar admin hai toh stats load karo
+  loadStats();
 });
 
 // 1. 📊 Stats Load Karne Ka Logic
 async function loadStats() {
   try {
-    const token = localStorage.getItem("token"); // LocalStorage se token nikalo
+    const token = localStorage.getItem("token");
 
     if (!token) {
       console.error("Bhai, token hi nahi mila!");
@@ -26,7 +27,7 @@ async function loadStats() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // 🔥 'Bearer ' ke baad space zaruri hai
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -69,7 +70,7 @@ async function sendBulkMail() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      // Backend controller ko target (all/vip/normal) bhej rahe hain
+
       body: JSON.stringify({ target, subject, htmlContent }),
     });
 
@@ -77,7 +78,7 @@ async function sendBulkMail() {
 
     if (res.ok) {
       alert("🚀 " + data.message);
-      // Clear fields after success
+
       document.getElementById("mail-subject").value = "";
       document.getElementById("mail-body").value = "";
     } else {
@@ -97,8 +98,8 @@ function logout() {
   window.location.href = "login.html";
 }
 
+// CANCEL ACTIVE COUPON
 async function cancelActiveCoupon() {
-  // 1. Confirm karo pehle
   if (
     !confirm(
       "Bhai, kya aap sach mein current discount offer ko band karna chahte ho?",
@@ -123,7 +124,7 @@ async function cancelActiveCoupon() {
 
     if (data.success) {
       alert("✅ " + data.msg);
-      location.reload(); // Page refresh karo stats update karne ke liye
+      location.reload();
     } else {
       alert("❌ Galti: " + data.msg);
     }
@@ -134,3 +135,4 @@ async function cancelActiveCoupon() {
     btn.disabled = false;
   }
 }
+//#endregion

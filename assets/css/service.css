@@ -1,4 +1,12 @@
-/* --- CSS STYLES --- */
+/* #region ━━━━━ 🛠️ WELCOME DESIGNER | SERVICES SYSTEM STYLES ━━━━━ */
+/**
+ * 🛠️ SERVICES UI ARCHITECTURE
+ * Logic: Service Offering Grids, Feature Benefit Lists & Iconography
+ * Purpose: Styling the core value propositions and solutions offered by BRR30KART
+ * Status: 2026 Production Ready | Optimized for Feature Clarity
+ * --------------------------------------------------------------------------
+ */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +16,6 @@
 
 body {
   background-color: #050505;
-  /* Your Brand Deep Navy */
   color: #ffffff;
   line-height: 1.6;
   overflow-x: hidden;
@@ -171,3 +178,11 @@ body {
     font-size: 2.5rem;
   }
 }
+/* #endregion */
+/* ==========================================================================
+   ✅ UI STATUS: SERVICE STYLES ORGANIZED & POLISHED.
+   ✨ VISUALS: FEATURE CARDS & SERVICE GRIDS FULLY RESPONSIVE.
+   🚀 DEPLOYMENT: SERVICES CSS READY FOR LIVE BUSINESS SHOWCASE!
+   ========================================================================== */
+
+/* 🏁 --- END OF SERVICES STYLING --- */

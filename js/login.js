@@ -1,7 +1,5 @@
+//#region
 const API_URL = `${window.API_BASE_URL}/api/auth`;
-
-// 1. Redirect logic hata diya taaki tum login page dekh sako
-// Agar future mein chahiye toh tabhi lagana jab Logout functionality set ho jaye.
 
 // 2. Toggle Password Visibility
 function togglePassword() {
@@ -44,21 +42,17 @@ async function handleLogin(e) {
     if (res.ok) {
       localStorage.clear();
 
-      // 1. Data Save Karo
       localStorage.setItem("token", data.token);
       localStorage.setItem("userData", JSON.stringify(data.user));
       localStorage.setItem("role", data.user.role);
       localStorage.setItem("username", data.user.name);
 
-      // --- YAHAN ALERT ADD KIYA HAI ---
       if (data.user.role === "admin") {
         alert("Welcome Admin! 🚀 Dashboard Access Granted.");
       } else {
         alert("Login Success! 🚀 Redirecting to Home.");
       }
-      // -------------------------------
 
-      // 2. 🔥 Yahan ho rahi hai redirection (Role-based)
       setTimeout(() => {
         if (data.user.role === "admin") {
           window.location.href = "admin-admin-dashboard.html";
@@ -87,3 +81,4 @@ document.addEventListener("keypress", (e) => {
     }
   }
 });
+//#endregion

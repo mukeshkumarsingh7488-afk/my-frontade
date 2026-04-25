@@ -1,22 +1,20 @@
+//#region
 async function fetchAllAlerts() {
-  // 1. Token nikalna zaroori hai refresh ke baad bhi
   const token = localStorage.getItem("token");
   const list = document.getElementById("all-notif-list");
 
   try {
-    // 2. Fetch mein Headers bhej rahe hain
     const response = await fetch(
       `${window.API_BASE_URL}/api/notifications/all`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token, // Backend ko token milte hi wo data de dega
+          "x-auth-token": token,
         },
       },
     );
 
-    // 3. Agar Unauthorized (401) hai toh login page par bhejo ya error dikhao
     if (response.status === 401) {
       list.innerHTML =
         "<p style='color:orange; text-align:center;'>Plese login Frist!</p>";
@@ -24,9 +22,8 @@ async function fetchAllAlerts() {
     }
 
     const alerts = await response.json();
-    list.innerHTML = ""; // Loader hatao
+    list.innerHTML = "";
 
-    // 4. Check karo ki data Array hai ya nahi
     if (!Array.isArray(alerts) || alerts.length === 0) {
       list.innerHTML =
         "<p style='text-align:center; color:gray;'>Koi alert record nahi mila.</p>";
@@ -52,3 +49,4 @@ async function fetchAllAlerts() {
 
 // Page load hote hi run karo
 document.addEventListener("DOMContentLoaded", fetchAllAlerts);
+//#endregion

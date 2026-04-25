@@ -1,76 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <!-- ✅ Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L" + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TT7SLZ4L");
+    </script>
 
-<head>
+    <!-- ✅ Basic -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <head>
+    <!-- ❌ IMPORTANT (SEO OFF for admin page) -->
+    <meta name="robots" content="noindex, nofollow" />
 
-        <!-- ✅ Google Tag Manager -->
-        <script>
-            (function (w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L' + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-TT7SLZ4L');
-        </script>
+    <title>Admin Alert Panel | BR30 Trader</title>
 
-        <!-- ✅ Basic -->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg" />
 
-        <!-- ❌ IMPORTANT (SEO OFF for admin page) -->
-        <meta name="robots" content="noindex, nofollow">
+    <!-- ✅ Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../assets/css/admin-alerts.css" />
 
-        <title>Admin Alert Panel | BR30 Trader</title>
+    <!-- ✅ Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
 
-        <!-- ✅ Favicon -->
-        <link rel="icon" href="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg">
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="admin-card">
+      <h2>
+        Post
+        <span>Live Alert</span>
+        🔔
+      </h2>
 
-        <!-- ✅ Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="../assets/css/admin-alerts.css">
+      <input
+        type="text"
+        id="admin-title"
+        placeholder="Alert Title (e.g. MARKET UPDATE)"
+      />
+      <textarea
+        id="admin-msg"
+        placeholder="Type Market Alert (e.g. NIFTY Bullish Move!)"
+      ></textarea>
 
-        <!-- ✅ Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <button id="sendBtn" onclick="sendAlert()">BROADCAST ALERT 🚀</button>
 
-    </head>
-
-<body>
-      <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-<div class="admin-card">
-    <h2>Post <span>Live Alert</span> 🔔</h2>
-
-    <input type="text" id="admin-title" placeholder="Alert Title (e.g. MARKET UPDATE)">
-    <textarea id="admin-msg" placeholder="Type Market Alert (e.g. NIFTY Bullish Move!)"></textarea>
-
-    <button id="sendBtn" onclick="sendAlert()">BROADCAST ALERT 🚀</button>
-
-    <p id="status" style="margin-top: 15px; font-size: 0.8rem; color: #22c55e; display: none;">
+      <p
+        id="status"
+        style="
+          margin-top: 15px;
+          font-size: 0.8rem;
+          color: #22c55e;
+          display: none;
+        "
+      >
         ✅ Alert & Push Sent Successfully!
-    </p>
-   <div style="margin-top:15px;">
-  <a href="admin-dashboard.html"
-     onmouseover="this.style.background='#1d4ed8'; this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.2)'"
-     onmouseout="this.style.background='#2563eb'; this.style.transform='scale(1)'; this.style.boxShadow='none'"
-     style="display:inline-block; background:#2563eb; color:white; padding:8px 14px; border-radius:8px; font-size:12px; font-weight:bold; text-decoration:none; transition:all 0.2s ease;">
-    BACK TO DASHBOARD
-  </a>
-</div>
-</div>
+      </p>
+      <div style="margin-top: 15px">
+        <a
+          href="admin-dashboard.html"
+          onmouseover="
+            this.style.background = '#1d4ed8';
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+          "
+          onmouseout="
+            this.style.background = '#2563eb';
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+          "
+          style="
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s ease;
+          "
+        >
+          BACK TO DASHBOARD
+        </a>
+      </div>
+    </div>
 
     <script src="../js/config.js"></script>
-
-  <script src="../js/admin-alart.js"></script>
-     <script src="../js/security.js"></script>
-</body>
-
+    <script src="../js/admin-alart.js"></script>
+    <script src="../js/security.js"></script>
+  </body>
 </html>

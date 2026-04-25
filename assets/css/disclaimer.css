@@ -1,3 +1,12 @@
+/* #region ━━━━━ ⚖️ WELCOME DESIGNER | DISCLAIMER SYSTEM STYLES ━━━━━ */
+/**
+ * ⚖️ DISCLAIMER & LEGAL UI ARCHITECTURE
+ * Logic: Readability-focused Typography, Policy Layouts & Compliance Styling
+ * Purpose: Styling the legal boundaries and transparency notices of BRR30KART
+ * Status: 2026 Production Ready | Optimized for Content Clarity
+ * --------------------------------------------------------------------------
+ */
+
 * {
   margin: 0;
   padding: 0;
@@ -21,7 +30,6 @@ body {
   border-radius: 20px;
   padding: 40px;
   border: 1px solid rgba(255, 68, 68, 0.3);
-  /* Reddish border for warning feel */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow: hidden;
@@ -41,7 +49,6 @@ body {
 h3 {
   text-align: center;
   color: #ef4444;
-  /* Alert Red */
   font-size: 1.8rem;
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -114,3 +121,11 @@ b {
     font-size: 1.4rem;
   }
 }
+/* #endregion */
+/* ==========================================================================
+   ✅ UI STATUS: DISCLAIMER STYLES ORGANIZED & POLISHED.
+   📖 READABILITY: TEXT LAYOUTS & LEGAL GRIDS FULLY RESPONSIVE.
+   🚀 DEPLOYMENT: DISCLAIMER CSS READY FOR LIVE COMPLIANCE!
+   ========================================================================== */
+
+/* 🏁 --- END OF DISCLAIMER STYLING --- */

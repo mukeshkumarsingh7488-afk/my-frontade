@@ -1,3 +1,4 @@
+//#region
 /* ========================================================================
            🚀 PRO LEVEL ADMIN DASHBOARD: Full Sync with Pro Comments
       ======================================================================== */
@@ -5,7 +6,6 @@
 // 🌐 1. FETCH COURSES: Database se saare courses nikaal kar grid mein dikhana
 async function fetchCourses() {
   try {
-    // API Call: Backend se data mangwao
     const res = await fetch(`${window.API_BASE_URL}/api/courses`);
     const courses = await res.json();
 
@@ -13,14 +13,12 @@ async function fetchCourses() {
 
     const BASE_URL = window.API_BASE_URL;
 
-    // ✨ Shuru mein grid ko chhupao taaki posters 1-1 karke na chamkein (Smooth Entry)
     grid.style.opacity = "0";
     grid.innerHTML = "";
 
-    let imagesLoadedCount = 0; // Tracking variable: Kitni images load ho gayi
+    let imagesLoadedCount = 0;
     const totalImages = courses.length;
 
-    // Agar database khali hai toh message dikhao
     if (totalImages === 0) {
       grid.innerHTML =
         "<p style='text-align:center; color:#64748b; width:100%;'>Abhi tak koi course nahi hai bhai!</p>";
@@ -28,12 +26,10 @@ async function fetchCourses() {
       return;
     }
 
-    // Loop: Har ek course ke liye card banao
     courses.forEach((c) => {
       const card = document.createElement("div");
       card.className = "course-card";
 
-      // 🎯 Thumbnail Logic: Database se 'thumbnail' uthao, BASE_URL jodo aur Timestamp lagao taaki turant update ho
       const displayImage = c.thumbnail
         ? (c.thumbnail.startsWith("http")
             ? c.thumbnail
@@ -41,7 +37,6 @@ async function fetchCourses() {
           `?t=${Date.now()}`
         : "images/BR30TRADER.png";
 
-      // HTML Structure: ID Tag, Image, Title, Price aur Buttons
       card.innerHTML = `
                 <div style="background: rgba(160, 32, 240, 0.1); border: 1px dashed #a020f0; padding: 6px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 10px; color: #a020f0; font-weight: bold; font-family: 'Courier New', monospace;">ID: ${c._id}</span>
@@ -67,17 +62,15 @@ async function fetchCourses() {
                 </div>
             `;
 
-      // 🖼️ Image Load Counter: Jab saari images load ho jayein tabhi grid ko dikhao
       const img = card.querySelector(".course-img-preview");
       img.onload = () => {
         imagesLoadedCount++;
         if (imagesLoadedCount === totalImages) {
-          grid.style.opacity = "1"; // Boom! Saare posters ek saath chamkenge
+          grid.style.opacity = "1";
         }
       };
-      img.onerror = img.onload; // Photo error pe bhi grid dikha do taaki page freeze na ho
+      img.onerror = img.onload;
 
-      // ✍️ EDIT & DELETE Click Events: Aapka purana modal aur delete logic yahan se trigger hota hai
       card.querySelector(".edit-btn").onclick = () =>
         openEdit(c._id, c.title, c.price, c.thumbnail, c.videoUrl);
       card.querySelector(".del-btn").onclick = () => deleteCourse(c._id);
@@ -85,7 +78,6 @@ async function fetchCourses() {
       grid.appendChild(card);
     });
 
-    // 🛡️ Safety Timeout: Agar server slow hai, toh 2.5 sec baad apne aap grid dikha do
     setTimeout(() => {
       grid.style.opacity = "1";
     }, 2500);
@@ -141,13 +133,11 @@ async function openEdit(id, title, price, image, videoUrl) {
 
   if (formValues) {
     try {
-      // FormData ka use: Kyunki hum images (files) bhej rahe hain
       const formData = new FormData();
       formData.append("title", formValues.title);
       formData.append("price", formValues.price);
       formData.append("videoUrl", formValues.videoUrl);
 
-      // Agar admin ne nayi file select ki hai toh use bhi add karo
       if (formValues.imageFile.length > 0) {
         formData.append("thumbnail", formValues.imageFile[0]);
       }
@@ -171,7 +161,7 @@ async function openEdit(id, title, price, image, videoUrl) {
           timer: 1500,
           showConfirmButton: false,
         });
-        fetchCourses(); // Naya data refresh karo
+        fetchCourses();
       }
     } catch (err) {
       console.error("Update fail:", err);
@@ -219,3 +209,4 @@ async function deleteCourse(id) {
 
 // Page load par courses nikaalo
 document.addEventListener("DOMContentLoaded", fetchCourses);
+//#endregion

@@ -1,8 +1,9 @@
+//#region
 /**
  * 1. GLOBAL SETTINGS & AUTH CHECK
  */
 const BASE_URL = `${window.API_BASE_URL}/api/courses`;
-const token = localStorage.getItem("token"); // Sirf ek baar declare kiya
+const token = localStorage.getItem("token");
 
 if (!token) {
   alert("Security Alert: Admin login required! 🔑");
@@ -127,3 +128,4 @@ allInputs.forEach((input, index) => {
 
 // Initial Load
 window.onload = loadCourses;
+//#endregion

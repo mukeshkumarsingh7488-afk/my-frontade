@@ -1,3 +1,12 @@
+/* #region ━━━━━ 🎓 WELCOME DESIGNER | BASIC TO ADVANCE STYLES ━━━━━ */
+/**
+ * 🎓 MASTER COURSE UI ARCHITECTURE (B2A)
+ * Logic: Progressive Learning Layouts, Course Curriculum Grids & Typography
+ * Purpose: Styling the journey from Fundamental concepts to Professional Mastery
+ * Status: 2026 Production Ready | MSR PRO Academic Standards
+ * --------------------------------------------------------------------------
+ */
+
 :root {
   --bg-dark: #07070a;
   --card-bg: #12121a;
@@ -30,9 +39,7 @@ h1 {
   margin: 0;
   background: linear-gradient(to right, #fff, var(--primary-purple));
   background-clip: text;
-  /* Standard Property */
   -webkit-background-clip: text;
-  /* For Chrome/Safari */
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
 }
@@ -122,3 +129,11 @@ h1 {
   box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
   letter-spacing: 1px;
 }
+/* #endregion */
+/* ==========================================================================
+   ✅ UI STATUS: B2A COURSE STYLES ORGANIZED & POLISHED.
+   📚 VISUALS: LEARNING MODULES & CURRICULUM FULLY RESPONSIVE.
+   🚀 DEPLOYMENT: COURSE CSS READY FOR PREMIUM STUDENT EXPERIENCE!
+   ========================================================================== */
+
+/* 🏁 --- END OF BASIC TO ADVANCE STYLING --- */

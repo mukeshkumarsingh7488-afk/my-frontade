@@ -1,3 +1,4 @@
+//#region
 // 🎥 1. Camera Scanner Logic
 const html5QrCode = new Html5Qrcode("reader");
 const config = { fps: 10, qrbox: { width: 250, height: 250 } };
@@ -32,7 +33,6 @@ async function verifyCert() {
         data.studentName.toUpperCase();
       document.getElementById("res-course").innerText = data.course;
 
-      // 📅 3. DATE FORMATTING
       const dateObj = new Date(data.issueDate);
       const formattedDate = isNaN(dateObj)
         ? new Date().toLocaleDateString("en-IN")
@@ -40,7 +40,6 @@ async function verifyCert() {
       document.getElementById("res-date").innerText =
         "Issued on: " + formattedDate;
 
-      // 📥 4. DYNAMIC DOWNLOAD BUTTON
       const oldBtn = document.getElementById("dl-btn");
       if (oldBtn) oldBtn.remove();
 
@@ -80,7 +79,7 @@ async function verifyCert() {
   } catch (err) {
     alert("Bhai, server connection fail!");
   }
-} // <--- verifyCert yahan khatam hua
+}
 
 // 3. Auto-load logic (verifyCert ke bahar)
 window.addEventListener("load", () => {
@@ -94,3 +93,4 @@ window.addEventListener("load", () => {
     }
   }
 });
+//#endregion

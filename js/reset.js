@@ -1,3 +1,4 @@
+//#region
 // event parameter add kiya taaki refresh roke aur browser signal capture kare
 async function resetPassword(event) {
   if (event) event.preventDefault();
@@ -7,13 +8,11 @@ async function resetPassword(event) {
   const newPassword = document.getElementById("newPassword").value;
   const btn = document.getElementById("resetBtn");
 
-  // Basic Validation
   if (!email || !token || !newPassword) {
     alert("Bhai, please enter all details!");
     return;
   }
 
-  // Strength Check
   const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   if (!passRegex.test(newPassword)) {
     return alert("Password weak hai! Use 8+ chars & Special Character.");
@@ -33,7 +32,7 @@ async function resetPassword(event) {
 
     if (res.ok) {
       alert("Password updated successfully! 🚀");
-      // 1 second ka gap taaki browser password save karne ka popup dikha sake
+
       setTimeout(() => {
         window.location.href = "login.html";
       }, 1000);
@@ -55,3 +54,4 @@ document.addEventListener("keypress", (e) => {
     document.getElementById("resetBtn").click();
   }
 });
+//#endregion

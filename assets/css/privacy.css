@@ -1,6 +1,12 @@
-/* =========================================
-           GLOBAL & BODY STYLING (Dark Theme)
-        ========================================= */
+/* #region ━━━━━ 🛡️ WELCOME DESIGNER | PRIVACY POLICY STYLES ━━━━━ */
+/**
+ * 🛡️ PRIVACY & DATA PROTECTION UI ARCHITECTURE
+ * Logic: Readability-focused Typography, Policy Hierarchies & Legal Grids
+ * Purpose: Styling the transparency and data security notices for BRR30KART
+ * Status: 2026 Production Ready | Optimized for Trust & Clarity
+ * --------------------------------------------------------------------------
+ */
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +16,6 @@
 
 body {
   background-color: #050505;
-  /* Aapka Body Color */
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -25,12 +30,10 @@ body {
 .box {
   width: 100%;
   max-width: 600px;
-  /* Desktop limit */
   margin: 20px auto;
   padding: 40px;
   text-align: center;
   background: #1e293b;
-  /* Card Background */
   border-radius: 20px;
   border: 1px solid #334155;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -38,7 +41,6 @@ body {
 
 h1 {
   color: #a020f0;
-  /* Aapka Purple Color */
   font-size: 28px;
   margin-bottom: 25px;
   font-weight: 600;
@@ -46,7 +48,6 @@ h1 {
 
 p {
   color: #cbd5e1;
-  /* Soft White for readability */
   font-size: 16px;
   line-height: 1.8;
   margin-bottom: 20px;
@@ -60,7 +61,6 @@ p {
   margin-top: 10px;
   padding: 12px 35px;
   background-color: #a020f0;
-  /* Purple Button */
   color: white;
   text-decoration: none;
   font-weight: 600;
@@ -89,6 +89,13 @@ p {
   p {
     font-size: 14px;
     text-align: justify;
-    /* Choti screen par clean dikhega */
   }
 }
+/* #endregion */
+/* ==========================================================================
+   ✅ UI STATUS: PRIVACY STYLES ORGANIZED & POLISHED.
+   📖 READABILITY: LEGAL CONTENT & TEXT BLOCKS FULLY RESPONSIVE.
+   🚀 DEPLOYMENT: PRIVACY CSS READY FOR LIVE COMPLIANCE!
+   ========================================================================== */
+
+/* 🏁 --- END OF PRIVACY STYLING --- */
