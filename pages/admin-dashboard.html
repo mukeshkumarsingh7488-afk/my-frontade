@@ -3,50 +3,63 @@
   <head>
     <!-- ✅ Google Tag Manager -->
     <script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L' + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TT7SLZ4L');
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L" + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TT7SLZ4L");
     </script>
 
     <!-- ✅ Basic -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ✅ Title -->
     <title>Admin Dashboard | BR30 Trader</title>
 
     <!-- 🔒 Hide from Google -->
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="noindex, nofollow" />
 
     <!-- ❌ Extra security (no caching) -->
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <meta
+      http-equiv="Cache-Control"
+      content="no-store, no-cache, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
     <!-- ✅ Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <!-- ✅ Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- ✅ Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="../assets/css/admin-dashboard.css">
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/admin-dashboard.css" />
   </head>
   <body>
-      <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!-- Updated Sidebar Menu with 5 Pro Buttons -->
     <div class="sidebar">
       <div class="logo">
@@ -97,22 +110,21 @@
         <hr style="border: 0.5px solid #222; margin: 20px 0" />
 
         <!-- 5. Back to Dashboard Button (Yellowish for Focus) -->
-<button
-  class="side-btn"
-  style="color: #ffca28; animation:blink 1s infinite;"
-  onclick="window.open('/index.html', '_blank')"
->
-  <i class="fas fa-arrow-alt-circle-left"></i>
-  Back to Home
-</button>
-
+        <button
+          class="side-btn"
+          style="color: #ffca28; animation: blink 1s infinite"
+          onclick="window.open('/index.html', '_blank')"
+        >
+          <i class="fas fa-arrow-alt-circle-left"></i>
+          Back to Home
+        </button>
       </nav>
     </div>
 
     <div class="main-content">
       <div class="header">
         <h2 style="font-size: 20px; letter-spacing: 0.5px">
-         👑 Master Admin Dashboard 
+          👑 Master Admin Dashboard
         </h2>
         <div class="filter-section">
           <input type="date" id="startDate" class="bright-date" />
@@ -158,37 +170,48 @@
         </div>
       </div>
 
-<!-- ✉️ Marketing & Coupon Management -->
-<div class="marketing-card">
-    <h4><i class="fas fa-bullhorn"></i> BULK MARKETING</h4>
+      <!-- ✉️ Marketing & Coupon Management -->
+      <div class="marketing-card">
+        <h4>
+          <i class="fas fa-bullhorn"></i>
+          BULK MARKETING
+        </h4>
 
-    <select id="mail-target" class="marketing-input">
-        <option value="all">Target: All Users</option>
-        <option value="vip">Target: VIP Only</option>
-        <option value="normal">Target: Normal Only</option>
-    </select>
+        <select id="mail-target" class="marketing-input">
+          <option value="all">Target: All Users</option>
+          <option value="vip">Target: VIP Only</option>
+          <option value="normal">Target: Normal Only</option>
+        </select>
 
-    <input type="text" id="mail-subject" placeholder="Offer Subject (e.g. 30% OFF)" class="marketing-input">
+        <input
+          type="text"
+          id="mail-subject"
+          placeholder="Offer Subject (e.g. 30% OFF)"
+          class="marketing-input"
+        />
 
-    <textarea id="mail-body" placeholder="Message... (HTML Allowed)" class="marketing-input text-area"></textarea>
+        <textarea
+          id="mail-body"
+          placeholder="Message... (HTML Allowed)"
+          class="marketing-input text-area"
+        ></textarea>
 
-    <button onclick="sendBulkMail()" id="send-btn" class="blast-btn">
-        🚀 Send Blast Now
-    </button>
-
-    <!-- Coupon Control Section -->
-    <div class="coupon-box">
-        <button onclick="cancelActiveCoupon()" id="cancel-btn">
-            🚫 Cancel Active Coupon
+        <button onclick="sendBulkMail()" id="send-btn" class="blast-btn">
+          🚀 Send Blast Now
         </button>
-        <p id="coupon-status">(Stop current website discount instantly)</p>
+
+        <!-- Coupon Control Section -->
+        <div class="coupon-box">
+          <button onclick="cancelActiveCoupon()" id="cancel-btn">
+            🚫 Cancel Active Coupon
+          </button>
+          <p id="coupon-status">(Stop current website discount instantly)</p>
+        </div>
+      </div>
     </div>
-</div>
 
-
-   <script src="../js/config.js"></script>
-      <script src="../js/security.js"></script>
-        <script src="../js/admin-dashboard.js"></script>
-      
+    <script src="../js/config.js"></script>
+    <script src="../js/security.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
   </body>
 </html>

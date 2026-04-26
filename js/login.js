@@ -55,7 +55,7 @@ async function handleLogin(e) {
 
       setTimeout(() => {
         if (data.user.role === "admin") {
-          window.location.href = "admin-admin-dashboard.html";
+          window.location.href = "admin-dashboard.html";
         } else {
           window.location.href = "index.html";
         }

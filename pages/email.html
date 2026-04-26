@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/email.css">
+    <link rel="stylesheet" href="../assets/css/email.css" />
 
     <!-- ✅ Font Awesome -->
     <link
@@ -57,14 +57,19 @@
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
       defer
     ></script>
- 
   </head>
 
   <body>
-      <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <div class="email-card">
       <h2>Admin Bulk Email 📧</h2>
@@ -89,29 +94,39 @@
       <button id="send-bulk-btn">Sabko Mail Bhejo</button>
       <div id="status-msg"></div>
 
- <div style="margin-top: 15px;">
-  <a href="admin-dashboard.html"
-     onmouseover="this.style.background='#1d4ed8'; this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.2)'"
-     onmouseout="this.style.background='#2563eb'; this.style.transform='scale(1)'; this.style.boxShadow='none'"
-     style="
-        display: inline-block;
-        background: #2563eb;
-        color: white;
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: bold;
-        text-decoration: none;
-        transition: all 0.2s ease;
-     ">
-    BACK TO DASHBOARD
-  </a>
-</div>
+      <div style="margin-top: 15px">
+        <a
+          href="admin-dashboard.html"
+          onmouseover="
+            this.style.background = '#1d4ed8';
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+          "
+          onmouseout="
+            this.style.background = '#2563eb';
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+          "
+          style="
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s ease;
+          "
+        >
+          BACK TO DASHBOARD
+        </a>
+      </div>
+    </div>
 
     <script src="../js/config.js"></script>
     <!-- Dashboard Logic (Type Module) -->
-  <script type="module" src="../js/email.js"></script>
+    <script type="module" src="../js/email.js"></script>
     <script src="../js/security.js"></script>
-     
   </body>
 </html>

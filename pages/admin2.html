@@ -1,206 +1,487 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!-- ✅ Google Tag Manager -->
     <script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L' + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TT7SLZ4L');
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=GTM-TT7SLZ4L" + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TT7SLZ4L");
     </script>
 
     <!-- ✅ Basic -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ❌ Admin page → SEO OFF -->
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="noindex, nofollow" />
 
     <title>Admin - User Management | BR30 Trader</title>
 
     <!-- ✅ Favicon -->
-    <link rel="icon" href="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg">
+    <link rel="icon" href="https://i.ibb.co/JRJ2Dv9W/BR30-LOGO.jpg" />
 
     <!-- ✅ Bootstrap (already tha — same rakha) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
 
     <!-- ✅ Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/admin2.css">
-  
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/admin2.css" />
+  </head>
 
-<body>
-      <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TT7SLZ4L"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!-- 👥 1. USER MANAGEMENT SECTION -->
-    <div class="admin-box"
-        style="max-width: 1000px; margin: 20px auto; background: #0a0a0a; padding: 25px; border-radius: 20px; border: 1px solid #1e293b; box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);">
-        <h2 style="color: white; border-left: 4px solid #00ff88; padding-left: 15px; margin: 0 0 10px 0;">
-            <i class="fas fa-users-cog"></i> User Management Panel
-        </h2>
-        <p style="color: #64748b; margin-bottom: 20px; font-size: 13px;">Manage your students, VIP access, and Block
-            harami users here.</p>
+    <div
+      class="admin-box"
+      style="
+        max-width: 1000px;
+        margin: 20px auto;
+        background: #0a0a0a;
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid #1e293b;
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
+      "
+    >
+      <h2
+        style="
+          color: white;
+          border-left: 4px solid #00ff88;
+          padding-left: 15px;
+          margin: 0 0 10px 0;
+        "
+      >
+        <i class="fas fa-users-cog"></i>
+        User Management Panel
+      </h2>
+      <p style="color: #64748b; margin-bottom: 20px; font-size: 13px">
+        Manage your students, VIP access, and Block harami users here.
+      </p>
 
-        <!-- 🔍 PRO SEARCH BAR -->
-        <input type="text" id="search-bar" oninput="searchUser(this.value)"
-            placeholder="🔍 Search by Email or Name (e.g. Mukesh Raj)..."
-            style="width: 100%; padding: 15px; margin-bottom: 25px; background: #0f172a; border: 1px solid #00ff88; color: white; border-radius: 12px; font-size: 16px; outline: none; box-shadow: 0 0 15px rgba(0, 255, 136, 0.1); box-sizing: border-box;">
+      <!-- 🔍 PRO SEARCH BAR -->
+      <input
+        type="text"
+        id="search-bar"
+        oninput="searchUser(this.value)"
+        placeholder="🔍 Search by Email or Name (e.g. Mukesh Raj)..."
+        style="
+          width: 100%;
+          padding: 15px;
+          margin-bottom: 25px;
+          background: #0f172a;
+          border: 1px solid #00ff88;
+          color: white;
+          border-radius: 12px;
+          font-size: 16px;
+          outline: none;
+          box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
+          box-sizing: border-box;
+        "
+      />
 
+      <!-- 📅 USER FILTER BY DATE BAR (Layout Friendly) -->
+      <div
+        style="
+          display: flex;
+          gap: 10px;
+          margin: -10px 0 20px 0;
+          align-items: center;
+          padding: 10px;
+          background: #0f172a;
+          border-radius: 12px;
+          border: 1px solid #1e293b;
+        "
+      >
+        <span
+          style="
+            color: #64748b;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+          "
+        >
+          Filter Date:
+        </span>
+        <input
+          type="date"
+          id="date-picker"
+          onchange="filterByDate(this.value)"
+          style="
+            background: #050505;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 4px 8px;
+            border-radius: 6px;
+            outline: none;
+            font-size: 13px;
+            cursor: pointer;
+          "
+        />
 
-        <!-- 📅 USER FILTER BY DATE BAR (Layout Friendly) -->
-        <div
-            style="display: flex; gap: 10px; margin: -10px 0 20px 0; align-items: center; padding: 10px; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;">
-            <span style="color: #64748b; font-size: 11px; font-weight: bold; text-transform: uppercase;">Filter
-                Date:</span>
-            <input type="date" id="date-picker" onchange="filterByDate(this.value)"
-                style="background: #050505; color: #00ff88; border: 1px solid #00ff88; padding: 4px 8px; border-radius: 6px; outline: none; font-size: 13px; cursor: pointer;">
+        <button
+          id="show-all-btn"
+          onclick="loadAllUsers()"
+          style="
+            background: #00ff88;
+            color: #000;
+            border: 1px solid #00ff88;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+          "
+        >
+          SHOW ALL
+        </button>
+      </div>
 
-            <button id="show-all-btn" onclick="loadAllUsers()"
-                style="background: #00ff88; color: #000; border: 1px solid #00ff88; padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);">
-                SHOW ALL
-            </button>
+      <!-- 📜 SCROLLING CONTAINER: Fixed Height for Symmetry -->
+      <div
+        style="
+          max-height: 380px;
+          overflow-y: auto;
+          border: 1px solid #1a1a1a;
+          border-radius: 12px;
+          scrollbar-width: thin;
+          scrollbar-color: #00ff88 #000;
+        "
+      >
+        <table style="width: 100%; border-collapse: collapse">
+          <thead
+            style="
+              position: sticky;
+              top: 0;
+              background: #0a0a0a;
+              z-index: 10;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            "
+          >
+            <tr
+              style="
+                text-align: left;
+                border-bottom: 2px solid #1e293b;
+                color: #00ff88;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              "
+            >
+              <th style="padding: 18px 15px">NAME</th>
+              <th style="padding: 18px 15px">EMAIL</th>
+              <th style="padding: 18px 15px; text-align: center">BADGE</th>
+              <th style="padding: 18px 15px; text-align: center">ACTIONS</th>
+              <th style="padding: 18px 15px; text-align: center">
+                CERTIFICATE 🏆
+              </th>
+              <!-- 👈 Naya Column -->
+            </tr>
+          </thead>
+          <tbody id="user-list">
+            <tr>
+              <td
+                colspan="5"
+                style="text-align: center; padding: 40px; color: #64748b"
+              >
+                🔍 Loading Users Data...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        </div>
-
-
-
-
-        <!-- 📜 SCROLLING CONTAINER: Fixed Height for Symmetry -->
-        <div
-            style="max-height: 380px; overflow-y: auto; border: 1px solid #1a1a1a; border-radius: 12px; scrollbar-width: thin; scrollbar-color: #00ff88 #000;">
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead
-                    style="position: sticky; top: 0; background: #0a0a0a; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5);">
-                    <tr
-                        style="text-align: left; border-bottom: 2px solid #1e293b; color: #00ff88; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">
-                        <th style="padding: 18px 15px;">NAME</th>
-                        <th style="padding: 18px 15px;">EMAIL</th>
-                        <th style="padding: 18px 15px; text-align:center;">BADGE</th>
-                        <th style="padding: 18px 15px; text-align:center;">ACTIONS</th>
-                        <th style="padding: 18px 15px; text-align: center;">CERTIFICATE 🏆</th> <!-- 👈 Naya Column -->
-                    </tr>
-                </thead>
-                <tbody id="user-list">
-                    <tr>
-                        <td colspan="5" style="text-align:center; padding:40px; color:#64748b;">🔍 Loading Users Data...
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-
-        <br>
-        <a href="admin-dashboard.html"
-            style="color: #00ff88; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.3s; display: inline-block;">
-            <i class="fas fa-arrow-left"></i> Back to Dashboard
-        </a>
+      <br />
+      <a
+        href="admin-dashboard.html"
+        style="
+          color: #00ff88;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 14px;
+          transition: 0.3s;
+          display: inline-block;
+        "
+      >
+        <i class="fas fa-arrow-left"></i>
+        Back to Dashboard
+      </a>
     </div>
 
     <!-- 💰 2. PRO SALES & REVENUE SECTION (ULTIMATE VERSION) -->
-    <div class="sales-container"
-        style="max-width: 1000px; margin: 40px auto; padding: 25px; background: #0a0a0a; border-radius: 20px; border: 1px solid #00ff88; box-shadow: 0 0 25px rgba(0, 255, 136, 0.1);">
-
+    <div
+      class="sales-container"
+      style="
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 25px;
+        background: #0a0a0a;
+        border-radius: 20px;
+        border: 1px solid #00ff88;
+        box-shadow: 0 0 25px rgba(0, 255, 136, 0.1);
+      "
+    >
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 25px;
+          flex-wrap: wrap;
+          gap: 15px;
+        "
+      >
+        <!-- 📅 DATE SELECTOR SECTION -->
         <div
-            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+          style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #050505;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+          "
+        >
+          <input
+            type="date"
+            id="salesStartDate"
+            style="
+              background: transparent;
+              color: #00ff88;
+              border: none;
+              outline: none;
+              font-size: 11px;
+              cursor: pointer;
+            "
+          />
+          <span style="color: #64748b; font-size: 11px">to</span>
+          <input
+            type="date"
+            id="salesEndDate"
+            style="
+              background: transparent;
+              color: #00ff88;
+              border: none;
+              outline: none;
+              font-size: 11px;
+              cursor: pointer;
+            "
+          />
 
-            <!-- 📅 DATE SELECTOR SECTION -->
-            <div
-                style="display: flex; align-items: center; gap: 10px; background: #050505; padding: 8px 12px; border-radius: 12px; border: 1px solid #1e293b;">
-                <input type="date" id="salesStartDate"
-                    style="background: transparent; color: #00ff88; border: none; outline: none; font-size: 11px; cursor: pointer;">
-                <span style="color: #64748b; font-size: 11px;">to</span>
-                <input type="date" id="salesEndDate"
-                    style="background: transparent; color: #00ff88; border: none; outline: none; font-size: 11px; cursor: pointer;">
+          <button
+            id="apply-btn"
+            onclick="applyCalendarFilter()"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              color: #00ff88;
+              border: 1px solid #00ff88;
+              padding: 6px 15px;
+              border-radius: 8px;
+              font-weight: 900;
+              cursor: pointer;
+              font-size: 10px;
+              text-transform: uppercase;
+              transition: 0.3s;
+            "
+          >
+            Apply
+          </button>
 
-                <button id="apply-btn" onclick="applyCalendarFilter()"
-                    style="background: rgba(255,255,255,0.05); color: #00ff88; border: 1px solid #00ff88; padding: 6px 15px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 10px; text-transform: uppercase; transition: 0.3s;">
-                    Apply
-                </button>
-
-                <button id="show-all-btn" onclick="resetSalesFilter()"
-                    style="background: #00ff88; color: black; border: none; padding: 6px 15px; border-radius: 8px; cursor: pointer; font-size: 10px; text-transform: uppercase; font-weight: bold; transition: 0.3s;">
-                    Show All
-                </button>
-            </div>
-
-            <!-- Right Side: Stats (Best Seller & Revenue) -->
-            <div style="display: flex; gap: 15px;">
-                <div
-                    style="background: rgba(160, 32, 240, 0.1); border: 1px solid #a020f0; padding: 10px 20px; border-radius: 15px; text-align: right; min-width: 120px;">
-                    <p
-                        style="color: #94a3b8; font-size: 10px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
-                        🔥 Best Seller</p>
-                    <h2 id="best-course-name"
-                        style="color: #a020f0; margin: 0; font-size: 18px; font-weight: 900; text-shadow: 0 0 10px rgba(160, 32, 240, 0.3);">
-                        Analyzing...</h2>
-                </div>
-
-                <div
-                    style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; padding: 10px 25px; border-radius: 15px; text-align: right; min-width: 140px;">
-                    <p
-                        style="color: #94a3b8; font-size: 10px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
-                        Revenue Track</p>
-                    <h2 id="total-revenue"
-                        style="color: #00ff88; margin: 0; font-size: 24px; font-weight: 900; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);">
-                        ₹0</h2>
-                </div>
-            </div>
+          <button
+            id="show-all-btn"
+            onclick="resetSalesFilter()"
+            style="
+              background: #00ff88;
+              color: black;
+              border: none;
+              padding: 6px 15px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 10px;
+              text-transform: uppercase;
+              font-weight: bold;
+              transition: 0.3s;
+            "
+          >
+            Show All
+          </button>
         </div>
 
-        <!-- 📥 DOWNLOAD & EXPORT TOOLS -->
-        <div style="margin-bottom: 20px; display: flex; gap: 10px;">
-            <button onclick="downloadSalesReport()"
-                style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: bold; transition: 0.3s;">
-                <i class="fas fa-file-download"></i> Download Sales Report (CSV)
-            </button>
-        </div>
+        <!-- Right Side: Stats (Best Seller & Revenue) -->
+        <div style="display: flex; gap: 15px">
+          <div
+            style="
+              background: rgba(160, 32, 240, 0.1);
+              border: 1px solid #a020f0;
+              padding: 10px 20px;
+              border-radius: 15px;
+              text-align: right;
+              min-width: 120px;
+            "
+          >
+            <p
+              style="
+                color: #94a3b8;
+                font-size: 10px;
+                margin: 0;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              "
+            >
+              🔥 Best Seller
+            </p>
+            <h2
+              id="best-course-name"
+              style="
+                color: #a020f0;
+                margin: 0;
+                font-size: 18px;
+                font-weight: 900;
+                text-shadow: 0 0 10px rgba(160, 32, 240, 0.3);
+              "
+            >
+              Analyzing...
+            </h2>
+          </div>
 
-        <!-- 📜 SCROLLING CONTAINER (With Neon Green Scrollbar) -->
-        <div class="sales-scroll-panel">
-            <table style="width: 100%; border-collapse: collapse; color: #94a3b8; text-align: left;">
-                <thead
-                    style="position: sticky; top: 0; background: #0a0a0a; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5);">
-                    <tr
-                        style="border-bottom: 2px solid #1e293b; font-size: 12px; text-transform: uppercase; color: #00ff88;">
-                        <th style="padding: 18px 15px;">User Email</th>
-                        <th style="padding: 18px 15px;">Course Name</th>
-                        <th style="padding: 18px 15px;">Amount</th>
-                        <th style="padding: 18px 15px;">Date & Time</th>
-                    </tr>
-                </thead>
-                <tbody id="sales-table-body">
-                    <tr>
-                        <td colspan="4" style="text-align:center; padding:40px; color: #64748b;">🔍 Analyzing Sales
-                            Records...</td>
-                    </tr>
-                </tbody>
-            </table>
+          <div
+            style="
+              background: rgba(0, 255, 136, 0.1);
+              border: 1px solid #00ff88;
+              padding: 10px 25px;
+              border-radius: 15px;
+              text-align: right;
+              min-width: 140px;
+            "
+          >
+            <p
+              style="
+                color: #94a3b8;
+                font-size: 10px;
+                margin: 0;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              "
+            >
+              Revenue Track
+            </p>
+            <h2
+              id="total-revenue"
+              style="
+                color: #00ff88;
+                margin: 0;
+                font-size: 24px;
+                font-weight: 900;
+                text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+              "
+            >
+              ₹0
+            </h2>
+          </div>
         </div>
+      </div>
+
+      <!-- 📥 DOWNLOAD & EXPORT TOOLS -->
+      <div style="margin-bottom: 20px; display: flex; gap: 10px">
+        <button
+          onclick="downloadSalesReport()"
+          style="
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+          "
+        >
+          <i class="fas fa-file-download"></i>
+          Download Sales Report (CSV)
+        </button>
+      </div>
+
+      <!-- 📜 SCROLLING CONTAINER (With Neon Green Scrollbar) -->
+      <div class="sales-scroll-panel">
+        <table
+          style="
+            width: 100%;
+            border-collapse: collapse;
+            color: #94a3b8;
+            text-align: left;
+          "
+        >
+          <thead
+            style="
+              position: sticky;
+              top: 0;
+              background: #0a0a0a;
+              z-index: 10;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            "
+          >
+            <tr
+              style="
+                border-bottom: 2px solid #1e293b;
+                font-size: 12px;
+                text-transform: uppercase;
+                color: #00ff88;
+              "
+            >
+              <th style="padding: 18px 15px">User Email</th>
+              <th style="padding: 18px 15px">Course Name</th>
+              <th style="padding: 18px 15px">Amount</th>
+              <th style="padding: 18px 15px">Date & Time</th>
+            </tr>
+          </thead>
+          <tbody id="sales-table-body">
+            <tr>
+              <td
+                colspan="4"
+                style="text-align: center; padding: 40px; color: #64748b"
+              >
+                🔍 Analyzing Sales Records...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
+    <!-- ================= JS FILES ================= -->
+    <script src="../js/config.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
-<!-- ================= JS FILES ================= -->
-<script src="../js/config.js"></script>
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Axios (API call ke liye) -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Axios (API call ke liye) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/security.js"></script>
-  <script src="../js/admin2.js"></script>
-</body>
-
+    <script src="../js/admin2.js"></script>
+  </body>
 </html>
