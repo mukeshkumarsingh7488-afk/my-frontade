@@ -104,13 +104,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>"https://my-frontend-eight-roan.vercel.app/pages/verify.html</loc>
+    <loc>https://my-frontend-eight-roan.vercel.app/pages/verify.html</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
     <url>
-    <loc>"https://my-frontend-eight-roan.vercel.app/pages/strategies.html</loc>
+    <loc>https://my-frontend-eight-roan.vercel.app/pages/strategies.html</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
