@@ -1,35 +1,19 @@
-//#region
+//#region SAFE SECURITY
+
 // 🚫 Right Click Block
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 
-// 🚫 DevTools Block
+// 🚫 Basic DevTools Block (light version)
 document.addEventListener("keydown", function (e) {
   if (
     e.key === "F12" ||
-    (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) ||
-    (e.ctrlKey && e.key === "U")
+    (e.ctrlKey && e.shiftKey && ["I", "J"].includes(e.key))
   ) {
     e.preventDefault();
   }
 });
 
-// 🚫 DevTools detect + redirect
-setInterval(() => {
-  if (window.outerWidth - window.innerWidth > 160) {
-    window.location.href = "https://br30trader.com";
-  }
-}, 1000);
+// ❌ REMOVE debugger trap (important)
+// ❌ REMOVE aggressive redirect
 
-// 🚫 Copy block
-document.addEventListener("copy", (e) => e.preventDefault());
-
-// 🚫 Text select block
-document.addEventListener("selectstart", (e) => e.preventDefault());
-
-// 🚫 Debugger trap
-setInterval(() => {
-  debugger;
-}, 100);
-
-// cleane consol
 //#endregion
