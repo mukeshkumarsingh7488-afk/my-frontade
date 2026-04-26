@@ -212,8 +212,9 @@ function updateUserStatus(userData) {
     // 🛡️ Admin priority par rahega
     badgeContainer.innerHTML = `
       <div class="admin-badge">
-          <i class="fas fa-user-shield"></i> SYSTEM ADMIN
-      </div>`;
+          <i class="fas fa-user-shield"></i> SYSTEM MODERATOR
+      </div>
+      <p style="color: #ef4444; font-size: 10px; margin-top: 4px; font-weight: bold;">WELCOME ADMIN</p>`;
   } else if (userBadge === "vip") {
     // 👑 Agar student hai lekin VIP badge hai
     badgeContainer.innerHTML = `
@@ -225,7 +226,7 @@ function updateUserStatus(userData) {
     badgeContainer.innerHTML = `
       <div class="standard-badge">
           <span class="status-label">Standard Member</span>
-          <a href="../pages/pricing.html" class="upgrade-link">Upgrade to VIP <i class="fas fa-arrow-right"></i></a>
+          <a href="../index.html#coursesection" class="upgrade-link">Upgrade to VIP <i class="fas fa-arrow-right"></i></a>
       </div>`;
   }
 }
