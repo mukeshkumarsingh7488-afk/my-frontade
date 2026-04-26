@@ -142,17 +142,36 @@ document.getElementById("editName").addEventListener("keypress", (e) => {
   }
 });
 
-// 4. NAME SAVE LOGIC
+//  ━━━━━ 👤 PROFILE UPDATE | SWEETALERT2 INTEGRATION ━━━━━
 document.getElementById("saveBtn").addEventListener("click", async () => {
   const newName = document.getElementById("editName").value.trim();
   const token = localStorage.getItem("token");
-  console.log("🛑 Checking Token Value:", token);
 
-  if (!newName) return alert("Name cannot be empty!");
-
-  console.log("📝 Updating Name to:", newName);
+  // 1. Validation Check
+  if (!newName) {
+    return Swal.fire({
+      icon: "warning",
+      title: "Khali Naam?",
+      text: "Bhai, naam likhna toh zaroori hai!",
+      background: "#111827",
+      color: "#fff",
+      confirmButtonColor: "#a020f0",
+    });
+  }
 
   try {
+    // 2. Loading Spinner Dikhao
+    Swal.fire({
+      title: "Saving Changes...",
+      text: "Please wait while we update your profile.",
+      allowOutsideClick: false,
+      background: "#111827",
+      color: "#fff",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
     const res = await fetch(window.API_BASE_URL + "/api/auth/update-profile", {
       method: "PUT",
       headers: {
@@ -163,34 +182,53 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
     });
 
     const data = await res.json();
-    console.log("📥 Name Update Response:", data);
+    console.log("📥 Server Response:", data);
 
     if (res.ok) {
+      // ✅ Sahi Name Extract karo
       const finalName = data.name || (data.user && data.user.name) || newName;
-      document.getElementById("userName").innerText = finalName;
 
-      // UI Reset logic
+      // UI Update Logic
+      document.getElementById("userName").innerText = finalName;
       document.getElementById("userName").style.display = "block";
       document.getElementById("editName").style.display = "none";
       document.getElementById("editBtn").style.display = "inline-block";
       document.getElementById("saveBtn").style.display = "none";
 
-      // LocalStorage update (Professional Practice)
+      // 🔄 Sync LocalStorage (Best Practice)
       let userData = JSON.parse(localStorage.getItem("userData")) || {};
       userData.name = finalName;
       localStorage.setItem("userData", JSON.stringify(userData));
 
-      console.log("✅ Name Updated Successfully.");
-      alert("Name Updated! ✅");
+      // 🎉 Success Message
+      Swal.fire({
+        icon: "success",
+        title: "Profile Updated! ✅",
+        text: "Aapka naya naam save ho gaya hai.",
+        timer: 2000,
+        showConfirmButton: false,
+        background: "#111827",
+        color: "#fff",
+      });
     } else {
-      console.error("❌ Name Update Failed:", data.msg);
-      alert(data.msg || "Update failed!");
+      // ❌ Server Error Handle Karein
+      throw new Error(data.message || data.msg || "Update fail ho gaya bhai!");
     }
   } catch (err) {
-    console.error("🚨 Critical Name Update Error:", err);
-    alert("Server error while updating name.");
+    console.error("🚨 Update Error:", err);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: err.message,
+      background: "#111827",
+      color: "#fff",
+      confirmButtonColor: "#ef4444",
+    });
   }
 });
+
+// 🏁 --- END OF PROFILE UPDATE MODULE ---
+
 function logout() {
   if (confirm(" Conform Logout ?")) {
     localStorage.clear();
