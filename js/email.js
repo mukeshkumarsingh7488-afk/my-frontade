@@ -1,6 +1,6 @@
 //#region
 /**
- * BR30ᴛʀᴀᴅᴇʀ - BULK ANNOUNCEMENT MODULE
+ * BR30Trader - BULK ANNOUNCEMENT MODULE
  * Logic for sending Neon Green Mails to all users via Admin Panel
  */
 

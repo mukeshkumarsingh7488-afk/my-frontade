@@ -35,7 +35,7 @@ async function fetchCourses() {
             ? c.thumbnail
             : (BASE_URL + "/" + c.thumbnail).replace(/([^:]\/)\/+/g, "$1")) +
           `?t=${Date.now()}`
-        : "images/BR30TRADER.png";
+        : "images/BR30Trader.png";
 
       card.innerHTML = `
                 <div style="background: rgba(160, 32, 240, 0.1); border: 1px dashed #a020f0; padding: 6px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">

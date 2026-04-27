@@ -1,6 +1,6 @@
 ✅ Option Selling Guide
 
-Options trading me **Option Selling (Writing Options)** ek advanced strategy hai jisme trader premium earn karta hai market ko trade kar ke. Yeh strategy **time decay aur probability advantage** par based hai.  
+Options trading me **Option Selling (Writing Options)** ek advanced strategy hai jisme Trader premium earn karta hai market ko trade kar ke. Yeh strategy **time decay aur probability advantage** par based hai.  
 
 ✅ Basic Concept
 - Option seller = Premium receive karta hai by selling Call ya Put  

@@ -1,6 +1,6 @@
 ✅ Advanced Options Strategies
 
-Advanced Options Strategies un traders ke liye hain jo basic buying/selling se aage badh kar **multi-leg strategies** use karte hain taaki risk control aur profit maximize ho sake.  
+Advanced Options Strategies un Traders ke liye hain jo basic buying/selling se aage badh kar **multi-leg strategies** use karte hain taaki risk control aur profit maximize ho sake.  
 
 ✅ Basic Concept
 - Multi-leg options ka use karna  

@@ -234,7 +234,7 @@ p {
 }
 
 /* Welcome Center */
-.welcome.trader h1 {
+.welcome.Trader h1 {
   color: #ffcc00;
   font-size: 1.1rem;
   margin: 0;
@@ -251,7 +251,7 @@ p {
     display: none !important;
   }
 
-  .welcome.trader {
+  .welcome.Trader {
     position: relative !important;
     left: 50% !important;
     top: 50% !important;
@@ -262,7 +262,7 @@ p {
     width: auto !important;
   }
 
-  .welcome.trader h1 {
+  .welcome.Trader h1 {
     font-size: 0.9rem !important;
     white-space: nowrap !important;
     letter-spacing: 0px !important;
@@ -274,12 +274,12 @@ p {
 }
 
 @media screen and (min-width: 769px) {
-  .welcome.trader {
+  .welcome.Trader {
     display: block !important;
   }
 }
 @media screen and (max-width: 768px) {
-  .welcome.trader {
+  .welcome.Trader {
     display: none !important;
     margin-left: 8px;
     white-space: nowrap;
@@ -297,7 +297,7 @@ p {
 }
 
 @media screen and (min-width: 769px) {
-  .welcome.trader {
+  .welcome.Trader {
     display: block !important;
   }
 }
@@ -311,7 +311,7 @@ header {
   min-height: 60px;
 }
 
-.welcome.trader {
+.welcome.Trader {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -320,7 +320,7 @@ header {
   z-index: 10;
 }
 
-.welcome.trader h1 {
+.welcome.Trader h1 {
   color: #ffd700;
   white-space: nowrap;
   font-family: "Poppins", sans-serif;
@@ -342,7 +342,7 @@ header {
     display: none;
   }
 
-  .welcome.trader h1 {
+  .welcome.Trader h1 {
     font-size: 1rem !important;
   }
 }
@@ -399,7 +399,7 @@ header {
   transition: 0.3s ease-in-out;
 }
 
-.welcome.trader {
+.welcome.Trader {
   display: none;
 }
 
@@ -3613,7 +3613,7 @@ h3,
 }
 
 /* Desktop पर 2 Column, Mobile पर 1 */
-.traders-list-container {
+.Traders-list-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
@@ -3623,7 +3623,7 @@ h3,
 
 /* Mobile Responsive Logic */
 @media (max-width: 768px) {
-  .traders-list-container {
+  .Traders-list-container {
     grid-template-columns: 1fr;
   }
 
@@ -3633,7 +3633,7 @@ h3,
 }
 
 /* Sleek Trader Card */
-.trader-item {
+.Trader-item {
   display: flex;
   gap: 12px;
   align-items: center;

@@ -1,6 +1,6 @@
 ✅ Option Hedging Strategies
 
-Option Hedging ka maksad **existing positions ka risk kam karna** aur market ke adverse moves se protection lena hai. Ye professional traders aur institutions me commonly use hota hai.  
+Option Hedging ka maksad **existing positions ka risk kam karna** aur market ke adverse moves se protection lena hai. Ye professional Traders aur institutions me commonly use hota hai.  
 
 ✅ Basic Concept
 - Hedging = Risk management technique  

@@ -1,6 +1,6 @@
 ✅ Option Buying Guide
 
-Options trading me **Option Buying** सबसे common और beginner-friendly strategy है। इसमें trader right buy karta hai बिना underlying को hold kiye, limited risk ke sath profit potential ke liye।  
+Options trading me **Option Buying** सबसे common और beginner-friendly strategy है। इसमें Trader right buy karta hai बिना underlying को hold kiye, limited risk ke sath profit potential ke liye।  
 
 ✅ Basic Concept
 - Option = Right to buy/sell underlying asset without obligation  

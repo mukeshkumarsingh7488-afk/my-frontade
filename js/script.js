@@ -70,9 +70,9 @@ import {
 
 const firebaseConfig = {
   apiKey: "AIzaSyA4wnSAZ3VLlAMyHhPt5WjULihejoKuLoY",
-  authDomain: "br30trader.firebaseapp.com",
-  projectId: "br30trader",
-  storageBucket: "br30trader.firebasestorage.app",
+  authDomain: "br30Trader.firebaseapp.com",
+  projectId: "br30Trader",
+  storageBucket: "br30Trader.firebasestorage.app",
   messagingSenderId: "32865565434",
   appId: "1:32865565434:web:4d620d3cb41a19c5582743",
 };
@@ -1027,7 +1027,7 @@ if (
 } // socket.io connection (end.)
 
 /* ============================================================
-   🚀 BR30 TRADER - ULTRA PRO MAX DYNAMIC PAYMENT ENGINE
+   🚀 BR30 Trader - ULTRA PRO MAX DYNAMIC PAYMENT ENGINE
 ============================================================ */
 //#region
 async function loadLatestPrice() {
@@ -1097,7 +1097,7 @@ const checkout = async function (courseId) {
       key: data.key,
       amount: data.order.amount,
       currency: "INR",
-      name: "BR30TRADER ACADEMY",
+      name: "BR30Trader ACADEMY",
       description: "VIP Enrollment 🏆",
       order_id: data.order.id,
       handler: async function (response) {
@@ -1265,7 +1265,7 @@ async function fetchTraders() {
     allTraders = Array.isArray(data) ? data : data.data || [];
 
     if (!allTraders || allTraders.length === 0) {
-      console.log("❌ No traders data");
+      console.log("❌ No Traders data");
       return;
     }
 
@@ -1340,8 +1340,8 @@ function displayNextBatch() {
 
         const batch = slidingList.slice(currentIndex, currentIndex + batchSize);
 
-        batch.forEach((trader, index) => {
-          appendTraderHTML(trader, currentIndex + index + 2, index + 1);
+        batch.forEach((Trader, index) => {
+          appendTraderHTML(Trader, currentIndex + index + 2, index + 1);
         });
 
         currentIndex =
@@ -1358,25 +1358,25 @@ function displayNextBatch() {
 }
 
 // HTML render
-function appendTraderHTML(trader, rank, delay) {
+function appendTraderHTML(Trader, rank, delay) {
   const listContainer = document.getElementById("topTradersList");
-  if (!trader) return;
+  if (!Trader) return;
 
-  const rawPath = trader.profilePic || "";
+  const rawPath = Trader.profilePic || "";
 
   let userPic =
     rawPath && rawPath.startsWith("http")
       ? rawPath
       : rawPath
         ? `${window.API_BASE_URL}/uploads/${rawPath.split(/[\\/]/).pop()}`
-        : `https://ui-avatars.com/api/?name=${encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true`;
+        : `https://ui-avatars.com/api/?name=${encodeURIComponent(Trader.name)}&background=111&color=00ff88&bold=true`;
 
   const row = `
-    <div class="trader-item" style="animation-delay: ${delay * 0.05}s;">
+    <div class="Trader-item" style="animation-delay: ${delay * 0.05}s;">
         <span class="rank-num">#${rank}</span>
         <img src="${userPic}" class="user-avatar"
-             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(trader.name)}&background=111&color=00ff88&bold=true'">
-        <span class="user-name">${trader.name}</span>
+             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(Trader.name)}&background=111&color=00ff88&bold=true'">
+        <span class="user-name">${Trader.name}</span>
         <span class="vip-badge">💎VIP</span>
     </div>
   `;
