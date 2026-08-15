@@ -44,15 +44,22 @@ export default function FooterSection() {
 
       <div className="footer-policy-links">
         <div className="policy-wrapper">
-          <Link to="/dashboard/aboutus">About Us</Link>
-          <span className="divider">|</span>
-          <Link to="/dashboard/contact">Contact Us</Link>
-          <span className="divider">|</span>
-          <Link to="/dashboard/privacy">Privacy Policy</Link>
-          <span className="divider">|</span>
           <Link to="/dashboard/terms">Terms & Conditions</Link>
           <span className="divider">|</span>
+
+          <Link to="/dashboard/privacy">Privacy Policy</Link>
+          <span className="divider">|</span>
+
           <Link to="/dashboard/refund">Refund Policy</Link>
+          <span className="divider">|</span>
+
+          <Link to="/dashboard/disclaimer">Disclaimer</Link>
+          <span className="divider">|</span>
+
+          <Link to="/dashboard/aboutus">About Us</Link>
+          <span className="divider">|</span>
+
+          <Link to="/dashboard/contact">Contact Us</Link>
         </div>
       </div>
 

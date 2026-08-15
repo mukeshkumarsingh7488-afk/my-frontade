@@ -49,12 +49,12 @@ export default function Footer() {
 
           <div className="footer-col">
             <h3>Legal</h3>
-            <Link to="/aboutus">About Us</Link>
-            <Link to="/contact">Contact Us</Link>
-            <Link to="/privacy">Privacy Policy</Link>
             <Link to="/terms">Terms & Conditions</Link>
+            <Link to="/privacy">Privacy Policy</Link>
             <Link to="/refund">Refund Policy</Link>
             <Link to="/disclaimer">Disclaimer</Link>
+            <Link to="/aboutus">About Us</Link>
+            <Link to="/contact">Contact Us</Link>
           </div>
 
           <div className="footer-col footer-contact">
