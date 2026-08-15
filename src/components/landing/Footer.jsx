@@ -27,11 +27,11 @@ export default function Footer() {
               <a href="https://www.facebook.com/share/1DDJYGYYDf/" target="_blank" rel="noopener noreferrer">
                 <i className="fa-brands fa-facebook"></i>
               </a>
-              <a href="https://t.me/+hBAT4kWo63A4ZWY1" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-telegram"></i>
-              </a>
               <a href="https://x.com/MukeshKuma48159" target="_blank" rel="noopener noreferrer">
                 <i className="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="https://t.me/+hBAT4kWo63A4ZWY1" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands fa-telegram"></i>
               </a>
               <a href="https://www.linkedin.com/in/mukeshraj-br30/" target="_blank" rel="noopener noreferrer">
                 <i className="fa-brands fa-linkedin"></i>

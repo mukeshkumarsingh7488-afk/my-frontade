@@ -81,16 +81,16 @@ export default function FooterSection() {
                 <i className="fa-solid fa-globe"></i>
               </a>
 
-              <a href="https://www.threads.com/@br30traderofficial" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-threads"></i>
-              </a>
-
               <a href="https://x.com/MukeshKuma48159" target="_blank" rel="noopener noreferrer">
                 <i className="fa-brands fa-x-twitter"></i>
               </a>
 
               <a href="https://www.linkedin.com/in/mukeshraj-br30/" target="_blank" rel="noopener noreferrer">
                 <i className="fa-brands fa-linkedin"></i>
+              </a>
+
+              <a href="https://www.threads.com/@br30traderofficial" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands fa-threads"></i>
               </a>
             </div>
           </div>
