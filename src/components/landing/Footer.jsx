@@ -45,6 +45,7 @@ export default function Footer() {
             <Link to="/strategies">Strategies</Link>
             <Link to="/service">Services</Link>
             <Link to="/about">About Founder</Link>
+            <Link to="/contact">Contact Us</Link>
           </div>
 
           <div className="footer-col">
@@ -54,7 +55,6 @@ export default function Footer() {
             <Link to="/refund">Refund Policy</Link>
             <Link to="/disclaimer">Disclaimer</Link>
             <Link to="/aboutus">About Us</Link>
-            <Link to="/contact">Contact Us</Link>
           </div>
 
           <div className="footer-col footer-contact">
